@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 24th August 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 297, "date": "2026-08-24", "weekday": "Monday", "title": "Daily Operations Report - 24th August 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 32, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 88, "incompleteCount": 1, "incompleteExample": "Online claiming run in Best Practice" }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 314,
+    "accepted": 289,
+    "acceptedPct": 92,
+    "missed": 25,
+    "missedPct": 8,
+    "totalOutbound": 146,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 96 },
+    "topOutboundAgent": { "name": "Ambrosie Brassil", "calls": 37 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 180, "missed": 11 },
+      { "queue": "General Enquiries", "accepted": 102, "missed": 7 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 99,
+    "oldestDays": 13.61,
+    "contactsQueuedYesterday": 104,
+    "emailsHandledYesterday": 196,
+    "totalOverallCases": 6299,
+    "totalInProgress": 90,
+    "totalOpenCases": 80
+  },
+  "leave": {
+    "weekLabel": "24–28 August 2026",
+    "doctorLinesOnLeave": 6,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Andy Davies", "Lucinda Gonzalez", "Joshua Saw"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}
