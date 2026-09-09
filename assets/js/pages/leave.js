@@ -1,4 +1,4 @@
-import { esc, fetchJSON, formatDate } from '../util.js';
+import { esc, fetchJSON, formatDate, addDaysISO } from '../util.js';
 import { renderMonthCalendar } from '../calendarview.js';
 
 // "On leave" is deliberately the LOUD colour (vermillion), matching the source PDF's
@@ -17,10 +17,10 @@ function cell(status, isToday) {
   return `<td style="${isToday ? 'background:var(--accent-weak)' : ''}"><span class="chip" style="background:${s.bg};color:${s.ink}">${s.label}</span></td>`;
 }
 
-function dayIndexOf(reportDateISO, weekStartISO) {
-  const report = new Date(`${reportDateISO}T00:00:00Z`);
+function dayIndexOf(dateISO, weekStartISO) {
+  const d = new Date(`${dateISO}T00:00:00Z`);
   const start = new Date(`${weekStartISO}T00:00:00Z`);
-  const diff = Math.round((report - start) / 86400000);
+  const diff = Math.round((d - start) / 86400000);
   return diff >= 0 && diff <= 4 ? diff : -1;
 }
 
@@ -29,7 +29,14 @@ const CAL_MAX = { year: 2026, month: 11 };
 
 export async function renderLeave(container) {
   const d = await fetchJSON('assets/data/leave.json');
-  const todayIndex = dayIndexOf(d.reportDate, d.weekStart);
+  // The report always publishes a day after the date its figures describe (see
+  // README's "Interactivity" note) — reportDate is "the day this data is about"
+  // (Tuesday), but "Today" for a person reading the leave roster right now means
+  // the day the report is actually being read (Wednesday). Every other page's
+  // numbers are retrospective and rightly stay anchored to reportDate; this is
+  // the one place that needs the day someone is actually looking at it.
+  const viewedOnDate = addDaysISO(d.reportDate, 1);
+  const todayIndex = dayIndexOf(viewedOnDate, d.weekStart);
 
   const fullWeek = (person) => person.status.every((s) => s === 'leave');
   const noneWeek = (person) => person.status.every((s) => s === 'available');
@@ -165,16 +172,17 @@ export async function renderLeave(container) {
   searchInput.addEventListener('input', () => { query = searchInput.value; paintWeek(); });
   paintWeek();
 
-  // Public holiday calendar: month navigation, starting on the report month
-  const reportDate = new Date(`${d.reportDate}T00:00:00Z`);
-  let calYear = reportDate.getUTCFullYear();
-  let calMonth = reportDate.getUTCMonth();
+  // Public holiday calendar: month navigation, starting on today's actual month
+  // (viewedOnDate, not reportDate — see the comment above).
+  const viewedOn = new Date(`${viewedOnDate}T00:00:00Z`);
+  let calYear = viewedOn.getUTCFullYear();
+  let calMonth = viewedOn.getUTCMonth();
   const calMount = container.querySelector('.dr-cal-mount');
   const prevBtn = container.querySelector('.dr-cal-prev');
   const nextBtn = container.querySelector('.dr-cal-next');
 
   function paintCalendar() {
-    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO: d.reportDate });
+    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO: viewedOnDate });
     prevBtn.disabled = calYear === CAL_MIN.year && calMonth === CAL_MIN.month;
     nextBtn.disabled = calYear === CAL_MAX.year && calMonth === CAL_MAX.month;
     prevBtn.style.opacity = prevBtn.disabled ? .4 : 1;

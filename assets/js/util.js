@@ -12,6 +12,15 @@ export async function fetchJSON(path) {
 
 export function pct(n) { return `${n}%`; }
 
+/** Add `n` calendar days to a date-only ISO string, returning another one.
+ *  UTC-based so it never drifts a day under a non-UTC viewer timezone — same
+ *  reasoning as formatDate() below. */
+export function addDaysISO(iso, n) {
+  const d = new Date(`${iso}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
 /** Format a date-only ISO string ("2026-01-13") without local-timezone drift.
  *  `new Date("2026-01-13").toLocaleDateString()` shifts a day back for any viewer
  *  west of UTC, because the string parses as UTC midnight; pinning timeZone:'UTC'
