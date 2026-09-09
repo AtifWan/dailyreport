@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 31st August 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 302, "date": "2026-08-31", "weekday": "Monday", "title": "Daily Operations Report - 31st August 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 37, "onHalt": false },
+      { "name": "Finance", "days": 1, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 370,
+    "accepted": 335,
+    "acceptedPct": 91,
+    "missed": 35,
+    "missedPct": 9,
+    "totalOutbound": 227,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 121 },
+    "topOutboundAgent": { "name": "Apurva Pathak", "calls": 55 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 209, "missed": 17 },
+      { "queue": "General Enquiries", "accepted": 123, "missed": 17 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 1 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 86,
+    "oldestDays": 6.96,
+    "contactsQueuedYesterday": 79,
+    "emailsHandledYesterday": 118,
+    "totalOverallCases": 6768,
+    "totalInProgress": 86,
+    "totalOpenCases": 86
+  },
+  "leave": {
+    "weekLabel": "31 August – 4 September 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": ["Shae Connors", "Rebecca Quinn", "Kiara Pfeffer", "Emily Pettett", "Micah Haly", "Kate Chin"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

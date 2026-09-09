@@ -1,0 +1,46 @@
+{
+  "_source": "Daily Operations Report - 31st August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 31st August 2026",
+  "extractedAt": "2026-09-01T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Tuesday 1 September 2026",
+  "realTimeQueues": [
+    { "queue": "Unassigned", "inQueue": 36, "oldestDays": 3.2 },
+    { "queue": "Documents", "inQueue": 15, "oldestDays": 1.41 },
+    { "queue": "Practice Finance", "inQueue": 15, "oldestDays": 6.81 },
+    { "queue": "Requests", "inQueue": 14, "oldestDays": 6.76 },
+    { "queue": "GP Mail", "inQueue": 3, "oldestDays": 6.96 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 0.65 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 5.68 },
+    { "queue": "Failed Communication", "inQueue": 1, "oldestDays": 1.7 }
+  ],
+  "realTimeSummary": { "inQueue": 86, "oldestDays": 6.96 },
+  "contactsQueuedYesterday": [
+    { "queue": "Documents", "count": 29 },
+    { "queue": "Unassigned", "count": 25 },
+    { "queue": "Medico-legal", "count": 13 },
+    { "queue": "Requests", "count": 10 },
+    { "queue": "Escalation", "count": 1 },
+    { "queue": "Failed Communication", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug"],
+    "totals": [87, 81, 75, 102, 104, 114, 91, 83, 79, 79]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 53, "outbound": 22, "total": 75 },
+    { "agent": "Lucinda Gonzalez", "incoming": 12, "outbound": 9, "total": 21 },
+    { "agent": "Frances Doble", "incoming": 13, "outbound": 6, "total": 20 },
+    { "agent": "Atif Wan", "incoming": 1, "outbound": 0, "total": 1 },
+    { "agent": "Kenneth Lobo", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Frances Doble's stated total (20) doesn't equal incoming+outbound (13+6=19) in the source PDF itself — same recurring quirk already flagged on 2026-09-07's cloop.json. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-09-01", "totalOverallCases": 6768, "totalInProgress": 86, "totalOpenCases": 86 },
+  "inProgressTenDayTrend": {
+    "labels": ["Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep"],
+    "totals": [136, 154, 155, 144, 90, 85, 86, 89, 93, 86]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep"],
+    "totals": [78, 70, 63, 74, 80, 63, 57, 52, 77, 86]
+  }
+}
