@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 25th August 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 25th August 2026",
+  "reportDate": "2026-08-25",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 33, "onHalt": false },
+    { "name": "Finance", "days": 1, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Caregp Ai Tool (C.Le@11:56)",
+        "Send Claim For Automed Payments (C.Le@11:56)",
+        "Clinical Reminders (C.Le@11:56)",
+        "Allocate - Healthlink Unallocated (C.Le@12:47)",
+        "E-Referrals (A.Wa@16:22)",
+        "Action 10 Or More Failed Communications (A.Wa@16:22)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 88, 89, 100, 13, 100, 88, 100],
+      "complete": [
+        "Online claiming run in Best Practice (J.Sa@0:49)",
+        "90/60-day debt list actioned (L.Go@15:57)",
+        "Xero accounts reconciled (L.Go@15:57)",
+        "Debt chasing report updated (L.Go@15:57)",
+        "Unidentified payments resolved (L.Go@15:57)",
+        "Finance queue in Cloop has zero emails (L.Go@15:57)",
+        "Tyro Health receipts captured (L.Go@15:57)",
+        "Remittances allocated (L.Go@15:57)"
+      ],
+      "incomplete": []
+    }
+  ],
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}
