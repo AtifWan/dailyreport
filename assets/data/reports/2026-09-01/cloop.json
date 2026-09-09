@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 1st September 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 1st September 2026",
+  "extractedAt": "2026-09-02T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Wednesday 2 September 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 20, "oldestDays": 4.68 },
+    { "queue": "Practice Finance", "inQueue": 16, "oldestDays": 7.82 },
+    { "queue": "Unassigned", "inQueue": 8, "oldestDays": 0.82 },
+    { "queue": "Failed Communication", "inQueue": 7, "oldestDays": 0.73 },
+    { "queue": "Documents", "inQueue": 5, "oldestDays": 0.79 },
+    { "queue": "GP Mail", "inQueue": 4, "oldestDays": 7.97 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.71 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 0 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 6.69 }
+  ],
+  "realTimeSummary": { "inQueue": 64, "oldestDays": 7.97 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 53 },
+    { "queue": "Documents", "count": 31 },
+    { "queue": "Finance", "count": 16 },
+    { "queue": "Requests", "count": 8 },
+    { "queue": "Medico-legal", "count": 5 },
+    { "queue": "File Transfer", "count": 3 },
+    { "queue": "Failed Communication", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep"],
+    "totals": [81, 75, 102, 104, 114, 91, 83, 79, 79, 117]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 89, "outbound": 24, "total": 113 },
+    { "agent": "Leh Peng Goh", "incoming": 16, "outbound": 1, "total": 17 },
+    { "agent": "Lucinda Gonzalez", "incoming": 7, "outbound": 2, "total": 9 },
+    { "agent": "Frances Doble", "incoming": 4, "outbound": 3, "total": 7 },
+    { "agent": "Jasmina Sodolovic", "incoming": 0, "outbound": 2, "total": 2 }
+  ],
+  "totalCasesToDate": { "date": "2026-09-02", "totalOverallCases": 6858, "totalInProgress": 90, "totalOpenCases": 60 },
+  "inProgressTenDayTrend": {
+    "labels": ["Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep"],
+    "totals": [154, 155, 144, 90, 85, 86, 89, 93, 86, 90]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep"],
+    "totals": [70, 63, 74, 80, 63, 57, 52, 77, 86, 60]
+  }
+}
