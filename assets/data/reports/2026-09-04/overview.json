@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 4th September 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 306, "date": "2026-09-04", "weekday": "Friday", "title": "Daily Operations Report - 4th September 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 42, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 13, "incompleteCount": 7, "incompleteExample": "Xero accounts reconciled" }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 261,
+    "accepted": 210,
+    "acceptedPct": 80,
+    "missed": 51,
+    "missedPct": 20,
+    "totalOutbound": 111,
+    "topInboundAgent": { "name": "David Antioch", "calls": 52 },
+    "topOutboundAgent": { "name": "Apurva Pathak", "calls": 36 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 117, "missed": 20 },
+      { "queue": "General Enquiries", "accepted": 90, "missed": 30 },
+      { "queue": "Canberra Vasectomy", "accepted": 3, "missed": 1 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 99,
+    "oldestDays": 12.96,
+    "contactsQueuedYesterday": 66,
+    "emailsHandledYesterday": 79,
+    "totalOverallCases": 7122,
+    "totalInProgress": 105,
+    "totalOpenCases": 98
+  },
+  "leave": {
+    "weekLabel": "7–11 September 2026",
+    "doctorLinesOnLeave": 4,
+    "staffFullyOnLeave": 2,
+    "staffPartialLeave": 1,
+    "staffPartialLeaveNames": ["Kiara Pfeffer"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

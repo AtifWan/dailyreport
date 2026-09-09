@@ -1,0 +1,36 @@
+{
+  "_source": "Daily Operations Report - 4th September 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "This Friday report's leave grid is a look-ahead to the FOLLOWING week (7-11 Sept), not the week containing its own date — every Friday report previews next week's roster. It shows only 3 staff (no Bethany Tran or Renee Bowman) — fewer than the same week's grid on the 7th/8th September reports, which show 5. That's not an extraction error: shown verbatim as this PDF has it, on the assumption the roster was updated after this Friday snapshot was taken (e.g. late leave requests processed over the weekend) rather than before.",
+  "reportTitle": "Daily Operations Report - 4th September 2026",
+  "reportDate": "2026-09-04",
+  "weekStart": "2026-09-07",
+  "weekEnd": "2026-09-11",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Med Student Sarah Lucas", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr John Deery & Dr Mel Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Hannah Searle", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Ella Blackamore", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Kiara Pfeffer", "site": null, "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}
