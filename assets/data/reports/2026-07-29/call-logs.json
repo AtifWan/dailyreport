@@ -1,0 +1,83 @@
+{
+  "_source": "Daily Operations Report - 29th July 2026.pdf, pages 2-17 (Call Logs Reporting) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 29th July 2026",
+  "reportDate": "2026-07-29",
+  "summary": { "totalInbound": 307, "accepted": 280, "missed": 27, "acceptedPct": 91, "missedPct": 9, "totalOutbound": 152 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 173, "missed": 10 },
+    { "queue": "General Enquiries", "accepted": 88, "missed": 6 },
+    { "queue": "Health Professionals", "accepted": 13, "missed": 9 },
+    { "queue": "Canberra Vasectomy", "accepted": 4, "missed": 2 }
+  ],
+  "grandTotal": { "accepted": 278, "missed": 27 },
+  "_summaryVsGrandTotalNote": "The pie chart's Accepted Calls value (280) — which matches the inbound-by-staff sum and today's hourly pattern sum exactly — is 2 higher than the Grand Total bar chart's sum of the printed per-queue rows (278). Same recurring discrepancy pattern flagged on multiple prior dates. Recorded verbatim, not reconciled.",
+  "tenDayTrend": {
+    "labels": ["Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul", "Fri 24 Jul", "Mon 27 Jul", "Tue 28 Jul", "Wed 29 Jul"],
+    "answerRatePct": [95, 89, 94, 95, 94, 91, 95, 95, 88, 91],
+    "answerRateTargetPct": 85,
+    "accepted": [246, 213, 328, 253, 273, 258, 261, 375, 251, 280],
+    "missed": [13, 26, 21, 13, 18, 25, 13, 21, 33, 27],
+    "overallAvgWaitSec": [21, 50, 20, 34, 26, 38, 35, 27, 31, 36]
+  },
+  "queues": {
+    "Appointments": { "accepted": [146, 127, 203, 145, 181, 163, 153, 258, 160, 173], "missed": [6, 13, 10, 8, 7, 14, 5, 9, 12, 10], "avgWaitSec": [24, 62, 18, 33, 25, 41, 34, 28, 33, 37] },
+    "General Enquiries": { "accepted": [81, 70, 106, 92, 79, 83, 92, 93, 77, 88], "missed": [4, 6, 7, 3, 8, 10, 8, 5, 11, 6], "avgWaitSec": [17, 35, 23, 37, 28, 35, 37, 23, 30, 38] },
+    "Health Professionals": { "accepted": [16, 13, 15, 12, 11, 10, 12, 14, 11, 13], "missed": [3, 7, 4, 2, 3, 1, 0, 5, 10, 9], "avgWaitSec": [11, 15, 10, 13, 21, 22, 24, 23, 11, 30] },
+    "Canberra Vasectomy": { "accepted": [1, 3, 4, 3, 0, 2, 2, 7, 3, 4], "missed": [0, 0, 0, 0, 0, 0, 0, 2, 0, 2], "avgWaitSec": [24, 31, 52, 48, 0, 24, 65, 46, 12, 8] }
+  },
+  "_tenDayTrendNote": "Cross-validated: every trend array's positions1-9 match the already-committed 2026-07-30 arrays' positions0-8 exactly — overall trend and all 4 per-queue trends. New/unverified position0 (Thu 16 Jul) read directly from the image.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 889,
+    "longestCallAt": "2:00 PM",
+    "longestCallAgent": "Andrew Davies",
+    "longestWaitingTimeSec": 494,
+    "longestWaitingAt": "3:22 PM",
+    "avgCallHandlingSec": 163
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 494, "time": "3:22 PM", "name": "Rebecca Quinn", "waitLabel": "8 min 14 sec" },
+    { "queue": "General Enquiries", "waitSec": 374, "time": "12:33 PM", "name": "Rebecca Quinn", "waitLabel": "6 min 14 sec" },
+    { "queue": "Health Professionals", "waitSec": 96, "time": "1:00 PM", "name": "Holly Archer", "waitLabel": "1 min 36 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 12, "time": "1:26 PM", "name": "Apurva Pathak", "waitLabel": "0 min 12 sec" }
+  ],
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 85, "durationMins": 161 },
+    { "name": "Andrew Davies", "calls": 36, "durationMins": 124 },
+    { "name": "Bianca Mitchell", "calls": 36, "durationMins": 104 },
+    { "name": "Apurva Pathak", "calls": 33, "durationMins": 86 },
+    { "name": "Kiara Pfeffer", "calls": 27, "durationMins": 95 },
+    { "name": "De Ang Renfree", "calls": 19, "durationMins": 72 },
+    { "name": "Lucinda Gonzalez", "calls": 17, "durationMins": 48 },
+    { "name": "David Antioch", "calls": 16, "durationMins": 35 },
+    { "name": "Emily Pettett", "calls": 3, "durationMins": 9 },
+    { "name": "Pinky De Paz", "calls": 2, "durationMins": 8 },
+    { "name": "Holly Archer", "calls": 2, "durationMins": 3 },
+    { "name": "Lyneham - Rec 1", "calls": 1, "durationMins": 4 },
+    { "name": "Ella Blackmore", "calls": 1, "durationMins": 2 },
+    { "name": "Isaac Davis", "calls": 1, "durationMins": 4 },
+    { "name": "Shae Connors", "calls": 1, "durationMins": 4 }
+  ],
+  "_inboundByStaffNote": "'Bianca Mitchell' appears here as a new agent name not previously seen in this project's dataset — recorded verbatim.",
+  "outboundByStaff": [
+    { "name": "Andrew Davies", "calls": 29, "durationMins": 80 },
+    { "name": "Emily Pettett", "calls": 21, "durationMins": 22 },
+    { "name": "Pinky De Paz", "calls": 18, "durationMins": 14 },
+    { "name": "Isaac Davis", "calls": 17, "durationMins": 37 },
+    { "name": "Apurva Pathak", "calls": 17, "durationMins": 32 },
+    { "name": "Lucinda Gonzalez", "calls": 15, "durationMins": 14 },
+    { "name": "Bianca Mitchell", "calls": 8, "durationMins": 8 },
+    { "name": "De Ang Renfree", "calls": 7, "durationMins": 37 },
+    { "name": "Shae Connors", "calls": 6, "durationMins": 6 },
+    { "name": "Rebecca Quinn", "calls": 6, "durationMins": 8 },
+    { "name": "Kiara Pfeffer", "calls": 3, "durationMins": 4 },
+    { "name": "David Antioch", "calls": 2, "durationMins": 2 },
+    { "name": "Megan Wright", "calls": 2, "durationMins": 4 },
+    { "name": "Holly Archer", "calls": 1, "durationMins": 1 }
+  ],
+  "outboundTenDayTrend": { "labels": ["Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul", "Fri 24 Jul", "Mon 27 Jul", "Tue 28 Jul", "Wed 29 Jul"], "totals": [211, 191, 337, 257, 273, 294, 309, 256, 248, 302] },
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [2, 43, 35, 27, 31, 32, 28, 32, 24, 19, 7],
+    "missed": [1, 1, 2, 5, 3, 10, 0, 0, 4, 1, 0]
+  }
+}

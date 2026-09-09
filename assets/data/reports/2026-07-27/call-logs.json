@@ -1,0 +1,83 @@
+{
+  "_source": "Daily Operations Report - 27th July 2026.pdf, pages 2-17 (Call Logs Reporting) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 27th July 2026",
+  "reportDate": "2026-07-27",
+  "summary": { "totalInbound": 396, "accepted": 375, "missed": 21, "acceptedPct": 95, "missedPct": 5, "totalOutbound": 154 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 258, "missed": 9 },
+    { "queue": "General Enquiries", "accepted": 93, "missed": 5 },
+    { "queue": "Health Professionals", "accepted": 14, "missed": 5 },
+    { "queue": "Canberra Vasectomy", "accepted": 7, "missed": 2 }
+  ],
+  "grandTotal": { "accepted": 372, "missed": 21 },
+  "_summaryVsGrandTotalNote": "The pie chart's Accepted Calls value (375) — which matches the inbound-by-staff sum exactly — is 3 higher than the Grand Total bar chart's sum of the printed per-queue rows (372). Same recurring discrepancy pattern flagged on multiple prior dates, though the gap is larger than usual (3 rather than the more typical 1-2). Recorded verbatim, not reconciled. Note also that today's hourly pattern sums to 373 accepted — a third distinct value, matching neither the pie nor the Grand Total exactly (missed values do sum to 21, matching exactly).",
+  "tenDayTrend": {
+    "labels": ["Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul", "Fri 24 Jul", "Mon 27 Jul"],
+    "answerRatePct": [96, 94, 95, 89, 94, 95, 94, 91, 95, 95],
+    "answerRateTargetPct": 85,
+    "accepted": [248, 193, 246, 213, 328, 253, 273, 258, 261, 375],
+    "missed": [11, 13, 13, 26, 21, 13, 18, 25, 13, 21],
+    "overallAvgWaitSec": [23, 27, 21, 50, 20, 34, 26, 38, 35, 27]
+  },
+  "queues": {
+    "Appointments": { "accepted": [149, 120, 146, 127, 203, 145, 181, 163, 153, 258], "missed": [7, 7, 6, 13, 10, 8, 7, 14, 5, 9], "avgWaitSec": [26, 25, 24, 62, 18, 33, 25, 41, 34, 28] },
+    "General Enquiries": { "accepted": [85, 63, 81, 70, 106, 92, 79, 83, 92, 93], "missed": [2, 4, 4, 6, 7, 3, 8, 10, 8, 5], "avgWaitSec": [20, 31, 17, 35, 23, 37, 28, 35, 37, 23] },
+    "Health Professionals": { "accepted": [13, 7, 16, 13, 15, 12, 11, 10, 12, 14], "missed": [1, 2, 3, 7, 4, 2, 3, 1, 0, 5], "avgWaitSec": [12, 31, 11, 15, 10, 13, 21, 22, 24, 23] },
+    "Canberra Vasectomy": { "accepted": [1, 3, 1, 3, 4, 3, 0, 2, 2, 7], "missed": [0, 0, 0, 0, 0, 0, 0, 0, 0, 2], "avgWaitSec": [10, 20, 24, 31, 52, 48, 0, 24, 65, 46] }
+  },
+  "_tenDayTrendNote": "Cross-validated: every trend array's positions1-9 match the already-committed 2026-07-28 arrays' positions0-8 exactly — overall trend and all 4 per-queue trends. New/unverified position0 (Tue 14 Jul) read directly from the image.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 850,
+    "longestCallAt": "11:51 AM",
+    "longestCallAgent": "Andrew Davies",
+    "longestWaitingTimeSec": 324,
+    "longestWaitingAt": "12:57 PM",
+    "avgCallHandlingSec": 150
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 324, "time": "12:57 PM", "name": "David Antioch", "waitLabel": "5 min 24 sec" },
+    { "queue": "General Enquiries", "waitSec": 105, "time": "3:34 PM", "name": "Rebecca Quinn", "waitLabel": "1 min 45 sec" },
+    { "queue": "Health Professionals", "waitSec": 63, "time": "9:30 AM", "name": "Bianca Mitchell", "waitLabel": "1 min 3 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 129, "time": "2:06 PM", "name": "Pinky De Paz", "waitLabel": "2 min 9 sec" }
+  ],
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 99, "durationMins": 206 },
+    { "name": "David Antioch", "calls": 63, "durationMins": 111 },
+    { "name": "Kiara Pfeffer", "calls": 41, "durationMins": 130 },
+    { "name": "De Ang Renfree", "calls": 41, "durationMins": 106 },
+    { "name": "Andrew Davies", "calls": 38, "durationMins": 111 },
+    { "name": "Bianca Mitchell", "calls": 26, "durationMins": 68 },
+    { "name": "Jasmine Deery", "calls": 14, "durationMins": 41 },
+    { "name": "Pinky De Paz", "calls": 12, "durationMins": 39 },
+    { "name": "Shae Connors", "calls": 11, "durationMins": 45 },
+    { "name": "Holly Archer", "calls": 10, "durationMins": 31 },
+    { "name": "Lucinda Gonzalez", "calls": 9, "durationMins": 26 },
+    { "name": "Emily Pettett", "calls": 8, "durationMins": 18 },
+    { "name": "Ella Blackmore", "calls": 2, "durationMins": 4 },
+    { "name": "Crace - Rec 1", "calls": 1, "durationMins": 1 }
+  ],
+  "outboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 21, "durationMins": 36 },
+    { "name": "Holly Archer", "calls": 21, "durationMins": 24 },
+    { "name": "Andrew Davies", "calls": 19, "durationMins": 38 },
+    { "name": "Jasmine Deery", "calls": 15, "durationMins": 22 },
+    { "name": "Emily Pettett", "calls": 15, "durationMins": 19 },
+    { "name": "Bianca Mitchell", "calls": 14, "durationMins": 19 },
+    { "name": "Mel Deery", "calls": 9, "durationMins": 52 },
+    { "name": "De Ang Renfree", "calls": 9, "durationMins": 12 },
+    { "name": "Lucinda Gonzalez", "calls": 9, "durationMins": 18 },
+    { "name": "David Antioch", "calls": 6, "durationMins": 4 },
+    { "name": "Kiara Pfeffer", "calls": 3, "durationMins": 3 },
+    { "name": "Shae Connors", "calls": 4, "durationMins": 6 },
+    { "name": "Pinky De Paz", "calls": 3, "durationMins": 4 },
+    { "name": "Ella Blackmore", "calls": 3, "durationMins": 3 },
+    { "name": "Aiden Chang", "calls": 2, "durationMins": 10 }
+  ],
+  "_outboundByStaffNote": "Per-staff calls sum to 153, one less than the header's stated 'Total Outbound Calls = 154 Calls'. Recorded verbatim; not reconciled.",
+  "outboundTenDayTrend": { "labels": ["Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul", "Fri 24 Jul", "Mon 27 Jul"], "totals": [289, 242, 211, 191, 337, 257, 273, 294, 309, 256] },
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [5, 48, 50, 41, 46, 50, 33, 36, 28, 32, 4],
+    "missed": [0, 4, 1, 5, 2, 0, 2, 1, 3, 2, 1]
+  }
+}
