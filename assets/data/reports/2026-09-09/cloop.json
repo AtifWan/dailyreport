@@ -1,0 +1,48 @@
+{
+  "_source": "Daily Operations Report - 9th September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 9th September 2026",
+  "extractedAt": "2026-09-10T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Thursday 10 September 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 35, "oldestDays": 8.1 },
+    { "queue": "Medico-legal", "inQueue": 17, "oldestDays": 7.93 },
+    { "queue": "Unassigned", "inQueue": 12, "oldestDays": 5.68 },
+    { "queue": "Documents", "inQueue": 5, "oldestDays": 7.02 },
+    { "queue": "Practice Finance", "inQueue": 5, "oldestDays": 2.93 },
+    { "queue": "Failed Communication", "inQueue": 5, "oldestDays": 1.65 },
+    { "queue": "GP Mail", "inQueue": 3, "oldestDays": 12.97 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 0.96 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 7.03 }
+  ],
+  "realTimeSummary": { "inQueue": 84, "oldestDays": 12.97 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 27 },
+    { "queue": "Documents", "count": 23 },
+    { "queue": "Requests", "count": 20 },
+    { "queue": "Finance", "count": 7 },
+    { "queue": "Failed Communication", "count": 2 },
+    { "queue": "Medico-legal", "count": 2 },
+    { "queue": "Practice Finance", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep", "Mon 07 Sep", "Tue 08 Sep", "Wed 09 Sep"],
+    "totals": [83, 79, 79, 117, 69, 71, 66, 109, 65, 82]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 56, "outbound": 16, "total": 72 },
+    { "agent": "Lucinda Gonzalez", "incoming": 10, "outbound": 2, "total": 12 },
+    { "agent": "Apurva Pathak", "incoming": 6, "outbound": 4, "total": 10 },
+    { "agent": "Leh Peng Goh", "incoming": 7, "outbound": 1, "total": 8 },
+    { "agent": "Emily Pettett", "incoming": 3, "outbound": 1, "total": 4 }
+  ],
+  "totalCasesToDate": { "date": "2026-09-09", "totalOverallCases": 7377, "totalInProgress": 123, "totalOpenCases": 77 },
+  "inProgressTenDayTrend": {
+    "labels": ["Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep", "Mon 07 Sep", "Tue 08 Sep", "Wed 09 Sep", "Thu 10 Sep"],
+    "totals": [89, 93, 86, 90, 95, 97, 105, 113, 117, 123]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep", "Mon 07 Sep", "Tue 08 Sep", "Wed 09 Sep", "Thu 10 Sep"],
+    "totals": [52, 77, 86, 60, 90, 82, 98, 94, 94, 77]
+  },
+  "_note": "Extracted via OneDrive text (Microsoft 365 connector), not pixel-level image rendering. This page's tables are mostly clean, distinctly-labelled rows (queue names, agent names) and cross-checked internally (e.g. realTimeQueues sums to the Summary row's 84 exactly; each emailsHandledYesterday row's incoming+outbound sums to its own total). contactsQueuedTenDayTrend's position 9 (82) is confirmed three independent ways: it's the one value in the garbled chart that wasn't already a known figure from 2026-09-08, it agrees between the short and long PDF's separately-garbled extractions, and it matches the Yesterday's-Contacts-Queued breakdown table's own sum (27+23+20+7+2+2+1=82). inProgressTenDayTrend and openCasesTenDayTrend positions 9 (123, 77) are taken directly from the Total Cases To Date row above (which is what these two trends track day-over-day) rather than from their own garbled charts, which didn't contain either figure."
+}
