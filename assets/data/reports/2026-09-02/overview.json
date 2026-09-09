@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 2nd September 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 304, "date": "2026-09-02", "weekday": "Wednesday", "title": "Daily Operations Report - 2nd September 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 39, "onHalt": false },
+      { "name": "Finance", "days": 1, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 216,
+    "accepted": 194,
+    "acceptedPct": 90,
+    "missed": 22,
+    "missedPct": 10,
+    "totalOutbound": 145,
+    "topInboundAgent": { "name": "Lucinda Gonzalez", "calls": 66 },
+    "topOutboundAgent": { "name": "Apurva Pathak", "calls": 36 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 113, "missed": 9 },
+      { "queue": "General Enquiries", "accepted": 78, "missed": 13 },
+      { "queue": "Canberra Vasectomy", "accepted": 3, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 81,
+    "oldestDays": 8.96,
+    "contactsQueuedYesterday": 69,
+    "emailsHandledYesterday": 91,
+    "totalOverallCases": 6952,
+    "totalInProgress": 95,
+    "totalOpenCases": 90
+  },
+  "leave": {
+    "weekLabel": "31 August – 4 September 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": ["Shae Connors", "Rebecca Quinn", "Kiara Pfeffer", "Emily Pettett", "Micah Haly", "Kate Chin"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}
