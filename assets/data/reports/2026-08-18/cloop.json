@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 18th August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 18th August 2026",
+  "extractedAt": "2026-08-19T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Wednesday 19 August 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 23, "oldestDays": 7.96 },
+    { "queue": "Unassigned", "inQueue": 12, "oldestDays": 0.8 },
+    { "queue": "Documents", "inQueue": 12, "oldestDays": 0.87 },
+    { "queue": "Medico-legal", "inQueue": 9, "oldestDays": 4.73 },
+    { "queue": "Finance", "inQueue": 8, "oldestDays": 1.04 },
+    { "queue": "Practice Finance", "inQueue": 8, "oldestDays": 7.6 },
+    { "queue": "Escalation", "inQueue": 3, "oldestDays": 7.95 },
+    { "queue": "Failed Communication", "inQueue": 2, "oldestDays": 0.63 },
+    { "queue": "File Transfer", "inQueue": 2, "oldestDays": 1.81 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 4.89 }
+  ],
+  "realTimeSummary": { "inQueue": 80, "oldestDays": 7.96 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 27 },
+    { "queue": "Documents", "count": 25 },
+    { "queue": "Requests", "count": 12 },
+    { "queue": "Failed Communication", "count": 11 },
+    { "queue": "File Transfer", "count": 4 },
+    { "queue": "Practice Finance", "count": 4 },
+    { "queue": "Escalation", "count": 2 },
+    { "queue": "Medico-legal", "count": 2 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug"],
+    "totals": [69, 73, 126, 108, 88, 71, 88, 102, 90, 87]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 60, "outbound": 13, "total": 74 },
+    { "agent": "Apurva Pathak", "incoming": 14, "outbound": 3, "total": 17 },
+    { "agent": "Atif Wan", "incoming": 10, "outbound": 0, "total": 10 },
+    { "agent": "Alexandra Cownie", "incoming": 1, "outbound": 0, "total": 2 }
+  ],
+  "_emailsHandledYesterdayNote": "Two agents' stated totals don't equal incoming+outbound in the source PDF itself: Chloey Leow (60+13=73, stated 74) and Alexandra Cownie (1+0=1, stated 2). Same recurring quirk already flagged on 2026-09-07's cloop.json. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-08-18", "totalOverallCases": 5930, "totalInProgress": 136, "totalOpenCases": 78 },
+  "inProgressTenDayTrend": {
+    "labels": ["Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug"],
+    "totals": [120, 126, 137, 130, 128, 124, 127, 132, 135, 136]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug"],
+    "totals": [24, 42, 43, 48, 49, 53, 60, 73, 70, 78]
+  }
+}

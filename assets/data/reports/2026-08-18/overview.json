@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 18th August 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 293, "date": "2026-08-18", "weekday": "Tuesday", "title": "Daily Operations Report - 18th August 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 28, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 89, "incompleteCount": 1, "incompleteExample": "Finance queries resolved" }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 285,
+    "accepted": 256,
+    "acceptedPct": 90,
+    "missed": 29,
+    "missedPct": 10,
+    "totalOutbound": 164,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 77 },
+    "topOutboundAgent": { "name": "Apurva Pathak", "calls": 49 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 160, "missed": 16 },
+      { "queue": "General Enquiries", "accepted": 83, "missed": 9 },
+      { "queue": "Canberra Vasectomy", "accepted": 0, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 80,
+    "oldestDays": 7.96,
+    "contactsQueuedYesterday": 87,
+    "emailsHandledYesterday": 103,
+    "totalOverallCases": 5930,
+    "totalInProgress": 136,
+    "totalOpenCases": 78
+  },
+  "leave": {
+    "weekLabel": "17–21 August 2026",
+    "doctorLinesOnLeave": 4,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Andy Davies", "Apurva Pathak", "De Ang Renfree", "Jasmine Deery", "Aiden Chang"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}
