@@ -77,6 +77,33 @@
   .dr-cal-holiday, .dr-cal-note { font-size: 9.5px; }
 }
 
+/* Report-date picker (assets/js/datepicker.js) — replaces a native <input
+   type=date>, whose <datalist> "which days have data" hint rendered as an
+   actual calendar with tick marks in some browsers but as a plain scrolling
+   list of every date in others. This is a button + popover instead, so the
+   calendar grid always looks the same everywhere. Sized/coloured off the same
+   tokens as .dr-cal-* (the read-only holiday month view) but kept in its own
+   dr-pick-* namespace since the two aren't visually identical (this one is
+   much smaller and every cell is a real, focusable <button>). */
+.dr-datepicker { position: relative; }
+.dr-datepicker-btn { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; cursor: pointer; text-align: left; white-space: nowrap; color: var(--ink); }
+.dr-datepicker-btn:hover { border-color: var(--hairline-strong); }
+.dr-datepicker-btn svg { flex: none; color: var(--ink-faint); }
+.dr-datepicker-pop { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; width: 260px; max-width: calc(100vw - 32px); background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); box-shadow: var(--shadow-pop); padding: 12px; }
+.dr-datepicker-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.dr-datepicker-mon { font-weight: 700; font-size: 14px; color: var(--ink); }
+.dr-datepicker-prev, .dr-datepicker-next { border: none; background: var(--surface-sunk); width: 26px; height: 26px; border-radius: 8px; font-size: 15px; line-height: 1; cursor: pointer; color: var(--ink-muted); }
+.dr-datepicker-prev:hover:not(:disabled), .dr-datepicker-next:hover:not(:disabled) { background: var(--accent-weak); color: var(--accent-strong); }
+.dr-datepicker-prev:disabled, .dr-datepicker-next:disabled { opacity: .35; cursor: default; }
+.dr-pick-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.dr-pick-weekday { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); text-align: center; padding: 4px 0 6px; }
+.dr-pick-cell { display: flex; }
+.dr-pick-day { width: 100%; aspect-ratio: 1; border: none; background: none; border-radius: 8px; font-size: 12.5px; font-weight: 600; color: var(--ink-muted); cursor: pointer; }
+.dr-pick-day--empty { color: var(--hairline-strong); cursor: default; }
+.dr-pick-day--has:hover { background: var(--surface-sunk); color: var(--ink); }
+.dr-pick-day--sel { background: var(--accent); color: #fff; }
+.dr-pick-day--sel:hover { background: var(--accent); color: #fff; }
+
 /* Leave-grid row status rail (item 5 redesign) — same inset-rail idiom as .kpi.crit/
    .kpi.good, so "who's fully out" and "who's partly out" register before you've read
    a single cell. Two things make this trickier than a card: box-shadow on a <tr>
