@@ -1,6 +1,6 @@
 {
   "_source": "Daily_Operations_Report__8th_September_2026_Short_Version.pdf (condensed headline figures)",
-  "report": { "number": 308, "date": "2026-09-08", "weekday": "Tuesday" },
+  "report": { "number": 308, "date": "2026-09-08", "weekday": "Tuesday", "title": "Daily Operations Report - 8th September 2026 (Short Version)" },
   "criticalTasks": {
     "streaks": [
       { "name": "Crace", "days": 1, "onHalt": true },

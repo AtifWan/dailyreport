@@ -53,6 +53,33 @@ Concretely, that means:
 5. **Auth**, if the live endpoint needs it: add headers/credentials inside `fetchJSON()`
    in `util.js` — the one place every page module already funnels through.
 
+## Identifying which source PDF is which
+
+Each report date is published as two PDFs with near-identical titles — the extraction
+step (manual today, automatable later) needs to tell them apart correctly every time:
+
+- Long/full version: `Daily Operations Report - [DATE]` → feeds `tasks.json`,
+  `call-logs.json`, `cloop.json`, `leave.json`.
+- Short version: `Daily Operations Report - [DATE] (Short Version)` → feeds
+  `overview.json` only.
+
+`[DATE]` is the day-ordinal form ("8th September 2026") and must match between the pair
+and match the `YYYY-MM-DD` folder the pair is filed under. Trust the title text on the
+page over the filename — filenames drift, titles are the contract. Each JSON file
+already records the exact title it was extracted from (`report.title` in
+`overview.json`, `reportTitle` in the other four); an automated pipeline should do the
+same and flag a mismatch (wrong pairing, or a date that doesn't match the destination
+folder) rather than silently filing bad data.
+
+## Timezone
+
+Every date in this app is a timezone-agnostic date-only string; the one thing that ever
+needs a real timezone is a live pipeline deciding "what day is it right now" (e.g. has
+today's report landed yet, what folder name to write next). That must always be resolved
+against **Australia/Sydney** (the IANA zone Canberra follows — AEST/AEDT), never the
+server's local time and never UTC. `cloop.json`'s `extractedAt` shows the expected
+format: an explicit `+10:00`/`+11:00` offset, not a bare timestamp.
+
 ## What doesn't change
 
 - `index.html`, the sidebar/router (`app.js`), and every `assets/js/charts.js` helper —

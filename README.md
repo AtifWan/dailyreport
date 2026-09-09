@@ -80,6 +80,20 @@ PHASE-2.md                    <- what changes (and what doesn't) when this goes 
   today-highlight and the Public holiday calendar's today-ring — which use the report
   date plus one day instead (`addDaysISO()` in `util.js`), so "Today" always lands on
   the actual day the report is being read, not the day its data is about.
+- **Timezone: always Australia/Canberra, never the viewer's device.** Every date in this
+  app is a date-only ISO string (`YYYY-MM-DD`, no time-of-day) describing an ACT
+  (Canberra) calendar day, parsed and formatted with an explicit UTC anchor (`T00:00:00Z`
+  / `timeZone:'UTC'` in `formatDate()`/`addDaysISO()`) precisely so it renders as the same
+  day regardless of which timezone the viewer's browser is in — a Sydney-based practice's
+  "today" shouldn't silently shift by a day for someone viewing from Perth or overseas.
+  Nothing in the app reads the viewer's or server's real clock (there's no `new Date()`
+  anywhere in `assets/js/`); the one wall-clock timestamp that exists, `cloop.json`'s
+  `extractedAt`, is recorded with an explicit Canberra offset (`+10:00` AEST /
+  `+11:00` AEDT, whichever applies to that date) rather than UTC or a bare local time. Any
+  future feature that needs the real current moment (e.g. a live refresh, or deciding
+  whether today's report has landed yet) must resolve "today" against the
+  **Australia/Sydney** IANA timezone (which Canberra follows) — never `UTC` and never
+  `Intl`/`Date` defaults, which pick up whatever timezone the process happens to run in.
 - **Week at a glance, redesigned for scanability** — "On leave" renders in the loud
   colour (vermillion) and "Available" in the calm one, deliberately matching the
   source PDF's orange/green emphasis (an earlier version had this backwards, which
@@ -96,6 +110,23 @@ the same five JSON files described above. `assets/data/reports/index.json` is th
 manifest listing which dates exist (`dates`) and which is newest (`latest`) — nothing
 else in the app hardcodes a date list. Adding a new day's report is: drop in a new dated
 folder, add its date to the manifest, done.
+
+**Telling the two source PDFs apart.** Every report date is published as two PDFs, and
+their title text — not the filename — is the reliable way to tell which is which:
+
+| Report | Title on the page | Feeds |
+|---|---|---|
+| Long/full version | `Daily Operations Report - [DATE]` | `tasks.json`, `call-logs.json`, `cloop.json`, `leave.json` |
+| Short version | `Daily Operations Report - [DATE] (Short Version)` | `overview.json` only |
+
+`[DATE]` is written out as "8th September 2026" (day-ordinal + full month name + year) —
+the same string that becomes that folder's `YYYY-MM-DD`. The only textual difference
+between the two titles is the trailing `(Short Version)`; everything else, including the
+date, matches exactly between the pair for a given day. Each of the five JSON files
+records the exact source title it came from in `report.title` (`overview.json`) or
+`reportTitle` (the other four) — so a mismatch between a file's stored title and its
+folder's date, or between the long/short pair's dates, is a sign the wrong PDF pair was
+used and worth flagging before extracting further.
 
 The selected date lives in the URL hash itself — `#/<route>/<date>`, e.g.
 `#/leave/2026-09-08` — not inside any one page's state, which is what makes it survive

@@ -1,5 +1,6 @@
 {
   "_source": "Daily_Operations_Report__8th_September_2026.pdf, pages 3-17 (Call Logs Reporting)",
+  "reportTitle": "Daily Operations Report - 8th September 2026",
   "reportDate": "2026-09-08",
   "summary": { "totalInbound": 303, "accepted": 280, "missed": 23, "acceptedPct": 92, "missedPct": 8, "totalOutbound": 186 },
   "queueReport": [
