@@ -70,10 +70,11 @@
 .dr-cal-daynum { font-size: 12.5px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 5px; }
 .dr-cal-today-tag { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--accent-strong); background: var(--accent-weak); border-radius: 999px; padding: 1px 6px; }
 .dr-cal-holiday { font-size: 11px; font-weight: 600; color: var(--infer-ink); margin-top: 4px; line-height: 1.25; }
+.dr-cal-note { font-size: 11px; font-weight: 600; color: var(--accent-strong); margin-top: 4px; line-height: 1.25; }
 @media (max-width: 520px) {
   .dr-cal-weekday { font-size: 9.5px; padding: 5px 2px; }
   .dr-cal-cell { min-height: 46px; padding: 4px 5px; }
-  .dr-cal-holiday { font-size: 9.5px; }
+  .dr-cal-holiday, .dr-cal-note { font-size: 9.5px; }
 }
 
 /* Leave-grid row status rail (item 5 redesign) — same inset-rail idiom as .kpi.crit/

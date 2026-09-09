@@ -111,6 +111,7 @@ export async function renderLeave(container) {
         </div>
       </div>
       <div class="dr-cal-mount" style="margin-top:14px"></div>
+      <p class="foot-note">Crace runs a Saturday clinic, 9am–1pm, every week (marked on each Saturday below) — every other clinic, and Crace itself outside those hours, is closed weekends.</p>
     </div>
 
     <div class="panel dr-section-gap">
