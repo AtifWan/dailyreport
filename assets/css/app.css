@@ -1,0 +1,28 @@
+/* Operations Dashboard — thin additions on top of design-system/css/styles.css.
+   No new colours, radii or shadows: everything here just lays out the chart SVGs
+   and leave-grid table produced by assets/js/charts.js and the page modules. */
+
+.dr-chart-wrap { overflow-x: auto; }
+.dr-chart { display: block; width: 100%; min-width: 560px; height: auto; }
+
+/* A grid/flex item's automatic min-width defaults to its content's min-content size,
+   which — without this — lets a 560px-wide chart bubble up through .panel and force
+   the WHOLE PAGE to scroll sideways instead of just the chart's own .dr-chart-wrap.
+   min-width:0 lets the panel shrink to its track and pushes the scrolling down to
+   where it belongs. */
+.panel { min-width: 0; }
+
+.dr-page { display: none; }
+.dr-page.on { display: block; }
+
+.dr-section-gap { margin-top: 16px; }
+
+.dr-leave-table td, .dr-leave-table th { text-align: center; }
+.dr-leave-table td:first-child, .dr-leave-table th:first-child { text-align: left; }
+.dr-leave-table .dr-group-row td { background: var(--surface-sunk); font-weight: 700; text-align: left; letter-spacing: .04em; text-transform: uppercase; font-size: 12px; color: var(--ink-muted); }
+
+.dr-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-muted); margin-top: 12px; }
+.dr-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dr-legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+.dr-placeholder { border: 1px dashed var(--hairline-strong); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: var(--ink-faint); background: var(--surface-sunk); }

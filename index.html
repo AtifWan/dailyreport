@@ -3,18 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daily Report · YourGP</title>
+<title>Daily Operations Report · YourGP</title>
 <link rel="icon" href="design-system/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="design-system/favicon/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="design-system/favicon/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="design-system/favicon/apple-touch-icon.png">
 <link rel="manifest" href="design-system/favicon/site.webmanifest">
 <meta name="theme-color" content="#008C99">
-<meta name="description" content="Daily billing report for YourGP: today's invoices, payment status and aging, by site.">
+<meta name="description" content="Internal operations dashboard for YourGP: critical daily tasks, call logs, Cloop case queues and staff leave.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="design-system/css/styles.css">
+<link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
 <div class="app">
@@ -22,24 +23,32 @@
   <div class="nav-backdrop" id="navBackdrop"></div>
 
   <aside class="sidebar" id="sidebar">
-    <div class="brand"><div class="mark">Y</div><div class="nm">Daily Report<span>YourGP</span></div></div>
+    <div class="brand"><div class="mark">Y</div><div class="nm">Daily Operations<span>YourGP</span></div></div>
     <div class="nav-label">Reports</div>
     <nav class="nav">
-      <button class="nav-item on">
+      <button class="nav-item on" id="nav-overview" onclick="location.hash='#/overview'">
         <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12.5 16V8M17 16v-6"/></svg>
-        Today
+        Overview
       </button>
-      <button class="nav-item">
-        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H6.5A1.5 1.5 0 0 0 5 4v16a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20V7.5z"/><path d="M14 2.5V8h5"/><path d="M8.5 13h7M8.5 16.5h7"/></svg>
-        Invoices
+      <button class="nav-item" id="nav-tasks" onclick="location.hash='#/critical-tasks'">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8 12.5l2.4 2.4L16 9.5"/></svg>
+        Critical daily tasks
       </button>
-      <button class="nav-item">
+      <button class="nav-item" id="nav-calls" onclick="location.hash='#/call-logs'">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5c-1.1 0-2 .9-2 2 0 8.3 6.7 15 15 15 1.1 0 2-.9 2-2v-2.4c0-.5-.3-.9-.8-1l-3.3-.8c-.4-.1-.9 0-1.1.4l-.9 1.4a10.6 10.6 0 0 1-4.7-4.7l1.4-.9c.4-.3.5-.7.4-1.1l-.8-3.3c-.1-.5-.5-.8-1-.8H6.5z"/></svg>
+        Call logs
+      </button>
+      <button class="nav-item" id="nav-cloop" onclick="location.hash='#/cloop'">
         <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.2"/></svg>
-        By site
+        Cloop
+      </button>
+      <button class="nav-item" id="nav-leave" onclick="location.hash='#/leave'">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="1.6"/><path d="M3.5 9.5h17M8 3v3M16 3v3"/></svg>
+        Staff &amp; doctors' leave
       </button>
     </nav>
     <div class="side-user">
-      <div class="su-id"><div class="su-av">P</div><span class="su-email">practice.manager@ygp.au</span></div>
+      <div class="su-id"><div class="su-av">A</div><span class="su-email">atif.wan@ygp.au</span></div>
       <button class="signout">Sign out</button>
     </div>
   </aside>
@@ -50,191 +59,18 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
       <div class="tb-titles">
-        <div class="tt">Daily report</div>
-        <div class="ts">Billing summary for Tuesday 9 September 2026, across all sites.</div>
+        <div class="tt">Overview</div>
+        <div class="ts">At-a-glance summary of the daily operations report.</div>
       </div>
       <button class="signout mob-only">Sign out</button>
     </div>
 
     <div class="content">
-
-      <div class="demo-note">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg>
-        <div>Representative data for demonstration. Connect the daily BestPractice export to make these figures live.</div>
-      </div>
-
-      <div class="kpis">
-        <div class="kpi">
-          <div class="k-l">Billed today</div>
-          <div class="k-v num">$8,420.00</div>
-          <div class="k-n">42 invoices issued</div>
-        </div>
-        <div class="kpi good">
-          <div class="k-l">Paid today</div>
-          <div class="k-v num">$6,150.00</div>
-          <div class="k-n">73% of billed · 31 invoices</div>
-        </div>
-        <div class="kpi crit">
-          <div class="k-l">Unpaid today</div>
-          <div class="k-v num">$2,270.00</div>
-          <div class="k-n">27% of billed · 11 invoices<span class="k-vs">vs yesterday <span class="d-up">▲ $310 (+16%)</span></span></div>
-        </div>
-        <div class="kpi">
-          <div class="k-l">Average invoice</div>
-          <div class="k-v num">$200.48</div>
-          <div class="k-n">across 3 sites</div>
-        </div>
-      </div>
-
-      <div class="filters">
-        <div class="fgrp"><span class="flbl">Report date</span><input class="dinput" type="date" value="2026-09-09"></div>
-        <div class="fgrp"><span class="flbl">Site</span><div class="selwrap"><select id="siteSelect"><option>All sites</option><option>Crace</option><option>Denman</option><option>Lyneham</option></select></div></div>
-        <div class="fgrp inv"><span class="flbl">Invoice #</span><input class="sinput" type="text" placeholder="Search invoices"></div>
-        <div class="fgrp"><span class="flbl">Status</span><div class="selwrap"><select><option>All</option><option>Paid</option><option>Unpaid</option></select></div></div>
-        <div class="fgrp"><span class="flbl">Category</span><div class="selwrap"><select><option>All</option><option>Consultation</option><option>Workers Compensation</option><option>Private – Skin</option><option>Medicolegal / DVA Reports</option></select></div></div>
-      </div>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 16px">
-        <button class="locbtn on">All</button>
-        <button class="locbtn">Crace</button>
-        <button class="locbtn">Denman</button>
-        <button class="locbtn">Lyneham</button>
-      </div>
-
-      <div class="grid2">
-        <div class="panel">
-          <h3>Billed by location</h3>
-          <p class="q">Where today's billing landed.</p>
-          <div class="brow"><div class="bl">Crace</div><div class="minibar"><i style="width:100%"></i></div><div class="bv">$4,180<small>20 invoices</small></div></div>
-          <div class="brow"><div class="bl">Denman</div><div class="minibar"><i style="width:63%"></i></div><div class="bv">$2,630<small>13 invoices</small></div></div>
-          <div class="brow"><div class="bl">Lyneham</div><div class="minibar"><i style="width:38%"></i></div><div class="bv">$1,610<small>9 invoices</small></div></div>
-          <div class="take"><b>Reads as:</b> Crace is on pace for its usual half-share of daily billing; Lyneham is running a little light today.</div>
-        </div>
-
-        <div class="panel">
-          <h3>Paid vs unpaid</h3>
-          <p class="q">Same-day collection rate.</p>
-          <p class="result-meta">42 invoices · $8,420.00 billed &nbsp;&nbsp; <span style="color:var(--live-ink);font-weight:700">Paid 31 ($6,150.00)</span> &nbsp; Unpaid 11 ($2,270.00)</p>
-          <div class="splitbar">
-            <div class="seg" style="width:73%;background:var(--live)">Paid 73%</div>
-            <div class="seg" style="width:27%;background:var(--manual)">27%</div>
-          </div>
-          <div class="take"><b>Reads as:</b> just over a quarter of today's billing is still unpaid at close of business — in line with a typical weekday.</div>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-top:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap">
-          <div>
-            <h3>Today's invoices</h3>
-            <p class="q">All invoices raised today, newest first.</p>
-          </div>
-          <button class="btn btn-primary" id="downloadBtn">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M8 11l4 4 4-4"/><path d="M5 20h14"/></svg>
-            Download Excel
-          </button>
-        </div>
-
-        <div class="rtable-wrap" style="margin-top:14px">
-          <table class="rtable" id="invoiceTable">
-            <thead><tr>
-              <th>Invoice #</th>
-              <th>Time</th>
-              <th>Site</th>
-              <th>Category</th>
-              <th class="r"><button class="thsort on" data-col="4" data-type="num">Total <span class="thsort-i">▼</span></button></th>
-              <th>Status</th>
-            </tr></thead>
-            <tbody>
-              <tr><td class="strong">1584231</td><td>4:42 pm</td><td>Crace</td><td>Consultation</td><td class="r num">86.00</td><td><span class="chip paid">Paid</span></td></tr>
-              <tr><td class="strong">1584229</td><td>4:15 pm</td><td>Lyneham</td><td>Private – Skin</td><td class="r num">312.50</td><td><span class="chip unpaid">Unpaid</span></td></tr>
-              <tr><td class="strong">1584224</td><td>3:50 pm</td><td>Crace</td><td>Consultation</td><td class="r num">96.00</td><td><span class="chip paid">Paid</span></td></tr>
-              <tr><td class="strong">1584218</td><td>3:22 pm</td><td>Denman</td><td>Workers Compensation</td><td class="r num">210.00</td><td><span class="chip unpaid">Unpaid</span></td></tr>
-              <tr><td class="strong">1584211</td><td>2:47 pm</td><td>Crace</td><td>Medicolegal / DVA Reports</td><td class="r num">560.00</td><td><span class="chip unpaid">Unpaid</span></td></tr>
-              <tr><td class="strong">1584205</td><td>2:10 pm</td><td>Denman</td><td>Consultation</td><td class="r num">86.00</td><td><span class="chip paid">Paid</span></td></tr>
-              <tr><td class="strong">1584198</td><td>1:36 pm</td><td>Lyneham</td><td>Consultation</td><td class="r num">96.00</td><td><span class="chip paid">Paid</span></td></tr>
-              <tr><td class="strong">1584190</td><td>12:58 pm</td><td>Crace</td><td>Private – Skin</td><td class="r num">228.00</td><td><span class="chip paid">Paid</span></td></tr>
-              <tr><td class="strong">1584183</td><td>12:20 pm</td><td>Denman</td><td>Consultation</td><td class="r num">86.00</td><td><span class="chip unpaid">Unpaid</span></td></tr>
-              <tr><td class="strong">1584176</td><td>11:44 am</td><td>Crace</td><td>Consultation</td><td class="r num">96.00</td><td><span class="chip paid">Paid</span></td></tr>
-            </tbody>
-            <tfoot><tr><td>Total (10 of 42 shown)</td><td></td><td></td><td></td><td class="r num">1,856.50</td><td></td></tr></tfoot>
-          </table>
-        </div>
-
-        <div class="pager">
-          <div class="pg-l">Showing 1–10 of 42
-            <span class="pg-btns"><button class="pg-btn on">10</button><button class="pg-btn">25</button><button class="pg-btn">50</button></span>
-          </div>
-          <div class="pg-btns"><button class="pg-btn" disabled>Prev</button><button class="pg-btn">Next</button></div>
-        </div>
-
-        <p class="foot-note">Ages reset at midnight; anything unpaid after today rolls into the aging report under 0–30 days.</p>
-      </div>
-
+      <div id="page-content"><p class="result-meta">Loading…</p></div>
     </div>
   </main>
 </div>
 
-<div class="toast" id="toast">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-  Exported to Excel
-</div>
-
-<script>
-  // Mobile drawer
-  var sidebar = document.getElementById('sidebar');
-  var backdrop = document.getElementById('navBackdrop');
-  var menuBtn = document.getElementById('menuBtn');
-  function openDrawer(){ sidebar.classList.add('open'); backdrop.classList.add('show'); }
-  function closeDrawer(){ sidebar.classList.remove('open'); backdrop.classList.remove('show'); }
-  menuBtn.addEventListener('click', openDrawer);
-  backdrop.addEventListener('click', closeDrawer);
-
-  // Nav item selection (single-page demo: only "Today" has content)
-  document.querySelectorAll('.nav-item').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('.nav-item').forEach(function(b){ b.classList.remove('on'); });
-      btn.classList.add('on');
-      closeDrawer();
-    });
-  });
-
-  // Segmented site tabs mirror the site filter
-  var siteSelect = document.getElementById('siteSelect');
-  document.querySelectorAll('.locbtn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('.locbtn').forEach(function(b){ b.classList.remove('on'); });
-      btn.classList.add('on');
-      siteSelect.value = btn.textContent === 'All' ? 'All sites' : btn.textContent;
-    });
-  });
-
-  // Download Excel -> toast confirmation
-  var toast = document.getElementById('toast');
-  document.getElementById('downloadBtn').addEventListener('click', function(){
-    toast.classList.add('show');
-    setTimeout(function(){ toast.classList.remove('show'); }, 2200);
-  });
-
-  // Sortable "Total" column
-  var table = document.getElementById('invoiceTable');
-  table.querySelectorAll('.thsort').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var col = parseInt(btn.dataset.col, 10);
-      var asc = !btn.classList.contains('on') ? true : btn.querySelector('.thsort-i').textContent !== '▼';
-      table.querySelectorAll('.thsort').forEach(function(b){ b.classList.remove('on'); b.querySelector('.thsort-i').textContent = '⇅'; });
-      btn.classList.add('on');
-      btn.querySelector('.thsort-i').textContent = asc ? '▲' : '▼';
-      var tbody = table.querySelector('tbody');
-      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
-      rows.sort(function(a, b){
-        var av = parseFloat(a.children[col].textContent.replace(/,/g, ''));
-        var bv = parseFloat(b.children[col].textContent.replace(/,/g, ''));
-        return asc ? av - bv : bv - av;
-      });
-      rows.forEach(function(r){ tbody.appendChild(r); });
-    });
-  });
-</script>
+<script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
