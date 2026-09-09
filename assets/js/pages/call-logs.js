@@ -1,5 +1,6 @@
 import { esc, fetchJSON, mountInteractiveTable } from '../util.js';
 import { barChart, stackedBarChart, lineChart, hBarGroup } from '../charts.js';
+import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
 const QUEUE_COLORS = { Appointments: 'var(--age1)', 'General Enquiries': 'var(--age2)', 'Health Professionals': 'var(--age3)', 'Canberra Vasectomy': 'var(--age4)' };
 const QUEUES = Object.keys(QUEUE_COLORS);
@@ -24,7 +25,7 @@ function buildStaffActivity(callLogs, cloop) {
   return Array.from(byName.values()).map((r) => ({ ...r, totalCalls: r.inboundCalls + r.outboundCalls, totalMins: r.inboundMins + r.outboundMins }));
 }
 
-function mountStaffActivityTable(container, staff) {
+function mountStaffActivityTable(container, staff, date) {
   const maxCalls = Math.max(...staff.map((s) => s.totalCalls), 1);
   mountInteractiveTable(container, {
     rows: staff,
@@ -53,7 +54,7 @@ function mountStaffActivityTable(container, staff) {
             <span><b style="color:var(--ink)">Inbound:</b> ${r.inboundCalls} calls · ${r.inboundMins}m total</span>
             <span><b style="color:var(--ink)">Outbound:</b> ${r.outboundCalls} calls · ${r.outboundMins}m total</span>
             ${r.emailTotal > 0
-              ? `<span><b style="color:var(--ink)">Cloop, yesterday:</b> ${r.emailTotal} contacts handled (${r.emailIncoming} in / ${r.emailOutbound} out) — <a href="#/cloop" style="color:var(--accent)">view in Cloop &rarr;</a></span>`
+              ? `<span><b style="color:var(--ink)">Cloop, yesterday:</b> ${r.emailTotal} contacts handled (${r.emailIncoming} in / ${r.emailOutbound} out) — <a href="#/cloop/${esc(date)}" style="color:var(--accent)">view in Cloop &rarr;</a></span>`
               : `<span class="foot-note" style="margin:0">No Cloop email activity logged for this agent yesterday.</span>`}
           </div>
         </td>
@@ -91,10 +92,10 @@ function wireQueueFilter(container) {
   });
 }
 
-export async function renderCallLogs(container) {
+export async function renderCallLogs(container, date, manifest) {
   const [d, cloop] = await Promise.all([
-    fetchJSON('assets/data/call-logs.json'),
-    fetchJSON('assets/data/cloop.json').catch(() => null),
+    fetchJSON(`assets/data/reports/${date}/call-logs.json`),
+    fetchJSON(`assets/data/reports/${date}/cloop.json`).catch(() => null),
   ]);
   const t = d.tenDayTrend;
   const staff = buildStaffActivity(d, cloop);
@@ -122,6 +123,7 @@ export async function renderCallLogs(container) {
   const hourly = d.todaysHourlyPattern;
 
   container.innerHTML = `
+    ${datePickerHtml(date, manifest)}
     <div class="kpis">
       <div class="kpi">
         <div class="k-l">Total inbound calls</div>
@@ -257,5 +259,6 @@ export async function renderCallLogs(container) {
 
   wireQueueFilter(container);
   mountLongestWaitTable(container.querySelector('.dr-longest-wait'), d.longestWaitPerQueue);
-  mountStaffActivityTable(container.querySelector('.dr-staff-table'), staff);
+  mountStaffActivityTable(container.querySelector('.dr-staff-table'), staff, date);
+  wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/call-logs/${newDate}`; } });
 }

@@ -62,6 +62,9 @@ neither introduces a competing visual language:
   owns no styling of its own.
 - `workdays.js` is pure date math (an ACT 2026 public holiday list + a "count back N
   working days" function) — no DOM, no styling.
+- `datepicker.js` renders each page's date picker using only existing design-system
+  classes (`.filters` `.fgrp` `.flbl` `.dinput` `.foot-note`) — a plain native
+  `<input type="date">`, not a new widget, so it needed no new CSS at all.
 
 ## Deliberately not used
 

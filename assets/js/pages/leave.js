@@ -1,5 +1,6 @@
 import { esc, fetchJSON, formatDate, addDaysISO } from '../util.js';
 import { renderMonthCalendar } from '../calendarview.js';
+import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
 // "On leave" is deliberately the LOUD colour (vermillion), matching the source PDF's
 // vivid orange — someone scanning the grid needs the exception (who's out) to pop,
@@ -27,8 +28,8 @@ function dayIndexOf(dateISO, weekStartISO) {
 const CAL_MIN = { year: 2026, month: 0 };
 const CAL_MAX = { year: 2026, month: 11 };
 
-export async function renderLeave(container) {
-  const d = await fetchJSON('assets/data/leave.json');
+export async function renderLeave(container, date, manifest) {
+  const d = await fetchJSON(`assets/data/reports/${date}/leave.json`);
   // The report always publishes a day after the date its figures describe (see
   // README's "Interactivity" note) — reportDate is "the day this data is about"
   // (Tuesday), but "Today" for a person reading the leave roster right now means
@@ -48,6 +49,7 @@ export async function renderLeave(container) {
   const partialNames = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).map((p) => p.name);
 
   container.innerHTML = `
+    ${datePickerHtml(date, manifest)}
     <p class="result-meta">Week of ${formatDate(d.weekStart, { day: 'numeric', month: 'long' })} – ${formatDate(d.weekEnd, { day: 'numeric', month: 'long', year: 'numeric' })}</p>
 
     <div class="kpis">
@@ -200,4 +202,6 @@ export async function renderLeave(container) {
     paintCalendar();
   });
   paintCalendar();
+
+  wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/leave/${newDate}`; } });
 }

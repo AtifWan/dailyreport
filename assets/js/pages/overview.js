@@ -1,11 +1,12 @@
 import { esc, fetchJSON, formatDate } from '../util.js';
+import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
-function viewLink(route, label) {
-  return `<a href="${route}" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none">${label} <span aria-hidden="true">&rarr;</span></a>`;
+function viewLink(route, date, label) {
+  return `<a href="#/${route}/${date}" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none">${label} <span aria-hidden="true">&rarr;</span></a>`;
 }
 
-export async function renderOverview(container) {
-  const d = await fetchJSON('assets/data/overview.json');
+export async function renderOverview(container, date, manifest) {
+  const d = await fetchJSON(`assets/data/reports/${date}/overview.json`);
   const t = d.criticalTasks, c = d.callLogs, cl = d.cloop, lv = d.leave;
   const maxStreak = Math.max(...t.streaks.map((s) => s.days), 1);
 
@@ -25,6 +26,7 @@ export async function renderOverview(container) {
     </div>`).join('');
 
   container.innerHTML = `
+    ${datePickerHtml(date, manifest)}
     <p class="result-meta">Report #${d.report.number} · ${esc(d.report.weekday)} ${formatDate(d.report.date)}</p>
 
     <div class="kpis">
@@ -56,14 +58,14 @@ export async function renderOverview(container) {
         <p class="q">Consecutive days at 100% checklist completion.</p>
         ${streakRows}
         <div class="take"><b>Reads as:</b> Denman's 109-day streak is intact; Crace and Lyneham reset recently and both sit on halt.</div>
-        ${viewLink('#/critical-tasks', 'View full checklist detail')}
+        ${viewLink('critical-tasks', date, 'View full checklist detail')}
       </div>
       <div class="panel">
         <h3>Call queue snapshot</h3>
         <p class="q">Accepted calls by queue, today.</p>
         ${queueRows}
         <div class="take"><b>Reads as:</b> Appointments takes just over half of all inbound traffic; ${esc(c.topInboundAgent.name)} answered the most calls today (${c.topInboundAgent.calls}).</div>
-        ${viewLink('#/call-logs', 'View full call logs')}
+        ${viewLink('call-logs', date, 'View full call logs')}
       </div>
     </div>
 
@@ -98,7 +100,7 @@ export async function renderOverview(container) {
           <div class="seg" style="width:100%;background:var(--accent)">${cl.contactsQueuedYesterday} contacts queued yesterday</div>
         </div>
         <div class="take"><b>Reads as:</b> ${cl.emailsHandledYesterday} contacts were handled yesterday across the team, out of ${cl.totalOverallCases.toLocaleString()} total cases logged to date (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).</div>
-        ${viewLink('#/cloop', 'View full Cloop report')}
+        ${viewLink('cloop', date, 'View full Cloop report')}
       </div>
       <div class="panel">
         <h3>Staff &amp; doctors' leave — this week</h3>
@@ -107,8 +109,10 @@ export async function renderOverview(container) {
         <div class="brow"><div class="bl">Staff fully on leave</div><div class="minibar"><i style="width:${(lv.staffFullyOnLeave / 5) * 100}%"></i></div><div class="bv">${lv.staffFullyOnLeave}<small>all week</small></div></div>
         <div class="brow"><div class="bl">Staff partially on leave</div><div class="minibar"><i style="width:${(lv.staffPartialLeave / 5) * 100}%"></i></div><div class="bv">${lv.staffPartialLeave}<small>${lv.staffPartialLeaveNames.map(esc).join(', ')}</small></div></div>
         <p class="foot-note">${esc(lv.longTerm[0].name)} remains on ${esc(lv.longTerm[0].note).toLowerCase()} (${formatDate(lv.longTerm[0].from)} – ${formatDate(lv.longTerm[0].to)}).</p>
-        ${viewLink('#/leave', 'View the week-at-a-glance grid')}
+        ${viewLink('leave', date, 'View the week-at-a-glance grid')}
       </div>
     </div>
   `;
+
+  wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/overview/${newDate}`; } });
 }

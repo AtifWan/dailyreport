@@ -1,6 +1,7 @@
 import { esc, fetchJSON, formatDate } from '../util.js';
 import { lineChart } from '../charts.js';
 import { startOfWorkingStreak } from '../workdays.js';
+import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
 // The PDF states Denman's streak start date directly — that's sourced fact, so we
 // show it verbatim rather than re-derive it (a real ACT-working-day count from
@@ -53,8 +54,8 @@ function checklistPanel(cl, dates) {
     </div>`;
 }
 
-export async function renderTasks(container) {
-  const d = await fetchJSON('assets/data/tasks.json');
+export async function renderTasks(container, date, manifest) {
+  const d = await fetchJSON(`assets/data/reports/${date}/tasks.json`);
   const maxStreak = Math.max(...d.streaks.map((s) => s.days), 1);
   const since = Object.fromEntries(d.streaks.map((s) => [s.name, sinceInfo(s, d.reportDate, d.longestStreak)]));
 
@@ -69,6 +70,7 @@ export async function renderTasks(container) {
   }).join('');
 
   container.innerHTML = `
+    ${datePickerHtml(date, manifest)}
     <div class="kpis">${kpis}</div>
 
     <div class="panel">
@@ -97,4 +99,6 @@ export async function renderTasks(container) {
       <div class="dr-placeholder">${esc(d.sitePlaceholderNote)}</div>
     </div>
   `;
+
+  wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/critical-tasks/${newDate}`; } });
 }

@@ -32,13 +32,16 @@ index.html                    <- app shell: sidebar + topbar + a #page-content m
 assets/
   css/app.css                 <- a handful of layout-only additions on top of the design system
   js/
-    app.js                    <- hash router (#/overview, #/critical-tasks, #/call-logs, #/cloop, #/leave)
+    app.js                    <- date-aware hash router: #/<route>/<date>, e.g. #/overview/2026-09-08
+    datepicker.js              <- the per-page native <input type="date"> (item 10) — markup + wiring
     charts.js                 <- dependency-free SVG chart helpers, built only from design tokens
-    util.js                   <- esc(), fetchJSON(), timezone-safe formatDate(), mountInteractiveTable()
+    util.js                   <- esc(), fetchJSON(), timezone-safe formatDate()/addDaysISO(), mountInteractiveTable()
     workdays.js                <- ACT (Canberra) 2026 public holidays (dated + named) + working-day math
     calendarview.js             <- renders one month grid: holidays + known leave counts
-    pages/*.js                <- one render(container) module per page; each fetches its own JSON
-  data/*.json                 <- one file per page — the Phase 2 seam (see PHASE-2.md)
+    pages/*.js                <- one render(container, date, manifest) module per page; each fetches its own dated JSON
+  data/reports/
+    index.json                 <- manifest: {"dates": [...], "latest": "..."} — the only file that lists what's available
+    <YYYY-MM-DD>/*.json        <- one dated folder per report, same 5 filenames each time — the Phase 2 seam (see PHASE-2.md)
 design-system/                <- vendored, unmodified YourGP Design System package
 COMPONENT-ANALYSIS.md         <- which design-system components each page uses, and why
 PHASE-2.md                    <- what changes (and what doesn't) when this goes live
@@ -69,6 +72,14 @@ PHASE-2.md                    <- what changes (and what doesn't) when this goes 
   browse ahead to what's coming up; month nav is clamped to Jan–Dec 2026, the span the
   holiday list actually covers. It deliberately does *not* also show a per-day leave
   count — that would just duplicate the "Week at a glance" table above it.
+- **"Today" vs. the report date** — a report is always published a day after the date
+  its figures describe (Report #308's data is *about* Tuesday, but is only ever read
+  starting Wednesday). Retrospective figures (call volumes, checklist completion,
+  streak day-counts) stay anchored to the report's own date throughout. The one
+  exception is anything showing "which day is today, right now" — the Leave page's
+  today-highlight and the Public holiday calendar's today-ring — which use the report
+  date plus one day instead (`addDaysISO()` in `util.js`), so "Today" always lands on
+  the actual day the report is being read, not the day its data is about.
 - **Week at a glance, redesigned for scanability** — "On leave" renders in the loud
   colour (vermillion) and "Available" in the calm one, deliberately matching the
   source PDF's orange/green emphasis (an earlier version had this backwards, which
@@ -77,6 +88,32 @@ PHASE-2.md                    <- what changes (and what doesn't) when this goes 
   an "Out all week" / "N/5 days out" badge plus a left status rail (the same inset-rail
   idiom the KPI cards use for good/crit) — so who needs attention is obvious before
   you've read a single day cell.
+
+## Historical reports & the date picker
+
+Every report date lives in its own folder, `assets/data/reports/<YYYY-MM-DD>/`, holding
+the same five JSON files described above. `assets/data/reports/index.json` is the one
+manifest listing which dates exist (`dates`) and which is newest (`latest`) — nothing
+else in the app hardcodes a date list. Adding a new day's report is: drop in a new dated
+folder, add its date to the manifest, done.
+
+The selected date lives in the URL hash itself — `#/<route>/<date>`, e.g.
+`#/leave/2026-09-08` — not inside any one page's state, which is what makes it survive
+navigating between pages (item 11). `app.js` is the one place that reads/resolves it
+(from the URL, falling back to whatever was last selected, falling back to
+`manifest.latest`) and passes it into every page's `render(container, date, manifest)`;
+sidebar nav clicks carry the current date forward via `data-route` attributes rather
+than resetting it. `manifest.latest` is never the live/real calendar date — a report is
+always published a day after the date it covers (see "Today" below), so "newest
+available" and "today's real date" are two different things on purpose.
+
+Each page renders its own date picker (`datepicker.js`) — a plain native
+`<input type="date">`, not a custom calendar widget, per the explicit ask — clamped to
+the manifest's date range and backed by a `<datalist>` so browsers that support it show
+tick marks on the specific dates that actually have data. Changing it on any one page
+re-renders that page at the new date and updates the URL; the picker is per-page by
+design (so, e.g., picking an older date on Leave doesn't also jump Overview to it), but
+navigating via the sidebar always preserves whatever date you were last looking at.
 
 ## Pages
 

@@ -1,5 +1,6 @@
 import { esc, fetchJSON, mountInteractiveTable } from '../util.js';
 import { lineChart, hBarGroup } from '../charts.js';
+import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
 function weekOverWeek(totals) {
   const latest = totals[totals.length - 1];
@@ -42,10 +43,10 @@ function mountEmailsTable(container, rows, totals) {
   if (tfoot) tfoot.innerHTML = `<tr><td>Total</td><td class="r num">${totals.incoming}</td><td class="r num">${totals.outbound}</td><td class="r num">${totals.total}</td></tr>`;
 }
 
-export async function renderCloop(container) {
+export async function renderCloop(container, date, manifest) {
   const [d, callLogs] = await Promise.all([
-    fetchJSON('assets/data/cloop.json'),
-    fetchJSON('assets/data/call-logs.json').catch(() => null),
+    fetchJSON(`assets/data/reports/${date}/cloop.json`),
+    fetchJSON(`assets/data/reports/${date}/call-logs.json`).catch(() => null),
   ]);
   const yesterdayTotal = d.contactsQueuedYesterday.reduce((s, q) => s + q.count, 0);
   const wowQueued = weekOverWeek(d.contactsQueuedTenDayTrend.totals);
@@ -57,6 +58,7 @@ export async function renderCloop(container) {
   const alsoOnPhones = d.emailsHandledYesterday.map((a) => a.agent).filter((name) => callNames.has(name));
 
   container.innerHTML = `
+    ${datePickerHtml(date, manifest)}
     <div class="kpis">
       <div class="kpi">
         <div class="k-l">In queue right now</div>
@@ -124,7 +126,7 @@ export async function renderCloop(container) {
           <tfoot></tfoot>
         </table>
       </div>
-      ${alsoOnPhones.length ? `<p class="foot-note">${alsoOnPhones.map(esc).join(' and ')} also took phone calls today — <a href="#/call-logs" style="color:var(--accent)">see the Staff activity table on Call Logs &rarr;</a></p>` : ''}
+      ${alsoOnPhones.length ? `<p class="foot-note">${alsoOnPhones.map(esc).join(' and ')} also took phone calls today — <a href="#/call-logs/${esc(date)}" style="color:var(--accent)">see the Staff activity table on Call Logs &rarr;</a></p>` : ''}
     </div>
 
     <div class="kpis dr-section-gap">
@@ -154,4 +156,5 @@ export async function renderCloop(container) {
 
   mountRealTimeTable(container.querySelector('.dr-realtime-table'), d.realTimeQueues, d.realTimeSummary);
   mountEmailsTable(container.querySelector('.dr-emails-table'), d.emailsHandledYesterday, emailTotals);
+  wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/cloop/${newDate}`; } });
 }
