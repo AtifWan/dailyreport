@@ -1,0 +1,39 @@
+{
+  "_source": "Daily Operations Report - 20th August 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "This Thursday report shows its own CURRENT week (17-21 Aug) — a completely different week and roster from the 24-28 Aug week seen on nearby dates. All four doctors/med student are on leave every day this particular week (unlike the 24-28 Aug week, where the same four people had leave only on Monday). Staff: Andy Davies, David Antioch, Apurva Pathak, De Ang Renfree, Jasmine Deery, Aiden Chang. Recorded verbatim per this PDF.",
+  "reportTitle": "Daily Operations Report - 20th August 2026",
+  "reportDate": "2026-08-20",
+  "weekStart": "2026-08-17",
+  "weekEnd": "2026-08-21",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Hall", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr William Fong", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Med Student Sarah Lucas", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Andy Davies", "site": null, "status": ["available", "available", "leave", "leave", "leave"] },
+        { "name": "David Antioch", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Apurva Pathak", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "De Ang Renfree", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Aiden Chang", "site": null, "status": ["available", "available", "leave", "leave", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}
