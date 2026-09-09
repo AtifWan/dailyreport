@@ -3,7 +3,16 @@
    and leave-grid table produced by assets/js/charts.js and the page modules. */
 
 .dr-chart-wrap { overflow-x: auto; }
-.dr-chart { display: block; width: 100%; min-width: 560px; height: auto; }
+.dr-chart { display: block; width: 100%; height: auto; }
+/* Below ~520px, a two-column .grid2 has already collapsed to one column, but a
+   full-width chart is still too narrow to keep 10 date labels legible. Only THERE
+   does it make sense to hold a wider chart and let it scroll in its own wrap —
+   above that width the SVG just scales to fill its container so nothing is ever
+   scrolled out of view on first paint (a chart silently missing its last point
+   behind an unscrolled .dr-chart-wrap is exactly the "clipped text" bug to avoid). */
+@media (max-width: 560px) {
+  .dr-chart { min-width: 560px; }
+}
 
 /* A grid/flex item's automatic min-width defaults to its content's min-content size,
    which — without this — lets a 560px-wide chart bubble up through .panel and force
@@ -26,3 +35,8 @@
 .dr-legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
 
 .dr-placeholder { border: 1px dashed var(--hairline-strong); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: var(--ink-faint); background: var(--surface-sunk); }
+
+/* Expandable table rows (mountInteractiveTable's renderDetail) carry data-key and a
+   pointer cursor inline; this just gives them a hover cue consistent with .thsort's
+   own hover-toward-accent convention. */
+.rtable tbody tr[data-key]:hover td { background: var(--surface-sunk); }

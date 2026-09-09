@@ -34,13 +34,35 @@ assets/
   js/
     app.js                    <- hash router (#/overview, #/critical-tasks, #/call-logs, #/cloop, #/leave)
     charts.js                 <- dependency-free SVG chart helpers, built only from design tokens
-    util.js                   <- esc(), fetchJSON(), timezone-safe formatDate()
+    util.js                   <- esc(), fetchJSON(), timezone-safe formatDate(), mountInteractiveTable()
+    workdays.js                <- ACT (Canberra) 2026 public holiday calendar + working-day math
     pages/*.js                <- one render(container) module per page; each fetches its own JSON
   data/*.json                 <- one file per page — the Phase 2 seam (see PHASE-2.md)
 design-system/                <- vendored, unmodified YourGP Design System package
 COMPONENT-ANALYSIS.md         <- which design-system components each page uses, and why
 PHASE-2.md                    <- what changes (and what doesn't) when this goes live
 ```
+
+## Interactivity
+
+- **Sortable, searchable tables** — Call Logs' Staff activity and Longest wait per
+  queue, Cloop's Real-time metrics and Emails handled: click a column to sort, type in
+  a search box to filter. All built on one small helper, `mountInteractiveTable()` in
+  `util.js`, so any future table gets the same behaviour for free.
+- **Real filters** — a queue picker on Call Logs narrows both 10-day trend grids to one
+  queue; a day picker on Staff & Doctors' Leave shows only who's on leave that day.
+- **Drill-down** — clicking a row in Call Logs' Staff activity table expands it to show
+  that person's inbound + outbound split, cross-referenced against yesterday's Cloop
+  email handling where the same name appears (a genuine cross-page view, not just the
+  same numbers shown twice). Overview links straight through to each detail page.
+- **Streak "since" dates** — Critical Daily Tasks computes a calendar start date for
+  each streak by counting back its day-count across ACT (Canberra) *working days*
+  (Mon–Fri, minus real 2026 ACT public holidays — see `workdays.js`) from the report
+  date, and marks it "est." Denman's start date is the one exception: the source PDF
+  states it directly (13 Jan 2026), and a plain ACT-working-day count between that date
+  and the report date doesn't land on the stated 109-day streak either — so it's shown
+  verbatim rather than recalculated, with both facts called out in the page's own
+  footnote rather than silently papered over.
 
 ## Pages
 

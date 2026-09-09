@@ -1,4 +1,4 @@
-import { esc, fetchJSON } from '../util.js';
+import { esc, fetchJSON, mountInteractiveTable } from '../util.js';
 import { lineChart, hBarGroup } from '../charts.js';
 
 function weekOverWeek(totals) {
@@ -16,19 +16,45 @@ function deltaChip(delta, pct) {
   return `<span class="${cls}">${arrow} ${Math.abs(delta)}${pct != null ? ` (${delta > 0 ? '+' : '-'}${Math.abs(pct)}%)` : ''}</span>`;
 }
 
+function mountRealTimeTable(container, rows, summary) {
+  mountInteractiveTable(container, {
+    rows,
+    keyOf: (r) => r.queue,
+    defaultSortKey: 'inQueue',
+    emptyColspan: 3,
+    renderRow: (r) => `
+      <tr><td class="strong">${esc(r.queue)}</td><td class="r num">${r.inQueue}</td><td class="r num">${r.oldestDays}</td></tr>`,
+  });
+  const tfoot = container.querySelector('table').querySelector('tfoot');
+  if (tfoot) tfoot.innerHTML = `<tr><td>Summary</td><td class="r num">${summary.inQueue}</td><td class="r num">${summary.oldestDays}</td></tr>`;
+}
+
+function mountEmailsTable(container, rows, totals) {
+  mountInteractiveTable(container, {
+    rows,
+    keyOf: (r) => r.agent,
+    defaultSortKey: 'total',
+    emptyColspan: 4,
+    renderRow: (r) => `
+      <tr><td class="strong">${esc(r.agent)}</td><td class="r num">${r.incoming}</td><td class="r num">${r.outbound}</td><td class="r num strong">${r.total}</td></tr>`,
+  });
+  const tfoot = container.querySelector('table').querySelector('tfoot');
+  if (tfoot) tfoot.innerHTML = `<tr><td>Total</td><td class="r num">${totals.incoming}</td><td class="r num">${totals.outbound}</td><td class="r num">${totals.total}</td></tr>`;
+}
+
 export async function renderCloop(container) {
-  const d = await fetchJSON('assets/data/cloop.json');
+  const [d, callLogs] = await Promise.all([
+    fetchJSON('assets/data/cloop.json'),
+    fetchJSON('assets/data/call-logs.json').catch(() => null),
+  ]);
   const yesterdayTotal = d.contactsQueuedYesterday.reduce((s, q) => s + q.count, 0);
   const wowQueued = weekOverWeek(d.contactsQueuedTenDayTrend.totals);
   const wowProgress = weekOverWeek(d.inProgressTenDayTrend.totals);
   const wowOpen = weekOverWeek(d.openCasesTenDayTrend.totals);
-
-  const realTimeRows = d.realTimeQueues.map((q) => `
-    <tr><td class="strong">${esc(q.queue)}</td><td class="r num">${q.inQueue}</td><td class="r num">${q.oldestDays}</td></tr>`).join('');
-
-  const emailRows = d.emailsHandledYesterday.map((a) => `
-    <tr><td class="strong">${esc(a.agent)}</td><td class="r num">${a.incoming}</td><td class="r num">${a.outbound}</td><td class="r num strong">${a.total}</td></tr>`).join('');
   const emailTotals = d.emailsHandledYesterday.reduce((acc, a) => ({ incoming: acc.incoming + a.incoming, outbound: acc.outbound + a.outbound, total: acc.total + a.total }), { incoming: 0, outbound: 0, total: 0 });
+
+  const callNames = new Set((callLogs?.inboundByStaff || []).concat(callLogs?.outboundByStaff || []).map((p) => p.name));
+  const alsoOnPhones = d.emailsHandledYesterday.map((a) => a.agent).filter((name) => callNames.has(name));
 
   container.innerHTML = `
     <div class="kpis">
@@ -57,12 +83,16 @@ export async function renderCloop(container) {
     <div class="grid2">
       <div class="panel">
         <h3>Real-time metrics, by queue</h3>
-        <p class="q">In queue now, and the age of the oldest case (days).</p>
-        <div class="rtable-wrap" style="max-height:none">
+        <p class="q">In queue now, and the age of the oldest case (days). Click a column to sort.</p>
+        <div class="rtable-wrap dr-realtime-table" style="max-height:none">
           <table class="rtable">
-            <thead><tr><th>Queue name</th><th class="r">In queue</th><th class="r">Oldest (days)</th></tr></thead>
-            <tbody>${realTimeRows}</tbody>
-            <tfoot><tr><td>Summary</td><td class="r num">${d.realTimeSummary.inQueue}</td><td class="r num">${d.realTimeSummary.oldestDays}</td></tr></tfoot>
+            <thead><tr>
+              <th><button class="thsort" data-key="queue">Queue name <span class="thsort-i">⇅</span></button></th>
+              <th class="r"><button class="thsort on" data-key="inQueue">In queue <span class="thsort-i">▼</span></button></th>
+              <th class="r"><button class="thsort" data-key="oldestDays">Oldest (days) <span class="thsort-i">⇅</span></button></th>
+            </tr></thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
           </table>
         </div>
       </div>
@@ -81,14 +111,20 @@ export async function renderCloop(container) {
 
     <div class="panel dr-section-gap">
       <h3>Emails handled yesterday, by agent</h3>
-      <p class="q">Incoming vs outbound contacts handled — the cross-category matrix from the source report.</p>
-      <div class="rtable-wrap" style="max-height:none">
+      <p class="q">Incoming vs outbound contacts handled — the cross-category matrix from the source report. Click a column to sort.</p>
+      <div class="rtable-wrap dr-emails-table" style="max-height:none">
         <table class="rtable">
-          <thead><tr><th>Agent</th><th class="r">Incoming</th><th class="r">Outbound</th><th class="r">Total handled</th></tr></thead>
-          <tbody>${emailRows}</tbody>
-          <tfoot><tr><td>Total</td><td class="r num">${emailTotals.incoming}</td><td class="r num">${emailTotals.outbound}</td><td class="r num">${emailTotals.total}</td></tr></tfoot>
+          <thead><tr>
+            <th><button class="thsort" data-key="agent">Agent <span class="thsort-i">⇅</span></button></th>
+            <th class="r"><button class="thsort" data-key="incoming">Incoming <span class="thsort-i">⇅</span></button></th>
+            <th class="r"><button class="thsort" data-key="outbound">Outbound <span class="thsort-i">⇅</span></button></th>
+            <th class="r"><button class="thsort on" data-key="total">Total handled <span class="thsort-i">▼</span></button></th>
+          </tr></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
         </table>
       </div>
+      ${alsoOnPhones.length ? `<p class="foot-note">${alsoOnPhones.map(esc).join(' and ')} also took phone calls today — <a href="#/call-logs" style="color:var(--accent)">see the Staff activity table on Call Logs &rarr;</a></p>` : ''}
     </div>
 
     <div class="kpis dr-section-gap">
@@ -115,4 +151,7 @@ export async function renderCloop(container) {
       </div>
     </div>
   `;
+
+  mountRealTimeTable(container.querySelector('.dr-realtime-table'), d.realTimeQueues, d.realTimeSummary);
+  mountEmailsTable(container.querySelector('.dr-emails-table'), d.emailsHandledYesterday, emailTotals);
 }
