@@ -1,0 +1,38 @@
+{
+  "_source": "Daily Operations Report - 26th August 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "Same week (24-28 Aug) and same doctor roster as the already-committed 2026-08-27 leave.json, but this Wednesday snapshot's Staff section lists only 3 people (Andy Davies, Lucinda Gonzalez, Joshua Saw) — Shae Connors and Amy Morton, present on the 27 Aug snapshot of the same week, are simply absent here. Same intra-week roster-differs-by-snapshot-date quirk already documented for the 4 Sept and 28 Aug weeks. Recorded verbatim per this PDF.",
+  "reportTitle": "Daily Operations Report - 26th August 2026",
+  "reportDate": "2026-08-26",
+  "weekStart": "2026-08-24",
+  "weekEnd": "2026-08-28",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Dr Penny Hall", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr William Fong", "site": "Crace", "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Med Student Sarah Lucas", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Mel Deery", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Dr John Deery", "site": "Crace", "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Andy Davies", "site": null, "status": ["available", "available", "leave", "leave", "leave"] },
+        { "name": "Lucinda Gonzalez", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Joshua Saw", "site": null, "status": ["available", "leave", "available", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}
