@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<style>body{background:var(--bg);font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);padding:28px;margin:0}.demo{max-width:940px;margin:0 auto}.demo h2{font-family:"Fraunces",serif;color:var(--accent-strong);font-size:20px;margin:0 0 6px}.demo p.lede{color:var(--ink-faint);margin:0 0 22px;font-size:14px}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:20px}</style>
+</head><body><div class="demo">
+<h2>Chips, pills & tabs</h2><p class="lede">Report tabs = .rpick .rt (.on). Preset pills = .pchip (.on). Range chips = .rchip with .rvs between. Filter pills = .mcb (.on) with .mcb-lbl.</p>
+<div class="rpick" style="margin-bottom:20px"><button class="rt on">Outstanding debt</button><button class="rt">Billing &amp; payments</button></div>
+<div class="period-ranges" style="margin-bottom:18px">
+  <button class="rchip"><span class="rdot" style="background:var(--accent)"></span>This period (30 Jun – 6 Jul)</button>
+  <span class="rvs">VS</span>
+  <button class="rchip"><span class="rdot" style="background:var(--infer)"></span>Last period (23 – 29 Jun)</button>
+</div>
+<div class="period-ctl" style="margin-bottom:18px">
+  <button class="pchip">Day</button><button class="pchip on">Week</button><button class="pchip">Fortnight</button><button class="pchip">Month</button><button class="pchip">Quarter</button><button class="pchip">Custom</button>
+</div>
+<div class="mcbctl"><span class="mcb-lbl">Age group:</span><button class="mcb on">All ages</button><button class="mcb">Current</button><button class="mcb">31–60</button><button class="mcb">61–90</button><button class="mcb">91+</button></div>
+</div></body></html>

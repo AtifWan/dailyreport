@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<style>body{background:var(--bg);font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);padding:28px;margin:0}.demo{max-width:940px;margin:0 auto}.demo h2{font-family:"Fraunces",serif;color:var(--accent-strong);font-size:20px;margin:0 0 6px}.demo p.lede{color:var(--ink-faint);margin:0 0 22px;font-size:14px}</style>
+</head><body><div class="demo">
+<h2>Data table</h2><p class="lede">.rtable-wrap (scroll + sticky header/first column + right-edge scroll shadow) wrapping table.rtable. .r = right align. Sortable headers use button.thsort. Status via .chip, age via .agepill.</p>
+<div class="rtable-wrap" style="max-height:none">
+  <table class="rtable">
+    <thead><tr>
+      <th>Invoice #</th><th>Invoice Date</th>
+      <th class="r"><button class="thsort on">Age (days) <span class="thsort-i">▼</span></button></th>
+      <th>Category</th>
+      <th class="r"><button class="thsort">Total <span class="thsort-i">⇅</span></button></th>
+      <th>Status</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="strong">1580023</td><td>10/07/2026</td><td class="r"><span class="agepill"><i style="background:var(--age1)"></i>0</span></td><td>Workers Compensation</td><td class="r num">117.00</td><td><span class="chip paid">Paid</span></td></tr>
+      <tr><td class="strong">1578110</td><td>02/05/2026</td><td class="r"><span class="agepill"><i style="background:var(--age4)"></i>69</span></td><td>Private – Skin</td><td class="r num">312.50</td><td><span class="chip unpaid">Unpaid</span></td></tr>
+      <tr><td class="strong">1571002</td><td>18/03/2026</td><td class="r"><span class="agepill"><i style="background:var(--age4)"></i>114</span></td><td>Medicolegal / DVA Reports</td><td class="r num">560.00</td><td><span class="chip unpaid">Unpaid</span></td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td></td><td></td><td></td><td class="r num">989.50</td><td></td></tr></tfoot>
+  </table>
+</div>
+</div></body></html>

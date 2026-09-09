@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<style>body{background:var(--bg);font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);padding:28px;margin:0}.demo{max-width:940px;margin:0 auto}.demo h2{font-family:"Fraunces",serif;color:var(--accent-strong);font-size:20px;margin:0 0 6px}.demo p.lede{color:var(--ink-faint);margin:0 0 22px;font-size:14px}</style>
+</head><body><div class="demo">
+<h2>Summary, split bar &amp; pagination</h2><p class="lede">.result-meta summarises a filtered set. .splitbar shows a two-part ratio (paid vs unpaid) with labels ON the bar. .pager pairs a .pg-l summary with .pg-btns of .pg-btn controls.</p>
+<div class="panel">
+  <p class="result-meta">25,753 invoices · $3,473,863 billed &nbsp;&nbsp; <span style="color:var(--live-ink);font-weight:700">Paid 22,856 ($3,081,314)</span> &nbsp; Unpaid 2,897 ($392,549)</p>
+  <div class="splitbar">
+    <div class="seg" style="width:89%;background:var(--live)">Paid 89%</div>
+    <div class="seg" style="width:11%;background:var(--manual)">11%</div>
+  </div>
+  <div class="pager">
+    <div class="pg-l">Showing 1–50 of 25,753
+      <span class="pg-btns"><button class="pg-btn on">25</button><button class="pg-btn">50</button><button class="pg-btn">100</button></span>
+    </div>
+    <div class="pg-btns"><button class="pg-btn">Prev</button><button class="pg-btn">Next</button></div>
+  </div>
+</div>
+</div></body></html>

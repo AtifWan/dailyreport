@@ -1,0 +1,23 @@
+:root{
+    --bg: oklch(98.5% 0.006 200);
+    --surface: oklch(100% 0 0);
+    --surface-sunk: oklch(97% 0.006 200);
+    --ink: oklch(26% 0.02 220);
+    --ink-muted: oklch(41% 0.016 220);
+    --ink-faint: oklch(49% 0.014 220);
+    --hairline: oklch(91% 0.008 200);
+    --hairline-strong: oklch(83% 0.012 200);
+    --accent: oklch(58% 0.11 205);
+    --accent-strong: oklch(50% 0.12 205);
+    --accent-weak: oklch(58% 0.11 205 / 0.12);
+    --accent-2: oklch(55% 0.10 175);
+    --live: oklch(52% 0.14 248); --live-soft: oklch(95% 0.045 248); --live-ink: oklch(45% 0.14 250);
+    --infer: oklch(70% 0.15 70); --infer-soft: oklch(96% 0.07 78); --infer-ink: oklch(52% 0.13 62);
+    --manual: oklch(62% 0.02 250); --manual-soft: oklch(95% 0.006 250); --manual-ink: oklch(48% 0.015 250);
+    --danger: oklch(62% 0.19 45); --danger-soft: oklch(95% 0.07 55); --danger-ink: oklch(50% 0.18 45);
+    --age1:#56B4E9; --age2:#009E73; --age3:#E69F00; --age4:#D55E00;
+    --radius: 14px; --radius-sm: 9px;
+    --shadow: 0 1px 2px oklch(40% 0.03 220 / 0.05), 0 4px 16px oklch(40% 0.03 220 / 0.05);
+    --shadow-pop: 0 8px 28px oklch(40% 0.03 220 / 0.14), 0 2px 6px oklch(40% 0.03 220 / 0.08);
+    --sidebar-w: 256px;
+  }

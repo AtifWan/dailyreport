@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<style>body{background:var(--bg);font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);padding:28px;margin:0}.demo{max-width:940px;margin:0 auto}.demo h2{font-family:"Fraunces",serif;color:var(--accent-strong);font-size:20px;margin:0 0 6px}.demo p.lede{color:var(--ink-faint);margin:0 0 22px;font-size:14px}.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px}</style>
+</head><body><div class="demo">
+<h2>Navigation / sidebar</h2><p class="lede">.sidebar holds .brand (.mark + .nm), a .nav-label, nav.nav of .nav-item buttons (.on active, each with an .nav-ic line icon), and a pinned .side-user footer. Below 880px this becomes a hamburger-opened drawer.</p>
+<aside class="sidebar" style="position:relative;height:auto;transform:none;box-shadow:var(--shadow)">
+  <div class="brand"><div class="mark">Y</div><div class="nm">Finance Intelligence Hub<span>YourGP</span></div></div>
+  <div class="nav-label">Reports</div>
+  <nav class="nav">
+    <button class="nav-item on"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12.5 16V8M17 16v-6"/></svg>Overview</button>
+    <button class="nav-item"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 16.5 9 10.5 13 14.5 21 6.5"/><polyline points="15 6.5 21 6.5 21 12.5"/></svg>Movement</button>
+    <button class="nav-item"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.2"/></svg>Category matrix</button>
+    <button class="nav-item"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H6.5A1.5 1.5 0 0 0 5 4v16a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20V7.5z"/><path d="M14 2.5V8h5"/><path d="M8.5 13h7M8.5 16.5h7"/></svg>Invoice list</button>
+  </nav>
+  <div class="side-user"><div class="su-id"><div class="su-av">A</div><span class="su-email">aman.singh@ygp.au</span></div><button class="signout">Sign out</button></div>
+</aside>
+</div></body></html>

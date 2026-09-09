@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<style>body{background:var(--bg);font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);padding:28px;margin:0}.demo{max-width:940px;margin:0 auto}.demo h2{font-family:"Fraunces",serif;color:var(--accent-strong);font-size:20px;margin:0 0 6px}.demo p.lede{color:var(--ink-faint);margin:0 0 22px;font-size:14px}</style>
+</head><body><div class="demo">
+<h2>Charts &amp; bars</h2><p class="lede">Composition bar (.compbar + .comp-legend), aging bars (.albars/.albar-row/.al-track/.al-seg), sparkline (.sparkline/.spark-line), and the movement line chart (.linechart with .lc-band, .lc-area, dashed .lc-line2 for "last period", solid .lc-line for "this period").</p>
+
+<div class="panel">
+  <h3>Aging composition</h3><p class="q">How the balance splits across buckets.</p>
+  <div class="compbar">
+    <div class="comp-seg" style="width:38%;background:var(--age1)"></div>
+    <div class="comp-seg" style="width:13%;background:var(--age2)"></div>
+    <div class="comp-seg" style="width:10%;background:var(--age3)"></div>
+    <div class="comp-seg" style="width:39%;background:var(--age4)"></div>
+  </div>
+  <div class="comp-legend">
+    <span><i style="display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--age1);vertical-align:-1px;margin-right:6px"></i>Current (0–30 days)</span>
+    <span><i style="display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--age2);vertical-align:-1px;margin-right:6px"></i>31–60</span>
+    <span><i style="display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--age3);vertical-align:-1px;margin-right:6px"></i>61–90</span>
+    <span><i style="display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--age4);vertical-align:-1px;margin-right:6px"></i>91+</span>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:16px">
+  <h3>By location (aging bars)</h3><p class="q">.albar-row = label / .al-track / amount.</p>
+  <div class="albars">
+    <div class="albar-row"><div class="al-l">Crace</div><div class="al-track"><div class="al-seg" style="width:64%;background:var(--age4)"></div></div><div class="al-amt">$92,007</div></div>
+    <div class="albar-row"><div class="al-l">Denman</div><div class="al-track"><div class="al-seg" style="width:29%;background:var(--age3)"></div></div><div class="al-amt">$42,046</div></div>
+    <div class="albar-row"><div class="al-l">Lyneham</div><div class="al-track"><div class="al-seg" style="width:11%;background:var(--age2)"></div></div><div class="al-amt">$10,230</div></div>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:16px">
+  <h3>Sparkline</h3><p class="q">Inline trend, used in tables.</p>
+  <svg class="sparkline" viewBox="0 0 96 26"><path class="spark-line" d="M2 20 L18 16 L34 18 L50 10 L66 12 L82 5 L94 6"/></svg>
+</div>
+
+<div class="panel" style="margin-top:16px">
+  <h3>Movement line chart</h3><p class="q">Solid accent = this period; amber band + dashed line = last period.</p>
+  <svg class="linechart" viewBox="0 0 760 240">
+    <rect class="lc-band" x="40" y="20" width="330" height="180"/>
+    <path class="lc-area" d="M370 150 L470 120 L560 165 L650 110 L720 70 L720 200 L370 200 Z"/>
+    <path class="lc-line2" d="M40 160 L120 175 L200 150 L300 152 L370 150"/>
+    <path class="lc-line" d="M370 150 L470 120 L560 165 L650 110 L720 70"/>
+    <line class="lc-div" x1="370" y1="20" x2="370" y2="200" stroke="var(--infer)" stroke-dasharray="3 4"/>
+    <circle class="lc-dot2" cx="40" cy="160" r="3.5" fill="var(--infer)"/>
+    <circle class="lc-dot" cx="720" cy="70" r="4"/>
+    <text class="lc-x" x="40" y="222">23 Jun</text>
+    <text class="lc-x" x="360" y="222">29 Jun</text>
+    <text class="lc-x" x="690" y="222">6 Jul</text>
+    <text class="lc-lg" x="40" y="14">Last week</text>
+    <text class="lc-lg" x="130" y="14">This week</text>
+  </svg>
+</div>
+</div></body></html>

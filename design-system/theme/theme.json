@@ -1,0 +1,182 @@
+{
+  "name": "YourGP / Finance Intelligence Hub design system",
+  "colorSpace": "OKLCH (source of truth) with sRGB hex fallbacks",
+  "colors": {
+    "bg": {
+      "oklch": "98.5% 0.006 200",
+      "hex": "#F6FBFC",
+      "role": "app background (very light cool grey)"
+    },
+    "surface": {
+      "oklch": "100% 0 0",
+      "hex": "#FFFFFF",
+      "role": "cards, panels, inputs"
+    },
+    "surface-sunk": {
+      "oklch": "97% 0.006 200",
+      "hex": "#F1F6F7",
+      "role": "recessed areas, table zebra, tracks"
+    },
+    "ink": {
+      "oklch": "26% 0.02 220",
+      "hex": "#19262B",
+      "role": "primary text, headings, values"
+    },
+    "ink-muted": {
+      "oklch": "41% 0.016 220",
+      "hex": "#414D50",
+      "role": "secondary text, labels"
+    },
+    "ink-faint": {
+      "oklch": "49% 0.014 220",
+      "hex": "#586266",
+      "role": "tertiary text, captions (still AA)"
+    },
+    "hairline": {
+      "oklch": "91% 0.008 200",
+      "hex": "#DBE3E3",
+      "role": "default borders"
+    },
+    "hairline-strong": {
+      "oklch": "83% 0.012 200",
+      "hex": "#BFCACA",
+      "role": "stronger borders, input outlines"
+    },
+    "accent": {
+      "oklch": "58% 0.11 205",
+      "hex": "#008C99",
+      "role": "BRAND teal: active state, primary buttons, links, brand mark"
+    },
+    "accent-strong": {
+      "oklch": "50% 0.12 205",
+      "hex": "#007583",
+      "role": "accent hover/pressed"
+    },
+    "accent-2": {
+      "oklch": "55% 0.10 175",
+      "hex": "#11846E",
+      "role": "secondary teal-green"
+    },
+    "live": {
+      "oklch": "52% 0.14 248",
+      "hex": "#006CB4",
+      "role": "SEMANTIC GOOD = blue (colour-blind-safe, never green)"
+    },
+    "live-ink": {
+      "oklch": "45% 0.14 250",
+      "hex": "#00569F",
+      "role": "good text / positive delta"
+    },
+    "danger": {
+      "oklch": "62% 0.19 45",
+      "hex": "#DD5400",
+      "role": "SEMANTIC BAD = vermillion (colour-blind-safe, never pure red)"
+    },
+    "danger-ink": {
+      "oklch": "50% 0.18 45",
+      "hex": "#B03000",
+      "role": "bad text / negative delta / critical"
+    },
+    "infer": {
+      "oklch": "70% 0.15 70",
+      "hex": "#D98B09",
+      "role": "amber: 'previous period' / inferred"
+    },
+    "manual": {
+      "oklch": "62% 0.02 250",
+      "hex": "#7D8792",
+      "role": "neutral grey: unpaid, inactive"
+    },
+    "age1": {
+      "hex": "#56B4E9",
+      "role": "Aging bucket 1 (Current) - Okabe-Ito sky blue"
+    },
+    "age2": {
+      "hex": "#009E73",
+      "role": "Aging bucket 2 (31-60) - Okabe-Ito bluish green"
+    },
+    "age3": {
+      "hex": "#E69F00",
+      "role": "Aging bucket 3 (61-90) - Okabe-Ito orange"
+    },
+    "age4": {
+      "hex": "#D55E00",
+      "role": "Aging bucket 4 (91+) - Okabe-Ito vermillion"
+    }
+  },
+  "typography": {
+    "display": {
+      "family": "Fraunces",
+      "use": "section headings (h1/h3), page titles",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "opticalSizing": "9..144",
+      "notes": "characterful serif, used with restraint; NOT for data numbers"
+    },
+    "body": {
+      "family": "Hanken Grotesk",
+      "use": "body text, labels, AND stat-card numbers",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "numerals": "font-variant-numeric: tabular-nums on all figures/tables",
+    "googleFontsLink": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+  },
+  "radius": {
+    "card": "14px",
+    "small": "9px (--radius-sm)",
+    "pill": "999px"
+  },
+  "shadow": {
+    "default": "0 1px 2px oklch(40% 0.03 220 / .05), 0 4px 16px oklch(40% 0.03 220 / .05)",
+    "pop": "0 8px 28px oklch(40% 0.03 220 / .14), 0 2px 6px oklch(40% 0.03 220 / .08)"
+  },
+  "layout": {
+    "sidebarWidth": "256px",
+    "contentMaxWidth": "1320px",
+    "panelPadding": "18-20px",
+    "cardGap": "14px"
+  },
+  "breakpoints": {
+    "drawer/stack": "880px",
+    "single-column": "520px"
+  },
+  "icons": {
+    "style": "line, viewBox 0 0 24 24, stroke=currentColor, stroke-width 1.9-2.2, round caps/joins, fill none",
+    "size": "~18-20px"
+  },
+  "softFills": {
+    "accent-weak": {
+      "value": "oklch(58% 0.11 205 / 0.12)",
+      "role": "accent at 12% alpha (chart area, hover wash)"
+    },
+    "live-soft": {
+      "oklch": "95% 0.045 248",
+      "hex": "#D8F2FF",
+      "role": "good/paid tint"
+    },
+    "danger-soft": {
+      "oklch": "95% 0.07 55",
+      "hex": "#FFE3C2",
+      "role": "critical card tint"
+    },
+    "infer-soft": {
+      "oklch": "96% 0.07 78",
+      "hex": "#FFEDBD",
+      "role": "previous-period band / amber note bg"
+    },
+    "manual-soft": {
+      "oklch": "95% 0.006 250",
+      "hex": "#EBEFF2",
+      "role": "unpaid/neutral tint"
+    }
+  },
+  "note": "theme/tokens.css is the complete, authoritative :root. This JSON is a readable mirror; if they ever differ, tokens.css wins. Design is light-mode only by intent."
+}
