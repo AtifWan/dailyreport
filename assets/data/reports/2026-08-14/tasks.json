@@ -1,0 +1,48 @@
+{
+  "_source": "Daily Operations Report - 14th August 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 14th August 2026",
+  "reportDate": "2026-08-14",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 26, "onHalt": false },
+    { "name": "Finance", "days": 6, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Caregp Ai Tool (C.Le@10:36)",
+        "Send Claim For Automed Payments (C.Le@10:36)",
+        "Clinical Reminders (C.Le@10:36)",
+        "Allocate - Healthlink Unallocated (C.Le@11:16)",
+        "Action 10 Or More Failed Communications (A.Wa@14:30)",
+        "E-Referrals (A.Wa@14:30)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 100,
+      "trend": [88, 78, 100, 0, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Online claiming run in Best Practice (J.Sa@11:13)",
+        "90/60-day debt list actioned (L.Go@20:40)",
+        "Tyro Health receipts captured (L.Go@20:40)",
+        "Unidentified payments resolved (L.Go@20:40)",
+        "Debt chasing report updated (L.Go@20:40)",
+        "Finance queue in Cloop has zero emails (L.Go@20:40)",
+        "Remittances allocated (L.Go@20:40)",
+        "Xero accounts reconciled (L.Go@20:40)"
+      ],
+      "incomplete": []
+    }
+  ],
+  "_trendNote": "Cross-validated: PST trend positions1-9=[100×9] and Finance trend positions1-9=[78,100,0,100,100,100,100,100,100] both match the already-committed 2026-08-17 trend arrays' positions0-8 exactly (08-14 Fri → 08-17 Mon are adjacent business days, so the shift-by-one-day check applies across the weekend). New/unverified position0 (Mon 03 Aug) read directly from the image.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 13th August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 13th August 2026",
+  "extractedAt": "2026-08-14T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Friday 14 August 2026",
+  "_extractedAtNote": "Extraction timestamp reads 9:00 AM rather than the usual 8:45 AM — same recurring timestamp variance already documented on prior dates.",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 16, "oldestDays": 3.89 },
+    { "queue": "Finance", "inQueue": 11, "oldestDays": 1.11 },
+    { "queue": "Unassigned", "inQueue": 8, "oldestDays": 0.69 },
+    { "queue": "Escalation", "inQueue": 6, "oldestDays": 13.94 },
+    { "queue": "Practice Finance", "inQueue": 6, "oldestDays": 7.24 },
+    { "queue": "Documents", "inQueue": 3, "oldestDays": 0.65 },
+    { "queue": "Failed Communication", "inQueue": 3, "oldestDays": 0.79 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 0.02 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 3.99 }
+  ],
+  "realTimeSummary": { "inQueue": 55, "oldestDays": 13.94 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 36 },
+    { "queue": "Documents", "count": 19 },
+    { "queue": "Medico-legal", "count": 18 },
+    { "queue": "Failed Communication", "count": 11 },
+    { "queue": "Requests", "count": 3 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 31 Jul", "Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug"],
+    "totals": [49, 122, 78, 69, 73, 126, 108, 88, 71, 88]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 71, "outbound": 17, "total": 88 },
+    { "agent": "Frances Doble", "incoming": 10, "outbound": 3, "total": 14 },
+    { "agent": "Atif Wan", "incoming": 6, "outbound": 0, "total": 6 },
+    { "agent": "Lucinda Gonzalez", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Frances Doble's stated total (14) doesn't equal incoming+outbound in the source PDF itself (10+3=13). Same recurring quirk already flagged on 2026-09-07's cloop.json (and others in this batch). Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-08-14", "totalOverallCases": 5627, "totalInProgress": 127, "totalOpenCases": 60 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the rest of this Cloop section (through Fri 14 Aug rather than Thu 13 Aug) — same next-business-day extraction pattern noted on the already-committed 2026-08-14/17 files.",
+  "inProgressTenDayTrend": {
+    "labels": ["Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug"],
+    "totals": [113, 138, 117, 120, 126, 137, 130, 128, 124, 127]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug"],
+    "totals": [67, 26, 34, 24, 42, 43, 48, 49, 53, 60]
+  },
+  "_tenDayTrendNote": "Cross-validated: all three trend arrays' positions1-9 match the already-committed 2026-08-14 arrays' positions0-8 exactly. New/unverified position0 in each read directly from the image."
+}

@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 11th August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 11th August 2026",
+  "extractedAt": "2026-08-12T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Wednesday 12 August 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 19, "oldestDays": 4.76 },
+    { "queue": "Unassigned", "inQueue": 9, "oldestDays": 0.87 },
+    { "queue": "Medico-legal", "inQueue": 8, "oldestDays": 4.78 },
+    { "queue": "Practice Finance", "inQueue": 6, "oldestDays": 5.25 },
+    { "queue": "Documents", "inQueue": 6, "oldestDays": 0.93 },
+    { "queue": "Escalation", "inQueue": 5, "oldestDays": 11.94 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 2 }
+  ],
+  "realTimeSummary": { "inQueue": 52, "oldestDays": 11.94 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 28 },
+    { "queue": "Documents", "count": 21 },
+    { "queue": "Failed Communication", "count": 13 },
+    { "queue": "Requests", "count": 12 },
+    { "queue": "Finance", "count": 9 },
+    { "queue": "Medico-legal", "count": 4 },
+    { "queue": "Escalation", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Wed 29 Jul", "Thu 30 Jul", "Fri 31 Jul", "Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug"],
+    "totals": [62, 81, 49, 122, 78, 69, 73, 126, 108, 88]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 64, "outbound": 17, "total": 81 },
+    { "agent": "Atif Wan", "incoming": 10, "outbound": 0, "total": 10 },
+    { "agent": "Ella Blackamore", "incoming": 4, "outbound": 5, "total": 9 },
+    { "agent": "Leh Peng Goh", "incoming": 8, "outbound": 0, "total": 8 },
+    { "agent": "Megan Wright", "incoming": 0, "outbound": 7, "total": 7 },
+    { "agent": "Frances Doble", "incoming": 0, "outbound": 1, "total": 1 },
+    { "agent": "Rebecca Quinn", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "No incoming+outbound discrepancy this date — every agent's stated total matches exactly. Agent name printed exactly as 'Ella Blackamore' in this table (same alternate spelling seen on 2026-08-12's cloop.json).",
+  "totalCasesToDate": { "date": "2026-08-12", "totalOverallCases": 5455, "totalInProgress": 128, "totalOpenCases": 49 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the rest of this Cloop section (through Wed 12 Aug rather than Tue 11 Aug) — same next-business-day extraction pattern noted on the already-committed 2026-08-12/13/14/17 files.",
+  "inProgressTenDayTrend": {
+    "labels": ["Thu 30 Jul", "Fri 31 Jul", "Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug"],
+    "totals": [106, 113, 113, 138, 117, 120, 126, 137, 130, 128]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Thu 30 Jul", "Fri 31 Jul", "Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug"],
+    "totals": [35, 48, 67, 26, 34, 24, 42, 43, 48, 49]
+  },
+  "_tenDayTrendNote": "Cross-validated: all three trend arrays' positions1-9 match the already-committed 2026-08-12 arrays' positions0-8 exactly. New/unverified position0 in each read directly from the image."
+}
