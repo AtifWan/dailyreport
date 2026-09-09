@@ -29,6 +29,15 @@ export function formatDate(isoDate, opts = { day: 'numeric', month: 'long', year
   return new Date(`${isoDate}T00:00:00Z`).toLocaleDateString('en-AU', { ...opts, timeZone: 'UTC' });
 }
 
+/** Today's date, as YYYY-MM-DD, in the clinics' own timezone (ACT/Canberra — same
+ *  IANA zone as Sydney/NSW; there's no separate "Australia/Canberra" zone id) —
+ *  never the visitor's local timezone, which would silently disagree by a day for
+ *  anyone reading the dashboard from overseas around midnight. The 'en-CA' locale
+ *  is a standard trick for getting Intl to format a date as YYYY-MM-DD directly. */
+export function todayISOInCanberra() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Sydney' }).format(new Date());
+}
+
 /**
  * Wires up a sortable, optionally searchable, optionally expandable data table.
  *

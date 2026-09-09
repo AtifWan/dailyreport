@@ -1,4 +1,4 @@
-import { esc, fetchJSON, formatDate, addDaysISO } from '../util.js';
+import { esc, fetchJSON, formatDate, todayISOInCanberra } from '../util.js';
 import { renderMonthCalendar } from '../calendarview.js';
 import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
@@ -30,14 +30,15 @@ const CAL_MAX = { year: 2026, month: 11 };
 
 export async function renderLeave(container, date, manifest) {
   const d = await fetchJSON(`assets/data/reports/${date}/leave.json`);
-  // The report always publishes a day after the date its figures describe (see
-  // README's "Interactivity" note) — reportDate is "the day this data is about"
-  // (Tuesday), but "Today" for a person reading the leave roster right now means
-  // the day the report is actually being read (Wednesday). Every other page's
-  // numbers are retrospective and rightly stay anchored to reportDate; this is
-  // the one place that needs the day someone is actually looking at it.
-  const viewedOnDate = addDaysISO(d.reportDate, 1);
-  const todayIndex = dayIndexOf(viewedOnDate, d.weekStart);
+  // "Today" here means the real day someone is reading this — not reportDate,
+  // which is "the day this data is about" and stays retrospective everywhere
+  // else in the app. Anchoring it to the real Canberra clock (rather than the
+  // viewer's local timezone) means it only ever highlights a day in the current
+  // week's table (todayIndex is -1, no highlight, while browsing an older
+  // report), and the holiday calendar below always opens on the real current
+  // month regardless of which report is loaded.
+  const todayISO = todayISOInCanberra();
+  const todayIndex = dayIndexOf(todayISO, d.weekStart);
 
   const fullWeek = (person) => person.status.every((s) => s === 'leave');
   const noneWeek = (person) => person.status.every((s) => s === 'available');
@@ -176,16 +177,16 @@ export async function renderLeave(container, date, manifest) {
   paintWeek();
 
   // Public holiday calendar: month navigation, starting on today's actual month
-  // (viewedOnDate, not reportDate — see the comment above).
-  const viewedOn = new Date(`${viewedOnDate}T00:00:00Z`);
-  let calYear = viewedOn.getUTCFullYear();
-  let calMonth = viewedOn.getUTCMonth();
+  // (the real Canberra date, not reportDate — see the comment above).
+  const todayUTC = new Date(`${todayISO}T00:00:00Z`);
+  let calYear = todayUTC.getUTCFullYear();
+  let calMonth = todayUTC.getUTCMonth();
   const calMount = container.querySelector('.dr-cal-mount');
   const prevBtn = container.querySelector('.dr-cal-prev');
   const nextBtn = container.querySelector('.dr-cal-next');
 
   function paintCalendar() {
-    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO: viewedOnDate });
+    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO });
     prevBtn.disabled = calYear === CAL_MIN.year && calMonth === CAL_MIN.month;
     nextBtn.disabled = calYear === CAL_MAX.year && calMonth === CAL_MAX.month;
     prevBtn.style.opacity = prevBtn.disabled ? .4 : 1;
