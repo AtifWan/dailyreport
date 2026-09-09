@@ -39,9 +39,14 @@ assets/
     workdays.js                <- ACT (Canberra) 2026 public holidays (dated + named) + working-day math
     calendarview.js             <- renders one month grid: holidays + known leave counts
     pages/*.js                <- one render(container, date, manifest) module per page; each fetches its own dated JSON
-  data/reports/
-    index.json                 <- manifest: {"dates": [...], "latest": "..."} — the only file that lists what's available
-    <YYYY-MM-DD>/*.json        <- one dated folder per report, same 5 filenames each time — the Phase 2 seam (see PHASE-2.md)
+  data/
+    source-pdfs/                <- drop new report PDFs here (see "Historical reports" below); nothing reads this at runtime
+      processed/                 <- PDFs already extracted, archived here so they're not re-processed
+    reports/
+      index.json                 <- manifest: {"dates": [...], "latest": "..."} — the only file that lists what's available
+      <YYYY-MM-DD>/*.json        <- one dated folder per report, same 5 filenames each time — the Phase 2 seam (see PHASE-2.md)
+scripts/
+  detect_reports.py            <- reports which PDFs in source-pdfs/ are new/paired/pending — no data extraction, just bookkeeping
 design-system/                <- vendored, unmodified YourGP Design System package
 COMPONENT-ANALYSIS.md         <- which design-system components each page uses, and why
 PHASE-2.md                    <- what changes (and what doesn't) when this goes live
@@ -108,8 +113,17 @@ PHASE-2.md                    <- what changes (and what doesn't) when this goes 
 Every report date lives in its own folder, `assets/data/reports/<YYYY-MM-DD>/`, holding
 the same five JSON files described above. `assets/data/reports/index.json` is the one
 manifest listing which dates exist (`dates`) and which is newest (`latest`) — nothing
-else in the app hardcodes a date list. Adding a new day's report is: drop in a new dated
-folder, add its date to the manifest, done.
+else in the app hardcodes a date list.
+
+**Adding a new report doesn't mean creating that dated folder yourself.** Drop the
+source PDF(s) into `assets/data/source-pdfs/` — no renaming, no subfolders, any number
+of dates at once — and ask Claude to process them. It identifies each PDF's date and
+version from its title (below), extracts and verifies the figures, creates
+`assets/data/reports/<date>/`, updates the manifest, and archives the PDFs into
+`assets/data/source-pdfs/processed/`. `scripts/detect_reports.py` does the bookkeeping
+half of that on its own — run it (`python3 scripts/detect_reports.py`) to see which
+dropped-in dates are new, already done, or missing one half of the pair, without it
+touching any data itself.
 
 **Telling the two source PDFs apart.** Every report date is published as two PDFs, and
 their title text — not the filename — is the reliable way to tell which is which:

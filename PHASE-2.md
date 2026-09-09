@@ -71,6 +71,17 @@ already records the exact title it was extracted from (`report.title` in
 same and flag a mismatch (wrong pairing, or a date that doesn't match the destination
 folder) rather than silently filing bad data.
 
+`scripts/detect_reports.py` implements exactly this classification (parses each PDF's
+first-page title with `pdfplumber`, groups by date, cross-checks against the manifest)
+against whatever's dropped into `assets/data/source-pdfs/`. It's deliberately
+bookkeeping-only — it doesn't extract a single figure — because the actual numbers
+still need the same read-and-verify treatment the 8 September 2026 report got (cross-
+checked cell-by-cell against the source), not a blind regex over the PDF body. A live
+pipeline that wants to go further would extend this script's classification step with
+real field extraction per page, but should keep the same verify-before-write posture:
+this dataset's whole premise is that every number traces back to something a human
+(or Claude) actually checked.
+
 ## Timezone
 
 Every date in this app is a timezone-agnostic date-only string; the one thing that ever
