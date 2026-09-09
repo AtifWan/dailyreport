@@ -40,3 +40,27 @@
    pointer cursor inline; this just gives them a hover cue consistent with .thsort's
    own hover-toward-accent convention. */
 .rtable tbody tr[data-key]:hover td { background: var(--surface-sunk); }
+
+/* Month calendar (assets/js/calendarview.js) — no design-system precedent to extend,
+   so it borrows the same tokens a .panel would: hairline dividers, --radius-sm cells,
+   --surface-sunk for a receding day, --infer/--danger/--live for holiday/leave/clear. */
+.dr-cal-title { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 16px; margin: 0 0 10px; }
+.dr-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius-sm); overflow: hidden; }
+.dr-cal-weekday { background: var(--surface-sunk); color: var(--ink-faint); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-align: center; padding: 7px 4px; }
+.dr-cal-cell { background: var(--surface); min-height: 72px; padding: 6px 7px; position: relative; }
+.dr-cal-cell--empty { background: var(--surface-sunk); }
+.dr-cal-cell--weekend { background: var(--surface-sunk); }
+.dr-cal-cell--holiday { background: var(--infer-soft); }
+.dr-cal-cell--today { box-shadow: inset 0 0 0 2px var(--accent); border-radius: var(--radius-sm); }
+.dr-cal-daynum { font-size: 12.5px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 5px; }
+.dr-cal-today-tag { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--accent-strong); background: var(--accent-weak); border-radius: 999px; padding: 1px 6px; }
+.dr-cal-holiday { font-size: 11px; font-weight: 600; color: var(--infer-ink); margin-top: 4px; line-height: 1.25; }
+.dr-cal-leave { font-size: 11px; font-weight: 600; margin-top: 4px; }
+.dr-cal-leave:not(.dr-cal-leave--none):not(.dr-cal-leave--unknown) { color: var(--danger-ink); cursor: help; border-bottom: 1px dashed var(--danger-ink); display: inline-block; }
+.dr-cal-leave--none { color: var(--live-ink); }
+.dr-cal-leave--unknown { color: var(--ink-faint); font-weight: 400; font-style: italic; }
+@media (max-width: 520px) {
+  .dr-cal-weekday { font-size: 9.5px; padding: 5px 2px; }
+  .dr-cal-cell { min-height: 58px; padding: 4px 5px; }
+  .dr-cal-holiday, .dr-cal-leave { font-size: 9.5px; }
+}

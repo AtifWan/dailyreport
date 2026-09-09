@@ -35,7 +35,8 @@ assets/
     app.js                    <- hash router (#/overview, #/critical-tasks, #/call-logs, #/cloop, #/leave)
     charts.js                 <- dependency-free SVG chart helpers, built only from design tokens
     util.js                   <- esc(), fetchJSON(), timezone-safe formatDate(), mountInteractiveTable()
-    workdays.js                <- ACT (Canberra) 2026 public holiday calendar + working-day math
+    workdays.js                <- ACT (Canberra) 2026 public holidays (dated + named) + working-day math
+    calendarview.js             <- renders one month grid: holidays + known leave counts
     pages/*.js                <- one render(container) module per page; each fetches its own JSON
   data/*.json                 <- one file per page — the Phase 2 seam (see PHASE-2.md)
 design-system/                <- vendored, unmodified YourGP Design System package
@@ -63,6 +64,15 @@ PHASE-2.md                    <- what changes (and what doesn't) when this goes 
   and the report date doesn't land on the stated 109-day streak either — so it's shown
   verbatim rather than recalculated, with both facts called out in the page's own
   footnote rather than silently papered over.
+- **Leave & public holiday calendar** — Staff & Doctors' Leave has a month-by-month
+  calendar (`calendarview.js`) marking every real 2026 ACT public holiday and, for the
+  one week the source data covers, how many people are on leave each day (hover a day
+  for names). Days outside that week honestly say "No leave data" rather than imply
+  a clear roster; month nav is clamped to Jan–Dec 2026, the span the holiday list
+  actually covers. "On leave" renders in the loud colour (vermillion) and "Available"
+  in the calm one, deliberately matching the source PDF's orange/green emphasis — the
+  first version had this backwards, which made a person's single leave day easy to
+  miss next to a run of fully-on-leave rows.
 
 ## Pages
 
