@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 19th August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 19th August 2026",
+  "extractedAt": "2026-08-20T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Thursday 20 August 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 35, "oldestDays": 8.96 },
+    { "queue": "Medico-legal", "inQueue": 13, "oldestDays": 5.73 },
+    { "queue": "Failed Communication", "inQueue": 10, "oldestDays": 0.73 },
+    { "queue": "Practice Finance", "inQueue": 9, "oldestDays": 8.61 },
+    { "queue": "Unassigned", "inQueue": 6, "oldestDays": 0.62 },
+    { "queue": "Documents", "inQueue": 5, "oldestDays": 0.62 },
+    { "queue": "Escalation", "inQueue": 3, "oldestDays": 8.95 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.6 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 2.82 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 5.9 }
+  ],
+  "realTimeSummary": { "inQueue": 80, "oldestDays": 8.96 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 31 },
+    { "queue": "Documents", "count": 23 },
+    { "queue": "Finance", "count": 14 },
+    { "queue": "Failed Communication", "count": 4 },
+    { "queue": "Medico-legal", "count": 4 },
+    { "queue": "Requests", "count": 4 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug"],
+    "totals": [73, 126, 108, 88, 71, 88, 102, 90, 87, 81]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 62, "outbound": 13, "total": 75 },
+    { "agent": "Leh Peng Goh", "incoming": 14, "outbound": 0, "total": 14 },
+    { "agent": "Atif Wan", "incoming": 4, "outbound": 1, "total": 5 },
+    { "agent": "Lucinda Gonzalez", "incoming": 1, "outbound": 1, "total": 2 }
+  ],
+  "totalCasesToDate": { "date": "2026-08-18", "totalOverallCases": 6015, "totalInProgress": 154, "totalOpenCases": 70 },
+  "inProgressTenDayTrend": {
+    "labels": ["Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug"],
+    "totals": [126, 137, 130, 128, 124, 127, 132, 135, 136, 154]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug"],
+    "totals": [42, 43, 48, 49, 53, 60, 73, 70, 78, 70]
+  }
+}
