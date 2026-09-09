@@ -64,15 +64,19 @@ PHASE-2.md                    <- what changes (and what doesn't) when this goes 
   and the report date doesn't land on the stated 109-day streak either — so it's shown
   verbatim rather than recalculated, with both facts called out in the page's own
   footnote rather than silently papered over.
-- **Leave & public holiday calendar** — Staff & Doctors' Leave has a month-by-month
-  calendar (`calendarview.js`) marking every real 2026 ACT public holiday and, for the
-  one week the source data covers, how many people are on leave each day (hover a day
-  for names). Days outside that week honestly say "No leave data" rather than imply
-  a clear roster; month nav is clamped to Jan–Dec 2026, the span the holiday list
-  actually covers. "On leave" renders in the loud colour (vermillion) and "Available"
-  in the calm one, deliberately matching the source PDF's orange/green emphasis — the
-  first version had this backwards, which made a person's single leave day easy to
-  miss next to a run of fully-on-leave rows.
+- **Public holiday calendar** — Staff & Doctors' Leave has a month-by-month calendar
+  (`calendarview.js`) marking every real 2026 ACT public holiday, so admin staff can
+  browse ahead to what's coming up; month nav is clamped to Jan–Dec 2026, the span the
+  holiday list actually covers. It deliberately does *not* also show a per-day leave
+  count — that would just duplicate the "Week at a glance" table above it.
+- **Week at a glance, redesigned for scanability** — "On leave" renders in the loud
+  colour (vermillion) and "Available" in the calm one, deliberately matching the
+  source PDF's orange/green emphasis (an earlier version had this backwards, which
+  made a person's single leave day easy to miss next to a run of fully-on-leave rows).
+  Rows are sorted fully-out-first, then by days-out descending, and each name carries
+  an "Out all week" / "N/5 days out" badge plus a left status rail (the same inset-rail
+  idiom the KPI cards use for good/crit) — so who needs attention is obvious before
+  you've read a single day cell.
 
 ## Pages
 

@@ -36,18 +36,33 @@
 
 .dr-placeholder { border: 1px dashed var(--hairline-strong); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: var(--ink-faint); background: var(--surface-sunk); }
 
+/* design-system's .brow sizes its 3rd (value) column to that row's own text width
+   ("auto") — since each .brow is its own independent grid, a row with a long note
+   ("est. since 10 July 2026") gets a wider 3rd column than a row with a short one
+   ("8"), which pushes the 1fr label column to a different width too, so the bar in
+   between starts at a different x-position per row. Pinning the 3rd column's width
+   and letting long notes wrap (instead of forcing the column wider) keeps every
+   bar's left edge aligned down the panel. */
+.brow { grid-template-columns: 1fr 46% 130px; }
+.brow .bv { white-space: normal; }
+@media (max-width: 880px) {
+  .brow { grid-template-columns: 1fr 30% 96px; }
+}
+
 /* Expandable table rows (mountInteractiveTable's renderDetail) carry data-key and a
    pointer cursor inline; this just gives them a hover cue consistent with .thsort's
    own hover-toward-accent convention. */
 .rtable tbody tr[data-key]:hover td { background: var(--surface-sunk); }
 
-/* Month calendar (assets/js/calendarview.js) — no design-system precedent to extend,
-   so it borrows the same tokens a .panel would: hairline dividers, --radius-sm cells,
-   --surface-sunk for a receding day, --infer/--danger/--live for holiday/leave/clear. */
+/* Month calendar (assets/js/calendarview.js) — public holidays only (the per-day
+   leave count was dropped: it duplicated the "Week at a glance" table above it).
+   No design-system precedent to extend, so it borrows the same tokens a .panel
+   would: hairline dividers, --radius-sm cells, --surface-sunk for a receding day,
+   --infer for a holiday. */
 .dr-cal-title { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 16px; margin: 0 0 10px; }
 .dr-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius-sm); overflow: hidden; }
 .dr-cal-weekday { background: var(--surface-sunk); color: var(--ink-faint); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-align: center; padding: 7px 4px; }
-.dr-cal-cell { background: var(--surface); min-height: 72px; padding: 6px 7px; position: relative; }
+.dr-cal-cell { background: var(--surface); min-height: 56px; padding: 6px 7px; position: relative; }
 .dr-cal-cell--empty { background: var(--surface-sunk); }
 .dr-cal-cell--weekend { background: var(--surface-sunk); }
 .dr-cal-cell--holiday { background: var(--infer-soft); }
@@ -55,12 +70,21 @@
 .dr-cal-daynum { font-size: 12.5px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 5px; }
 .dr-cal-today-tag { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--accent-strong); background: var(--accent-weak); border-radius: 999px; padding: 1px 6px; }
 .dr-cal-holiday { font-size: 11px; font-weight: 600; color: var(--infer-ink); margin-top: 4px; line-height: 1.25; }
-.dr-cal-leave { font-size: 11px; font-weight: 600; margin-top: 4px; }
-.dr-cal-leave:not(.dr-cal-leave--none):not(.dr-cal-leave--unknown) { color: var(--danger-ink); cursor: help; border-bottom: 1px dashed var(--danger-ink); display: inline-block; }
-.dr-cal-leave--none { color: var(--live-ink); }
-.dr-cal-leave--unknown { color: var(--ink-faint); font-weight: 400; font-style: italic; }
 @media (max-width: 520px) {
   .dr-cal-weekday { font-size: 9.5px; padding: 5px 2px; }
-  .dr-cal-cell { min-height: 58px; padding: 4px 5px; }
-  .dr-cal-holiday, .dr-cal-leave { font-size: 9.5px; }
+  .dr-cal-cell { min-height: 46px; padding: 4px 5px; }
+  .dr-cal-holiday { font-size: 9.5px; }
 }
+
+/* Leave-grid row status rail (item 5 redesign) — same inset-rail idiom as .kpi.crit/
+   .kpi.good, so "who's fully out" and "who's partly out" register before you've read
+   a single cell. Two things make this trickier than a card: box-shadow on a <tr>
+   doesn't reliably paint (a table row isn't a single box), so the rail lives on the
+   name cell instead; and design-system's own `.rtable tbody td:first-child` rule
+   (needed for the sticky first column) is more specific than a bare class selector,
+   so this has to out-specify it rather than just come later in the file. */
+.dr-leave-table tbody tr.dr-leave-row--full td:first-child { background: var(--danger-soft); box-shadow: inset 3px 0 0 var(--danger), 1px 0 0 var(--hairline); }
+.dr-leave-table tbody tr.dr-leave-row--partial td:first-child { box-shadow: inset 3px 0 0 var(--infer), 1px 0 0 var(--hairline); }
+.dr-leave-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; margin-left: 8px; white-space: nowrap; }
+.dr-leave-badge--full { background: var(--danger-soft); color: var(--danger-ink); }
+.dr-leave-badge--partial { background: var(--infer-soft); color: var(--infer-ink); }

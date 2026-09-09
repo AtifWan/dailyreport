@@ -44,6 +44,7 @@
     "doctorLinesOnLeave": 4,
     "staffFullyOnLeave": 2,
     "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Kiara Pfeffer", "Bethany Tran", "Renee Bowman"],
     "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
   }
 }

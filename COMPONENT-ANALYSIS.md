@@ -11,8 +11,10 @@ widths, `.agepill i` dot colours).
 ## Shell
 
 `.app` / `.sidebar` / `.brand` `.mark` `.nm` / `.nav-label` / `.nav-item` (`.on`) `.nav-ic`
-/ `.side-user` / `.main` `.topbar` `.tb-titles` `.tt` `.ts` / `.content` / `.menu-btn`
-`.nav-backdrop` (`.show`) `.sidebar.open` — used verbatim from `examples/starter.html`.
+/ `.main` `.topbar` `.tb-titles` `.tt` `.ts` / `.content` / `.menu-btn`
+`.nav-backdrop` (`.show`) `.sidebar.open` — used verbatim from `examples/starter.html`,
+minus its `.side-user` account footer and topbar sign-out: this report needs no
+sign-in to view, so those elements were removed rather than left as dead UI.
 Two icons (call-logs phone glyph, leave calendar glyph) were hand-drawn in `index.html`
 to the exact construction `ICONS.md` specifies (`viewBox 0 0 24 24`, `stroke=currentColor`,
 1.9 width, round caps) since the shipped icon set doesn't include a phone or calendar mark

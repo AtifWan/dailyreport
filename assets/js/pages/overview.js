@@ -105,7 +105,7 @@ export async function renderOverview(container) {
         <p class="q">${esc(lv.weekLabel)}</p>
         <div class="brow"><div class="bl">Doctor lines on leave</div><div class="minibar"><i style="width:${(lv.doctorLinesOnLeave / 4) * 100}%"></i></div><div class="bv">${lv.doctorLinesOnLeave}<small>of 4 rostered lines</small></div></div>
         <div class="brow"><div class="bl">Staff fully on leave</div><div class="minibar"><i style="width:${(lv.staffFullyOnLeave / 5) * 100}%"></i></div><div class="bv">${lv.staffFullyOnLeave}<small>all week</small></div></div>
-        <div class="brow"><div class="bl">Staff partially on leave</div><div class="minibar"><i style="width:${(lv.staffPartialLeave / 5) * 100}%"></i></div><div class="bv">${lv.staffPartialLeave}<small>1-2 days</small></div></div>
+        <div class="brow"><div class="bl">Staff partially on leave</div><div class="minibar"><i style="width:${(lv.staffPartialLeave / 5) * 100}%"></i></div><div class="bv">${lv.staffPartialLeave}<small>${lv.staffPartialLeaveNames.map(esc).join(', ')}</small></div></div>
         <p class="foot-note">${esc(lv.longTerm[0].name)} remains on ${esc(lv.longTerm[0].note).toLowerCase()} (${formatDate(lv.longTerm[0].from)} – ${formatDate(lv.longTerm[0].to)}).</p>
         ${viewLink('#/leave', 'View the week-at-a-glance grid')}
       </div>

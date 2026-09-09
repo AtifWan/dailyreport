@@ -24,37 +24,16 @@ function dayIndexOf(reportDateISO, weekStartISO) {
   return diff >= 0 && diff <= 4 ? diff : -1;
 }
 
-function addDaysISO(iso, n) {
-  const d = new Date(`${iso}T00:00:00Z`);
-  d.setUTCDate(d.getUTCDate() + n);
-  return d.toISOString().slice(0, 10);
-}
-
-/** date -> { count, names } for every day the leave grid actually covers (Mon-Fri
- *  of the one known week) — built from the same people/status arrays the week
- *  grid renders, so the calendar can never drift out of sync with it. */
-function buildLeaveByDate(d) {
-  const map = new Map();
-  const allPeople = d.groups.flatMap((g) => g.people);
-  d.days.forEach((_, i) => {
-    const dateISO = addDaysISO(d.weekStart, i);
-    const onLeave = allPeople.filter((p) => p.status[i] === 'leave').map((p) => p.name);
-    map.set(dateISO, { count: onLeave.length, names: onLeave });
-  });
-  return map;
-}
-
 const CAL_MIN = { year: 2026, month: 0 };
 const CAL_MAX = { year: 2026, month: 11 };
 
 export async function renderLeave(container) {
   const d = await fetchJSON('assets/data/leave.json');
   const todayIndex = dayIndexOf(d.reportDate, d.weekStart);
-  const leaveByDate = buildLeaveByDate(d);
-  const knownRange = { start: d.weekStart, end: addDaysISO(d.weekStart, d.days.length - 1) };
 
   const fullWeek = (person) => person.status.every((s) => s === 'leave');
   const noneWeek = (person) => person.status.every((s) => s === 'available');
+  const leaveDayCount = (person) => person.status.filter((s) => s === 'leave').length;
   const allPeople = d.groups.flatMap((g) => g.people);
   const fullyOnLeave = allPeople.filter(fullWeek).length;
   const partialLeave = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
@@ -92,7 +71,7 @@ export async function renderLeave(container) {
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <div>
           <h3>Week at a glance</h3>
-          <p class="q">One row per person, one column per day. Filter by day, or search a name.</p>
+          <p class="q">Fully-out people first, then partial. Filter by day, or search a name.</p>
         </div>
         <input class="sinput dr-leave-search" type="text" placeholder="Search name">
       </div>
@@ -108,14 +87,16 @@ export async function renderLeave(container) {
       </div>
       <div class="dr-legend">
         ${d.legend.map((l) => `<span><i style="background:${STATUS[l.key].bg};border:1px solid ${STATUS[l.key].ink}"></i>${esc(l.label)}</span>`).join('')}
+        <span><i style="background:var(--danger);border:1px solid var(--danger-ink)"></i>Row rail: out all week</span>
+        <span><i style="background:var(--infer);border:1px solid var(--infer-ink)"></i>Row rail: partly out</span>
       </div>
     </div>
 
     <div class="panel dr-section-gap">
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <div>
-          <h3>Leave &amp; public holiday calendar</h3>
-          <p class="q">Real 2026 ACT (Canberra) public holidays, plus how many people are on leave each day.</p>
+          <h3>Public holiday calendar</h3>
+          <p class="q">Real 2026 ACT (Canberra) public holidays — browse ahead to see what's coming up.</p>
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <button class="locbtn dr-cal-prev" aria-label="Previous month">&larr;</button>
@@ -123,7 +104,6 @@ export async function renderLeave(container) {
         </div>
       </div>
       <div class="dr-cal-mount" style="margin-top:14px"></div>
-      <p class="foot-note">Public holidays are the real ACT calendar for all of 2026. Day-by-day leave counts are only known for the week above (7–11 Sept 2026) — other working days show <i>"No leave data"</i> rather than imply nobody's out.</p>
     </div>
 
     <div class="panel dr-section-gap">
@@ -132,29 +112,44 @@ export async function renderLeave(container) {
     </div>
   `;
 
-  // Week grid: day filter + name search
+  // Week grid: day filter + name search + priority ordering (fully-out first)
   const tbody = container.querySelector('.dr-leave-table tbody');
   const searchInput = container.querySelector('.dr-leave-search');
   const dayButtons = container.querySelectorAll('.dr-day-filter .locbtn');
   let dayFilter = -1;
   let query = '';
 
+  function personRow(p) {
+    const days = leaveDayCount(p);
+    const rowClass = fullWeek(p) ? 'dr-leave-row--full' : days > 0 ? 'dr-leave-row--partial' : '';
+    const badge = fullWeek(p)
+      ? `<span class="dr-leave-badge dr-leave-badge--full">Out all week</span>`
+      : days > 0
+        ? `<span class="dr-leave-badge dr-leave-badge--partial">${days}/${p.status.length} days out</span>`
+        : '';
+    return `
+      <tr class="${rowClass}">
+        <td class="strong">${esc(p.name)}${p.site ? `<small style="color:var(--ink-faint)"> (${esc(p.site)})</small>` : ''}${badge}</td>
+        ${p.status.map((s, i) => cell(s, i === todayIndex)).join('')}
+      </tr>`;
+  }
+
   function paintWeek() {
     const q = query.trim().toLowerCase();
     const rows = d.groups.map((g) => {
-      const people = g.people.filter((p) => {
-        const matchesDay = dayFilter === -1 || p.status[dayFilter] === 'leave';
-        const matchesQuery = !q || p.name.toLowerCase().includes(q);
-        return matchesDay && matchesQuery;
-      });
+      const people = g.people
+        .filter((p) => {
+          const matchesDay = dayFilter === -1 || p.status[dayFilter] === 'leave';
+          const matchesQuery = !q || p.name.toLowerCase().includes(q);
+          return matchesDay && matchesQuery;
+        })
+        // Priority order within each group: fully out, then partial (most days out
+        // first), then fully available — so who needs attention is always on top.
+        .sort((a, b) => leaveDayCount(b) - leaveDayCount(a));
       if (!people.length) return '';
       return `
         <tr class="dr-group-row"><td colspan="${d.days.length + 1}">${esc(g.group)}</td></tr>
-        ${people.map((p) => `
-          <tr>
-            <td class="strong">${esc(p.name)}${p.site ? `<small style="color:var(--ink-faint)"> (${esc(p.site)})</small>` : ''}</td>
-            ${p.status.map((s, i) => cell(s, i === todayIndex)).join('')}
-          </tr>`).join('')}`;
+        ${people.map(personRow).join('')}`;
     }).join('');
     tbody.innerHTML = rows || `<tr><td colspan="${d.days.length + 1}" class="foot-note">No one matches this filter.</td></tr>`;
   }
@@ -170,7 +165,7 @@ export async function renderLeave(container) {
   searchInput.addEventListener('input', () => { query = searchInput.value; paintWeek(); });
   paintWeek();
 
-  // Calendar: month navigation, starting on the report month
+  // Public holiday calendar: month navigation, starting on the report month
   const reportDate = new Date(`${d.reportDate}T00:00:00Z`);
   let calYear = reportDate.getUTCFullYear();
   let calMonth = reportDate.getUTCMonth();
@@ -179,7 +174,7 @@ export async function renderLeave(container) {
   const nextBtn = container.querySelector('.dr-cal-next');
 
   function paintCalendar() {
-    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO: d.reportDate, leaveByDate, knownRange });
+    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO: d.reportDate });
     prevBtn.disabled = calYear === CAL_MIN.year && calMonth === CAL_MIN.month;
     nextBtn.disabled = calYear === CAL_MAX.year && calMonth === CAL_MAX.month;
     prevBtn.style.opacity = prevBtn.disabled ? .4 : 1;
