@@ -16,7 +16,7 @@
     "answerRatePct": [87, 90, 84, 78, 93, 89, 96, 86, 89, 81],
     "answerRateTargetPct": 85,
     "accepted": [260, 238, 237, 329, 281, 264, 218, 220, 308, 229],
-    "missed": [38, 26, 45, 93, 21, 31, 3, 37, 38, 54],
+    "missed": [38, 26, 45, 93, 21, 31, 9, 37, 38, 54],
     "overallAvgWaitSec": [40, 36, 42, 30, 28, 30, 23, 41, 36, 47]
   },
   "queues": {
@@ -26,6 +26,7 @@
     "Canberra Vasectomy": { "accepted": [4, 2, 0, 2, 3, 4, 4, 0, 1, 2], "missed": [0, 2, 0, 0, 0, 0, 0, 0, 1, 1], "avgWaitSec": [39, 6, 0, 39, 7, 10, 39, 0, 153, 37] }
   },
   "_tenDayTrendNote": "All four queue charts and both overall charts cross-validate exactly against 2026-06-22's own committed 10-day trend (this date's positions 0-8 reproduce that date's positions 1-9 exactly for every one of the six charts), and every queue's own Tue-23-Jun accepted/missed value matches this date's Call Logs pie/queue-report exactly. One transcription note: Canberra Vasectomy's Wed-10-Jun missed value initially appeared to read as 4 in this chart (which would conflict with the established chain's 0), but careful re-reading confirmed the second '4' label belongs to the Total Inbound line (which sits at the same height as the Accepted-Calls bar that day, both 4) rather than a second, taller Missed-Calls bar — the actual Missed-Calls bar that day has zero height, consistent with the chain. Recorded as 0, matching 2026-06-22 exactly.",
+  "_missedTrendCorrectionNote": "tenDayTrend.missed[6] (Thu 18 Jun) was originally transcribed as 3, but this was a misread of this file's own Call Volume chart — the small red 'missed' segment at Thu-18-Jun is labeled 9, not 3. Caught when cross-validating against 2026-06-24 (which reproduces every one of this date's positions 1-9 exactly except this one, where it independently reads 9), and confirmed both by re-examining this date's own source image directly and by the fact that this date's own four per-queue missed values at Thu-18-Jun (Appointments 4, General Enquiries 2, Health Professionals 3, Canberra Vasectomy 0) sum to 9, not 3. Corrected to 9.",
   "patientServiceKpi": {
     "longestCallDurationSec": 544,
     "longestCallAt": "9:15 AM",
