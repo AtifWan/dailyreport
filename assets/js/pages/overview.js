@@ -111,7 +111,7 @@ export async function renderOverview(container, date, manifest) {
         ${cl ? `
         ${cl.contactsQueuedYesterday != null ? `
         <div class="splitbar">
-          <div class="seg" style="width:100%;background:var(--accent)">${cl.contactsQueuedYesterday} contacts queued yesterday</div>
+          <div class="seg dr-splitbar-static" style="width:100%;background:var(--accent)">${cl.contactsQueuedYesterday} contacts queued yesterday</div>
         </div>
         ` : `<p class="dr-placeholder">Contacts-queued-yesterday total not published this date.</p>`}
         <div class="take"><b>Reads as:</b> ${cl.emailsHandledYesterday} contacts were handled yesterday across the team, out of ${cl.totalOverallCases.toLocaleString()} total cases logged to date (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).</div>

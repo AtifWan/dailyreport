@@ -36,6 +36,15 @@
 
 .dr-placeholder { border: 1px dashed var(--hairline-strong); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: var(--ink-faint); background: var(--surface-sunk); }
 
+/* Overview's Cloop "contacts queued yesterday" bar reuses design-system's .splitbar/.seg,
+   but as a single label-only segment rather than the two-part ratio (paid vs unpaid)
+   that class is meant for. It's not clickable — no data-tip, no handler — yet it still
+   picked up the shared .seg:hover brightening design-system uses to hint "this segment
+   has a tooltip", which reads as a button hover with nothing behind it. Scoped back off
+   for just this one static usage rather than touching the shared design-system rule
+   (comp-seg/al-seg/daybar genuinely are interactive elsewhere and should keep it). */
+.splitbar .seg.dr-splitbar-static:hover { filter: none; }
+
 /* design-system's .brow sizes its 3rd (value) column to that row's own text width
    ("auto") — since each .brow is its own independent grid, a row with a long note
    ("est. since 10 July 2026") gets a wider 3rd column than a row with a short one
