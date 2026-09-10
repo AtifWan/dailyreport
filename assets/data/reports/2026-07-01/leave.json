@@ -1,0 +1,41 @@
+{
+  "_source": "Daily Operations Report - 1st July 2026.pdf, page 20 (Staff & Doctors on Leave) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 1st July 2026",
+  "reportDate": "2026-07-01",
+  "weekStart": "2026-06-29",
+  "weekEnd": "2026-07-03",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Julie Beuth", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["available", "available", "leave", "leave", "leave"] },
+        { "name": "Dr Freya Ashman", "site": "Lyneham", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Dr Reiham Ibrahim", "site": "Crace", "status": ["available", "available", "leave", "leave", "leave"] },
+        { "name": "JMO Ashley Kean", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Pinky Mae De Paz", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Samantha Cooper", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "leave", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "This report's Doctor group has grown to 7 rows (Dr Julie Beuth, Dr Tracy Fox, Dr Sheahan Ranasinghe, Dr Freya Ashman, Dr Krystel Chin, Dr Reiham Ibrahim, JMO Ashley Kean) for the SAME displayed week (29 June - 3 July) that 2026-06-29 and 2026-06-30's own committed leave.json files showed with only 2 doctor rows — recorded verbatim as a genuine cross-report roster inconsistency for the identical calendar week, not reconciled (the Staff group, by contrast, is unchanged: same 5 names, same per-day statuses as 2026-06-29/06-30). overview.json's doctorLinesOnLeave/staffFullyOnLeave/staffPartialLeave counts are a same-day (Wednesday) snapshot: doctorLinesOnLeave=5 (Julie Beuth, Sheahan Ranasinghe, Freya Ashman, Reiham Ibrahim, Ashley Kean all on leave Wednesday; Tracy Fox and Krystel Chin available Wednesday, each on leave only Friday); staffFullyOnLeave=4 (Andrew Davies, Pinky Mae De Paz, Samantha Cooper, Jasmine Deery); staffPartialLeave=1 (Megan Moreno Pitcher, on leave specifically Wednesday)."
+}

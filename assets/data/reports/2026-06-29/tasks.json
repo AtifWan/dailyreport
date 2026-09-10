@@ -1,0 +1,41 @@
+{
+  "_source": "Daily Operations Report - 29th June 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 29th June 2026",
+  "reportDate": "2026-06-29",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 0, "onHalt": false },
+    { "name": "Finance", "days": 0, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Tue 16 Jun", "Wed 17 Jun", "Thu 18 Jun", "Fri 19 Jun", "Mon 22 Jun", "Tue 23 Jun", "Wed 24 Jun", "Thu 25 Jun", "Fri 26 Jun", "Mon 29 Jun"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 56,
+      "trend": [50, 44, 56, 50, 50, 50, 44, 56, 50, 50],
+      "complete": [
+        "Clinical Reminders (C.Le@8:31)",
+        "Allocate - Healthlink Unallocated (C.Le@8:31)",
+        "Reports For Management Meetings (C.Le@8:50)",
+        "Send Claim For Automed Payments (C.Le@8:50)",
+        "Caregp Ai Tool (C.Le@15:26)"
+      ],
+      "incomplete": ["ADH", "HotDoc NUA - To Call", "HotDoc NUA - To Action (9-5)", "Manage Email Rejections"]
+    },
+    {
+      "name": "Finance",
+      "completionPct": 25,
+      "complete": [
+        "Finance Queue In Cloop Has Zero Emails (L.Go@20:30)",
+        "Online Claiming Run In Best Practice (J.Sa@9:01)"
+      ],
+      "incomplete": ["Xero Accounts Reconciled", "Debt Chasing Report Updated", "Tyro Health Receipts Captured", "90/60-Day Debt List Actioned", "Remittances Allocated"]
+    }
+  ],
+  "_trendNote": "This report's PST 10-day trend chart again renders in dense unevenly-spaced clusters (3-dot, then 4-dot, then 3-dot). This date's positions0-8 = [50,44,56,50,50,50,44,56,50], reproducing 2026-06-26's own committed positions1-9 exactly (the leftmost cluster's raw left-to-right read, '50%50%44%', required the same reordering-within-cluster correction as 2026-06-25/06-26 — chain-corrected here to [50,44,56]; the 4-dot and final 3-dot clusters already matched the chain without adjustment). The new (10th, rightmost) point reads 50%, which again does not equal the printed completion badge (56%) for this same PST checklist on this same date — recorded verbatim as plotted, the same badge-vs-chart mismatch seen on every date so far in this project. This date's task-count/badge DOES agree: 5 complete of 9 total = 55.6%, rounding to the printed 56%. A new PST task, 'Reports For Management Meetings', appears in the complete list for the first time in this project's committed dates. trendDates inferred from the call-log 10-day trend chart's date axis.",
+  "_financeChecklistNote": "No 10-day trend chart is shown anywhere on the source pages for the Finance checklist (only PST has one). The printed completion badge (25%) does not equal 2 complete / 7 total tasks as listed (2/7 = 29%) — recorded verbatim, not reconciled, the same badge-vs-count mismatch seen on 2026-06-25/06-26.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

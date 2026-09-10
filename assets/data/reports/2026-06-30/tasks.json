@@ -1,0 +1,46 @@
+{
+  "_source": "Daily Operations Report - 30th June 2026 (Short Version).pdf, page 1 (Critical Daily Tasks) — verified against rendered page images",
+  "_criticalDataGapNote": "The 'long' version PNG renders supplied for this date (0630_long_p*.png) actually contain the 2026-07-29 report's content (see overview.json's _criticalDataGapNote for full detail) and were not used. The short version's single Critical Daily Tasks page (below) was the only reliable source; it has no separate streak-counter page, so streaks/longestStreak here are inferred from the unbroken 2026-06-24 through 2026-06-29 pattern rather than directly observed for this date — see overview.json.",
+  "reportTitle": "Daily Operations Report - 30th June 2026 (Short Version)",
+  "reportDate": "2026-06-30",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true, "_inferred": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true, "_inferred": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true, "_inferred": true },
+    { "name": "PST", "days": 0, "onHalt": false, "_inferred": true },
+    { "name": "Finance", "days": 0, "onHalt": false, "_inferred": true }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13", "_inferred": true },
+  "trendDates": ["Wed 17 Jun", "Thu 18 Jun", "Fri 19 Jun", "Mon 22 Jun", "Tue 23 Jun", "Wed 24 Jun", "Thu 25 Jun", "Fri 26 Jun", "Mon 29 Jun", "Tue 30 Jun"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 50,
+      "trend": [44, 56, 50, 50, 50, 44, 56, 50, 50, 50],
+      "complete": [
+        "Clinical Reminders (C.Le@8:48)",
+        "Send Claim For Automed Payments (C.Le@8:49)",
+        "Allocate - Healthlink Unallocated (C.Le@9:13)",
+        "Caregp Ai Tool (C.Le@9:13)"
+      ],
+      "incomplete": ["HotDoc NUA - To Action (9-5)", "ADH", "Manage Email Rejections", "HotDoc NUA - To Call"]
+    },
+    {
+      "name": "Finance",
+      "completionPct": 100,
+      "complete": [
+        "Remittances Allocated (L.Go@19:33)",
+        "Tyro Health Receipts Captured (L.Go@19:33)",
+        "Xero Accounts Reconciled (L.Go@19:33)",
+        "Unidentified Payments Resolved (L.Go@19:33)",
+        "Debt Chasing Report Updated (L.Go@19:33)",
+        "Finance Queue In Cloop Has Zero Emails (L.Go@19:34)",
+        "90/60-Day Debt List Actioned (L.Go@19:33)"
+      ],
+      "incomplete": []
+    }
+  ],
+  "_trendNote": "This chart again renders in dense unevenly-spaced clusters (3-dot, 3-dot, 4-dot). positions0-8 = [44,56,50,50,50,44,56,50,50], reproducing 2026-06-29's own committed positions1-9 exactly (per the established chain). The new (10th, rightmost) point was resolved via the rightmost cluster's value SET: its 4 raw labels read as {56%,50%,50%,44%}, which — matched against the already-chain-established positions 6-8 ({44,56,50}) — leaves exactly one value (50) unaccounted for as the genuinely new position9, rather than a fifth distinct number appearing from nowhere. Final array: [44,56,50,50,50,44,56,50,50,50]. Unlike every prior date in this project, this chart's own final point (50%) DOES match the printed completion badge (50%) this time, and the task-count also agrees exactly (4 complete of 8 total = 50%) — no mismatch to flag for once. trendDates inferred from the established chain's own date sequence (the call-log 10-day trend chart, which would normally carry this axis, was not available for this date — see _criticalDataGapNote).",
+  "_financeChecklistNote": "No 10-day trend chart is shown for the Finance checklist (only PST has one, consistent with every prior date). The printed completion badge (100%) agrees exactly with the task count (7 complete of 7 total, 0 incomplete) — no mismatch this time, unlike 2026-06-25/06-26/06-29.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

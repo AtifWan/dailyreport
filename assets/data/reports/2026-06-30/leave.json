@@ -1,0 +1,37 @@
+{
+  "_source": "Daily Operations Report - 30th June 2026 (Short Version).pdf, page 7 (Staff & Doctors on Leave) — verified against rendered page images",
+  "_criticalDataGapNote": "The 'long' version PNG renders supplied for this date (0630_long_p*.png) actually contain the 2026-07-29 report's content, not 30 June's — see overview.json's _criticalDataGapNote. The short version's leave page (below) was used instead.",
+  "reportTitle": "Daily Operations Report - 30th June 2026 (Short Version)",
+  "reportDate": "2026-06-30",
+  "weekStart": "2026-06-29",
+  "weekEnd": "2026-07-03",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Julie Beuth", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Pinky Mae De Paz", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Samantha Cooper", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "leave", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "This date's roster grid is identical to 2026-06-29's own committed leave.json (same week, 29 June - 3 July, same 2-doctor/5-staff roster and same per-day statuses) — verified against this date's own source page. This report's own date (30 June, Tuesday) is the second day of the displayed week: doctorLinesOnLeave=1 (Dr Julie Beuth on leave Tuesday; Dr Tracy Fox available Tuesday, on leave only Friday); staffFullyOnLeave=4 (Andrew Davies, Pinky Mae De Paz, Samantha Cooper, Jasmine Deery); staffPartialLeave=0 (Megan Moreno Pitcher is available Tuesday — her one leave day is Wednesday 1 July)."
+}

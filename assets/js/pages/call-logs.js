@@ -97,7 +97,7 @@ export async function renderCallLogs(container, date, manifest) {
     fetchJSON(`assets/data/reports/${date}/call-logs.json`),
     fetchJSON(`assets/data/reports/${date}/cloop.json`).catch(() => null),
   ]);
-  const t = d.tenDayTrend;
+  const t = d.tenDayTrend || {};
   const staff = buildStaffActivity(d, cloop);
 
   const queueBars = hBarGroup({
@@ -106,19 +106,19 @@ export async function renderCallLogs(container, date, manifest) {
 
   const queueFilterBtns = ['All', ...QUEUES].map((q) => `<button class="locbtn${q === 'All' ? ' on' : ''}" data-queue="${esc(q)}">${esc(q)}</button>`).join('');
 
-  const queueTrendPanels = Object.entries(d.queues).map(([name, q]) => `
+  const queueTrendPanels = d.queues ? Object.entries(d.queues).map(([name, q]) => `
     <div class="panel" data-queue-panel="${esc(name)}">
       <h3 style="color:${QUEUE_COLORS[name]}">${esc(name)}</h3>
       <p class="q">Accepted vs missed, 10-day trend</p>
       <div class="dr-chart-wrap">${stackedBarChart({ dates: t.labels, seriesA: q.accepted, seriesB: q.missed, height: 190 })}</div>
-    </div>`).join('');
+    </div>`).join('') : '';
 
-  const waitTrendPanels = Object.entries(d.queues).map(([name, q]) => `
+  const waitTrendPanels = d.queues ? Object.entries(d.queues).map(([name, q]) => `
     <div class="panel" data-queue-panel="${esc(name)}">
       <h3 style="color:${QUEUE_COLORS[name]}">${esc(name)}</h3>
       <p class="q">Average wait time (seconds), 10-day trend</p>
       <div class="dr-chart-wrap">${lineChart({ dates: t.labels, series: [{ data: q.avgWaitSec, color: QUEUE_COLORS[name], label: 'Avg wait (sec)' }], height: 170, unit: 's' })}</div>
-    </div>`).join('');
+    </div>`).join('') : '';
 
   const hourly = d.todaysHourlyPattern;
 
@@ -174,6 +174,7 @@ export async function renderCallLogs(container, date, manifest) {
     </div>
     ` : `<p class="dr-placeholder dr-section-gap">This date's source pages didn't include the overall Call Answer Rate / Call Volume 10-day charts (only the per-queue trends and overall wait time below).</p>`}
 
+    ${d.queues ? `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 2px 0">
       <h3 style="font-family:Fraunces,serif;font-weight:600;font-size:17px;color:var(--accent-strong);margin:0">Per-queue trends</h3>
       <div class="dr-queue-filter" style="display:flex;gap:8px;flex-wrap:wrap">${queueFilterBtns}</div>
@@ -181,7 +182,9 @@ export async function renderCallLogs(container, date, manifest) {
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:12px">
       ${queueTrendPanels}
     </div>
+    ` : `<p class="dr-placeholder dr-section-gap">Per-queue 10-day trend charts were not published for this date.</p>`}
 
+    ${d.patientServiceKpi ? `
     <div class="kpis dr-section-gap">
       <div class="kpi">
         <div class="k-l">Longest call duration</div>
@@ -199,8 +202,10 @@ export async function renderCallLogs(container, date, manifest) {
         <div class="k-n">per accepted call, today</div>
       </div>
     </div>
+    ` : `<p class="dr-placeholder dr-section-gap">Patient service KPIs were not published for this date.</p>`}
 
-    <div class="panel">
+    ${d.longestWaitPerQueue ? `
+    <div class="panel dr-section-gap">
       <h3>Longest wait per queue</h3>
       <p class="q">Click a column to sort.</p>
       <div class="rtable-wrap dr-longest-wait">
@@ -214,12 +219,16 @@ export async function renderCallLogs(container, date, manifest) {
         </table>
       </div>
     </div>
+    ` : ''}
 
+    ${t.overallAvgWaitSec ? `
     <div class="panel dr-section-gap">
       <h3>Overall average wait time — 10-day trend</h3>
       <div class="dr-chart-wrap">${lineChart({ dates: t.labels, series: [{ data: t.overallAvgWaitSec, color: 'var(--accent-2)', label: 'Avg wait (sec)' }], height: 200, unit: 's' })}</div>
     </div>
+    ` : ''}
 
+    ${d.queues ? `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 2px 0">
       <h3 style="font-family:Fraunces,serif;font-weight:600;font-size:17px;color:var(--accent-strong);margin:0">Queue average wait time — 10-day trend</h3>
       <p class="foot-note" style="margin:0">Filtered by the queue picker above</p>
@@ -227,6 +236,7 @@ export async function renderCallLogs(container, date, manifest) {
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:12px">
       ${waitTrendPanels}
     </div>
+    ` : ''}
 
     <div class="panel dr-section-gap">
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
@@ -253,18 +263,18 @@ export async function renderCallLogs(container, date, manifest) {
     <div class="grid2 dr-section-gap">
       <div class="panel">
         <h3>Total outbound calls — 10-day trend</h3>
-        <div class="dr-chart-wrap">${barChart({ dates: d.outboundTenDayTrend.labels, values: d.outboundTenDayTrend.totals, color: 'var(--accent-2)' })}</div>
+        ${d.outboundTenDayTrend ? `<div class="dr-chart-wrap">${barChart({ dates: d.outboundTenDayTrend.labels, values: d.outboundTenDayTrend.totals, color: 'var(--accent-2)' })}</div>` : `<p class="dr-placeholder">Not published this date.</p>`}
       </div>
       <div class="panel">
         <h3>Today's inbound pattern by hour</h3>
         <p class="q">Accepted vs missed, hour by hour</p>
-        <div class="dr-chart-wrap">${stackedBarChart({ dates: hourly.hours, seriesA: hourly.accepted, seriesB: hourly.missed, height: 200 })}</div>
+        ${hourly ? `<div class="dr-chart-wrap">${stackedBarChart({ dates: hourly.hours, seriesA: hourly.accepted, seriesB: hourly.missed, height: 200 })}</div>` : `<p class="dr-placeholder">Not published this date.</p>`}
       </div>
     </div>
   `;
 
   wireQueueFilter(container);
-  mountLongestWaitTable(container.querySelector('.dr-longest-wait'), d.longestWaitPerQueue);
+  if (d.longestWaitPerQueue) mountLongestWaitTable(container.querySelector('.dr-longest-wait'), d.longestWaitPerQueue);
   mountStaffActivityTable(container.querySelector('.dr-staff-table'), staff, date);
   wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/call-logs/${newDate}`; } });
 }

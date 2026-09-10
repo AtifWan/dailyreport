@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 3rd July 2026.pdf — headline figures assembled from the long version's own verified pages (there is no separate distinct 'overview' page in this report)",
+  "report": { "number": 261, "date": "2026-07-03", "weekday": "Friday", "title": "Daily Operations Report - 3rd July 2026" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 45 },
+      { "name": "Finance", "completionPct": 88 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 238,
+    "accepted": 174,
+    "acceptedPct": 73,
+    "missed": 64,
+    "missedPct": 27,
+    "totalOutbound": 79,
+    "topInboundAgent": { "name": "David Antioch", "calls": 56 },
+    "topOutboundAgent": { "name": "Apurva Pathak", "calls": 25 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 100, "missed": 32 },
+      { "queue": "General Enquiries", "accepted": 66, "missed": 24 },
+      { "queue": "Health Professionals", "accepted": 7, "missed": 8 },
+      { "queue": "Canberra Vasectomy", "accepted": 1, "missed": 0 }
+    ]
+  },
+  "_callLogsNote": "Unusually for this project, the pie chart (174 accepted), the Queue Report Grand Total (100+66+7+1=174), and the separate 'Accepted/Missed Calls by Queue' pie-chart page (same 100/66/7/1) all agree exactly — no accepted-calls discrepancy to record on this date. Missed calls (64) likewise agree everywhere. This is also by far the worst day for missed calls in this project's committed date range (27% missed vs the usual 4-12%), driven mostly by a sharp overall call-volume drop (238 inbound vs a usual 250-350) rather than a proportionally larger miss count.",
+  "cloop": {
+    "inQueue": 80,
+    "oldestDays": 10.90802,
+    "emailsHandledYesterday": 91,
+    "totalOverallCases": 3135,
+    "totalInProgress": 207,
+    "totalOpenCases": 104
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the five agents' printed 'Contacts handled' totals (72+9+6+2+2=91). This date's Real-Time Metrics table switches its per-queue 'Oldest' column to plain decimal-days (e.g. '10.90802') instead of the hh:mm:ss format used on every other date, while the Summary row alone keeps the old hh:mm:ss format ('261:47:33') — converting that gives exactly 10.90802 days, matching the Failed Communication row exactly, so the two formats agree once converted (not a data error, just an inconsistent presentation). The 10 per-queue rows sum to 79, one short of the printed Summary row (80) — recorded verbatim. A brand-new queue, 'Intake_Testing', appears for the first time in this project's committed dates.",
+  "leave": {
+    "weekLabel": "6 – 10 July 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 3,
+    "staffPartialLeave": 4,
+    "staffPartialLeaveNames": ["Sudina Rijal", "Isaac Davis", "Bianca Mitchell", "Bethany Tran"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "As on 2026-06-26 (also a Friday), this report's leave grid already previews the FOLLOWING week (6-10 July) rather than the current week containing 3 July — this report's own date isn't a column on the grid at all. The roster has also changed substantially yet again: the Doctor group keeps the same 6 names as 2026-07-01/07-02 (Dr Tracy Fox now the only one available Monday-Thursday, on leave Friday; the other 5 on leave all week), but the Staff group is now entirely different — Sudina Rijal, Samantha Cooper, Jasmine Deery, Andrew Davies, Isaac Davis, Bianca Mitchell, Bethany Tran — with Pinky Mae De Paz and Megan Moreno Pitcher, both fixtures of every prior week's roster, absent entirely. Counts above use Monday 6 July (the first day of the displayed week) as a stand-in snapshot, per the same convention established on 2026-06-26: doctorLinesOnLeave=5 (all but Tracy Fox); staffFullyOnLeave=3 (Samantha Cooper, Jasmine Deery, Andrew Davies, on leave all 5 days); staffPartialLeave=4 (Sudina Rijal, Isaac Davis, Bianca Mitchell, Bethany Tran, on leave Monday only)."
+}

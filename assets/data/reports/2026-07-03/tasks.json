@@ -1,0 +1,45 @@
+{
+  "_source": "Daily Operations Report - 3rd July 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 3rd July 2026",
+  "reportDate": "2026-07-03",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 0, "onHalt": false },
+    { "name": "Finance", "days": 0, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Mon 22 Jun", "Tue 23 Jun", "Wed 24 Jun", "Thu 25 Jun", "Fri 26 Jun", "Mon 29 Jun", "Tue 30 Jun", "Wed 1 Jul", "Thu 2 Jul", "Fri 3 Jul"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 45,
+      "trend": [50, 50, 44, 56, 50, 50, 50, 44, 56, 50],
+      "complete": [
+        "Clinical Reminders (C.Le@8:10)",
+        "Send Claim For Automed Payments (C.Le@8:11)",
+        "Caregp Ai Tool (C.Le@9:12)",
+        "Allocate - Healthlink Unallocated (C.Le@9:12)",
+        "E-Referrals (A.Wa@14:12)"
+      ],
+      "incomplete": ["HotDoc NUA - To Call", "ADH", "Action 10 or more Failed Communications", "HotDoc NUA - To Action (9-5)", "Manage Email Rejections", "Send – Failed Healthlink Out + Update EDI"]
+    },
+    {
+      "name": "Finance",
+      "completionPct": 88,
+      "complete": [
+        "90/60-Day Debt List Actioned (L.Go@15:48)",
+        "Xero Accounts Reconciled (L.Go@15:47)",
+        "Unidentified Payments Resolved (L.Go@15:47)",
+        "Tyro Health Receipts Captured (L.Go@15:47)",
+        "Debt Chasing Report Updated (L.Go@15:48)",
+        "Remittances Allocated (L.Go@15:47)"
+      ],
+      "incomplete": ["Online claiming run in Best Practice"]
+    }
+  ],
+  "_trendNote": "Positions0-8 reproduce 2026-07-02's own committed positions1-9 exactly, continuing the established period-5 repeating cycle ([56,50,50,50,44] every 5 business days). The new (10th, rightmost) point was predicted from that cycle (Fri 3 Jul is position 2 of the cycle that started Thu 2 Jul = 56, so Fri 3 Jul = 50) and this was confirmed against the raw chart's own rightmost 2-dot cluster, which reads '56%, 50%' in that order — matching positions8-9 exactly. Final array: [50,50,44,56,50,50,50,44,56,50]. The chart's own final point (50%) does not match the printed completion badge (45%) — the recurring badge-vs-chart mismatch — though the task count (5 complete of 11 total = 45.5%) DOES match the badge exactly. trendDates inferred from the call-log 10-day trend chart's date axis.",
+  "_financeChecklistNote": "No 10-day trend chart is shown for the Finance checklist. The printed completion badge (88%) is close to but does not exactly equal 6 complete / 7 total tasks as listed (6/7 = 86%) — recorded verbatim, a smaller mismatch than usual but still a mismatch.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

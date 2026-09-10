@@ -1,0 +1,34 @@
+{
+  "_source": "Daily Operations Report - 2nd July 2026.pdf, pages 18-19 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 2nd July 2026",
+  "extractedAt": "2026-07-03T08:00:00+10:00",
+  "extractedAtLabel": "8:00 AM, Friday 3 July 2026",
+  "realTimeQueues": [
+    { "queue": "Failed Communication", "inQueue": 23, "oldestDays": 7.90141 },
+    { "queue": "Documents", "inQueue": 8, "oldestDays": 0.64337 },
+    { "queue": "Unassigned", "inQueue": 7, "oldestDays": 0.65818 },
+    { "queue": "Nursing", "inQueue": 6, "oldestDays": 13.96811 },
+    { "queue": "Finance", "inQueue": 4, "oldestDays": 0.84703 },
+    { "queue": "Requests", "inQueue": 3, "oldestDays": 0.79053 },
+    { "queue": "Escalation", "inQueue": 2, "oldestDays": 1.88314 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 0.71733 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 0.66277 },
+    { "queue": "Practice Finance", "inQueue": 1, "oldestDays": 0.80433 }
+  ],
+  "realTimeSummary": { "inQueue": 56, "oldestDays": 13.96811 },
+  "_realTimeSummaryNote": "The 10 rows sum to 56, matching the Summary row exactly, and the Summary's 'Oldest' figure (335:14:05) matches the Nursing row's own oldest item exactly — no discrepancy this time, unlike 2026-07-01. This date's extraction-time note itself is internally consistent for once: 'Friday 3rd July 2026' correctly matches (3 July 2026 IS a Friday), unlike the mismatched notes on 2026-06-26/06-29/07-01.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 44, "outbound": 14, "total": 58 },
+    { "agent": "Apurva Pathak", "incoming": 6, "outbound": 5, "total": 17 },
+    { "agent": "Atif Wan", "incoming": 16, "outbound": 1, "total": 17 },
+    { "agent": "Kenneth Lobo", "incoming": 4, "outbound": 0, "total": 8 },
+    { "agent": "Frances Doble", "incoming": 3, "outbound": 3, "total": 7 },
+    { "agent": "Holly Archer", "incoming": 6, "outbound": 0, "total": 6 },
+    { "agent": "Leh Peng Goh", "incoming": 5, "outbound": 0, "total": 5 },
+    { "agent": "De Ang Renfree", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Three agents' stated totals don't equal their own incoming+outbound components in the source PDF itself: Apurva Pathak (6+5=11, not the printed 17), Kenneth Lobo (4+0=4, not the printed 8), and Frances Doble (3+3=6, not the printed 7) — the same 'total column doesn't match its own components' quirk seen on other dates in this project. The other five agents' totals agree exactly.",
+  "totalCasesToDate": { "date": "2026-07-03", "totalOverallCases": 3020, "totalInProgress": 192, "totalOpenCases": 81 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table is labeled Friday 3 July, one day ahead of this report's own Thursday 2 July date — the same next-business-day extraction pattern documented on other dates in this project.",
+  "_missingSectionsNote": "As on prior dates in this project, no 'Contacts Queued Yesterday' per-queue breakdown and no 10-day trend charts (contactsQueuedTenDayTrend / inProgressTenDayTrend / openCasesTenDayTrend) appear anywhere in the source pages — only the real-time snapshot, the emails-handled table, and a single Total Cases to Date row are present. Not fabricating these sections."
+}

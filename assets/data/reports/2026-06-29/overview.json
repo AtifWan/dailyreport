@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 29th June 2026.pdf — headline figures assembled from the long version's own verified pages (there is no separate distinct 'overview' page in this report)",
+  "report": { "number": 257, "date": "2026-06-29", "weekday": "Monday", "title": "Daily Operations Report - 29th June 2026" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 56 },
+      { "name": "Finance", "completionPct": 25 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 335,
+    "accepted": 314,
+    "acceptedPct": 94,
+    "missed": 21,
+    "missedPct": 6,
+    "totalOutbound": 124,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 74 },
+    "topOutboundAgent": { "name": "Kiara Pfeffer", "calls": 35 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 200, "missed": 12 },
+      { "queue": "General Enquiries", "accepted": 97, "missed": 6 },
+      { "queue": "Health Professionals", "accepted": 12, "missed": 2 },
+      { "queue": "Canberra Vasectomy", "accepted": 4, "missed": 1 }
+    ]
+  },
+  "_callLogsNote": "As on prior dates, the 'Total Inbound Calls' pie (335 total; Accepted 314/94%, Missed 21/6%) and the 'Queue Report' bar chart (also headed '=335 calls') disagree on accepted: the bar chart's per-queue rows sum to only 313 accepted (200+97+12+4), matching its own Grand Total row (313/21), not the pie's 314. Missed calls agree everywhere (21). The separate 'Accepted/Missed Calls by Queue' pie-chart page matches the Queue Report bar chart exactly (200/97/12/4 accepted, 12/6/2/1 missed) — no third figure. Recorded: accepted/acceptedPct from the pie (314/94, matching the inbound-by-staff table sum exactly), queueBreakdown rows verbatim from the Queue Report bar chart (summing to 313, not 314) — not reconciled.",
+  "cloop": {
+    "inQueue": 84,
+    "oldestDays": 13.98793,
+    "emailsHandledYesterday": 98,
+    "totalOverallCases": 2805,
+    "totalInProgress": 205,
+    "totalOpenCases": 118
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the five agents' printed 'Contacts handled' totals (60+19+10+7+2=98). This table is again titled 'Last Friday's Emails Handled' (as on 2026-06-26) — this report's own date (29 June) is a Monday, so 'Last Friday' correctly would mean 26 June, which is plausible this time (unlike 2026-06-26 itself, where the same title was used on a report whose own date WAS a Friday). The Real-Time Metrics Summary row's 'Oldest' figure (335:42:37) matches the Nursing row's own oldest item exactly. The source page's own extraction-time note again carries a mismatched weekday label: 'Note: The data was extracted at 8:45 AM, on Tuesday 26th June 2026' — but 26 June 2026 is a Friday (per the 2026-06-26 report's own cover page), not a Tuesday, and is also 3 days before this report's own date rather than the day before it; recorded verbatim, not corrected (same quirk family as 2026-06-26's mismatched note).",
+  "leave": {
+    "weekLabel": "29 June – 3 July 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 0,
+    "staffPartialLeaveNames": [],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "This report's own date (29 June, Monday) is now the first day of the leave grid's displayed week (29 June - 3 July), so — unlike 2026-06-26 — this is a genuine same-day snapshot: Dr Julie Beuth on leave Monday, Dr Tracy Fox available Monday (on leave only Friday 3 July); Andrew Davies/Pinky Mae De Paz/Samantha Cooper/Jasmine Deery on leave all 5 days; Megan Moreno Pitcher available Monday (her one leave day is Wednesday 1 July, so 0 partial-leave staff on Monday specifically)."
+}

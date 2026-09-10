@@ -1,0 +1,54 @@
+{
+  "_source": "Daily Operations Report - 2nd July 2026.pdf — headline figures assembled from the long version's own verified pages (there is no separate distinct 'overview' page in this report)",
+  "_coverDateTypoNote": "This report's own cover page prints '3rd July 2026, Thursday', but 3 July 2026 is actually a Friday (confirmed against 2026-07-03's own cover, whose date and weekday agree). Every dated chart axis inside THIS report (10-day trend charts) ends in a column explicitly labeled 'Thu, 02-Jul', and the report number (260) sits exactly one after 2026-07-01's #259 — so the weekday 'Thursday' is correct and the numeral '3rd' is the source's own typo; the file is treated as 2026-07-02 throughout.",
+  "report": { "number": 260, "date": "2026-07-02", "weekday": "Thursday", "title": "Daily Operations Report - 2nd July 2026" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 60 },
+      { "name": "Finance", "completionPct": 25 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 276,
+    "accepted": 264,
+    "acceptedPct": 96,
+    "missed": 12,
+    "missedPct": 4,
+    "totalOutbound": 152,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 62 },
+    "topOutboundAgent": { "name": "De Ang Renfree", "calls": 22 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 150, "missed": 4 },
+      { "queue": "General Enquiries", "accepted": 95, "missed": 5 },
+      { "queue": "Health Professionals", "accepted": 15, "missed": 3 },
+      { "queue": "Canberra Vasectomy", "accepted": 3, "missed": 0 }
+    ]
+  },
+  "_callLogsNote": "For once, the pie chart (264 accepted) and the Queue Report bar chart's Grand Total (150+95+15+3=263 accepted) are only 1 apart rather than the usual larger gap, and the separate 'Accepted/Missed Calls by Queue' pie-chart page matches the Queue Report bar chart exactly (150/95/15/3 accepted, 4/5/3/0 missed). Recorded: accepted/acceptedPct from the pie (264/96, matching the inbound-by-staff table sum exactly), queueBreakdown rows verbatim from the Queue Report bar chart (summing to 263, not 264) — not reconciled.",
+  "cloop": {
+    "inQueue": 56,
+    "oldestDays": 13.96811,
+    "emailsHandledYesterday": 119,
+    "totalOverallCases": 3020,
+    "totalInProgress": 192,
+    "totalOpenCases": 81
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the eight agents' printed 'Contacts handled' totals (58+17+17+8+7+6+5+1=119). The Real-Time Metrics table's 9 per-queue rows sum to exactly 56, matching the Summary row, and the Summary's 'Oldest' (335:14:05) matches the Nursing row's own oldest item exactly — no discrepancy this time (unlike 2026-07-01). Three agents' stated email totals don't equal their own incoming+outbound components: Apurva Pathak (6+5=11, not 17), Kenneth Lobo (4+0=4, not 8), Frances Doble (3+3=6, not 7) — recorded verbatim, the same 'total column doesn't match its own components' quirk seen on other dates.",
+  "leave": {
+    "weekLabel": "29 June – 3 July 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 0,
+    "staffPartialLeaveNames": [],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "Same 7-doctor / 5-staff roster and per-day statuses as 2026-07-01's own committed leave.json, for the same displayed week. Thursday (this report's own date) snapshot: doctorLinesOnLeave=5 (Julie Beuth, Sheahan Ranasinghe, Freya Ashman, Reiham Ibrahim, Ashley Kean on leave Thursday; Tracy Fox and Krystel Chin available Thursday, each on leave only Friday); staffFullyOnLeave=4; staffPartialLeave=0 (Megan Moreno Pitcher's one leave day was Wednesday, so she is available Thursday)."
+}

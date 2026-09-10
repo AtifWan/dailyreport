@@ -1,0 +1,64 @@
+{
+  "_source": "Daily Operations Report - 30th June 2026 (Short Version).pdf, pages 2-4 (Call Logs Reporting) — verified against rendered page images",
+  "_criticalDataGapNote": "The 'long' version PNG renders supplied for this date (0630_long_p*.png) actually contain the 2026-07-29 report's content, not 30 June's (see overview.json's _criticalDataGapNote) and were not used. The short version has only 3 call-logs pages (pie+queue bar; inbound-by-staff bar; outbound-by-staff bar) — it carries no 10-day trend charts, no Patient Service KPI page, no per-queue longest-wait table, no per-queue 10-day trend pages, and no today's-hourly-pattern chart. Those sections (tenDayTrend, queues, patientServiceKpi, longestWaitPerQueue, outboundTenDayTrend, todaysHourlyPattern) are omitted entirely below rather than fabricated. This also means 2026-07-01's own 10-day trend charts cannot be position-by-position chain-validated against a 2026-06-30 array for these fields; validate 07-01 against 2026-06-29's arrays at the appropriate shifted offset instead.",
+  "reportTitle": "Daily Operations Report - 30th June 2026 (Short Version)",
+  "reportDate": "2026-06-30",
+  "summary": { "totalInbound": 319, "accepted": 282, "missed": 37, "acceptedPct": 88, "missedPct": 12, "totalOutbound": 193 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 163, "missed": 12 },
+    { "queue": "General Enquiries", "accepted": 91, "missed": 15 },
+    { "queue": "Health Professionals", "accepted": 22, "missed": 9 },
+    { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 1 }
+  ],
+  "grandTotal": { "accepted": 278, "missed": 37 },
+  "_summaryVsGrandTotalNote": "The pie chart's Accepted Calls value (282) — which matches the inbound-by-staff sum exactly — is 4 higher than the Grand Total bar chart's sum of the printed per-queue rows (278). Both headers say '=319 calls' but only the pie's own components (282+37) total 319.",
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 64, "durationMins": 161 },
+    { "name": "David Antioch", "calls": 49, "durationMins": 99 },
+    { "name": "Ambrosie Brassil", "calls": 39, "durationMins": 77 },
+    { "name": "De Ang Renfree", "calls": 38, "durationMins": 120 },
+    { "name": "Hannah Searle", "calls": 34, "durationMins": 84 },
+    { "name": "Bianca Mitchell", "calls": 24, "durationMins": 67 },
+    { "name": "Ella Blackmore", "calls": 8, "durationMins": 10 },
+    { "name": "Shae Connors", "calls": 7, "durationMins": 33 },
+    { "name": "Lucinda Gonzalez", "calls": 5, "durationMins": 26 },
+    { "name": "Crace - Rec 1", "calls": 4, "durationMins": 11 },
+    { "name": "Isaac Davis", "calls": 4, "durationMins": 10 },
+    { "name": "Kiara Pfeffer", "calls": 3, "durationMins": 8 },
+    { "name": "Holly Archer", "calls": 3, "durationMins": 5 }
+  ],
+  "_inboundByStaffNote": "Per-staff calls sum to exactly 282, matching the pie chart's Accepted Calls figure exactly — this is the value trusted for summary.accepted (see _summaryVsGrandTotalNote). Isaac Davis and Hannah Searle appear here for the first time in this project's committed dates.",
+  "outboundByStaff": [
+    { "name": "Apurva Pathak", "calls": 62, "durationMins": 80 },
+    { "name": "Ambrosie Brassil", "calls": 32, "durationMins": 34 },
+    { "name": "Hannah Searle", "calls": 18, "durationMins": 26 },
+    { "name": "Isaac Davis", "calls": 17, "durationMins": 29 },
+    { "name": "De Ang Renfree", "calls": 13, "durationMins": 17 },
+    { "name": "Rebecca Quinn", "calls": 12, "durationMins": 9 },
+    { "name": "Lucinda Gonzalez", "calls": 9, "durationMins": 13 },
+    { "name": "David Antioch", "calls": 8, "durationMins": 11 },
+    { "name": "Emily Pettett", "calls": 6, "durationMins": 14 },
+    { "name": "Megan Wright", "calls": 4, "durationMins": 10 },
+    { "name": "Atif Wan", "calls": 3, "durationMins": 11 },
+    { "name": "Bianca Mitchell", "calls": 2, "durationMins": 5 },
+    { "name": "Ella Blackmore", "calls": 1, "durationMins": 2 },
+    { "name": "Lyneham - Rec 1", "calls": 0, "durationMins": 1 },
+    { "name": "Kiara Pfeffer", "calls": 1, "durationMins": 1 },
+    { "name": "Holly Archer", "calls": 1, "durationMins": 1 },
+    { "name": "Shae Connors", "calls": 1, "durationMins": 1 },
+    { "name": "Crace - Rec 1", "calls": 1, "durationMins": 1 }
+  ],
+  "_outboundByStaffNote": "Per-staff calls sum to 191 (62+32+18+17+13+12+9+8+6+4+3+2+1+0+1+1+1+1), 2 short of the header's stated 'Total Outbound Calls = 193 Calls' — recorded verbatim, not reconciled. Longest Call Outbound: 11.52 min duration at 3:41 PM by Apurva Pathak. Lyneham - Rec 1's calls cell printed as 0 with a non-zero duration (1 min) — recorded verbatim.",
+  "_recoveredFrom20260701": {
+    "_note": "2026-07-01's own 10-day trend charts (a genuine, correctly-rendered long-version PDF) each include a 'Tue, 30-Jun' data point, since their 10-day windows span back to include this date. That point recovers several 2026-06-30 figures the short version's pages didn't carry, chain-validated against 2026-06-29's committed arrays for every other shared position. Recorded here rather than left absent.",
+    "overallAvgWaitSec": 39,
+    "answerRatePct": 88,
+    "queues": {
+      "Appointments": { "accepted": 163, "missed": 12, "avgWaitSec": 37 },
+      "General Enquiries": { "accepted": 91, "missed": 15, "avgWaitSec": 45 },
+      "Health Professionals": { "accepted": 22, "missed": 9, "avgWaitSec": 29 },
+      "Canberra Vasectomy": { "accepted": 2, "missed": 1, "avgWaitSec": 64 }
+    },
+    "_crossCheckNote": "The recovered per-queue accepted/missed figures (163/12, 91/15, 22/9, 2/1) match this file's own queueReport array exactly, corroborating both sources."
+  }
+}
