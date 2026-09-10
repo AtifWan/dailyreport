@@ -1,0 +1,28 @@
+{
+  "_source": "Daily Operations Report - 7th July 2026.pdf, pages 18-19 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 7th July 2026",
+  "extractedAt": "2026-07-08T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Wednesday 8 July 2026",
+  "realTimeQueues": [
+    { "queue": "Finance", "inQueue": 19, "oldestDays": 1.4344 },
+    { "queue": "Failed Communication", "inQueue": 15, "oldestDays": 4.6254 },
+    { "queue": "Medico-legal", "inQueue": 5, "oldestDays": 1.9652 },
+    { "queue": "Unassigned", "inQueue": 5, "oldestDays": 0.7049 },
+    { "queue": "Nursing", "inQueue": 5, "oldestDays": 11.9601 },
+    { "queue": "Practice Finance", "inQueue": 3, "oldestDays": 1.9122 },
+    { "queue": "Escalation", "inQueue": 2, "oldestDays": 6.8971 },
+    { "queue": "Intake_Testing", "inQueue": 1, "oldestDays": 2.2756 }
+  ],
+  "realTimeSummary": { "inQueue": 55, "oldestDays": 11.9601 },
+  "_realTimeSummaryNote": "Unlike 2026-07-06 (where only the Summary row used an hh:mm:ss duration), EVERY row in this date's Real-Time Metrics table prints 'Oldest' as an hh:mm:ss duration (e.g. Finance = '34:25:35', Nursing = '287:02:31') rather than decimal days. All oldestDays values above are that duration converted to days (hours ÷ 24) for schema consistency with other dates in this project. The Summary row's own printed duration ('287:02:31') is identical to the Nursing row's, confirming the Summary 'Oldest' figure is simply the single oldest item's age, not a sum or average.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 40, "outbound": 7, "total": 47 },
+    { "agent": "Jasmina Sodolovic", "incoming": 31, "outbound": 10, "total": 44 },
+    { "agent": "Atif Wan", "incoming": 10, "outbound": 0, "total": 10 },
+    { "agent": "Apurva Pathak", "incoming": 4, "outbound": 3, "total": 8 },
+    { "agent": "Frances Doble", "incoming": 0, "outbound": 2, "total": 2 }
+  ],
+  "totalCasesToDate": { "date": "2026-07-08", "totalOverallCases": 3304, "totalInProgress": 220, "totalOpenCases": 76 },
+  "_totalCasesToDateNote": "As on 2026-07-06, the 'Total Cases to Date' table is labeled one day ahead of the report's own date (Wed 8 Jul rather than Tue 7 Jul) — the same next-business-day extraction pattern documented across this project.",
+  "_missingSectionsNote": "As on 2026-07-06, this early report's Cloop section has no 'Contacts Queued Yesterday' per-queue breakdown and no 10-day trend charts (contactsQueuedTenDayTrend / inProgressTenDayTrend / openCasesTenDayTrend) anywhere in the source pages — only the real-time snapshot, the emails-handled table, and a single Total Cases to Date row are present."
+}

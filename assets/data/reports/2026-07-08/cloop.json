@@ -1,0 +1,52 @@
+{
+  "_source": "Daily Operations Report - 8th July 2026.pdf, pages 5-9 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 8th July 2026",
+  "extractedAt": "2026-07-09T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Thursday 9 July 2026",
+  "realTimeQueues": [
+    { "queue": "Medico-legal", "inQueue": 11, "oldestDays": 2.9653 },
+    { "queue": "Documents", "inQueue": 6, "oldestDays": 0.6508 },
+    { "queue": "Unassigned", "inQueue": 5, "oldestDays": 0.6864 },
+    { "queue": "Nursing", "inQueue": 5, "oldestDays": 12.9603 },
+    { "queue": "Requests", "inQueue": 1, "oldestDays": 0.5889 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 7.8973 },
+    { "queue": "Intake_Testing", "inQueue": 1, "oldestDays": 3.2757 },
+    { "queue": "Finance", "inQueue": 1, "oldestDays": 0.5788 }
+  ],
+  "realTimeSummary": { "inQueue": 31, "oldestDays": 12.9603 },
+  "_realTimeSummaryNote": "This date's table headers its age column 'Oldest (in Hours)' and prints hh:mm:ss durations (e.g. Nursing = '311:02:45') rather than decimal days. oldestDays above converts hours÷24 for schema consistency with other dates. The Summary row's printed duration ('311:02:45') is identical to the Nursing row's, confirming it is simply the single oldest item's age, not an aggregate — same pattern as 2026-07-06/07.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 28 },
+    { "queue": "Finance", "count": 23 },
+    { "queue": "Documents", "count": 20 },
+    { "queue": "Failed Communication", "count": 16 },
+    { "queue": "Requests", "count": 8 },
+    { "queue": "Practice Finance", "count": 4 },
+    { "queue": "File Transfer", "count": 2 },
+    { "queue": "Escalation", "count": 1 }
+  ],
+  "_contactsQueuedYesterdayNote": "Per-queue rows sum to exactly 102, matching the printed 'Total' row exactly.",
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Thu 25 Jun", "Fri 26 Jun", "Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul"],
+    "totals": [180, 93, 159, 153, 163, 162, 76, 191, 172, 102]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 40, "outbound": 9, "total": 50 },
+    { "agent": "Leh Peng Goh", "incoming": 23, "outbound": 1, "total": 25 },
+    { "agent": "Atif Wan", "incoming": 16, "outbound": 0, "total": 16 },
+    { "agent": "Apurva Pathak", "incoming": 2, "outbound": 3, "total": 5 },
+    { "agent": "Jasmina Sodolovic", "incoming": 0, "outbound": 5, "total": 5 },
+    { "agent": "Lucinda Gonzalez", "incoming": 4, "outbound": 1, "total": 5 }
+  ],
+  "totalCasesToDate": { "date": "2026-07-09", "totalOverallCases": 3375, "totalInProgress": 229, "totalOpenCases": 59 },
+  "_totalCasesToDateNote": "As on other dates, the 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the report's own date (Thu 9 Jul rather than Wed 8 Jul).",
+  "inProgressTenDayTrend": {
+    "labels": ["Wed 24 Jun", "Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul"],
+    "totals": [199, 203, 205, 209, 209, 192, 207, 214, 220, 229]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Wed 24 Jun", "Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul"],
+    "totals": [118, 121, 118, 115, 103, 81, 104, 73, 76, 59]
+  },
+  "_tenDayTrendNote": "This is the first date in this batch with the fuller Cloop trend charts (contactsQueuedTenDayTrend, inProgressTenDayTrend, openCasesTenDayTrend) — 2026-07-06/07 had none. contactsQueuedTenDayTrend's date labels skip Thu25/Fri26Jun-style gaps seen elsewhere and instead show 10 labels ending on the report's own date (Wed 08 Jul), consistent with the project's convention that this series follows the report's own date. inProgressTenDayTrend/openCasesTenDayTrend both end one day later (Thu 09 Jul), consistent with the documented next-business-day extraction convention for these two series specifically. No prior date in this batch has these series to chain-validate positions against; will be cross-checked against 2026-07-09's own read."
+}

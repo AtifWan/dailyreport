@@ -155,18 +155,24 @@ export async function renderCallLogs(container, date, manifest) {
       <div class="take"><b>Reads as:</b> Appointments and General Enquiries carry almost all traffic; Canberra Vasectomy and Health Professionals are low-volume queues today.</div>
     </div>
 
+    ${(t.answerRatePct || t.accepted) ? `
     <div class="grid2 dr-section-gap">
+      ${t.answerRatePct ? `
       <div class="panel">
         <h3>Call answer rate — 10-day trend</h3>
         <p class="q">Target: ${t.answerRateTargetPct}%</p>
         <div class="dr-chart-wrap">${lineChart({ dates: t.labels, series: [{ data: t.answerRatePct, color: 'var(--accent)', label: 'Answer rate' }], height: 200, target: t.answerRateTargetPct, targetLabel: `${t.answerRateTargetPct}% target`, unit: '%' })}</div>
       </div>
+      ` : ''}
+      ${t.accepted ? `
       <div class="panel">
         <h3>Call volume — 10-day trend</h3>
         <p class="q">Accepted vs missed, all queues</p>
         <div class="dr-chart-wrap">${stackedBarChart({ dates: t.labels, seriesA: t.accepted, seriesB: t.missed, height: 220 })}</div>
       </div>
+      ` : ''}
     </div>
+    ` : `<p class="dr-placeholder dr-section-gap">This date's source pages didn't include the overall Call Answer Rate / Call Volume 10-day charts (only the per-queue trends and overall wait time below).</p>`}
 
     <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 2px 0">
       <h3 style="font-family:Fraunces,serif;font-weight:600;font-size:17px;color:var(--accent-strong);margin:0">Per-queue trends</h3>

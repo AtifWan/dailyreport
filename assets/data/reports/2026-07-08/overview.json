@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 8th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 264, "date": "2026-07-08", "weekday": "Wednesday", "title": "Daily Operations Report - 8th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 1, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 60 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 250,
+    "accepted": 235,
+    "acceptedPct": 94,
+    "missed": 15,
+    "missedPct": 6,
+    "totalOutbound": 170,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 84 },
+    "topOutboundAgent": { "name": "Rebecca Quinn", "calls": 34 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 137, "missed": 6 },
+      { "queue": "General Enquiries", "accepted": 81, "missed": 3 },
+      { "queue": "Health Professionals", "accepted": 15, "missed": 6 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 }
+    ]
+  },
+  "_callLogsNote": "Unlike 2026-07-06/07 (which had a small pie-vs-queue-report gap), this date's pie chart (235/15), Queue Report grand total (235/15) and per-staff inbound sum (84+34+21+19+17+16+12+12+9+7+4=235) all agree exactly.",
+  "cloop": {
+    "inQueue": 31,
+    "oldestDays": 12.9603,
+    "contactsQueuedYesterday": 102,
+    "emailsHandledYesterday": 106,
+    "totalOverallCases": 3375,
+    "totalInProgress": 229,
+    "totalOpenCases": 59
+  },
+  "_cloopNote": "Fuller Cloop section than 2026-07-06/07: includes a 'Contacts Queued Yesterday' per-queue breakdown/total (102) and 10-day trend charts for contacts queued, in-progress cases and open cases (see cloop.json). This date's Real-Time Metrics table headers its age column 'Oldest (in Hours)' and prints values as hh:mm:ss (e.g. Nursing = 311:02:45); oldestDays above converts that to days (hours/24) for consistency with other dates. emailsHandledYesterday is the sum of the six agents' printed totals (50+25+16+5+5+5=106).",
+  "leave": {
+    "weekLabel": "6–10 July 2026",
+    "doctorLinesOnLeave": 4,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Sudina Rijal", "Bianca Mitchell", "Bethany Tran"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

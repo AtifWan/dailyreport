@@ -1,0 +1,82 @@
+{
+  "_source": "Daily Operations Report - 7th July 2026.pdf, pages 2-17 (Call Logs Reporting) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 7th July 2026",
+  "reportDate": "2026-07-07",
+  "summary": { "totalInbound": 294, "accepted": 279, "missed": 15, "acceptedPct": 95, "missedPct": 5, "totalOutbound": 163 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 188, "missed": 10 },
+    { "queue": "General Enquiries", "accepted": 77, "missed": 1 },
+    { "queue": "Health Professionals", "accepted": 10, "missed": 4 },
+    { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 }
+  ],
+  "grandTotal": { "accepted": 277, "missed": 15 },
+  "_summaryVsGrandTotalNote": "The pie chart's Accepted Calls (279) is 2 higher than the Queue Report/Grand Total bar chart's sum of its own printed per-queue rows (277); missed matches exactly (15=15). The per-staff inbound table sums to 279, matching the pie chart exactly. Recorded verbatim — the same recurring 'grand total vs sum-of-queues' quirk documented on other dates in this project (e.g. 2026-07-27).",
+  "tenDayTrend": {
+    "labels": ["Wed 24 Jun", "Thu 25 Jun", "Fri 26 Jun", "Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul"],
+    "answerRatePct": [88, 91, 93, 94, 88, 90, 96, 73, 94, 95],
+    "answerRateTargetPct": 85,
+    "accepted": [234, 239, 228, 314, 282, 265, 264, 174, 308, 279],
+    "missed": [33, 23, 18, 21, 37, 28, 12, 64, 19, 15],
+    "overallAvgWaitSec": [46, 33, 30, 29, 39, 34, 29, 38, 29, 26]
+  },
+  "queues": {
+    "Appointments": { "accepted": [147, 148, 122, 200, 163, 155, 150, 100, 195, 188], "missed": [13, 8, 6, 12, 12, 10, 4, 32, 11, 10], "avgWaitSec": [39, 35, 28, 29, 37, 36, 29, 37, 31, 29] },
+    "General Enquiries": { "accepted": [72, 75, 84, 97, 91, 91, 95, 66, 100, 77], "missed": [10, 8, 5, 6, 15, 12, 5, 24, 7, 1], "avgWaitSec": [67, 31, 35, 30, 45, 34, 29, 42, 28, 20] },
+    "Health Professionals": { "accepted": [10, 14, 17, 12, 22, 15, 15, 7, 13, 10], "missed": [9, 7, 6, 2, 9, 6, 3, 8, 1, 4], "avgWaitSec": [12, 22, 31, 24, 29, 29, 22, 23, 14, 24] },
+    "Canberra Vasectomy": { "accepted": [1, 1, 2, 4, 2, 2, 3, 1, 0, 2], "missed": [1, 0, 1, 1, 1, 0, 0, 1, 0, 0], "avgWaitSec": [16, 54, 36, 11, 64, 19, 37, 4, 0, 10] }
+  },
+  "_tenDayTrendNote": "Cross-validated: every trend array's positions0-8 match 2026-07-06's own arrays' positions1-9 exactly — overall answerRatePct/accepted/missed/overallAvgWaitSec and all 4 per-queue accepted/missed/avgWaitSec series. New/unverified position9 (Tue 07 Jul) read directly from the image for each.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 840,
+    "longestCallAt": "2:15 PM",
+    "longestCallAgent": "Apurva Pathak",
+    "longestWaitingTimeSec": 313,
+    "longestWaitingAt": "9:57 AM",
+    "avgCallHandlingSec": 155
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 313, "time": "9:57 AM", "name": "Apurva Pathak", "waitLabel": "5 min 13 sec" },
+    { "queue": "General Enquiries", "waitSec": 129, "time": "4:31 PM", "name": "Ambrosie Brassil", "waitLabel": "2 min 9 sec" },
+    { "queue": "Health Professionals", "waitSec": 100, "time": "1:28 PM", "name": "Apurva Pathak", "waitLabel": "1 min 40 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 17, "time": "12:41 PM", "name": "Shae Connors", "waitLabel": "0 min 17 sec" }
+  ],
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 71, "durationMins": 148 },
+    { "name": "David Antioch", "calls": 42, "durationMins": 87 },
+    { "name": "Lucinda Gonzalez", "calls": 33, "durationMins": 80 },
+    { "name": "Bianca Mitchell", "calls": 28, "durationMins": 101 },
+    { "name": "Apurva Pathak", "calls": 27, "durationMins": 91 },
+    { "name": "De Ang Renfree", "calls": 23, "durationMins": 66 },
+    { "name": "Ambrosie Brassil", "calls": 22, "durationMins": 45 },
+    { "name": "Kiara Pfeffer", "calls": 20, "durationMins": 66 },
+    { "name": "Shae Connors", "calls": 7, "durationMins": 18 },
+    { "name": "Emily Pettett", "calls": 3, "durationMins": 7 },
+    { "name": "Crace - Rec 1", "calls": 2, "durationMins": 3 },
+    { "name": "Holly Archer", "calls": 1, "durationMins": 9 }
+  ],
+  "_inboundByStaffNote": "Per-staff calls sum to exactly 279, matching the pie chart's Accepted Calls exactly (see summary note above re: the Queue Report's lower total of 277).",
+  "outboundByStaff": [
+    { "name": "Ambrosie Brassil", "calls": 39, "durationMins": 37 },
+    { "name": "Apurva Pathak", "calls": 28, "durationMins": 45 },
+    { "name": "David Antioch", "calls": 17, "durationMins": 17 },
+    { "name": "Kiara Pfeffer", "calls": 17, "durationMins": 17 },
+    { "name": "De Ang Renfree", "calls": 16, "durationMins": 18 },
+    { "name": "Emily Pettett", "calls": 16, "durationMins": 28 },
+    { "name": "Bianca Mitchell", "calls": 9, "durationMins": 7 },
+    { "name": "Atif Wan", "calls": 6, "durationMins": 8 },
+    { "name": "Rebecca Quinn", "calls": 5, "durationMins": 3 },
+    { "name": "Shae Connors", "calls": 3, "durationMins": 2 },
+    { "name": "Lucinda Gonzalez", "calls": 3, "durationMins": 2 },
+    { "name": "Ella Blackmore", "calls": 2, "durationMins": 3 },
+    { "name": "Holly Archer", "calls": 1, "durationMins": 2 },
+    { "name": "Megan Wright", "calls": 1, "durationMins": 1 }
+  ],
+  "_outboundByStaffNote": "Per-staff calls sum to exactly 163, matching the header's stated 'Total Outbound Calls = 163 Calls' exactly. Longest Call Outbound: 6.93 min duration at 8:22 AM by Apurva Pathak. However, the separate Outbound 10-Day Trend chart's own last (Tue 07 Jul) point reads 192 — neither 163 nor any other figure on this page — a real discrepancy between the two outbound totals shown in the same report for the same day, recorded verbatim without reconciling (outboundByStaff above is trusted as the per-agent detail; outboundTenDayTrend below is recorded as plotted).",
+  "outboundTenDayTrend": { "labels": ["Wed 24 Jun", "Thu 25 Jun", "Fri 26 Jun", "Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul"], "totals": [161, 135, 153, 132, 221, 174, 160, 91, 119, 192] },
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [0, 41, 35, 30, 32, 32, 22, 26, 27, 25, 2],
+    "missed": [0, 1, 3, 1, 2, 1, 1, 3, 1, 2, 0]
+  },
+  "_hourlyPatternNote": "Hourly pattern's missed values sum to 15, matching the day's total missed exactly. Its accepted values sum to 272, below both the pie chart's 279 and the Queue Report's 277 — recorded verbatim, not reconciled."
+}
