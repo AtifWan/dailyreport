@@ -1,0 +1,36 @@
+{
+  "_source": "Daily Operations Report - 22nd July 2026.pdf, page 24 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "Same week (20-24 Jul, the report's own week) and identical roster to 2026-07-20's and 2026-07-21's leave.json.",
+  "reportTitle": "Daily Operations Report - 22nd July 2026",
+  "reportDate": "2026-07-22",
+  "weekStart": "2026-07-20",
+  "weekEnd": "2026-07-24",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "available", "available", "available", "available"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Amy Morton", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Isaac Davis", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Apurva Pathak", "site": null, "status": ["leave", "available", "available", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

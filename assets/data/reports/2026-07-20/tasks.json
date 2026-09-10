@@ -1,0 +1,48 @@
+{
+  "_source": "Daily Operations Report - 20th July 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 20th July 2026",
+  "reportDate": "2026-07-20",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 7, "onHalt": false },
+    { "name": "Finance", "days": 0, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [60, 60, 60, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Reports For Management Meetings (C.Le@8:25)",
+        "Clinical Reminders (C.Le@8:38)",
+        "Caregp Ai Tool (C.Le@8:38)",
+        "Send Claim For Automed Payments (C.Le@8:38)",
+        "Allocate - Healthlink Unallocated (C.Le@12:14)",
+        "E-Referrals (A.Wa@15:53)",
+        "Action 10 Or More Failed Communications (A.Wa@16:11)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 88,
+      "trend": [88, 100, 100, 100, 13, 100, 100, 100, 88, 88],
+      "complete": [
+        "Tyro Health receipts captured (L.Go@14:42)",
+        "Finance queue in Cloop has zero emails (L.Go@14:42)",
+        "Xero accounts reconciled (L.Go@14:41)",
+        "90/60-day debt list actioned (L.Go@14:42)",
+        "Debt chasing report updated (L.Go@14:42)",
+        "Unidentified payments resolved (L.Go@14:42)",
+        "Remittances allocated (L.Go@14:42)"
+      ],
+      "incomplete": ["Online claiming run in Best Practice"]
+    }
+  ],
+  "_financeChecklistNote": "Only 7 Finance tasks are listed for this date (no 'Online claiming run in Best Practice' item counted among the 7 complete — it is the 8th, incomplete item), giving 7/8 = 88%, which is internally consistent as printed.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

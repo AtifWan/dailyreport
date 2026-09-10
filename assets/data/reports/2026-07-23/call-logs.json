@@ -1,0 +1,79 @@
+{
+  "_source": "Daily Operations Report - 23rd July 2026.pdf, pages 3-18 (Call Logs Reporting) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 23rd July 2026",
+  "reportDate": "2026-07-23",
+  "summary": { "totalInbound": 283, "accepted": 258, "missed": 25, "acceptedPct": 91, "missedPct": 9, "totalOutbound": 190 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 163, "missed": 14 },
+    { "queue": "General Enquiries", "accepted": 83, "missed": 10 },
+    { "queue": "Health Professionals", "accepted": 10, "missed": 1 },
+    { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 }
+  ],
+  "grandTotal": { "accepted": 258, "missed": 25 },
+  "tenDayTrend": {
+    "labels": ["Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul"],
+    "answerRatePct": [95, 98, 96, 94, 95, 89, 94, 95, 94, 91],
+    "answerRateTargetPct": 85,
+    "accepted": [235, 261, 248, 193, 246, 213, 328, 253, 273, 258],
+    "missed": [15, 6, 11, 13, 13, 26, 21, 13, 18, 25],
+    "overallAvgWaitSec": [25, 17, 23, 27, 21, 50, 20, 34, 26, 38]
+  },
+  "queues": {
+    "Appointments": { "accepted": [116, 154, 149, 120, 146, 127, 203, 145, 181, 163], "missed": [4, 3, 7, 7, 6, 13, 10, 8, 7, 14], "avgWaitSec": [21, 16, 26, 25, 24, 62, 18, 33, 25, 41] },
+    "General Enquiries": { "accepted": [97, 84, 85, 63, 81, 70, 106, 92, 79, 83], "missed": [8, 1, 2, 4, 4, 6, 7, 3, 8, 10], "avgWaitSec": [27, 19, 20, 31, 17, 35, 23, 37, 28, 35] },
+    "Health Professionals": { "accepted": [18, 20, 13, 7, 16, 13, 15, 12, 11, 10], "missed": [3, 2, 1, 2, 3, 7, 4, 2, 3, 1], "avgWaitSec": [28, 13, 12, 31, 11, 15, 10, 13, 21, 22] },
+    "Canberra Vasectomy": { "accepted": [4, 2, 1, 3, 1, 3, 4, 3, 2, 2], "missed": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "avgWaitSec": [46, 27, 10, 20, 24, 31, 52, 48, 0, 24] }
+  },
+  "_tenDayTrendNote": "Cross-validated two ways: (1) within this batch, every trend array's positions1-9 (overall trend and all 4 per-queue trends) match 2026-07-22's already-written arrays' positions0-8 exactly; (2) forward to the already-committed 2026-07-27, matching by shared date label (this file's Tue 14 Jul through Thu 23 Jul positions, i.e. positions2-9) exactly equals 2026-07-27's positions0-7 for the overall trend and every per-queue trend — confirming the whole 4-day chain (20th-23rd) lines up correctly with committed data on both ends. New/unverified final position (Thu 23 Jul) read directly from the image.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 898,
+    "longestCallAt": "12:10 PM",
+    "longestCallAgent": "Kiara Pfeffer",
+    "longestWaitingTimeSec": 454,
+    "longestWaitingAt": "4:09 PM",
+    "avgCallHandlingSec": 142
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 454, "time": "4:09 PM", "name": "Apurva Pathak", "waitLabel": "7 min 34 sec" },
+    { "queue": "General Enquiries", "waitSec": 194, "time": "11:40 AM", "name": "Apurva Pathak", "waitLabel": "3 min 14 sec" },
+    { "queue": "Health Professionals", "waitSec": 91, "time": "4:28 PM", "name": "Ella Blackmore", "waitLabel": "1 min 31 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 32, "time": "3:07 PM", "name": "Isaac Davis", "waitLabel": "0 min 32 sec" }
+  ],
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 58, "durationMins": 122 },
+    { "name": "David Antioch", "calls": 47, "durationMins": 87 },
+    { "name": "Emily Pettett", "calls": 28, "durationMins": 56 },
+    { "name": "Apurva Pathak", "calls": 25, "durationMins": 76 },
+    { "name": "Isaac Davis", "calls": 24, "durationMins": 82 },
+    { "name": "Bianca Mitchell", "calls": 22, "durationMins": 61 },
+    { "name": "Pinky De Paz", "calls": 18, "durationMins": 43 },
+    { "name": "Andrew Davies", "calls": 16, "durationMins": 29 },
+    { "name": "Kiara Pfeffer", "calls": 12, "durationMins": 38 },
+    { "name": "Jasmine Deery", "calls": 3, "durationMins": 5 },
+    { "name": "Ella Blackmore", "calls": 3, "durationMins": 4 },
+    { "name": "Holly Archer", "calls": 2, "durationMins": 5 }
+  ],
+  "outboundByStaff": [
+    { "name": "Apurva Pathak", "calls": 32, "durationMins": 42 },
+    { "name": "Andrew Davies", "calls": 31, "durationMins": 42 },
+    { "name": "Jasmine Deery", "calls": 22, "durationMins": 19 },
+    { "name": "Pinky De Paz", "calls": 20, "durationMins": 32 },
+    { "name": "Rebecca Quinn", "calls": 17, "durationMins": 19 },
+    { "name": "Isaac Davis", "calls": 16, "durationMins": 33 },
+    { "name": "David Antioch", "calls": 14, "durationMins": 32 },
+    { "name": "Emily Pettett", "calls": 11, "durationMins": 8 },
+    { "name": "Bianca Mitchell", "calls": 10, "durationMins": 9 },
+    { "name": "Mel Deery", "calls": 6, "durationMins": 63 },
+    { "name": "Kiara Pfeffer", "calls": 6, "durationMins": 4 },
+    { "name": "Ella Blackmore", "calls": 2, "durationMins": 2 },
+    { "name": "Holly Archer", "calls": 2, "durationMins": 7 },
+    { "name": "Atif Wan", "calls": 1, "durationMins": 0 }
+  ],
+  "outboundTenDayTrend": { "labels": ["Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul"], "totals": [165, 267, 289, 242, 211, 191, 337, 257, 273, 294] },
+  "_outboundTenDayTrendNote": "As with every already-committed date in this project, this trend chart's totals run well above the day's own 'Total Outbound Calls' header figure (e.g. today's last point is 294 vs the header's 190) — the same systemic, unflagged pattern present in every prior committed call-logs.json. Recorded verbatim, not reconciled. Cross-validated forward to 2026-07-27 by date label: this file's Tue14Jul-Thu23Jul values (289,242,211,191,337,257,273,294 — positions2-9) match 2026-07-27's positions0-7 exactly.",
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [8, 19, 32, 37, 41, 27, 20, 30, 20, 19, 5],
+    "missed": [0, 1, 1, 4, 2, 2, 1, 2, 6, 4, 2]
+  }
+}

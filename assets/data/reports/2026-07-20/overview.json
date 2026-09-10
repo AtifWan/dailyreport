@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 20th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 272, "date": "2026-07-20", "weekday": "Monday", "title": "Daily Operations Report - 20th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 7, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 88 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 349,
+    "accepted": 328,
+    "acceptedPct": 94,
+    "missed": 21,
+    "missedPct": 6,
+    "totalOutbound": 213,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 60 },
+    "topOutboundAgent": { "name": "Ambrosie Brassil", "calls": 39 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 203, "missed": 10 },
+      { "queue": "General Enquiries", "accepted": 106, "missed": 7 },
+      { "queue": "Canberra Vasectomy", "accepted": 4, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 43,
+    "oldestDays": 10.78,
+    "contactsQueuedYesterday": 115,
+    "emailsHandledYesterday": 149,
+    "totalOverallCases": 4087,
+    "totalInProgress": 88,
+    "totalOpenCases": 50
+  },
+  "leave": {
+    "weekLabel": "20–24 July 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 4,
+    "staffPartialLeaveNames": ["Amy Morton", "Jasmine Deery", "Isaac Davis", "Apurva Pathak"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}
