@@ -45,9 +45,23 @@ function mountEmailsTable(container, rows, totals) {
 
 export async function renderCloop(container, date, manifest) {
   const [d, callLogs] = await Promise.all([
-    fetchJSON(`assets/data/reports/${date}/cloop.json`),
+    fetchJSON(`assets/data/reports/${date}/cloop.json`).catch(() => null),
     fetchJSON(`assets/data/reports/${date}/call-logs.json`).catch(() => null),
   ]);
+
+  // A handful of the oldest reports in this project's backlog (see PHASE-2.md's
+  // Pattern B note) have no Cloop section published at all — not a thinner one,
+  // none whatsoever — so there's no cloop.json for this date to even omit fields
+  // from. Show that plainly instead of falling through to the generic page-load
+  // error a missing file would otherwise produce.
+  if (!d) {
+    container.innerHTML = `
+      ${datePickerHtml(date, manifest)}
+      <p class="dr-placeholder">No Cloop report was published for this date.</p>
+    `;
+    wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/cloop/${newDate}`; } });
+    return;
+  }
   // Some earlier/thinner reports (see Pattern A/B notes in the backlog) don't publish
   // every Cloop section — no per-queue "contacts queued yesterday" breakdown, or none
   // of the three 10-day trend charts. Each is optional here rather than assumed present.

@@ -87,7 +87,11 @@ export async function renderTasks(container, date, manifest) {
           <div class="bv">${s.days} day${s.days === 1 ? '' : 's'}${label ? `<small>${esc(label)}</small>` : ''}</div>
         </div>`;
       }).join('')}
-      <div class="take"><b>Reads as:</b> Longest streak is ${esc(d.longestStreak.name)} at ${d.longestStreak.days} days, running since ${formatDate(d.longestStreak.startDate, { day: 'numeric', month: 'short', year: 'numeric' })} — as stated in the source report. Crace and Lyneham are both on halt after resetting recently.</div>
+      ${(() => {
+        const onHaltNames = d.streaks.filter((s) => s.onHalt && !s.longest).map((s) => s.name);
+        const haltNote = onHaltNames.length ? ` ${onHaltNames.join(' and ')} ${onHaltNames.length === 1 ? 'is' : 'are'} on halt after resetting recently.` : '';
+        return `<div class="take"><b>Reads as:</b> Longest streak is ${esc(d.longestStreak.name)} at ${d.longestStreak.days} days, running since ${formatDate(d.longestStreak.startDate, { day: 'numeric', month: 'short', year: 'numeric' })} — as stated in the source report.${haltNote}</div>`;
+      })()}
       <p class="foot-note">"Since" dates are calculated by counting back each streak's day-count across ACT (Canberra) working days — Mon–Fri, excluding public holidays — from this report's date (${formatDate(d.reportDate, { day: 'numeric', month: 'short', year: 'numeric' })}), and marked <i>est.</i> where the source report doesn't state a start date directly. Denman's date above is stated in the source report, not calculated — a plain working-day count between the two doesn't reconcile, so whatever the source system counts by isn't a straightforward ACT business-day tally. Crace and Lyneham are on halt with no stated date to fall back on, so no since-date is shown for either until they're back on a running streak.</p>
     </div>
 
@@ -95,11 +99,13 @@ export async function renderTasks(container, date, manifest) {
       ${d.checklists.map((cl) => checklistPanel(cl, d.trendDates)).join('')}
     </div>
 
+    ${d.sitePlaceholderNote ? `
     <div class="panel dr-section-gap">
       <h3>Crace, Denman &amp; Lyneham</h3>
       <p class="q">Site-level checklists</p>
       <div class="dr-placeholder">${esc(d.sitePlaceholderNote)}</div>
     </div>
+    ` : ''}
   `;
 
   wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/critical-tasks/${newDate}`; } });

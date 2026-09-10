@@ -17,6 +17,7 @@ export async function renderOverview(container, date, manifest) {
       <div class="bv">${s.days} day${s.days === 1 ? '' : 's'}${s.onHalt ? '<small style="color:var(--danger-ink)">On halt</small>' : ''}</div>
     </div>`).join('');
 
+  const pstChecklist = t.checklists.find((x) => x.name === 'PST');
   const financeChecklist = t.checklists.find((x) => x.name === 'Finance');
   const queueRows = c.queueBreakdown.map((q) => `
     <div class="brow">
@@ -30,16 +31,20 @@ export async function renderOverview(container, date, manifest) {
     <p class="result-meta">Report #${d.report.number} · ${esc(d.report.weekday)} ${formatDate(d.report.date)}</p>
 
     <div class="kpis">
-      <div class="kpi ${t.checklists[0].completionPct === 100 ? 'good' : ''}">
+      ${pstChecklist ? `
+      <div class="kpi ${pstChecklist.completionPct === 100 ? 'good' : ''}">
         <div class="k-l">PST checklist</div>
-        <div class="k-v num">${t.checklists[0].completionPct}%</div>
+        <div class="k-v num">${pstChecklist.completionPct}%</div>
         <div class="k-n">${t.streaks.find((s) => s.name === 'PST').days}-day streak</div>
       </div>
+      ` : ''}
+      ${financeChecklist ? `
       <div class="kpi ${financeChecklist.completionPct < 100 ? 'crit' : 'good'}">
         <div class="k-l">Finance checklist</div>
         <div class="k-v num">${financeChecklist.completionPct}%</div>
-        <div class="k-n">${financeChecklist.incompleteCount} task outstanding: ${esc(financeChecklist.incompleteExample)}</div>
+        <div class="k-n">${financeChecklist.incompleteCount != null ? `${financeChecklist.incompleteCount} task outstanding: ${esc(financeChecklist.incompleteExample)}` : (financeChecklist.completionPct === 100 ? 'Fully complete' : '')}</div>
       </div>
+      ` : ''}
       <div class="kpi good">
         <div class="k-l">Longest streak</div>
         <div class="k-v num">${t.streaks.find((s) => s.longest).days} days</div>
@@ -57,7 +62,12 @@ export async function renderOverview(container, date, manifest) {
         <h3>Critical daily tasks — streak</h3>
         <p class="q">Consecutive days at 100% checklist completion.</p>
         ${streakRows}
-        <div class="take"><b>Reads as:</b> Denman's 109-day streak is intact; Crace and Lyneham reset recently and both sit on halt.</div>
+        ${(() => {
+          const longest = t.streaks.find((s) => s.longest);
+          const onHaltNames = t.streaks.filter((s) => s.onHalt && !s.longest).map((s) => s.name);
+          const haltNote = onHaltNames.length ? ` ${onHaltNames.join(' and ')} ${onHaltNames.length === 1 ? 'is' : 'are'} on halt after resetting recently.` : '';
+          return `<div class="take"><b>Reads as:</b> ${esc(longest.name)}'s ${longest.days}-day streak is intact;${haltNote}</div>`;
+        })()}
         ${viewLink('critical-tasks', date, 'View full checklist detail')}
       </div>
       <div class="panel">
@@ -87,8 +97,10 @@ export async function renderOverview(container, date, manifest) {
       </div>
       <div class="kpi">
         <div class="k-l">Cloop cases in queue</div>
+        ${cl ? `
         <div class="k-v num">${cl.inQueue}</div>
         <div class="k-n">oldest case ${cl.oldestDays} days</div>
+        ` : `<div class="k-n">No Cloop report this date</div>`}
       </div>
     </div>
 
@@ -96,6 +108,7 @@ export async function renderOverview(container, date, manifest) {
       <div class="panel">
         <h3>Cloop, at a glance</h3>
         <p class="q">Case queue activity as of the report snapshot.</p>
+        ${cl ? `
         ${cl.contactsQueuedYesterday != null ? `
         <div class="splitbar">
           <div class="seg" style="width:100%;background:var(--accent)">${cl.contactsQueuedYesterday} contacts queued yesterday</div>
@@ -103,6 +116,7 @@ export async function renderOverview(container, date, manifest) {
         ` : `<p class="dr-placeholder">Contacts-queued-yesterday total not published this date.</p>`}
         <div class="take"><b>Reads as:</b> ${cl.emailsHandledYesterday} contacts were handled yesterday across the team, out of ${cl.totalOverallCases.toLocaleString()} total cases logged to date (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).</div>
         ${viewLink('cloop', date, 'View full Cloop report')}
+        ` : `<p class="dr-placeholder">No Cloop report was published for this date.</p>`}
       </div>
       <div class="panel">
         <h3>Staff &amp; doctors' leave — this week</h3>
