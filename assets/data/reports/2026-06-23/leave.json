@@ -1,0 +1,42 @@
+{
+  "_source": "Daily Operations Report - 23rd June 2026.pdf, page 20 (Staff & Doctors on Leave) — verified against rendered page image.",
+  "_rosterNote": "This date's leave page lists 11 people (2 doctors + 9 staff) for the same week (22-26 June 2026) that 2026-06-22's own leave page listed only 5 (2 doctors + 3 staff: Bethany Tran, Georgina Bick, Atif Wan). Both source images were re-checked directly to confirm this — 2026-06-22's page genuinely shows only those 5 rows. The larger roster here is recorded verbatim as printed, not treated as a correction of the prior date.",
+  "reportTitle": "Daily Operations Report - 23rd June 2026",
+  "reportDate": "2026-06-23",
+  "weekStart": "2026-06-22",
+  "weekEnd": "2026-06-26",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Julie Beuth", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Neena Sood", "site": "Crace", "status": ["leave", "leave", "available", "available", "available"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Bethany Tran", "site": "Crace", "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Georgina Bick", "site": "Crace", "status": ["available", "leave", "available", "available", "available"] },
+        { "name": "Atif Wan", "site": "MY Team", "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Nicole Regaspi", "site": "MY Team", "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Renee Bowman", "site": "MY Team", "status": ["leave", "leave", "available", "leave", "leave"] },
+        { "name": "Andrew Davies", "site": "MY Team", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Pinky Mae De Paz", "site": "MY Team", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Samantha Cooper", "site": "MY Team", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": "MY Team", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Abbey Freestone", "site": "MY Team", "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Emily Pettett", "site": "MY Team", "status": ["available", "available", "leave", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

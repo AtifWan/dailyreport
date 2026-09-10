@@ -1,0 +1,51 @@
+{
+  "_source": "Daily Operations Report - 22nd June 2026.pdf (Report #252) — headline figures cross-checked against the full call-logs/tasks/cloop/leave files for this date.",
+  "_note": "This date has no short-version PDF; overview.json is assembled from the long version's own headline figures instead, matching the same approach used for other dates in this project without a short pair. See tasks.json's _formatTransitionNote for the significant format-transition finding for this date.",
+  "report": { "number": 252, "date": "2026-06-22", "weekday": "Monday", "title": "Daily Operations Report - 22nd June 2026" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 56 },
+      { "name": "Finance", "completionPct": 55, "incompleteCount": 4, "incompleteExample": "90/60-day debt list actioned" }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 346,
+    "accepted": 308,
+    "acceptedPct": 89,
+    "missed": 38,
+    "missedPct": 11,
+    "totalOutbound": 156,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 86 },
+    "topOutboundAgent": { "name": "Ambrosie Brassil", "calls": 56 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 190, "missed": 16 },
+      { "queue": "General Enquiries", "accepted": 101, "missed": 16 },
+      { "queue": "Canberra Vasectomy", "accepted": 1, "missed": 1 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 116,
+    "oldestDays": 12.75,
+    "emailsHandledYesterday": 101,
+    "totalOverallCases": 2327,
+    "totalInProgress": 205,
+    "totalOpenCases": 112
+  },
+  "leave": {
+    "weekLabel": "22–26 June 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Bethany Tran", "Georgina Bick", "Atif Wan"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_cloopOverviewNote": "No \"contacts queued yesterday\" total exists in this date's Cloop section (see cloop.json's _structureNote) — omitted here rather than fabricated. emailsHandledYesterday (101) is the sum of that date's per-agent table (87+9+4+1)."
+}

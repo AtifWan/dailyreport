@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 23rd June 2026.pdf (Report #253), page 2 (Critical Daily Tasks) — verified against rendered page image.",
+  "reportTitle": "Daily Operations Report - 23rd June 2026",
+  "reportDate": "2026-06-23",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 0, "onHalt": false },
+    { "name": "Finance", "days": 0, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Wed 10 Jun", "Thu 11 Jun", "Fri 12 Jun", "Mon 15 Jun", "Tue 16 Jun", "Wed 17 Jun", "Thu 18 Jun", "Fri 19 Jun", "Mon 22 Jun", "Tue 23 Jun"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 50,
+      "trend": [50, 44, 50, 50, 50, 44, 56, 50, 50, 50],
+      "complete": [
+        "Allocate - Healthlink Unallocated (C.Le@9:05)",
+        "Caregp Ai Tool (C.Le@11:59)",
+        "Clinical Reminders (C.Le@11:59)",
+        "Send Claim For Automed Payments (C.Le@12:01)"
+      ],
+      "incomplete": ["HotDoc NUA - To Action (9-5)", "Manage Email Rejections", "HotDoc NUA - To Call", "ADH"]
+    },
+    {
+      "name": "Finance",
+      "completionPct": 82,
+      "incompleteCount": 1,
+      "incompleteExample": "Finance queries resolved",
+      "complete": [
+        "Online Claiming Run In Best Practice (J.Sa@9:39)",
+        "Unidentified Payments Resolved (L.Go@19:44)",
+        "Xero Accounts Reconciled (L.Go@19:44)",
+        "Tyro Health Receipts Captured (L.Go@19:44)",
+        "Debt Chasing Report Updated (L.Go@19:44)",
+        "Finance Queue In Cloop Has Zero Emails (L.Go@19:44)",
+        "Remittances Allocated (L.Go@19:44)",
+        "90/60-Day Debt List Actioned (L.Go@19:43)"
+      ],
+      "incomplete": ["Finance queries resolved"]
+    }
+  ],
+  "_trendNote": "Same unevenly-spaced, unlabeled mini-chart legibility issue documented on 2026-06-22 and 2026-07-06/07-07 — the chart itself groups points into visually separated clusters with no date axis. Resolved here via this project's chain-trust method: 2026-06-22's own committed trend (positions Wed10Jun–Mon22Jun) already establishes [50,44,50,50,50,44,56,50,50] for the first 9 shared positions; only the new rightmost cluster (which reads as 56,50,50,50 across the last four points) needed fresh reading, and its first three values reproduce the established chain exactly, giving high confidence in the new tenth value: 50% for Tue 23 Jun. This matches the 50% completion badge shown for this date's PST checklist — no badge-vs-chart mismatch this time (unlike 2026-06-22 and 2026-07-06).",
+  "sitePlaceholderNote": "As on 2026-06-22, Crace, Denman and Lyneham track only a daily streak counter in this report — their itemised task checklists are not published here; only PST and Finance publish task-level detail. This is the first date on the new (non-dual) format, using the same PST/Finance schema as every date after it."
+}

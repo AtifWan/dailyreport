@@ -96,9 +96,11 @@ export async function renderOverview(container, date, manifest) {
       <div class="panel">
         <h3>Cloop, at a glance</h3>
         <p class="q">Case queue activity as of the report snapshot.</p>
+        ${cl.contactsQueuedYesterday != null ? `
         <div class="splitbar">
           <div class="seg" style="width:100%;background:var(--accent)">${cl.contactsQueuedYesterday} contacts queued yesterday</div>
         </div>
+        ` : `<p class="dr-placeholder">Contacts-queued-yesterday total not published this date.</p>`}
         <div class="take"><b>Reads as:</b> ${cl.emailsHandledYesterday} contacts were handled yesterday across the team, out of ${cl.totalOverallCases.toLocaleString()} total cases logged to date (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).</div>
         ${viewLink('cloop', date, 'View full Cloop report')}
       </div>
