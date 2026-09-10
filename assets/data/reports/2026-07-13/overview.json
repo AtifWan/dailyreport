@@ -1,0 +1,52 @@
+{
+  "_source": "Daily Operations Report - 13th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 267, "date": "2026-07-13", "weekday": "Monday", "title": "Daily Operations Report - 13th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 2, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 13 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 267,
+    "accepted": 261,
+    "acceptedPct": 98,
+    "missed": 6,
+    "missedPct": 2,
+    "totalOutbound": 142,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 62 },
+    "topOutboundAgent": { "name": "Ambrosie Brassil", "calls": 37 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 154, "missed": 3 },
+      { "queue": "General Enquiries", "accepted": 84, "missed": 1 },
+      { "queue": "Health Professionals", "accepted": 20, "missed": 2 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 19,
+    "oldestDays": 13.96,
+    "contactsQueuedYesterday": 89,
+    "emailsHandledYesterday": 113,
+    "totalOverallCases": 3608,
+    "totalInProgress": 144,
+    "totalOpenCases": 47
+  },
+  "leave": {
+    "weekLabel": "13–17 July 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 3,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Amy Morton", "Katerina Gjorgievski", "Bethany Tran"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "doctorLinesOnLeave counts doctors on leave for all 5 days this week (5 of the 10 doctor lines shown); the other 5 doctor lines are on leave for part of the week only (see leave.json for the daily breakdown). staffFullyOnLeave/staffPartialLeave count staff similarly (3 staff on leave all week, 3 on leave part of the week)."
+}

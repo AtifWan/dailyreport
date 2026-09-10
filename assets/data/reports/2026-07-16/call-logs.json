@@ -1,0 +1,81 @@
+{
+  "_source": "Daily Operations Report - 16th July 2026.pdf, pages 3-17 (Call Logs Reporting) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 16th July 2026",
+  "reportDate": "2026-07-16",
+  "summary": { "totalInbound": 259, "accepted": 246, "missed": 13, "acceptedPct": 95, "missedPct": 5, "totalOutbound": 134 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 146, "missed": 6 },
+    { "queue": "General Enquiries", "accepted": 81, "missed": 4 },
+    { "queue": "Health Professionals", "accepted": 16, "missed": 3 },
+    { "queue": "Canberra Vasectomy", "accepted": 1, "missed": 0 }
+  ],
+  "grandTotal": { "accepted": 244, "missed": 13 },
+  "_summaryVsGrandTotalNote": "The pie chart's Accepted Calls value (246) — which matches the inbound-by-staff sum exactly — is 2 higher than the Grand Total bar chart's sum of the printed per-queue rows (244). Same recurring discrepancy pattern flagged on other dates in this project. Separately, the Appointments queue's 10-day trend chart shows 152 accepted for today, 6 higher than the Queue Report's 146 for the same queue/day (missed=6 agrees in both places); General Enquiries, Health Professionals and Canberra Vasectomy trend-chart values all match the Queue Report exactly. All figures recorded verbatim, not reconciled.",
+  "tenDayTrend": {
+    "labels": ["Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul"],
+    "answerRatePct": [73, 94, 95, 94, 95, 94, 98, 96, 94, 95],
+    "answerRateTargetPct": 85,
+    "accepted": [174, 308, 279, 235, 232, 235, 261, 248, 193, 246],
+    "missed": [64, 19, 15, 15, 11, 15, 6, 11, 13, 13],
+    "overallAvgWaitSec": [38, 29, 26, 23, 25, 25, 17, 23, 27, 21]
+  },
+  "queues": {
+    "Appointments": { "accepted": [100, 195, 188, 137, 130, 116, 154, 156, 120, 152], "missed": [32, 11, 10, 6, 6, 4, 3, 7, 7, 6], "avgWaitSec": [37, 31, 29, 21, 23, 21, 16, 26, 25, 24] },
+    "General Enquiries": { "accepted": [66, 100, 77, 81, 84, 97, 84, 85, 63, 81], "missed": [24, 7, 1, 3, 2, 8, 1, 2, 4, 4], "avgWaitSec": [42, 28, 20, 27, 29, 27, 19, 20, 31, 17] },
+    "Health Professionals": { "accepted": [7, 13, 10, 15, 18, 18, 20, 13, 7, 16], "missed": [8, 1, 4, 6, 3, 3, 2, 1, 2, 3], "avgWaitSec": [23, 14, 24, 23, 17, 28, 13, 12, 31, 11] },
+    "Canberra Vasectomy": { "accepted": [1, 0, 2, 2, 1, 4, 2, 1, 3, 1], "missed": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0], "avgWaitSec": [4, 0, 10, 4, 21, 46, 27, 10, 20, 24] }
+  },
+  "patientServiceKpi": {
+    "longestCallDurationSec": 800,
+    "longestCallAt": "3:53 PM",
+    "longestCallAgent": "Lucinda Gonzalez",
+    "longestWaitingTimeSec": 270,
+    "longestWaitingAt": "2:34 PM",
+    "avgCallHandlingSec": 173
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 270, "time": "2:34 PM", "name": "Shae Connors", "waitLabel": "4 min 30 sec" },
+    { "queue": "General Enquiries", "waitSec": 116, "time": "2:08 PM", "name": "Holly Archer", "waitLabel": "1 min 56 sec" },
+    { "queue": "Health Professionals", "waitSec": 33, "time": "9:53 AM", "name": "Bianca Mitchell", "waitLabel": "0 min 33 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 24, "time": "10:00 AM", "name": "Shae Connors", "waitLabel": "0 min 24 sec" }
+  ],
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 50, "durationMins": 114 },
+    { "name": "Pinky De Paz", "calls": 28, "durationMins": 73 },
+    { "name": "Holly Archer", "calls": 25, "durationMins": 61 },
+    { "name": "Andrew Davies", "calls": 24, "durationMins": 68 },
+    { "name": "Apurva Pathak", "calls": 23, "durationMins": 82 },
+    { "name": "Lucinda Gonzalez", "calls": 20, "durationMins": 75 },
+    { "name": "Emily Pettett", "calls": 19, "durationMins": 46 },
+    { "name": "David Antioch", "calls": 16, "durationMins": 26 },
+    { "name": "Bianca Mitchell", "calls": 13, "durationMins": 72 },
+    { "name": "Shae Connors", "calls": 12, "durationMins": 47 },
+    { "name": "De Ang Renfree", "calls": 10, "durationMins": 27 },
+    { "name": "Frances Doble", "calls": 4, "durationMins": 12 },
+    { "name": "Lyneham - Rec 1", "calls": 1, "durationMins": 1 },
+    { "name": "Kiara Pfeffer", "calls": 1, "durationMins": 2 }
+  ],
+  "outboundByStaff": [
+    { "name": "Holly Archer", "calls": 23, "durationMins": 57 },
+    { "name": "Andrew Davies", "calls": 21, "durationMins": 30 },
+    { "name": "Apurva Pathak", "calls": 15, "durationMins": 23 },
+    { "name": "Rebecca Quinn", "calls": 14, "durationMins": 23 },
+    { "name": "Kiara Pfeffer", "calls": 14, "durationMins": 19 },
+    { "name": "Pinky De Paz", "calls": 10, "durationMins": 12 },
+    { "name": "Mel Deery", "calls": 8, "durationMins": 60 },
+    { "name": "De Ang Renfree", "calls": 6, "durationMins": 6 },
+    { "name": "Shae Connors", "calls": 5, "durationMins": 15 },
+    { "name": "Emily Pettett", "calls": 5, "durationMins": 5 },
+    { "name": "Ella Blackmore", "calls": 4, "durationMins": 13 },
+    { "name": "David Antioch", "calls": 4, "durationMins": 5 },
+    { "name": "Lucinda Gonzalez", "calls": 4, "durationMins": 6 },
+    { "name": "Megan Wright", "calls": 1, "durationMins": 0 }
+  ],
+  "outboundTenDayTrend": { "labels": ["Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul"], "totals": [91, 119, 192, 187, 148, 165, 267, 289, 242, 211] },
+  "_outboundTenDayTrendNote": "As on the three prior dates, the Outbound 10-Day Trend chart's final point (211) does not match the per-staff Outbound breakdown total for the same date, which sums to exactly 134 (matching the page header 'Total Outbound Calls = 134 Calls' exactly). summary.totalOutbound (134) is trusted; the trend array's last value (211) is recorded verbatim from the chart as printed, continuing the same unexplained discrepancy pattern seen on every date so far this batch.",
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [2, 23, 33, 32, 18, 25, 19, 27, 28, 34, 5],
+    "missed": [0, 0, 1, 1, 1, 3, 1, 5, 0, 1, 0]
+  }
+}

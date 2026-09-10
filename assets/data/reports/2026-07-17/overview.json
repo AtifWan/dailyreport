@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 17th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 271, "date": "2026-07-17", "weekday": "Friday", "title": "Daily Operations Report - 17th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 6, "onHalt": false },
+      { "name": "Finance", "days": 4, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 88 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 239,
+    "accepted": 213,
+    "acceptedPct": 89,
+    "missed": 26,
+    "missedPct": 11,
+    "totalOutbound": 113,
+    "topInboundAgent": { "name": "David Antioch", "calls": 56 },
+    "topOutboundAgent": { "name": "De Ang Renfree", "calls": 26 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 127, "missed": 13 },
+      { "queue": "General Enquiries", "accepted": 70, "missed": 6 },
+      { "queue": "Health Professionals", "accepted": 13, "missed": 7 },
+      { "queue": "Canberra Vasectomy", "accepted": 3, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 54,
+    "oldestDays": 13.93,
+    "contactsQueuedYesterday": 109,
+    "emailsHandledYesterday": 53,
+    "totalOverallCases": 3994,
+    "totalInProgress": 93,
+    "totalOpenCases": 60
+  },
+  "leave": {
+    "weekLabel": "20–24 July 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 4,
+    "staffPartialLeaveNames": ["Amy Morton", "Jasmine Deery", "Isaac Davis", "Apurva Pathak"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "This report's leave table shows the UPCOMING week (20-24 Jul) rather than the current week (13-17 Jul) shown on 2026-07-13 through 07-16 — see leave.json for detail. doctorLinesOnLeave counts doctors on leave all 5 days of that upcoming week (1 of 3 doctor lines shown); the other 2 are on leave Monday only. staffFullyOnLeave/staffPartialLeave count staff similarly (0 full-week, 4 partial).",
+  "_cloopNote": "'Yesterday's' Contacts Queued / Emails Handled tables are labeled 'Last Friday's' in this report (see cloop.json) but sum to figures consistent with the report's own date position in the 10-day trend charts, not an actual prior Friday's data."
+}

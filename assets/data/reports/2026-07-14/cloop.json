@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 14th July 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 14th July 2026",
+  "extractedAt": "2026-07-15T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Wednesday 15 July 2026",
+  "realTimeQueues": [
+    { "queue": "Finance", "inQueue": 14, "oldestDays": 1.69 },
+    { "queue": "Unassigned", "inQueue": 4, "oldestDays": 0.71 },
+    { "queue": "Nursing", "inQueue": 3, "oldestDays": 8.95 },
+    { "queue": "Medico-legal", "inQueue": 2, "oldestDays": 2.02 },
+    { "queue": "File Transfer", "inQueue": 2, "oldestDays": 0.73 },
+    { "queue": "Requests", "inQueue": 1, "oldestDays": 0.68 },
+    { "queue": "Documents", "inQueue": 1, "oldestDays": 0.65 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 4.82 },
+    { "queue": "Practice Finance", "inQueue": 1, "oldestDays": 1.81 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 5.81 },
+    { "queue": "Intake_Testing", "inQueue": 1, "oldestDays": 9.3 }
+  ],
+  "realTimeSummary": { "inQueue": 31, "oldestDays": 9.3 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 26 },
+    { "queue": "Documents", "count": 16 },
+    { "queue": "Medico-legal", "count": 10 },
+    { "queue": "Requests", "count": 8 },
+    { "queue": "Failed Communication", "count": 5 },
+    { "queue": "Nursing", "count": 2 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul"],
+    "totals": [163, 162, 76, 191, 172, 102, 90, 54, 89, 67]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 47, "outbound": 10, "total": 57 },
+    { "agent": "Jasmina Sodolovic", "incoming": 14, "outbound": 4, "total": 18 },
+    { "agent": "Atif Wan", "incoming": 3, "outbound": 0, "total": 3 },
+    { "agent": "Kenneth Lobo", "incoming": 1, "outbound": 0, "total": 1 },
+    { "agent": "Pinky Mae De Paz", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "totalCasesToDate": { "date": "2026-07-15", "totalOverallCases": 3692, "totalInProgress": 102, "totalOpenCases": 55 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the rest of this Cloop section (through Wed 15 Jul rather than Tue 14 Jul) — the standard next-business-day extraction pattern used throughout this project.",
+  "inProgressTenDayTrend": {
+    "labels": ["Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul"],
+    "totals": [209, 192, 207, 214, 220, 229, 215, 223, 144, 102]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul"],
+    "totals": [103, 81, 104, 73, 76, 59, 60, 67, 47, 55]
+  },
+  "_tenDayTrendNote": "Cross-validated: contactsQueuedTenDayTrend, inProgressTenDayTrend and openCasesTenDayTrend all have positions 0-8 matching 2026-07-13's cloop.json positions 1-9 exactly. New/unverified final positions read directly from the images."
+}

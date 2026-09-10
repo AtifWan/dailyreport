@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 16th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 270, "date": "2026-07-16", "weekday": "Thursday", "title": "Daily Operations Report - 16th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 5, "onHalt": false },
+      { "name": "Finance", "days": 3, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 259,
+    "accepted": 246,
+    "acceptedPct": 95,
+    "missed": 13,
+    "missedPct": 5,
+    "totalOutbound": 134,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 50 },
+    "topOutboundAgent": { "name": "Holly Archer", "calls": 23 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 146, "missed": 6 },
+      { "queue": "General Enquiries", "accepted": 81, "missed": 4 },
+      { "queue": "Health Professionals", "accepted": 16, "missed": 3 },
+      { "queue": "Canberra Vasectomy", "accepted": 1, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 32,
+    "oldestDays": 10.27,
+    "contactsQueuedYesterday": 92,
+    "emailsHandledYesterday": 114,
+    "totalOverallCases": 3898,
+    "totalInProgress": 80,
+    "totalOpenCases": 40
+  },
+  "leave": {
+    "weekLabel": "13–17 July 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 3,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Amy Morton", "Katerina Gjorgievski", "Bethany Tran"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "Same week (13-17 Jul, the report's own week) and identical roster to 2026-07-13/14/15's leave.json — this report falls on the Thursday of that same week.",
+  "_callLogsNote": "The pie chart's Accepted Calls value (246) — which matches the inbound-by-staff sum exactly — is 2 higher than the Grand Total bar chart's sum of the printed per-queue rows (244, from 146+81+16+1). Recorded verbatim; queueBreakdown above uses the per-queue row values (which reconcile with the Grand Total), while callLogs.accepted uses the pie/header figure. See call-logs.json for the full note."
+}
