@@ -1,0 +1,94 @@
+{
+  "_source": "Daily Operations Report - 10th September 2026.pdf, page 23 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — a clean row-based table, not a chart, so this page carries the same confidence as the historical backlog's visual reads.",
+  "_note": "Same week (7-11 Sep, the report's own week) and identical roster/status to the already-committed 2026-09-09 leave.json — expected, since this is one day further into the same working week and the extracted roster names/week-range match exactly.",
+  "reportTitle": "Daily Operations Report - 10th September 2026",
+  "reportDate": "2026-09-10",
+  "weekStart": "2026-09-07",
+  "weekEnd": "2026-09-11",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Med Student Sarah Lucas",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr John Deery & Dr Mel Deery",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Hannah Searle",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Ella Blackamore",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Kiara Pfeffer",
+          "site": null,
+          "status": ["available", "available", "available", "available", "leave"]
+        },
+        {
+          "name": "Bethany Tran",
+          "site": null,
+          "status": ["leave", "leave", "available", "available", "available"]
+        },
+        {
+          "name": "Renee Bowman",
+          "site": null,
+          "status": ["available", "leave", "available", "available", "available"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ]
+}

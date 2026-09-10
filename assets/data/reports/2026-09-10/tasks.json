@@ -1,0 +1,83 @@
+{
+  "_source": "Daily Operations Report - 10th September 2026.pdf, pages 1-2 (Critical Daily Tasks), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 10th September 2026",
+  "reportDate": "2026-09-10",
+  "streaks": [
+    {
+      "name": "Crace",
+      "days": 1,
+      "onHalt": true
+    },
+    {
+      "name": "Denman",
+      "days": 109,
+      "onHalt": true,
+      "longest": true
+    },
+    {
+      "name": "Lyneham",
+      "days": 0,
+      "onHalt": true
+    },
+    {
+      "name": "PST",
+      "days": 45,
+      "onHalt": false
+    },
+    {
+      "name": "Finance",
+      "days": 0,
+      "onHalt": false
+    }
+  ],
+  "longestStreak": {
+    "name": "Denman",
+    "days": 109,
+    "startDate": "2026-01-13"
+  },
+  "trendDates": [
+    "Fri 28 Aug",
+    "Mon 31 Aug",
+    "Tue 01 Sep",
+    "Wed 02 Sep",
+    "Thu 03 Sep",
+    "Fri 04 Sep",
+    "Mon 07 Sep",
+    "Tue 08 Sep",
+    "Wed 09 Sep",
+    "Thu 10 Sep"
+  ],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Clinical Reminders (C.Le@10:25)",
+        "Caregp Ai Tool (C.Le@10:25)",
+        "Send Claim For Automed Payments (C.Le@10:25)",
+        "Allocate - Healthlink Unallocated (C.Le@11:43)",
+        "E-Referrals (A.Wa@12:50)",
+        "Action 10 Or More Failed Communications (A.Wa@12:50)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 0,
+      "trend": [0, 100, 89, 100, 100, 13, 100, 88, 88, 0],
+      "complete": [],
+      "incomplete": [
+        "Debt chasing report updated",
+        "Remittances allocated",
+        "Online claiming run in Best Practice",
+        "Unidentified payments resolved",
+        "Tyro Health receipts captured",
+        "Finance queue in Cloop has zero emails",
+        "Xero accounts reconciled",
+        "90/60-day debt list actioned"
+      ]
+    }
+  ],
+  "_trendNote": "PST's chart text carried only 8 of 10 '100%' labels (adjacent identical values overlap and collapse in this connector's text layer — a known limitation, not a data gap); since 2026-09-09's own committed PST trend was already all-100 and today's own completion badge and streak count (100%, 45-day streak, up from 44) agree, the full 10-point run of 100 is used as-is. Finance's chart text gave only 7 of 10 labels (100,89,100,100,13,100,0); position 9 (today, 0) matches the explicit 'Finance 0%' headline and the reset to a 0-day streak, and positions 0-8 are the mathematical carry-forward of 2026-09-09's own committed trend ([100,0,100,89,100,100,13,100,88,88], dropping its first entry) — not a fresh re-read — with the two adjacent '88' values (positions 7-8, Tue08Sep/Wed09Sep) similarly collapsed out of today's garbled text. This is the same chain-trust approach documented in 2026-09-09's own call-logs.json note."
+}
