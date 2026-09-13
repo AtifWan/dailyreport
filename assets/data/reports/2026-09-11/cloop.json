@@ -1,0 +1,190 @@
+{
+  "_source": "Daily Operations Report - 11th September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 11th September 2026",
+  "extractedAt": "2026-09-14T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Monday 14 September 2026",
+  "realTimeQueues": [
+    {
+      "queue": "Medico-legal",
+      "inQueue": 21,
+      "oldestDays": 11.93
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 15,
+      "oldestDays": 6.9
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 14,
+      "oldestDays": 5.01
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 6,
+      "oldestDays": 2.68
+    },
+    {
+      "queue": "Failed Communication",
+      "inQueue": 5,
+      "oldestDays": 3.61
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 4,
+      "oldestDays": 6.75
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 3,
+      "oldestDays": 13.82
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 2,
+      "oldestDays": 4.96
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 2,
+      "oldestDays": 3.68
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 1,
+      "oldestDays": 0.11
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 73,
+    "oldestDays": 13.82
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Requests",
+      "count": 25
+    },
+    {
+      "queue": "Unassigned",
+      "count": 22
+    },
+    {
+      "queue": "Documents",
+      "count": 20
+    },
+    {
+      "queue": "Finance",
+      "count": 9
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 5
+    },
+    {
+      "queue": "File Transfer",
+      "count": 4
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 4
+    },
+    {
+      "queue": "Practice Finance",
+      "count": 2
+    },
+    {
+      "queue": "GP Mail",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Mon 31 Aug",
+      "Tue 01 Sep",
+      "Wed 02 Sep",
+      "Thu 03 Sep",
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep"
+    ],
+    "totals": [79, 117, 69, 71, 66, 109, 65, 82, 87, 92]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 53,
+      "outbound": 19,
+      "total": 72
+    },
+    {
+      "agent": "Ambrosie Brassil",
+      "incoming": 20,
+      "outbound": 5,
+      "total": 25
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 9,
+      "outbound": 3,
+      "total": 12
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 6,
+      "outbound": 3,
+      "total": 9
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 2,
+      "outbound": 1,
+      "total": 3
+    },
+    {
+      "agent": "Frances Doble",
+      "incoming": 1,
+      "outbound": 0,
+      "total": 1
+    }
+  ],
+  "totalCasesToDate": {
+    "date": "2026-09-11",
+    "totalOverallCases": 7557,
+    "totalInProgress": 118,
+    "totalOpenCases": 69
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Tue 01 Sep",
+      "Wed 02 Sep",
+      "Thu 03 Sep",
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep"
+    ],
+    "totals": [86, 90, 95, 97, 105, 113, 117, 123, 124, 118]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Tue 01 Sep",
+      "Wed 02 Sep",
+      "Thu 03 Sep",
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep"
+    ],
+    "totals": [86, 60, 90, 82, 98, 94, 94, 77, 72, 69]
+  },
+  "_note": "Real-time/snapshot tables (realTimeQueues, realTimeSummary, contactsQueuedYesterday, emailsHandledYesterday, totalCasesToDate) are clean distinctly-labelled rows, extracted with high confidence and internally cross-checked (realTimeQueues sums to the Summary row's 73 exactly; each emailsHandledYesterday row's incoming+outbound sums to its own total exactly). The three 10-day trends use the same chain-trust carry-forward from 2026-09-10's own committed arrays. contactsQueuedTenDayTrend's newest point (92) is taken from the contactsQueuedYesterday table's own sum (25+22+20+9+5+4+4+2+1=92) rather than the trend chart's own garbled leftover figure (88), which didn't match. inProgressTenDayTrend and openCasesTenDayTrend's newest points (118, 69) are taken directly from this report's own Total Cases To Date row; openCasesTenDayTrend's newest point is also independently corroborated by a leftover, unmatched value (69) in its own chart's garbled text. Per the established convention on this page, totalCasesToDate.date is recorded as the report's own date (2026-09-11) even though the source table's literal date column and the extraction timestamp both read three calendar days ahead ('14/9/2026', Monday) — this is the same next-business-day snapshot cadence documented on every prior date, simply spanning a weekend this time (Friday → Monday) rather than a single day. For the same reason, inProgressTenDayTrend/openCasesTenDayTrend's date labels also run one business day ahead of the call-logs/cloop-queued trends (ending 'Mon 14 Sep' rather than 'Fri 11 Sep'), matching the exact offset pattern already established in 2026-09-10's own cloop.json."
+}

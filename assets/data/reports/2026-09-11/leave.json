@@ -1,0 +1,89 @@
+{
+  "_source": "Daily Operations Report - 11th September 2026.pdf, page 23 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 11th September 2026",
+  "reportDate": "2026-09-11",
+  "weekStart": "2026-09-14",
+  "weekEnd": "2026-09-18",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Med Student Sarah Lucas",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Adam Wiley",
+          "site": "Denman",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Tom Wigglesworth",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Nita Sigdel",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Atif Wan",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "IMPORTANT, please review: this page differs materially from every prior date's leave section, in two ways. (1) The week shown has jumped forward a full week — 'This week, 14th September 2026 until 18th September 2026' — rather than the current 7-11 September week that 2026-09-10's own leave.json already covers (Friday being the last working day of the current week, this may simply be the source system's normal forward-looking behaviour on a Friday, rolling straight to the next week rather than repeating the just-finished one — but that is our inference, not something stated explicitly in the source). (2) Unlike every prior date, the extracted text carried NO per-day status grid at all — only a flat list of 5 doctor names and 3 staff names under 'DOCTOR'/'STAFF' headers, followed by the usual legend, with no 'leave'/'available' words attached to individual day-cells (this held true in both the long and short version PDFs, so it isn't a one-off garble of a single extraction). Every person's status array above is therefore an INFERENCE — that appearing on this page at all means full-week leave — not a verified per-day reading; this could not be independently confirmed. Given Rebecca Quinn (this batch's consistently top inbound-call agent) and Atif Wan both appear on this list, this is flagged prominently for the user to double-check against the source PDF directly rather than trust as extracted fact."
+}
