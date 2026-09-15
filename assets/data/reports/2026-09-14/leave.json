@@ -1,0 +1,89 @@
+{
+  "_source": "Daily Operations Report - 14th September 2026.pdf, page 23 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 14th September 2026",
+  "reportDate": "2026-09-14",
+  "weekStart": "2026-09-14",
+  "weekEnd": "2026-09-18",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Med Student Sarah Lucas",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Adam Wiley",
+          "site": "Denman",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Tom Wigglesworth",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Nita Sigdel",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Atif Wan",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "REVISED from 2026-09-11's approach — please read this. The extracted text for this page is identical in shape to 2026-09-11's (same 8 names, same 'This week, 14th September 2026 until 18th September 2026' label, no per-day status grid at all). On 2026-09-11 these 8 names were recorded as full-week leave, inferred from context alone since no status grid was extractable. Today's OWN call-logs.json and cloop.json directly CONTRADICT that inference for at least two of the three Staff names: Rebecca Quinn tops today's inbound-call chart (44 calls, highest of any agent), and Atif Wan appears actively handling Cloop emails today (11 handled) — neither reads as someone on full-week leave for this exact week. Given that direct contradiction, this file now defaults every listed person to 'available' rather than repeating the disproven 'leave' guess — but this is still a guess, not a verified per-day reading (the underlying status grid remains unextractable from text). It's equally plausible these names denote partial leave on specific days this week that the grid would show but the text extraction lost entirely. The user should check the source PDF's actual visual leave grid directly, and may want 2026-09-11's already-committed leave.json revisited too, since it used the interpretation now known to be at least partly wrong."
+}
