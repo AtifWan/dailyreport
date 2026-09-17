@@ -1,0 +1,143 @@
+{
+  "_source": "Daily Operations Report - 16th September 2026.pdf, pages 3-17 (Call Logs Reporting), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 16th September 2026",
+  "reportDate": "2026-09-16",
+  "summary": {
+    "totalInbound": 303,
+    "accepted": 263,
+    "missed": 40,
+    "acceptedPct": 87,
+    "missedPct": 13,
+    "totalOutbound": 159
+  },
+  "queueReport": [
+    {
+      "queue": "Appointments",
+      "accepted": 149,
+      "missed": 14
+    },
+    {
+      "queue": "General Enquiries",
+      "accepted": 109,
+      "missed": 26
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "accepted": 3,
+      "missed": 0
+    },
+    {
+      "queue": "Health Professionals",
+      "accepted": 0,
+      "missed": 0
+    }
+  ],
+  "grandTotal": {
+    "accepted": 261,
+    "missed": 40
+  },
+  "_summaryVsGrandTotalNote": "The Queue Report bar chart's own Grand Total (261 accepted) runs 2 below the cover pie chart's confirmed total (263 accepted) — the same recurring discrepancy first documented ~2026-07-27 and seen on several dates since. Both figures are explicit, clean reads (cover pie: 'Accepted Calls, 263, 87%' / 'Missed Calls, 40, 13%'; Queue Report bar chart's own printed Grand Total row: 261/40, caption 'Queue Report = 303 calls'). Recorded verbatim rather than reconciled — summary uses the cover pie (263), grandTotal uses the Queue Report chart's own total (261), per established convention. Missed-by-queue sums exactly to 40 (14+26+0+0) with no discrepancy. Per-queue accepted (149+109+3+0=261) matches the chart's own Grand Total exactly, so the 2-call gap sits entirely between the chart's total and the cover pie, not inside the chart's own arithmetic.",
+  "tenDayTrend": {
+    "labels": [
+      "Thu 03 Sep",
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep"
+    ],
+    "answerRatePct": [93, 80, 85, 92, 92, 95, 91, 91, 87, 87],
+    "answerRateTargetPct": 85,
+    "accepted": [250, 210, 317, 280, 242, 231, 209, 284, 280, 263],
+    "missed": [20, 51, 54, 23, 20, 12, 20, 29, 41, 40],
+    "overallAvgWaitSec": [37, 51, 35, 30, 39, 28, 28, 42, 43, 41]
+  },
+  "_tenDayTrendNote": "Positions 0-8 of every series are the exact carry-forward of 2026-09-15's own committed trend. Position 9 (today): accepted (263) and missed (40) are taken directly from this report's own clean cover pie chart; answerRatePct (87) is confirmed both by that same math (263/303=86.8%≈87%) and appears as the chart's own trailing chain-matched value. overallAvgWaitSec's new point (41) is the one distinguishable trailing value in its own chart text once the historical chain (…,28,28,42,43) was matched off — a single stray '37' appeared mid-sequence that didn't fit any chain position and was discarded as noise, consistent with this chart's recurring garbling.",
+  "queues": {
+    "Appointments": {
+      "accepted": [149, 117, 183, 158, 154, 131, 113, 189, 150, 149],
+      "missed": [7, 20, 23, 16, 10, 8, 11, 13, 18, 14],
+      "avgWaitSec": [29, 43, 33, 26, 26, 42, 42, 27, 42, 42]
+    },
+    "General Enquiries": {
+      "accepted": [96, 90, 132, 120, 86, 96, 94, 93, 127, 109],
+      "missed": [13, 30, 31, 7, 10, 4, 9, 16, 23, 26],
+      "avgWaitSec": [50, 62, 37, 35, 35, 35, 35, 35, 35, 35]
+    },
+    "Health Professionals": {
+      "accepted": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "missed": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "avgWaitSec": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "Canberra Vasectomy": {
+      "accepted": [4, 3, 2, 2, 2, 3, 2, 2, 3, 3],
+      "missed": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+      "avgWaitSec": [34, 13, 19, 37, 37, 44, 44, 61, 61, 61]
+    }
+  },
+  "_queuesNote": "Appointments/General Enquiries/Canberra Vasectomy accepted+missed at position 9 match the queueReport table above exactly (149/14, 109/26, 3/0) — this report's own 10-day trend charts for Appointments and General Enquiries independently corroborate these same figures as their own trailing chain-matched values, and their accompanying Total Inbound series (163 and 135 respectively) equal accepted+missed exactly, both high confidence. Appointments avgWaitSec had two ambiguous trailing candidates (39, 35) once its historical chain was matched off — neither reconciles cleanly, so per the established convention for ambiguous avgWaitSec readings the prior value (42) is carried forward unchanged. General Enquiries avgWaitSec again produced multiple ambiguous trailing candidates (34, 29, 46, 41), the same recurring limitation seen on 2026-09-10/11/14/15 — carried forward unchanged (35). Canberra Vasectomy avgWaitSec's chain matched cleanly through its own last committed value (61) with two further ambiguous trailing candidates (58, 22) that don't reconcile — carried forward unchanged (61). Health Professionals (0) is carried forward and independently expected, given zero calls today (confirmed all-zero across accepted/missed/avgWaitSec in the source chart text).",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 738,
+    "longestCallAt": "9:40 AM",
+    "longestCallAgent": "Lucinda Gonzalez",
+    "longestWaitingTimeSec": 138,
+    "longestWaitingAt": "10:41 AM",
+    "avgCallHandlingSec": 175
+  },
+  "_patientServiceKpiNote": "738 and 138 are clean, unambiguous figures directly attached to the 'Longest Call Duration' / 'Longest Waiting Time' labels respectively (both fit their historical scale ranges well). The two times (9:40 AM, 10:41 AM) are given in that same order, and a single agent name (Lucinda Gonzalez) appears alongside them — attributed here to the longest call, per convention, since the schema has no separate waiting-time-agent field. avgCallHandlingSec (175) is carried forward from 2026-09-11/14/15 unchanged — no distinguishable third figure was present in this report's own KPI section.",
+  "longestWaitPerQueue": [
+    {
+      "queue": "Appointments",
+      "waitSec": 293,
+      "time": "2:06 PM",
+      "name": "Apurva Pathak",
+      "waitLabel": "4 min 53 sec"
+    },
+    {
+      "queue": "General Enquiries",
+      "waitSec": 380,
+      "time": "9:40 AM",
+      "name": "David Antioch",
+      "waitLabel": "6 min 20 sec"
+    },
+    {
+      "queue": "Health Professionals",
+      "waitSec": 0,
+      "time": null,
+      "name": null,
+      "waitLabel": "0 min 0 sec"
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "waitSec": 31,
+      "time": "3:12 PM",
+      "name": "Shae Connors",
+      "waitLabel": "0 min 31 sec"
+    }
+  ],
+  "inboundByStaff": [],
+  "_inboundByStaffNote": "Not recovered as a full table: the per-agent bar chart's text listed 14 entries (Rebecca Quinn, Apurva Pathak, Lucinda Gonzalez, Hannah Searle, Holly Archer, Jasmine Deery, Andrew Davies, David Antioch, Shae Connors, Pinky De Paz, Jessica Hinchy, Emily Pettett, Megan Wright, 'Crace - Rec 1') but only 11 call-count values and 10 duration values — left empty rather than publish a likely-misaligned set. Rebecca Quinn is again at the top of this name list (highest surviving value, 42 calls) — the fourth consecutive date she's clearly active on the phones, see the accompanying message re: leave.json.",
+  "outboundByStaff": [],
+  "_outboundByStaffNote": "Not recovered, same reason as inboundByStaff — the outbound chart's text listed 14 entries but only 11 call-count values and 10 duration values.",
+  "outboundTenDayTrend": {
+    "labels": [
+      "Thu 03 Sep",
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep"
+    ],
+    "totals": [320, 218, 301, 361, 148, 149, 127, 120, 121, 159]
+  },
+  "_outboundTenDayTrendNote": "Positions 0-8 are the exact carry-forward of 2026-09-15's own committed trend. Position 9 (159) is taken from this report's own explicit 'Total Outbound Calls = 159 Calls' caption. The chart's own garbled text again produced unexplained stray leftover values (285, 228, 220, 260) that don't match the confirmed total — none used, same recurring pattern as every prior date's outbound trend chart (228 and 260 in particular are recurring stray values seen on earlier dates too).",
+  "_hourlyPatternNote": "Not reliably recovered. The extracted text for this chart yielded partial series that don't sum anywhere close to this report's own confirmed totals (263 accepted, 40 missed), so the hourly breakdown could not be trusted at all. Left out entirely, same as every prior date (the frontend shows a placeholder when this field is absent)."
+}
