@@ -1,0 +1,99 @@
+{
+  "_source": "Daily Operations Report - 17th September 2026.pdf, page 10 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 17th September 2026",
+  "reportDate": "2026-09-17",
+  "weekStart": "2026-09-14",
+  "weekEnd": "2026-09-18",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Med Student Sarah Lucas",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Adam Wiley",
+          "site": "Denman",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Tom Wigglesworth",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Nita Sigdel",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Atif Wan",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Amy Morton",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Joshua Saw",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "This is the FIFTH consecutive report (2026-09-11, 09-14, 09-15, 09-16, and now this date) carrying the identical 'This week, 14th September 2026 until 18th September 2026' label with no per-day status grid extractable from text, same 10-name roster as the last three dates. IMPORTANT DEVELOPMENT: for the first time this window, Rebecca Quinn does NOT appear anywhere in today's inbound or outbound call charts (see call-logs.json's own notes) — a reversal after topping the inbound chart on each of the four preceding dates. This is the first piece of direct evidence actually consistent with a literal 'on leave' reading for her specifically, rather than against it. Atif Wan, by contrast, continues to appear actively working (8 Cloop emails handled today), so the evidence against a full-week-leave reading for him specifically still stands. Given this mixed picture, everyone is still defaulted to 'available' here (the underlying grid remains unextractable and one day's absence from a phone chart isn't conclusive — she could simply have had no calls routed to her, or the chart's own 9-value/12-name mismatch could have dropped her row), but this is flagged clearly rather than silently carried over: Rebecca Quinn's status today should be treated as genuinely uncertain, not confidently 'available' the way it was on 09-14/15/16. Recommend checking the source PDF's actual visual grid directly, and reconsidering 2026-09-11's already-committed leave.json (still marked full-week leave for the original 8 names) — this question has now been raised to the user four times without a response."
+}
