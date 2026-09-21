@@ -1,0 +1,125 @@
+{
+  "_source": "Daily Operations Report - 18th September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 18th September 2026",
+  "reportDate": "2026-09-18",
+  "weekStart": "2026-09-21",
+  "weekEnd": "2026-09-25",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Adam Wiley",
+          "site": "Denman",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Tom Wigglesworth",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Sam Primrose",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Penny Gosling",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Bethany Tran",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Nicole Regaspi",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Joshua Saw",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Anita Tammaro",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Kiara Pfeffer",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Val Zihhareva",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Megan Moreno Pitcher",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "MAJOR CHANGE: after five consecutive reports (2026-09-11, 09-14, 09-15, 09-16, 09-17) all showing the identical 'This week, 14th September 2026 until 18th September 2026' label, this report — dated 2026-09-18, the Friday that concluded that same week — has finally rolled over to a genuinely NEW week: 'This week, 21st September 2026 until 25th September 2026', the week immediately following. In hindsight the prior stability is much less mysterious than it looked mid-week: 2026-09-11 (a Thursday) was already showing the week that was about to start the following Monday, and the label then correctly held steady through that week's own five report dates before rolling to the next week exactly when it ended — a normal weekly-roster cadence, not a stuck extraction. The genuinely new information here is the roster itself, which changed completely: gone are Dr Mara Matic's fellow doctors Med Student Sarah Lucas, plus staff Nita Sigdel, Amy Morton and Atif Wan; two doctors (Adam Wiley, Tom Wigglesworth) now carry a 'Dr' title that wasn't printed before; two new doctors appear (Dr Sam Primrose, Dr Penny Gosling); and five new staff names appear (Bethany Tran, Nicole Regaspi, Anita Tammaro, Kiara Pfeffer, Val Zihhareva, Megan Moreno Pitcher) alongside two carried over (Rebecca Quinn, Joshua Saw). A new long-term maternity-leave entry starts exactly at this new week's boundary (Dr Michelle De Jesus, 21 Sept 2026 – 2 July 2027), which is a strong independent signal that the underlying roster genuinely is refreshed on a weekly cycle rather than being a static list. Because this week (21-25 Sept) has not started yet as of the report's own date (18 Sept), 'available' here is a placeholder only — it cannot describe actual attendance for days that haven't happened, and the per-day grid remains unextractable from text regardless. Rebecca Quinn is notably still listed on this upcoming week's staff roster despite being absent from the last two dates' call-activity charts (09-17, 09-18) — those two facts aren't in tension (a forward roster listing says nothing about whether she was on the phones on a specific past day), but it's worth keeping in view. Given this new, much clearer picture of how the page actually behaves week-to-week, it may be worth revisiting how 2026-09-11's leave.json (still recording the original 8 names as full-week 'leave', now understood to have been describing the *upcoming* week 14-18 Sept from three days out) should be framed, though the raw facts there are unchanged either way."
+}
