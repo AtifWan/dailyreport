@@ -1,0 +1,125 @@
+{
+  "_source": "Daily Operations Report - 21st September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 21st September 2026",
+  "reportDate": "2026-09-21",
+  "weekStart": "2026-09-21",
+  "weekEnd": "2026-09-25",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Adam Wiley",
+          "site": "Denman",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Tom Wigglesworth",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Sam Primrose",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Dr Penny Gosling",
+          "site": "Crace",
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Bethany Tran",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Nicole Regaspi",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Joshua Saw",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Anita Tammaro",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Kiara Pfeffer",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Val Zihhareva",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Megan Moreno Pitcher",
+          "site": null,
+          "status": ["available", "available", "available", "available", "available"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "Same week and roster as first seen on 2026-09-18 (21-25 September), unchanged — but for the first time this is the CURRENT week rather than a forward notice, since this report's own date (Monday 21 Sept) falls inside it. The per-day grid remains unextractable from text. Notably, Kiara Pfeffer appears on this leave roster while simultaneously appearing very actively on today's own call-logs staff tables (39 inbound calls, 6 outbound calls — both among the higher counts recorded) — direct same-day evidence against a literal 'on leave' reading for her specifically, consistent with the pattern seen for other names on this list across the project. Rebecca Quinn, by contrast, is absent from both staff call tables for a THIRD consecutive business date (2026-09-17, 09-18, 09-21) — the first time this absence has coincided with the actual week she's named on this leave page as opposed to a forward-looking listing for a week not yet underway. This is meaningfully stronger evidence than before, though still short of confirmation (the per-day grid is still unextractable, and a roster listing plus a quiet phone day isn't proof of leave) — everyone is still defaulted to 'available' per established convention, but Rebecca Quinn's status should be treated as genuinely uncertain rather than confidently available."
+}
