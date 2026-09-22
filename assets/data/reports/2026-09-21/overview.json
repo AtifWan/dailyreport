@@ -92,10 +92,10 @@
   },
   "leave": {
     "weekLabel": "21–25 September 2026",
-    "doctorLinesOnLeave": 0,
+    "doctorLinesOnLeave": 5,
     "staffFullyOnLeave": 0,
-    "staffPartialLeave": 0,
-    "staffPartialLeaveNames": [],
+    "staffPartialLeave": 8,
+    "staffPartialLeaveNames": ["Bethany Tran", "Rebecca Quinn", "Nicole Regaspi", "Joshua Saw", "Anita Tammaro", "Kiara Pfeffer", "Val Zihhareva", "Megan Moreno Pitcher"],
     "longTerm": [
       {
         "name": "Anna Lewis",
@@ -111,5 +111,5 @@
       }
     ]
   },
-  "_leaveNote": "See leave.json's own note — this is now the current week (not a forward notice) for the same roster first seen on 2026-09-18. Rebecca Quinn's continued absence from today's call charts, now coinciding with her own listed week, is flagged as meaningfully stronger evidence than before, though still unconfirmed. Please verify against the source PDF directly."
+  "_leaveNote": "CORRECTED — see leave.json's own note. Dr Mara Matic, Dr Tom Mills, Dr Adam Wiley, Dr Tom Wigglesworth and Dr Sam Primrose are on leave the full week (doctorLinesOnLeave=5). No staff member is on leave the entire week, but all eight listed staff are on leave part of the week. Today (Monday) Rebecca Quinn is confirmed genuinely on leave, exactly matching her absence from today's call charts; Kiara Pfeffer is confirmed available today, exactly matching her active presence on today's call charts. See leave.json for the exact per-day grid, now verified directly against the source PDF's visual table rather than guessed."
 }

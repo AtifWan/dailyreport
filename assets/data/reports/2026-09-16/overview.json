@@ -92,10 +92,10 @@
   },
   "leave": {
     "weekLabel": "14–18 September 2026",
-    "doctorLinesOnLeave": 0,
+    "doctorLinesOnLeave": 3,
     "staffFullyOnLeave": 0,
-    "staffPartialLeave": 0,
-    "staffPartialLeaveNames": [],
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Nita Sigdel", "Rebecca Quinn", "Atif Wan", "Amy Morton", "Joshua Saw"],
     "longTerm": [
       {
         "name": "Anna Lewis",
@@ -105,5 +105,5 @@
       }
     ]
   },
-  "_leaveNote": "See leave.json's own note — this is the fourth consecutive date carrying the same week label and an unextractable per-day grid, with the same 10-name roster as the last two dates. Rebecca Quinn/Atif Wan continue actively working, so this file again shows 0 for every leave count rather than repeat the original full-week-leave guess. Please verify against the source PDF directly."
+  "_leaveNote": "CORRECTED — see leave.json's own note. Dr Mara Matic, Dr Tom Mills and Tom Wigglesworth are on leave for the full week (doctorLinesOnLeave=3). No staff member is on leave the entire week, but all five listed staff are on leave part of the week on different specific days — see leave.json for the exact per-day grid, now verified directly against the source PDF's visual table rather than guessed."
 }

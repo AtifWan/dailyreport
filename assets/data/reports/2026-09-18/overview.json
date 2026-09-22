@@ -91,11 +91,11 @@
     "totalOpenCases": 99
   },
   "leave": {
-    "weekLabel": "21–25 September 2026",
-    "doctorLinesOnLeave": 0,
+    "weekLabel": "14–18 September 2026",
+    "doctorLinesOnLeave": 3,
     "staffFullyOnLeave": 0,
-    "staffPartialLeave": 0,
-    "staffPartialLeaveNames": [],
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Nita Sigdel", "Rebecca Quinn", "Atif Wan", "Amy Morton", "Joshua Saw"],
     "longTerm": [
       {
         "name": "Anna Lewis",
@@ -111,5 +111,5 @@
       }
     ]
   },
-  "_leaveNote": "See leave.json's own note — the week label finally changed after five identical sightings, rolling to the NEXT week (21-25 Sept) with an entirely new roster, and a new maternity-leave entry starting right at that boundary. Since that week hasn't started yet as of this report's date, 'available' here is a placeholder, not an attendance claim. Please verify against the source PDF directly."
+  "_leaveNote": "CORRECTED — see leave.json's own note. Dr Mara Matic, Dr Tom Mills and Tom Wigglesworth are on leave for the full week (doctorLinesOnLeave=3). No staff member is on leave the entire week, but all five listed staff are on leave part of the week — today (Friday 18th) both Rebecca Quinn and Joshua Saw are on leave. This report's own leave page happened to print the FOLLOWING week's grid (21-25 Sept, new roster, new maternity-leave entry for Dr Michelle De Jesus) instead of this week's — see leave.json's nextWeekPreview field for that grid. weekLabel here reflects the week containing this report's own date, consistent with every other date's file."
 }

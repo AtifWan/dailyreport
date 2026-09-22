@@ -1,5 +1,5 @@
 {
-  "_source": "Daily Operations Report - 21st September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "_source": "Daily Operations Report - 21st September 2026.pdf, pages 23-24 (Staff & Doctors on Leave). CORRECTED via direct visual inspection of the PDF page image (the user supplied the source PDF directly after flagging that leave data was wrong) — the prior text-extraction-only pass could not see this table's per-day status at all, since status is conveyed purely by cell color (orange=On Leave, green=Available, yellow=Public Holiday) with no text in the cells.",
   "reportTitle": "Daily Operations Report - 21st September 2026",
   "reportDate": "2026-09-21",
   "weekStart": "2026-09-21",
@@ -18,32 +18,32 @@
         {
           "name": "Dr Mara Matic",
           "site": "Crace",
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "leave", "leave", "leave", "leave"]
         },
         {
           "name": "Dr Tom Mills",
           "site": "Crace",
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "leave", "leave", "leave", "leave"]
         },
         {
           "name": "Dr Adam Wiley",
           "site": "Denman",
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "leave", "leave", "leave", "leave"]
         },
         {
           "name": "Dr Tom Wigglesworth",
           "site": "Crace",
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "leave", "leave", "leave", "leave"]
         },
         {
           "name": "Dr Sam Primrose",
           "site": "Crace",
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "leave", "leave", "leave", "leave"]
         },
         {
           "name": "Dr Penny Gosling",
           "site": "Crace",
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["available", "leave", "leave", "leave", "leave"]
         }
       ]
     },
@@ -53,42 +53,42 @@
         {
           "name": "Bethany Tran",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "available", "available", "available", "available"]
         },
         {
           "name": "Rebecca Quinn",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "available", "available", "available", "available"]
         },
         {
           "name": "Nicole Regaspi",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "leave", "available", "available", "available"]
         },
         {
           "name": "Joshua Saw",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["leave", "leave", "available", "available", "available"]
         },
         {
           "name": "Anita Tammaro",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["available", "available", "leave", "leave", "available"]
         },
         {
           "name": "Kiara Pfeffer",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["available", "available", "leave", "available", "available"]
         },
         {
           "name": "Val Zihhareva",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["available", "available", "available", "leave", "leave"]
         },
         {
           "name": "Megan Moreno Pitcher",
           "site": null,
-          "status": ["available", "available", "available", "available", "available"]
+          "status": ["available", "available", "available", "available", "leave"]
         }
       ]
     }
@@ -121,5 +121,5 @@
       "label": "Public Holiday"
     }
   ],
-  "_note": "Same week and roster as first seen on 2026-09-18 (21-25 September), unchanged — but for the first time this is the CURRENT week rather than a forward notice, since this report's own date (Monday 21 Sept) falls inside it. The per-day grid remains unextractable from text. Notably, Kiara Pfeffer appears on this leave roster while simultaneously appearing very actively on today's own call-logs staff tables (39 inbound calls, 6 outbound calls — both among the higher counts recorded) — direct same-day evidence against a literal 'on leave' reading for her specifically, consistent with the pattern seen for other names on this list across the project. Rebecca Quinn, by contrast, is absent from both staff call tables for a THIRD consecutive business date (2026-09-17, 09-18, 09-21) — the first time this absence has coincided with the actual week she's named on this leave page as opposed to a forward-looking listing for a week not yet underway. This is meaningfully stronger evidence than before, though still short of confirmation (the per-day grid is still unextractable, and a roster listing plus a quiet phone day isn't proof of leave) — everyone is still defaulted to 'available' per established convention, but Rebecca Quinn's status should be treated as genuinely uncertain rather than confidently available."
+  "_note": "CORRECTED (previously every person here was wrongly defaulted to 'available' because text extraction cannot see the leave grid's cell colors at all — confirmed by directly viewing the source PDF page as an image, and matches the identical grid already seen as a preview in 2026-09-18's report). This is the true Monday-Friday grid for the week of 21-25 September: Dr Mara Matic, Dr Tom Mills, Dr Adam Wiley, Dr Tom Wigglesworth and Dr Sam Primrose are on leave the entire week; Dr Penny Gosling is available Monday and on leave Tue-Fri; Bethany Tran and Rebecca Quinn are on leave Monday only (today, Rebecca Quinn is confirmed genuinely on leave — matching her absence from today's call charts exactly); Nicole Regaspi and Joshua Saw are on leave Mon-Tue; Anita Tammaro is on leave Wed-Thu; Kiara Pfeffer is on leave Wednesday only (matching her active presence on today's own call charts — she was available today, Monday); Val Zihhareva is on leave Thu-Fri; Megan Moreno Pitcher is on leave Friday only. Verified directly against the PDF's own colored table, not inferred from context or call-activity signals."
 }
