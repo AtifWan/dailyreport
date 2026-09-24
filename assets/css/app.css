@@ -125,3 +125,14 @@
 .dr-leave-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; margin-left: 8px; white-space: nowrap; }
 .dr-leave-badge--full { background: var(--danger-soft); color: var(--danger-ink); }
 .dr-leave-badge--partial { background: var(--infer-soft); color: var(--infer-ink); }
+
+/* Export button (topbar) — below the same breakpoint the sidebar itself collapses
+   to a drawer, .tb-titles is already tight against the menu button; a full-width
+   "Export full report" label pushed the longest page titles ("Staff & doctors'
+   leave") down to a truncated "St…". Icon-only keeps the button reachable without
+   crowding the title — aria-label carries the accessible name the hidden text
+   would otherwise have supplied. */
+@media (max-width: 880px) {
+  #exportBtn { padding: 9px 11px; }
+  #exportBtn #exportBtnLabel { display: none; }
+}

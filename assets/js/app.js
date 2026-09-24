@@ -5,6 +5,7 @@ import { renderTasks } from './pages/tasks.js';
 import { renderCallLogs } from './pages/call-logs.js';
 import { renderCloop } from './pages/cloop.js';
 import { renderLeave } from './pages/leave.js';
+import { exportFullReport, showToast } from './export.js';
 
 // Each route: key -> { title, subtitle, navId, render(container, date, manifest) }
 const ROUTES = {
@@ -90,6 +91,32 @@ function openDrawer() { sidebar.classList.add('open'); backdrop.classList.add('s
 function closeDrawer() { sidebar.classList.remove('open'); backdrop.classList.remove('show'); }
 document.getElementById('menuBtn').addEventListener('click', openDrawer);
 backdrop.addEventListener('click', closeDrawer);
+
+// Export button: always builds the full combined report for whatever date is
+// currently selected, regardless of which tab is open — it renders all 5 tabs
+// off-screen (see export.js), so the file it downloads is the same one no matter
+// where on the dashboard you clicked it from.
+const exportBtn = document.getElementById('exportBtn');
+const exportBtnLabel = document.getElementById('exportBtnLabel');
+exportBtn.addEventListener('click', async () => {
+  if (exportBtn.disabled) return;
+  const idleLabel = exportBtnLabel.textContent;
+  exportBtn.disabled = true;
+  exportBtn.style.opacity = '.6';
+  try {
+    const filename = await exportFullReport(currentDate, manifest, {
+      onProgress: (msg) => { exportBtnLabel.textContent = msg; },
+    });
+    showToast(`Downloaded ${filename}`);
+  } catch (err) {
+    console.error(err);
+    showToast("Couldn't export the report — try again.", { ok: false });
+  } finally {
+    exportBtnLabel.textContent = idleLabel;
+    exportBtn.disabled = false;
+    exportBtn.style.opacity = '';
+  }
+});
 
 window.addEventListener('hashchange', navigate);
 initChartTooltips(document.body);
