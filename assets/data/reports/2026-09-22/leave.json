@@ -1,0 +1,125 @@
+{
+  "_source": "Daily Operations Report - 22nd September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. This routine's safety net is the cross-check noted below, not visual reading (that stays reserved for the manually-driven historical backlog).",
+  "reportTitle": "Daily Operations Report - 22nd September 2026",
+  "reportDate": "2026-09-22",
+  "weekStart": "2026-09-21",
+  "weekEnd": "2026-09-25",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Adam Wiley",
+          "site": "Denman",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Tom Wigglesworth",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Sam Primrose",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Penny Gosling",
+          "site": "Crace",
+          "status": ["available", "leave", "leave", "leave", "leave"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Bethany Tran",
+          "site": null,
+          "status": ["leave", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": ["leave", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Nicole Regaspi",
+          "site": null,
+          "status": ["leave", "leave", "available", "available", "available"]
+        },
+        {
+          "name": "Joshua Saw",
+          "site": null,
+          "status": ["leave", "leave", "available", "available", "available"]
+        },
+        {
+          "name": "Anita Tammaro",
+          "site": null,
+          "status": ["available", "available", "leave", "leave", "available"]
+        },
+        {
+          "name": "Kiara Pfeffer",
+          "site": null,
+          "status": ["available", "available", "leave", "available", "available"]
+        },
+        {
+          "name": "Val Zihhareva",
+          "site": null,
+          "status": ["available", "available", "available", "leave", "leave"]
+        },
+        {
+          "name": "Megan Moreno Pitcher",
+          "site": null,
+          "status": ["available", "available", "available", "available", "leave"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "This report's own leave page (pages 23-24) reprints the identical 21-25 September grid already directly visually confirmed against the source PDF image for 2026-09-21 (same roster names, same week) — text extraction alone still cannot see this table's per-day cell colors at all, so this file carries forward that visually-confirmed grid rather than defaulting to 'available' (the bug the user originally flagged). Cross-checked independently against today's own call-activity data: Rebecca Quinn (available today per this grid) appears in today's inboundByStaff/outboundByStaff tables for the first time in four business dates, exactly as expected; Nicole Regaspi and Joshua Saw (on leave today per this grid) are both absent from today's call tables; Kiara Pfeffer (available today) is present and active. All four checks agree with the grid."
+}

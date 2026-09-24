@@ -1,0 +1,275 @@
+{
+  "_source": "Daily Operations Report - 22nd September 2026.pdf, pages 3-17 (Call Logs Reporting), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 22nd September 2026",
+  "reportDate": "2026-09-22",
+  "summary": {
+    "totalInbound": 304,
+    "accepted": 285,
+    "missed": 19,
+    "acceptedPct": 94,
+    "missedPct": 6,
+    "totalOutbound": 152
+  },
+  "queueReport": [
+    {
+      "queue": "Appointments",
+      "accepted": 157,
+      "missed": 9
+    },
+    {
+      "queue": "General Enquiries",
+      "accepted": 123,
+      "missed": 10
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "accepted": 2,
+      "missed": 0
+    },
+    {
+      "queue": "Health Professionals",
+      "accepted": 0,
+      "missed": 0
+    }
+  ],
+  "grandTotal": {
+    "accepted": 282,
+    "missed": 19
+  },
+  "_summaryVsGrandTotalNote": "Per-queue accepted/missed figures are direct reads from this report's own composition pies (matching the Queue Report bar chart's own printed Grand Total of 282 accepted / 19 missed exactly). The cover pie's own totals (285 accepted, 304 total inbound) run 3 above the Queue Report's grand total (282) — a larger version of the same recurring 'cover pie vs Queue Report total' gap seen on prior dates (usually 1-2). Recorded verbatim per convention; the inboundByStaff table below independently sums to exactly 285, matching the cover pie precisely, so 285 is used as the trusted accepted total elsewhere in this file.",
+  "tenDayTrend": {
+    "labels": [
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep",
+      "Tue 22 Sep"
+    ],
+    "answerRatePct": [92, 95, 91, 91, 87, 87, 85, 84, 78, 94],
+    "answerRateTargetPct": 85,
+    "accepted": [242, 231, 209, 284, 280, 263, 239, 173, 272, 285],
+    "missed": [20, 12, 20, 29, 41, 40, 42, 34, 77, 19],
+    "overallAvgWaitSec": [39, 28, 28, 42, 43, 41, 41, 52, 45, 29]
+  },
+  "_tenDayTrendNote": "answerRatePct/accepted/missed all printed cleanly with positions 0-8 matching 2026-09-21's own committed trend exactly (dropping its first entry), position 9 confirmed against this report's own cover pie (94%, 285 accepted, 19 missed) — high confidence across all three. overallAvgWaitSec's own printed sequence matched the committed chain at 7 of 9 interior positions but diverged at two (printed 42 where 28 was expected for Fri 11-Sep, and 37 where 42 was expected for Mon 14-Sep) — per convention the already-committed historical values are kept rather than the newly misread ones; position 9 (29) is accepted at face value since it follows immediately after a run of matching values.",
+  "queues": {
+    "Appointments": {
+      "accepted": [154, 131, 113, 189, 150, 149, 134, 95, 177, 157],
+      "missed": [10, 8, 11, 13, 18, 14, 21, 9, 33, 9],
+      "avgWaitSec": [26, 42, 42, 27, 42, 42, 42, 42, 42, 42]
+    },
+    "General Enquiries": {
+      "accepted": [86, 96, 94, 93, 127, 109, 101, 73, 89, 123],
+      "missed": [10, 4, 9, 16, 23, 26, 20, 25, 41, 10],
+      "avgWaitSec": [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+    },
+    "Health Professionals": {
+      "accepted": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "missed": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "avgWaitSec": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "Canberra Vasectomy": {
+      "accepted": [2, 3, 2, 2, 3, 3, 2, 3, 5, 2],
+      "missed": [0, 0, 0, 0, 0, 0, 1, 0, 3, 0],
+      "avgWaitSec": [37, 44, 44, 61, 61, 61, 61, 61, 61, 61]
+    }
+  },
+  "_queuesNote": "Appointments and Health Professionals accepted+missed chain-matched 2026-09-21's committed data exactly at positions 0-8, high confidence; both queues' position-9 values match their own printed pies exactly (157/9 and 0/0). General Enquiries missed chain-matched exactly, but its accepted series diverged from the committed chain at three positions (printed 85/89/126 where 86/93/127 were expected) — kept the committed historical values per convention; position 9 (123) is trusted, matching the queue pie exactly. Canberra Vasectomy missed chain-matched exactly; its accepted series diverged at one position (printed 3 where 2 was expected for Mon 14-Sep) — kept the committed value; position 9 (2) matches the pie. Appointments avgWaitSec and Canberra Vasectomy avgWaitSec again failed to chain-match beyond their own well-documented instability — carried forward unchanged (42, 61) per the established convention. General Enquiries avgWaitSec's chart again diverged immediately — carried forward unchanged (35). Health Professionals (0) independently expected, zero calls confirmed all-zero in the source chart text.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 637,
+    "longestCallAt": "4:43 PM",
+    "longestCallAgent": "Kiara Pfeffer",
+    "longestWaitingTimeSec": 427,
+    "longestWaitingAt": "5:16 PM",
+    "avgCallHandlingSec": 140
+  },
+  "_patientServiceKpiNote": "The KPI panel's own text listed two times (5:16 PM, 4:43 PM) and one name (Kiara Pfeffer) ahead of their labels, the same layout quirk seen on prior dates. This report's own Longest Wait Per Queue table (see longestWaitPerQueue below) independently and explicitly attributes a 427-second wait at 5:16 PM to the Appointments queue with agent De Ang Renfree — this cross-check fixes longestWaitingTimeSec=427 at 5:16 PM, leaving longestCallDurationSec=637 at 4:43 PM attached to the panel's own remaining name (Kiara Pfeffer) per the no-second-name-field schema. As before, this is a genuine, unresolved naming conflict (the queue table names De Ang Renfree for the same wait event the KPI panel's own name is Kiara Pfeffer) — recorded verbatim rather than reconciled.",
+  "longestWaitPerQueue": [
+    {
+      "queue": "Appointments",
+      "waitSec": 427,
+      "time": "5:16 PM",
+      "name": "De Ang Renfree",
+      "waitLabel": "7 min 7 sec"
+    },
+    {
+      "queue": "General Enquiries",
+      "waitSec": 405,
+      "time": "12:57 PM",
+      "name": "Pinky De Paz",
+      "waitLabel": "6 min 45 sec"
+    },
+    {
+      "queue": "Health Professionals",
+      "waitSec": 0,
+      "time": null,
+      "name": null,
+      "waitLabel": "0 min 0 sec"
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "waitSec": 26,
+      "time": "1:41 PM",
+      "name": "Shae Connors",
+      "waitLabel": "0 min 26 sec"
+    }
+  ],
+  "inboundByStaff": [
+    {
+      "name": "Rebecca Quinn",
+      "calls": 63,
+      "durationMins": 135
+    },
+    {
+      "name": "David Antioch",
+      "calls": 47,
+      "durationMins": 81
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 40,
+      "durationMins": 93
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 24,
+      "durationMins": 64
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 24,
+      "durationMins": 46
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 23,
+      "durationMins": 63
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 21,
+      "durationMins": 52
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 14,
+      "durationMins": 48
+    },
+    {
+      "name": "Apurva Pathak",
+      "calls": 12,
+      "durationMins": 32
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 12,
+      "durationMins": 32
+    },
+    {
+      "name": "Kate Chin",
+      "calls": 3,
+      "durationMins": 7
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 2,
+      "durationMins": 8
+    }
+  ],
+  "_inboundByStaffNote": "Full clean table: 12 names, 12 call-count values and 12 duration values all lined up 1:1, and the call counts sum to exactly 285 — matching this report's own cover pie precisely (rather than the Queue Report's lower grand total of 282, see _summaryVsGrandTotalNote). Rebecca Quinn reappears here for the first time in four business dates (absent 2026-09-17, 09-18 and 09-21) — this exactly matches leave.json's corrected grid, which has her on leave only Monday (09-21) and available from Tuesday (09-22) onward. Kiara Pfeffer's and Nicole Regaspi's/Joshua Saw's presence-or-absence here also matches leave.json exactly (Kiara Pfeffer available and present; Nicole Regaspi and Joshua Saw both on leave today and both absent from this table).",
+  "outboundByStaff": [
+    {
+      "name": "Apurva Pathak",
+      "calls": 24,
+      "durationMins": 24
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 19,
+      "durationMins": 24
+    },
+    {
+      "name": "David Antioch",
+      "calls": 16,
+      "durationMins": 17
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 15,
+      "durationMins": 20
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 13,
+      "durationMins": 23
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 13,
+      "durationMins": 15
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 12,
+      "durationMins": 30
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 11,
+      "durationMins": 11
+    },
+    {
+      "name": "Rebecca Quinn",
+      "calls": 9,
+      "durationMins": 10
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 7,
+      "durationMins": 8
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 5,
+      "durationMins": 3
+    },
+    {
+      "name": "Isaac Davis",
+      "calls": 5,
+      "durationMins": 18
+    },
+    {
+      "name": "Kate Chin",
+      "calls": 2,
+      "durationMins": 4
+    },
+    {
+      "name": "Megan Wright",
+      "calls": 1,
+      "durationMins": 16
+    }
+  ],
+  "_outboundByStaffNote": "Full clean table: 14 names, 14 call-count values and 14 duration values all lined up 1:1, and the call counts sum to exactly 152 — matching this report's own 'Total Outbound Calls = 152' caption precisely. Longest Call Outbound listed separately as Duration 25.13 (mins), Time 10:29 AM, Name 'Joanna Lin/ Sandeep Prat' (recorded verbatim, an unusual dual-name entry not otherwise explained by the source).",
+  "outboundTenDayTrend": {
+    "labels": [
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep",
+      "Tue 22 Sep"
+    ],
+    "totals": [148, 149, 127, 120, 121, 159, 117, 117, 163, 152]
+  },
+  "_outboundTenDayTrendNote": "Positions 0-8 are the exact carry-forward of 2026-09-21's own committed trend. Position 9 (152) is taken from this report's own clean 'Total Outbound Calls = 152' caption, independently confirmed by the outboundByStaff table's own exact sum. The chart's own trailing text again produced a run of discordant candidates (285, 228, 220, 260, 296, 316, 263, 259, 296, 265) that don't reconcile with anything — none used, same recurring pattern as this series' every prior date.",
+  "_hourlyPatternNote": "Closest match yet but still not safely usable: the extracted hourly chart text yielded two 12-value series that sum to exactly 285 (accepted) and 19 (missed) — matching this report's own confirmed totals precisely for the first time — but only 11 hour labels (7 AM-5 PM) were printed against 12 values per series, leaving an unresolved off-by-one in the hour-to-value alignment. Rather than guess which hour absorbs the extra bucket, left out entirely, same as every prior date (the frontend shows a placeholder when this field is absent)."
+}

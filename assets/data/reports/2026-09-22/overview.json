@@ -1,0 +1,115 @@
+{
+  "_source": "Daily Operations Report - 22nd September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 318,
+    "date": "2026-09-22",
+    "weekday": "Tuesday",
+    "title": "Daily Operations Report - 22nd September 2026 (Short Version)"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 53,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 5,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 100
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 304,
+    "accepted": 285,
+    "acceptedPct": 94,
+    "missed": 19,
+    "missedPct": 6,
+    "totalOutbound": 152,
+    "topInboundAgent": {
+      "name": "Rebecca Quinn",
+      "calls": 63
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 157,
+        "missed": 9
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 123,
+        "missed": 10
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 2,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence — Rebecca Quinn tops a fully clean inboundByStaff table (12 names, 12 values, 12 durations all lined up 1:1, summing exactly to the confirmed accepted total of 285). This is her first appearance topping (or appearing in) this chart in four business dates, exactly matching leave.json's corrected grid showing her back from leave as of today.",
+  "cloop": {
+    "inQueue": 43,
+    "oldestDays": 11.94,
+    "contactsQueuedYesterday": 95,
+    "emailsHandledYesterday": 132,
+    "totalOverallCases": 8196,
+    "totalInProgress": 113,
+    "totalOpenCases": 57
+  },
+  "leave": {
+    "weekLabel": "21–25 September 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 8,
+    "staffPartialLeaveNames": ["Bethany Tran", "Rebecca Quinn", "Nicole Regaspi", "Joshua Saw", "Anita Tammaro", "Kiara Pfeffer", "Val Zihhareva", "Megan Moreno Pitcher"],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "Same week as 2026-09-21 (21-25 Sept), so the weekly roster summary is unchanged: 5 doctors on leave the full week, 0 staff on leave the full week, all 8 listed staff on leave part of the week. Today (Tuesday) all 6 doctors are on leave (Dr Penny Gosling's own leave starts today) and 2 staff are on leave (Nicole Regaspi, Joshua Saw) — both confirmed against today's call-activity tables per leave.json's own note."
+}

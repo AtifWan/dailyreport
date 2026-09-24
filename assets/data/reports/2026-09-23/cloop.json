@@ -1,0 +1,166 @@
+{
+  "_source": "Daily Operations Report - 23rd September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 23rd September 2026",
+  "extractedAt": "2026-09-24T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Thursday 24 September 2026",
+  "realTimeQueues": [
+    {
+      "queue": "Requests",
+      "inQueue": 22,
+      "oldestDays": 7.01
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 6,
+      "oldestDays": 0.59
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 4,
+      "oldestDays": 0.66
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 3,
+      "oldestDays": 0.8
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 3,
+      "oldestDays": 0.72
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 3,
+      "oldestDays": 12.92
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 2,
+      "oldestDays": 2.75
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 1,
+      "oldestDays": 1.76
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 1,
+      "oldestDays": 2.85
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 45,
+    "oldestDays": 12.92
+  },
+  "_realTimeQueuesNote": "9 queues printed this time; they sum to the Summary row exactly (22+6+4+3+3+3+2+1+1=45), and the Summary's own oldestDays (12.92) matches GP Mail's own printed value exactly (the oldest individual queue) — high confidence.",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 28
+    },
+    {
+      "queue": "Documents",
+      "count": 26
+    },
+    {
+      "queue": "Finance",
+      "count": 6
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 4
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 2
+    },
+    {
+      "queue": "Requests",
+      "count": 2
+    },
+    {
+      "queue": "File Transfer",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep",
+      "Tue 22 Sep",
+      "Wed 23 Sep"
+    ],
+    "totals": [87, 92, 86, 60, 78, 88, 85, 116, 95, 69]
+  },
+  "_note": "contactsQueuedYesterday sums to 69 exactly (28+26+6+4+2+2+1), matching this report's own contactsQueuedTenDayTrend chart's clean trailing value exactly — high confidence. The trend chart's own printed sequence diverged from the committed chain at one position (printed 88 where 87 was expected for Thu 10-Sep, the same recurring single-point anomaly seen on 2026-09-22) — kept the committed historical value per convention; position 9 (69) is trusted. inProgressTenDayTrend and openCasesTenDayTrend (below) both chain-matched 2026-09-22's own committed trend exactly at positions 0-8, with position 9 (111, 57) confirmed by this report's own Total Cases To Date row. Per the established convention, totalCasesToDate.date is recorded as the report's own date (2026-09-23) even though the source table's literal date column and extraction timestamp both read one business day ahead ('24/9/2026', Thursday). This time Leh Peng Goh's stated total (7) doesn't equal his own incoming+outbound (6+0=6, off by 1) — a smaller version of the recurring 'total column doesn't match its own components' quirk, this time on a different agent than 2026-09-22's Jasmina Sodolovic mismatch. Recorded verbatim rather than reconciled. Every other emailsHandledYesterday row reconciles exactly.",
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 60,
+      "outbound": 18,
+      "total": 78
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 6,
+      "outbound": 0,
+      "total": 7
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 3,
+      "outbound": 0,
+      "total": 3
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 0,
+      "outbound": 1,
+      "total": 1
+    }
+  ],
+  "totalCasesToDate": {
+    "date": "2026-09-23",
+    "totalOverallCases": 8268,
+    "totalInProgress": 111,
+    "totalOpenCases": 57
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep",
+      "Tue 22 Sep",
+      "Wed 23 Sep"
+    ],
+    "totals": [124, 118, 125, 131, 122, 121, 129, 122, 113, 111]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep",
+      "Tue 22 Sep",
+      "Wed 23 Sep"
+    ],
+    "totals": [72, 69, 64, 72, 85, 80, 99, 65, 57, 57]
+  }
+}
