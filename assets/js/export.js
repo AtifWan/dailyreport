@@ -94,12 +94,33 @@ function loadOklchFreeCss() {
   return oklchFreeCssPromise;
 }
 
-/** Applies the oklch-free override to the live document for the duration of `fn`
- *  (the whole multi-section capture), then removes it again either way. */
+// The live dashboard's two-column panels (.grid2) and the ad-hoc per-queue chart
+// grids in call-logs.js are sized for a desktop browser window; printed at that same
+// width on a single A4 page, every line of text comes out well under 6pt — legible
+// on a phone screen at hi-DPI, not on paper. Stacking everything to one column lets
+// each section render at a *narrower* width and still print at a readable size (see
+// CAPTURE_WIDTH below), and a table's own overflow-scroll wrapper is unclipped too,
+// so a wide table prints in full rather than losing whatever columns need scrolling
+// live (measured for real and grown into if still not enough — see captureSection).
+// html2canvas clones the document before it reads any of this: cloning re-serialises
+// every inline style attribute through the CSSOM ("display:grid;grid-template-columns:…"
+// becomes "display: grid; grid-template-columns: …", spaced), so a substring selector
+// copied verbatim from the source (no space after the colon) never matches inside the
+// clone even though it matches the live page — confirmed by dumping the cloned
+// attribute text mid-capture. Matching on "auto-fit" alone sidesteps the whole
+// punctuation-spacing question, since html2canvas's reserialisation doesn't touch it.
+const PRINT_LAYOUT_CSS = `
+  .grid2 { grid-template-columns: 1fr !important; }
+  [style*="auto-fit"] { grid-template-columns: 1fr !important; }
+  .rtable-wrap { overflow: visible !important; max-height: none !important; width: fit-content !important; max-width: none !important; }
+`;
+
+/** Applies the oklch-free + print-layout overrides to the live document for the
+ *  duration of `fn` (the whole multi-section capture), then removes them either way. */
 async function withOklchOverride(fn) {
   const css = await loadOklchFreeCss();
   const styleEl = document.createElement('style');
-  styleEl.textContent = css;
+  styleEl.textContent = `${css}\n${PRINT_LAYOUT_CSS}`;
   document.head.appendChild(styleEl);
   try {
     return await fn();
@@ -130,7 +151,23 @@ function bakeSvgPaintColors(root) {
   });
 }
 
+// getBoundingClientRect() always reports an element's own real layout box, even when
+// an ancestor would normally clip it (clipping is a paint-time effect, not a layout
+// one) — so this finds how wide the widest actual table wants to be regardless of
+// its .rtable-wrap's overflow setting, independent of PRINT_LAYOUT_CSS having
+// unclipped that wrapper already.
+function measureNeededWidth(sandbox, baseWidth) {
+  const left = sandbox.getBoundingClientRect().left;
+  let needed = baseWidth;
+  sandbox.querySelectorAll('.rtable').forEach((table) => {
+    const right = table.getBoundingClientRect().right - left;
+    if (right > needed) needed = right + 24; // small right-hand breathing room
+  });
+  return needed;
+}
+
 async function captureSection(sandbox, section, date, manifest, width, scale) {
+  sandbox.style.width = `${width}px`;
   sandbox.innerHTML = '';
   await section.render(sandbox, date, manifest);
   sandbox.querySelectorAll(EXPORT_HIDE_SELECTOR).forEach((el) => { el.style.display = 'none'; });
@@ -139,10 +176,20 @@ async function captureSection(sandbox, section, date, manifest, width, scale) {
   // just triggered before html2canvas measures it.
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
+  // A table wider than `width` (its .rtable-wrap scrolls horizontally live) would
+  // otherwise just get cropped at `width` — no scrollbar to hint anything is missing
+  // once it's a flat image. Growing the sandbox to fit trades a smaller effective
+  // print scale on that one section for never silently dropping a column.
+  const neededWidth = measureNeededWidth(sandbox, width);
+  if (neededWidth > width) {
+    sandbox.style.width = `${neededWidth}px`;
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  }
+
   return window.html2canvas(sandbox, {
     scale,
-    width,
-    windowWidth: width,
+    width: neededWidth,
+    windowWidth: neededWidth,
     backgroundColor: '#faf9f5',
     onclone: (clonedDoc) => {
       // Box-shadow support in html2canvas is unreliable regardless of colour syntax;
@@ -236,16 +283,16 @@ export async function exportFullReport(date, manifest, { onProgress } = {}) {
   await document.fonts.ready;
   const { jsPDF } = window.jspdf;
 
-  // The dashboard's own two-column panels (.grid2) need real desktop width to lay
-  // out without their row labels/values overflowing — a narrower, comfortably
-  // mobile-sized capture clips text at the right edge of almost every panel.
-  const CAPTURE_WIDTH = 1280; // CSS px the sections render at
+  // PRINT_LAYOUT_CSS stacks every section to one column, so this only has to be
+  // wide enough for a *single* panel to read comfortably — not two side by side —
+  // which is what actually keeps the printed font size legible (see captureSection
+  // and PRINT_LAYOUT_CSS above for why 1280px, right for the live 2-column desktop
+  // layout, printed at illegibly small text once squeezed onto one A4 page width).
+  const CAPTURE_WIDTH = 820; // CSS px baseline; a section only grows past this if a table needs more room
   const SCALE = 2; // html2canvas render scale, for crisp text in the PDF
   const PAGE_W = 210, PAGE_H = 297, MARGIN = 14; // A4, mm
   const CONTENT_W = PAGE_W - MARGIN * 2;
   const CONTENT_H = PAGE_H - MARGIN * 2;
-  const mmPerCanvasPx = CONTENT_W / (CAPTURE_WIDTH * SCALE);
-  const pageHeightPx = CONTENT_H / mmPerCanvasPx;
 
   const sandbox = buildSandbox(CAPTURE_WIDTH);
   const sections = [];
@@ -254,7 +301,12 @@ export async function exportFullReport(date, manifest, { onProgress } = {}) {
       for (const section of SECTIONS) {
         onProgress?.(`Rendering ${section.label}…`);
         const canvas = await captureSection(sandbox, section, date, manifest, CAPTURE_WIDTH, SCALE);
-        sections.push({ label: section.label, slices: sliceCanvas(canvas, pageHeightPx) });
+        // Computed from this canvas's own width rather than the shared baseline —
+        // a section that had to grow for a wide table prints at a smaller scale
+        // *only for that section*, instead of shrinking every other page too.
+        const mmPerCanvasPx = CONTENT_W / canvas.width;
+        const pageHeightPx = CONTENT_H / mmPerCanvasPx;
+        sections.push({ label: section.label, mmPerCanvasPx, slices: sliceCanvas(canvas, pageHeightPx) });
       }
     });
   } finally {
@@ -268,7 +320,7 @@ export async function exportFullReport(date, manifest, { onProgress } = {}) {
   sections.forEach((section) => {
     section.slices.forEach((slice) => {
       doc.addPage();
-      doc.addImage(slice.dataUrl, 'JPEG', MARGIN, MARGIN, CONTENT_W, slice.heightPx * mmPerCanvasPx);
+      doc.addImage(slice.dataUrl, 'JPEG', MARGIN, MARGIN, CONTENT_W, slice.heightPx * section.mmPerCanvasPx);
     });
   });
 

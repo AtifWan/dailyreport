@@ -52,7 +52,7 @@ export function barChart({ dates, values, color = 'var(--accent)', height = 190,
     const h = innerH - (y(v) - padT);
     return `<rect x="${x.toFixed(1)}" y="${y(v).toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(h, 0).toFixed(1)}" rx="2" fill="${color}"
       data-tip="${esc(dates[i])}: ${esc(fmt(v))}${unit}"></rect>
-      <text x="${(x + bw / 2).toFixed(1)}" y="${(y(v) - 6).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">${esc(fmt(v))}</text>`;
+      <text x="${(x + bw / 2).toFixed(1)}" y="${(y(v) - 6).toFixed(1)}" text-anchor="${edgeAnchor(i, n)}" font-size="11" font-weight="700" fill="var(--ink)">${esc(fmt(v))}</text>`;
   }).join('');
   const gridlines = [0, 0.5, 1].map((f) => {
     const yy = padT + innerH * (1 - f);
@@ -87,7 +87,7 @@ export function stackedBarChart({ dates, seriesA, seriesB, colorA = 'var(--live)
         data-tip="${esc(dates[i])}: ${labelA} ${a}"></rect>
       <rect x="${x.toFixed(1)}" y="${yB.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(hB, 0).toFixed(1)}" fill="${colorB}"
         data-tip="${esc(dates[i])}: ${labelB} ${b}"></rect>
-      <text x="${(x + bw / 2).toFixed(1)}" y="${(yB - 6).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">${a + b}</text>
+      <text x="${(x + bw / 2).toFixed(1)}" y="${(yB - 6).toFixed(1)}" text-anchor="${edgeAnchor(i, n)}" font-size="11" font-weight="700" fill="var(--ink)">${a + b}</text>
     </g>`;
   }).join('');
   const gridlines = [0, 0.5, 1].map((f) => {
