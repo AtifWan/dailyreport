@@ -1,0 +1,44 @@
+{
+  "_source": "Daily Operations Report - 24th September 2026.pdf, pages 10-11 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. This routine's safety net is the cross-check noted below, not visual reading (that stays reserved for the manually-driven historical backlog).",
+  "reportTitle": "Daily Operations Report - 24th September 2026",
+  "reportDate": "2026-09-24",
+  "weekStart": "2026-09-21",
+  "weekEnd": "2026-09-25",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Wigglesworth", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sam Primrose", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Gosling", "site": "Crace", "status": ["available", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Bethany Tran", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Rebecca Quinn", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Nicole Regaspi", "site": null, "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Joshua Saw", "site": null, "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Anita Tammaro", "site": null, "status": ["available", "available", "leave", "leave", "available"] },
+        { "name": "Kiara Pfeffer", "site": null, "status": ["available", "available", "leave", "available", "available"] },
+        { "name": "Val Zihhareva", "site": null, "status": ["available", "available", "available", "leave", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+    { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "This date's own leave page reprints the identical 21-25 September grid already directly visually confirmed against the source PDF image for 2026-09-21 and reused verbatim on 2026-09-22/23 — text extraction alone still cannot see this table's per-day cell colors at all, so this file carries forward that same visually-confirmed grid rather than defaulting to 'available'. This date's own text extraction listed the same 6 doctors and 8 staff names as 2026-09-23's own grid (just split oddly across two pages), consistent with reusing it. Today (Thursday) the grid shows Anita Tammaro on leave and everyone else available; she is indeed absent from today's inbound/outbound staff tables in call-logs.json, though several other staff shown as available there are also absent (not every available staff member necessarily takes calls that day), so this is a supporting but not conclusive check."
+}

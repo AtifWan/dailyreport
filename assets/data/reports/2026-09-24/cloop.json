@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 24th September 2026.pdf, pages 5-9 (Cloop Report) — the only Cloop pages this date's PDF contains (it's missing the emails-handled and leave pages' usual neighbours, though the Cloop section itself came through intact). Read via OneDrive text extraction (Microsoft 365 connector), not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 24th September 2026",
+  "extractedAt": "2026-09-25T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Friday 25 September 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 24, "oldestDays": 7.73 },
+    { "queue": "Documents", "inQueue": 10, "oldestDays": 0.65 },
+    { "queue": "Unassigned", "inQueue": 5, "oldestDays": 0.69 },
+    { "queue": "GP Mail", "inQueue": 4, "oldestDays": 13.94 },
+    { "queue": "Practice Finance", "inQueue": 3, "oldestDays": 2.77 },
+    { "queue": "File Transfer", "inQueue": 2, "oldestDays": 3.76 },
+    { "queue": "Finance", "inQueue": 1, "oldestDays": 0.11 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 3.86 }
+  ],
+  "realTimeSummary": { "inQueue": 50, "oldestDays": 13.94 },
+  "_realTimeQueuesNote": "8 queues printed this time; they sum to the Summary row exactly (24+10+5+4+3+2+1+1=50), and the Summary's own oldestDays (13.94) matches GP Mail's own printed value exactly (the oldest individual queue) — high confidence.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 26 },
+    { "queue": "Documents", "count": 16 },
+    { "queue": "Finance", "count": 11 },
+    { "queue": "Failed Communication", "count": 4 },
+    { "queue": "Medico-legal", "count": 4 },
+    { "queue": "Requests", "count": 2 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 11 Sep", "Mon 14 Sep", "Tue 15 Sep", "Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep"],
+    "totals": [92, 86, 60, 78, 88, 85, 116, 95, 69, 63]
+  },
+  "_note": "contactsQueuedYesterday sums to 63 exactly (26+16+11+4+4+2), matching this date's own chain-reconstructed trend value at position 9 precisely — the trend chart itself wasn't printed on this date's PDF, so positions 0-8 are 2026-09-23's own committed trend with its first entry dropped, and position 9 (63) is doubly confirmed: by this date's own clean contactsQueuedYesterday sum AND by 2026-09-25's own printed chart, which independently carries this date's value as its own second-to-last point. inProgressTenDayTrend and openCasesTenDayTrend (below) are reconstructed the same way and matched 2026-09-25's own chain exactly at every overlapping position. Every emailsHandledYesterday row below reconciles its own incoming+outbound to its stated total exactly, unlike some prior dates.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 40, "outbound": 10, "total": 50 },
+    { "agent": "Leh Peng Goh", "incoming": 11, "outbound": 0, "total": 11 },
+    { "agent": "Apurva Pathak", "incoming": 2, "outbound": 5, "total": 7 },
+    { "agent": "Atif Wan", "incoming": 4, "outbound": 0, "total": 4 },
+    { "agent": "Emily Pettett", "incoming": 4, "outbound": 0, "total": 4 },
+    { "agent": "Lucinda Gonzalez", "incoming": 2, "outbound": 0, "total": 2 }
+  ],
+  "totalCasesToDate": { "date": "2026-09-24", "totalOverallCases": 8342, "totalInProgress": 101, "totalOpenCases": 59 },
+  "inProgressTenDayTrend": {
+    "labels": ["Fri 11 Sep", "Mon 14 Sep", "Tue 15 Sep", "Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep"],
+    "totals": [118, 125, 131, 122, 121, 129, 122, 113, 111, 101]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Fri 11 Sep", "Mon 14 Sep", "Tue 15 Sep", "Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep"],
+    "totals": [69, 64, 72, 85, 80, 99, 65, 57, 57, 59]
+  },
+  "_totalCasesToDateNote": "Per the established convention (see 2026-09-23's own cloop.json), this date's own Total Cases To Date row is printed with a one-business-day-ahead date/extraction stamp ('25/9/2026') — recorded here against this date's own actual report date (2026-09-24) instead. totalInProgress (101) and totalOpenCases (59) match the reconstructed trend arrays' own position 9 exactly."
+}

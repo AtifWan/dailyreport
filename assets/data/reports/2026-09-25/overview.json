@@ -1,0 +1,59 @@
+{
+  "_source": "Daily Operations Report - 25th September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 321,
+    "date": "2026-09-25",
+    "weekday": "Friday",
+    "title": "Daily Operations Report - 25th September 2026 (Short Version)"
+  },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 56, "onHalt": false },
+      { "name": "Finance", "days": 8, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 231,
+    "accepted": 216,
+    "acceptedPct": 94,
+    "missed": 15,
+    "missedPct": 6,
+    "totalOutbound": 123,
+    "topInboundAgent": { "name": "Andrew Davies", "calls": 39 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 123, "missed": 8 },
+      { "queue": "General Enquiries", "accepted": 85, "missed": 7 },
+      { "queue": "Canberra Vasectomy", "accepted": 8, "missed": 0 }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence — Andrew Davies tops a fully clean inboundByStaff table (11 names, 11 values, 11 durations all lined up 1:1, summing exactly to the confirmed accepted total of 216, with no cover-pie-vs-grand-total gap this time).",
+  "cloop": {
+    "inQueue": 56,
+    "oldestDays": 6.99,
+    "contactsQueuedYesterday": 63,
+    "emailsHandledYesterday": 93,
+    "totalOverallCases": 8431,
+    "totalInProgress": 105,
+    "totalOpenCases": 65
+  },
+  "leave": {
+    "weekLabel": "21–25 September 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 8,
+    "staffPartialLeaveNames": ["Bethany Tran", "Rebecca Quinn", "Nicole Regaspi", "Joshua Saw", "Anita Tammaro", "Kiara Pfeffer", "Val Zihhareva", "Megan Moreno Pitcher"],
+    "longTerm": [
+      { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+      { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+    ]
+  },
+  "_leaveNote": "Last day of the same 21-25 September week already committed for 2026-09-21 through 2026-09-24 — weekly roster summary unchanged. Today (Friday) Val Zihhareva and Megan Moreno Pitcher are on leave among the listed staff, and all 6 doctors remain on leave; see leave.json's own note on why this date's own leave-page text was set aside in favour of the already visually-confirmed grid."
+}
