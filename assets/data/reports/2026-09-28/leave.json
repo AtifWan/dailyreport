@@ -1,0 +1,46 @@
+{
+  "_source": "Daily Operations Report - 28th September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. This routine's safety net is the cross-check noted below, not visual reading (that stays reserved for the manually-driven historical backlog).",
+  "reportTitle": "Daily Operations Report - 28th September 2026",
+  "reportDate": "2026-09-28",
+  "weekStart": "2026-09-28",
+  "weekEnd": "2026-10-02",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Gosling", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Frederick Chung", "site": "Lyneham", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Val Zihhareva", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Anita Tammaro", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Micah Haly", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Amy Morton", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Renee Bowman", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+    { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "IMPORTANT, please review: this is a genuinely NEW week (28 Sept - 2 Oct) with no already-visually-confirmed grid to fall back on (unlike 2026-09-14 through 09-25, which all reused a grid the user had visually verified earlier). Exactly like 2026-09-11's leave.json, this date's own extracted text carried NO per-day status grid at all — only a flat list of 9 doctor names and 7 staff names under 'DOCTOR'/'STAFF' headers, with no 'leave'/'available' words attached to individual day-cells (status in this table is conveyed purely by cell colour, which text extraction cannot see). Every person's status array above is therefore an INFERENCE — that appearing on this page at all means full-week leave — not a verified per-day reading, following the same convention already used for 2026-09-11. Partial corroboration: none of the 7 STAFF names above (Val Zihhareva, Anita Tammaro, Micah Haly, Amy Morton, Renee Bowman, Megan Moreno Pitcher, Andrew Davies) appear anywhere in today's own inboundByStaff/outboundByStaff call tables, consistent with all of them being on leave at least today (Monday) — but this does not confirm the Tuesday-Friday portion of the inferred grid. Given the previous week's roster (Bethany Tran, Rebecca Quinn, Nicole Regaspi, Joshua Saw, Anita Tammaro, Kiara Pfeffer, Val Zihhareva, Megan Moreno Pitcher) only partially overlaps this one, and the doctor list has grown from 6 to 9 names, this is flagged prominently for the user to double-check against the source PDF directly rather than trust as extracted fact."
+}

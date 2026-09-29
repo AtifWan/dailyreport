@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 28th September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 28th September 2026",
+  "extractedAt": "2026-09-29T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Tuesday 29 September 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 26, "oldestDays": 5.6 },
+    { "queue": "Unassigned", "inQueue": 8, "oldestDays": 0.7 },
+    { "queue": "Practice Finance", "inQueue": 4, "oldestDays": 6.75 },
+    { "queue": "Medico-legal", "inQueue": 4, "oldestDays": 3.01 },
+    { "queue": "File Transfer", "inQueue": 3, "oldestDays": 3.67 },
+    { "queue": "GP Mail", "inQueue": 3, "oldestDays": 7.97 },
+    { "queue": "Documents", "inQueue": 1, "oldestDays": 0.07 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 0.95 }
+  ],
+  "realTimeSummary": { "inQueue": 50, "oldestDays": 7.97 },
+  "_realTimeQueuesNote": "8 queues printed this time; they sum to the Summary row exactly (26+8+4+4+3+3+1+1=50), and the Summary's own oldestDays (7.97) matches GP Mail's own printed value exactly (the oldest individual queue) — high confidence. This panel's own extraction timestamp reads 'Tuesday, 29th September 2026' — one business day ahead of this report's own Monday date, the same established one-business-day-ahead pattern seen on every prior date.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 27 },
+    { "queue": "Documents", "count": 20 },
+    { "queue": "Finance", "count": 14 },
+    { "queue": "Failed Communication", "count": 6 },
+    { "queue": "Requests", "count": 2 },
+    { "queue": "Medico-legal", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Tue 15 Sep", "Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep"],
+    "totals": [60, 78, 88, 85, 116, 95, 69, 63, 63, 70]
+  },
+  "_note": "contactsQueuedYesterday sums to 70 exactly (27+20+14+6+2+1), matching this report's own contactsQueuedTenDayTrend chart's clean trailing value exactly — positions 0-8 chain-matched 2026-09-25's own committed trend exactly. This panel is labelled 'Last Friday's Contacts Queued' in some prior dates' source text despite covering the prior business day regardless of weekday; this date's own label instead reads plainly ('Yesterday's Contacts Queued in Each Queue') since Monday-after-Friday still counts as 'yesterday' isn't literal here (extraction happens the next business morning, Tuesday), consistent with every other Monday date in this project. Only one emailsHandledYesterday row (Jasmina Sodolovic) fails to reconcile its own incoming+outbound to its stated total this time.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 49, "outbound": 18, "total": 67 },
+    { "agent": "Leh Peng Goh", "incoming": 14, "outbound": 0, "total": 14 },
+    { "agent": "Atif Wan", "incoming": 5, "outbound": 0, "total": 5 },
+    { "agent": "Jasmina Sodolovic", "incoming": 1, "outbound": 0, "total": 2 },
+    { "agent": "Ambrosie Brassil", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Jasmina Sodolovic's stated total (2) doesn't equal her own incoming+outbound (1+0=1) in the source PDF itself — the same recurring 'total column doesn't match its own components' quirk already flagged for this same agent on 2026-09-15/16. Recorded verbatim rather than reconciled; Chloey Leow, Leh Peng Goh, Atif Wan and Ambrosie Brassil all reconcile exactly.",
+  "totalCasesToDate": { "date": "2026-09-28", "totalOverallCases": 8494, "totalInProgress": 108, "totalOpenCases": 55 },
+  "inProgressTenDayTrend": {
+    "labels": ["Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep"],
+    "totals": [131, 122, 121, 129, 122, 113, 111, 101, 105, 108]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep"],
+    "totals": [72, 85, 80, 99, 65, 57, 57, 59, 65, 55]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a one-business-day-ahead date/label stamp ('29/9/2026', a Tuesday) — recorded here against this date's own actual report date (2026-09-28) instead, with the trend charts' labels shifted back correspondingly. totalInProgress (108) and totalOpenCases (55) match the relabelled trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-09-25's own committed trend exactly — high confidence."
+}
