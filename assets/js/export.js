@@ -1,29 +1,26 @@
-import { formatDate } from './util.js';
-import { renderOverview } from './pages/overview.js';
-import { renderTasks } from './pages/tasks.js';
-import { renderCallLogs } from './pages/call-logs.js';
-import { renderCloop } from './pages/cloop.js';
-import { renderLeave } from './pages/leave.js';
+import { fetchJSON, formatDate, todayISOInCanberra } from './util.js';
+import { startOfWorkingStreak } from './workdays.js';
 
-// Renders each tab off-screen, in the same order as the sidebar nav, and stitches
-// the result into one paginated PDF — the file that gets attached to the Teams
-// channel today, built with a click instead of by hand from the source PDFs.
-const SECTIONS = [
-  { label: 'Overview', render: renderOverview },
-  { label: 'Critical daily tasks', render: renderTasks },
-  { label: 'Call logs', render: renderCallLogs },
-  { label: 'Cloop', render: renderCloop },
-  { label: "Staff & doctors' leave", render: renderLeave },
-];
-
-// Controls that only make sense on a live page (a date-picker button, a search box,
-// filter chips) — hidden for the snapshot rather than rendered as dead chrome with
-// nothing behind it. Nothing they gate is hidden: call-logs' per-queue panels and
-// leave's day rows all default to "show everything", exactly what a full export wants.
-const EXPORT_HIDE_SELECTOR = '.dr-date-filter, input.sinput, .dr-queue-filter, .dr-day-filter';
+// Builds the downloadable report as a native, vector-drawn PDF — every word of text,
+// every table cell and every chart line is drawn straight into the PDF with jsPDF,
+// not screenshotted off the live page. That's what makes it print crisp at any zoom
+// (a screenshot-based PDF blurs past ~150%) and small (a few hundred KB, not tens of
+// MB of embedded JPEG). The trade-off is that this file no longer reuses the page
+// modules under pages/ — it fetches the same report JSON directly and lays it out
+// for print, so a schema change to one of those JSON files needs a matching update
+// here too (each section builder below names the fields it reads).
+//
+// jsPDF's default fonts (Helvetica/Times/Courier) only encode WinAnsi/Latin-1 —
+// no ✓, ☐, ▲, ▼, ⚑, or other Unicode symbol renders correctly. Every marker in this
+// file is plain ASCII or a colour, never a symbol glyph, for exactly that reason.
+const PAGE_W = 297, PAGE_H = 210, MARGIN = 10; // A4 landscape, mm
+const CONTENT_W = PAGE_W - MARGIN * 2;
+const HEADER_H = 13; // margin-top to body start, on every section page (not the cover)
+const FOOTER_H = 9; // body end to page bottom
+const BODY_Y = MARGIN + HEADER_H;
+const BODY_H = PAGE_H - MARGIN - FOOTER_H - BODY_Y;
 
 let libsPromise = null;
-
 function loadScript(src) {
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
@@ -33,245 +30,910 @@ function loadScript(src) {
     document.head.appendChild(s);
   });
 }
-
-/** html2canvas + jsPDF (~100KB gzipped together, vendored under assets/vendor/ so
- *  the export works with no third-party dependency at request time) are only
- *  fetched the first time an export actually runs, not on every page load. */
 function ensureLibs() {
-  if (window.html2canvas && window.jspdf) return Promise.resolve();
-  if (!libsPromise) {
-    libsPromise = Promise.all([
-      window.html2canvas ? null : loadScript('assets/vendor/html2canvas.min.js'),
-      window.jspdf ? null : loadScript('assets/vendor/jspdf.umd.min.js'),
-    ]);
-  }
+  if (window.jspdf) return Promise.resolve();
+  if (!libsPromise) libsPromise = loadScript('assets/vendor/jspdf.umd.min.js');
   return libsPromise;
 }
 
-/** Resolves ANY valid CSS colour (oklch(), a hex string, "transparent", …) to the
- *  rgb()/rgba() string a 2024-era canvas renderer like html2canvas can read —
- *  Canvas 2D's own fillStyle parser already understands oklch(), so painting one
- *  pixel and reading it back is a more reliable translator than hand-rolling an
- *  oklch-to-rgb formula. */
-function resolveToRgb(cssColor) {
+/** Resolves ANY valid CSS colour (oklch(), a hex string, a "/ 0.12"-alpha token, …) to
+ *  opaque [r,g,b] ints — painting it onto a white 1x1 canvas and reading the pixel back
+ *  both lets the browser's own colour parser do the oklch math (jsPDF's can't) and
+ *  correctly composites a translucent design-system tint (e.g. --accent-weak) against
+ *  the white page it'll actually sit on, in one step. */
+function resolveRgb(cssColor) {
   const c = document.createElement('canvas');
   c.width = c.height = 1;
   const ctx = c.getContext('2d');
-  ctx.clearRect(0, 0, 1, 1);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, 1, 1);
   ctx.fillStyle = cssColor;
   ctx.fillRect(0, 0, 1, 1);
-  const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
-  return a === 255 ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${(a / 255).toFixed(3)})`;
+  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+  return [r, g, b];
 }
 
-// html2canvas's own CSS colour parser predates oklch() and paints anything it can't
-// read as solid black — and design-system/css/styles.css uses oklch() both behind
-// custom properties AND written directly into rules (.topbar, .toast, .kpi.crit's
-// border-color, …), so patching individual properties on individual elements can't
-// cover it. The two stylesheets' own text is fetched once and every oklch(...)
-// literal in it is swapped for the rgb()/rgba() a 1x1 canvas resolves it to.
-//
-// That fixed CSS then has to win the cascade on the *live* page while a capture is
-// in flight, not just inside html2canvas's cloned copy — it turns out html2canvas
-// also reads computed style straight off the original elements for some of its own
-// bookkeeping (observed via `getComputedStyle(svg).borderTopColor` resolving
-// `currentcolor` back to oklch()), so a clone-only fix still throws on a real page.
-// Appending it as one more <style> after the two original stylesheets makes it win
-// every overlapping declaration (same selectors, same specificity, later wins) —
-// same computed colours everywhere, just spelled in a syntax html2canvas can read;
-// nothing changes visibly while it's active.
-let oklchFreeCssPromise = null;
-function loadOklchFreeCss() {
-  if (!oklchFreeCssPromise) {
-    oklchFreeCssPromise = (async () => {
-      const hrefs = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
-        .map((link) => link.href)
-        .filter((href) => href && !href.includes('fonts.googleapis.com'));
-      const texts = await Promise.all(hrefs.map((href) => fetch(href).then((r) => r.text())));
-      return texts.join('\n').replace(/oklch\([^)]*\)/g, (m) => resolveToRgb(m));
-    })();
-  }
-  return oklchFreeCssPromise;
+/** Reads the live design system's own custom properties so the PDF's palette always
+ *  matches the dashboard's, even if tokens.css changes later — never a hand-copied
+ *  duplicate set of colours to fall out of sync. */
+function buildPalette() {
+  const cs = getComputedStyle(document.documentElement);
+  const rgb = (name) => resolveRgb(cs.getPropertyValue(name).trim());
+  return {
+    ink: rgb('--ink'), inkMuted: rgb('--ink-muted'), inkFaint: rgb('--ink-faint'),
+    hairline: rgb('--hairline'), hairlineStrong: rgb('--hairline-strong'),
+    surfaceSunk: rgb('--surface-sunk'),
+    accent: rgb('--accent'), accentStrong: rgb('--accent-strong'), accentWeak: rgb('--accent-weak'),
+    accent2: rgb('--accent-2'),
+    live: rgb('--live'), liveSoft: rgb('--live-soft'), liveInk: rgb('--live-ink'),
+    infer: rgb('--infer'), inferSoft: rgb('--infer-soft'), inferInk: rgb('--infer-ink'),
+    danger: rgb('--danger'), dangerSoft: rgb('--danger-soft'), dangerInk: rgb('--danger-ink'),
+    age1: rgb('--age1'), age2: rgb('--age2'), age3: rgb('--age3'), age4: rgb('--age4'),
+    white: [255, 255, 255],
+  };
 }
 
-// The live dashboard's two-column panels (.grid2) and the ad-hoc per-queue chart
-// grids in call-logs.js are sized for a desktop browser window; printed at that same
-// width on a single A4 page, every line of text comes out well under 6pt — legible
-// on a phone screen at hi-DPI, not on paper. Stacking everything to one column lets
-// each section render at a *narrower* width and still print at a readable size (see
-// CAPTURE_WIDTH below), and a table's own overflow-scroll wrapper is unclipped too,
-// so a wide table prints in full rather than losing whatever columns need scrolling
-// live (measured for real and grown into if still not enough — see captureSection).
-// html2canvas clones the document before it reads any of this: cloning re-serialises
-// every inline style attribute through the CSSOM ("display:grid;grid-template-columns:…"
-// becomes "display: grid; grid-template-columns: …", spaced), so a substring selector
-// copied verbatim from the source (no space after the colon) never matches inside the
-// clone even though it matches the live page — confirmed by dumping the cloned
-// attribute text mid-capture. Matching on "auto-fit" alone sidesteps the whole
-// punctuation-spacing question, since html2canvas's reserialisation doesn't touch it.
-const PRINT_LAYOUT_CSS = `
-  .grid2 { grid-template-columns: 1fr !important; }
-  [style*="auto-fit"] { grid-template-columns: 1fr !important; }
-  .rtable-wrap { overflow: visible !important; max-height: none !important; width: fit-content !important; max-width: none !important; }
-`;
-
-/** Applies the oklch-free + print-layout overrides to the live document for the
- *  duration of `fn` (the whole multi-section capture), then removes them either way. */
-async function withOklchOverride(fn) {
-  const css = await loadOklchFreeCss();
-  const styleEl = document.createElement('style');
-  styleEl.textContent = `${css}\n${PRINT_LAYOUT_CSS}`;
-  document.head.appendChild(styleEl);
-  try {
-    return await fn();
-  } finally {
-    styleEl.remove();
-  }
+function niceMax(max) {
+  if (max <= 0) return 1;
+  const pow = Math.pow(10, Math.floor(Math.log10(max)));
+  const n = max / pow;
+  const step = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+  return step * pow;
 }
 
-function buildSandbox(width) {
-  const el = document.createElement('div');
-  // Off-screen, not display:none — html2canvas needs the element actually laid out.
-  el.style.cssText = `position:fixed; left:-10000px; top:0; width:${width}px; background:var(--bg);`;
-  document.body.appendChild(el);
-  return el;
+// The live dashboard drops the weekday from a "Wed 16 Sep"-style axis label when
+// space is tight (see shortDate() in charts.js) — same fix, same reason, here.
+function shortDate(d) {
+  const parts = String(d).split(' ');
+  return parts.length === 3 ? parts.slice(1).join(' ') : d;
 }
 
-// charts.js's SVGs set fill/stroke directly as presentation attributes
-// (`fill="var(--live)"`), not through a stylesheet rule — swapping the stylesheet
-// text (above) doesn't touch these, and unlike an inline style="color:var(--x)",
-// they don't reliably re-resolve against the clone's own cascade. Baked to a literal
-// rgb() on the *live* sandbox element, straight from its own computed style, before
-// html2canvas ever clones it, so there's no var() left for the clone to get wrong.
-function bakeSvgPaintColors(root) {
-  root.querySelectorAll('[fill*="var("], [stroke*="var("]').forEach((el) => {
-    const computed = getComputedStyle(el);
-    if (el.getAttribute('fill')?.includes('var(')) el.setAttribute('fill', resolveToRgb(computed.fill));
-    if (el.getAttribute('stroke')?.includes('var(')) el.setAttribute('stroke', resolveToRgb(computed.stroke));
-  });
+function fmtSec(sec) {
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return m > 0 ? `${m}m ${s}s` : `${s}s`;
 }
 
-// getBoundingClientRect() always reports an element's own real layout box, even when
-// an ancestor would normally clip it (clipping is a paint-time effect, not a layout
-// one) — so this finds how wide the widest actual table wants to be regardless of
-// its .rtable-wrap's overflow setting, independent of PRINT_LAYOUT_CSS having
-// unclipped that wrapper already.
-function measureNeededWidth(sandbox, baseWidth) {
-  const left = sandbox.getBoundingClientRect().left;
-  let needed = baseWidth;
-  sandbox.querySelectorAll('.rtable').forEach((table) => {
-    const right = table.getBoundingClientRect().right - left;
-    if (right > needed) needed = right + 24; // small right-hand breathing room
-  });
-  return needed;
-}
-
-async function captureSection(sandbox, section, date, manifest, width, scale) {
-  sandbox.style.width = `${width}px`;
-  sandbox.innerHTML = '';
-  await section.render(sandbox, date, manifest);
-  sandbox.querySelectorAll(EXPORT_HIDE_SELECTOR).forEach((el) => { el.style.display = 'none'; });
-  bakeSvgPaintColors(sandbox);
-  // Give the browser a couple of frames to settle the layout this innerHTML swap
-  // just triggered before html2canvas measures it.
-  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-  // A table wider than `width` (its .rtable-wrap scrolls horizontally live) would
-  // otherwise just get cropped at `width` — no scrollbar to hint anything is missing
-  // once it's a flat image. Growing the sandbox to fit trades a smaller effective
-  // print scale on that one section for never silently dropping a column.
-  const neededWidth = measureNeededWidth(sandbox, width);
-  if (neededWidth > width) {
-    sandbox.style.width = `${neededWidth}px`;
-    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-  }
-
-  return window.html2canvas(sandbox, {
-    scale,
-    width: neededWidth,
-    windowWidth: neededWidth,
-    backgroundColor: '#faf9f5',
-    onclone: (clonedDoc) => {
-      // Box-shadow support in html2canvas is unreliable regardless of colour syntax;
-      // a flat report reads fine without the dashboard's subtle elevation shadows.
-      const style = clonedDoc.createElement('style');
-      style.textContent = '*{ box-shadow: none !important; }';
-      clonedDoc.head.appendChild(style);
+// ---------------------------------------------------------------------------
+// Flow: a per-section vertical cursor that starts a fresh continuation page
+// (same title, same colour, "(cont'd)" appended) the moment the next block
+// wouldn't fit — so a page-per-section is the norm, but no report ever loses
+// content or overlaps two panels because one date happened to have more rows
+// than another. `pageMeta` is the single array the final chrome pass reads.
+// ---------------------------------------------------------------------------
+function makeFlow(doc, pageMeta, meta) {
+  let y = BODY_Y;
+  return {
+    get y() { return y; },
+    set y(v) { y = v; },
+    get remaining() { return BODY_Y + BODY_H - y; },
+    /** Ensures `h` mm are available at the current cursor, breaking to a new
+     *  page first if not, and returns the y to draw at. */
+    ensure(h) {
+      if (y + h > BODY_Y + BODY_H + 0.01) {
+        doc.addPage('a4', 'landscape');
+        pageMeta.push({ isCover: false, title: `${meta.title} (cont'd)`, color: meta.color, dateLabel: meta.dateLabel });
+        y = BODY_Y;
+      }
+      return y;
     },
-  });
+  };
 }
 
-/** Cuts one tall canvas into page-height chunks, each a separate PDF page. */
-function sliceCanvas(canvas, sliceHeightPx) {
-  const slices = [];
-  let y = 0;
-  while (y < canvas.height) {
-    const h = Math.min(sliceHeightPx, canvas.height - y);
-    const c = document.createElement('canvas');
-    c.width = canvas.width;
-    c.height = h;
-    c.getContext('2d').drawImage(canvas, 0, y, canvas.width, h, 0, 0, canvas.width, h);
-    slices.push({ heightPx: h, dataUrl: c.toDataURL('image/jpeg', 0.94) });
-    y += h;
+/** Every drawing primitive the section builders use, closed over one jsPDF document
+ *  and one resolved palette so callers never repeat a setFillColor/setDrawColor triad. */
+function makeKit(doc, pal) {
+  const fill = (rgb) => doc.setFillColor(rgb[0], rgb[1], rgb[2]);
+  const draw = (rgb) => doc.setDrawColor(rgb[0], rgb[1], rgb[2]);
+  const text = (rgb) => doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+
+  function kpiTile(x, y, w, h, { label, value, sub, tone = 'neutral' }) {
+    const barRgb = tone === 'good' ? pal.live : tone === 'crit' ? pal.danger : pal.hairlineStrong;
+    draw(pal.hairline); doc.setLineWidth(0.2);
+    doc.roundedRect(x, y, w, h, 1.6, 1.6, 'S');
+    fill(barRgb);
+    doc.roundedRect(x, y, 1.6, h, 0.8, 0.8, 'F');
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.6); text(pal.inkFaint);
+    doc.text(String(label).toUpperCase(), x + 4.5, y + 5.1);
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(15.5);
+    text(tone === 'good' ? pal.liveInk : tone === 'crit' ? pal.dangerInk : pal.ink);
+    doc.text(String(value), x + 4.5, y + 12.6);
+
+    if (sub) {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(6.6); text(pal.inkMuted);
+      doc.splitTextToSize(sub, w - 8).slice(0, 2).forEach((line, i) => doc.text(line, x + 4.5, y + 17.1 + i * 3.2));
+    }
   }
-  return slices;
+
+  function kpiRow(x, y, w, h, tiles) {
+    const gap = 3;
+    const tw = (w - gap * (tiles.length - 1)) / tiles.length;
+    tiles.forEach((t, i) => kpiTile(x + i * (tw + gap), y, tw, h, t));
+    return y + h;
+  }
+
+  function panelFrame(x, y, w, h, title, sub) {
+    draw(pal.hairline); doc.setLineWidth(0.2);
+    doc.roundedRect(x, y, w, h, 2, 2, 'S');
+    let yy = y + 6;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); text(pal.ink);
+    doc.text(title, x + 4, yy);
+    yy += 4;
+    if (sub) {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(6.8); text(pal.inkFaint);
+      doc.text(sub, x + 4, yy);
+      yy += 3.8;
+    }
+    return yy + 1.2;
+  }
+  /** Header consumed by panelFrame for a given title/sub combination — section
+   *  builders use this to size a panel *before* drawing it (deciding how much
+   *  room to ensure()). Positioning content, once the panel IS drawn, must
+   *  always use panelFrame's own return value instead, never this estimate. */
+  function panelHeaderH(sub) { return sub ? 15 : 7.2; }
+
+  /** A label / proportional-bar / value row, e.g. a streak or a queue's accepted count. */
+  function hBarRows(x, y, w, rowH, rows, { labelW = 34, valueW = 28 } = {}) {
+    let yy = y;
+    const barX = x + labelW, barW = w - labelW - valueW;
+    rows.forEach((r) => {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7.6); text(pal.ink);
+      doc.text(r.label, x, yy + rowH * 0.62, { maxWidth: labelW - 2 });
+      fill(pal.surfaceSunk);
+      doc.roundedRect(barX, yy + rowH * 0.16, barW, rowH * 0.5, 0.8, 0.8, 'F');
+      const frac = Math.max(0, Math.min(1, r.frac));
+      const fw = frac > 0 ? Math.max(barW * frac, 1.4) : 0;
+      if (fw > 0) { fill(r.color || pal.accent); doc.roundedRect(barX, yy + rowH * 0.16, fw, rowH * 0.5, 0.8, 0.8, 'F'); }
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7.6); text(pal.ink);
+      doc.text(r.valueLabel, x + w, yy + rowH * 0.62, { align: 'right' });
+      if (r.subLabel) {
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(6); text(pal.inkFaint);
+        doc.text(r.subLabel, x + w, yy + rowH - 0.6, { align: 'right' });
+      }
+      yy += rowH;
+    });
+    return yy;
+  }
+
+  /** Two thin stacked bars per row (accepted vs missed) instead of one combined bar —
+   *  matches the live dashboard's own hBarGroup(), which draws each value as its own
+   *  full-width-proportional bar rather than summing them. rowH needs to be generous
+   *  enough (>=8mm) for both value labels to sit clear of one another. */
+  function hBarGroupDual(x, y, w, rowH, items, { labelW = 40 } = {}) {
+    let yy = y;
+    const max = Math.max(...items.flatMap((it) => it.values.map((v) => v.value)), 1);
+    const barX = x + labelW, barW = w - labelW - 16;
+    items.forEach((it) => {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7.6); text(pal.ink);
+      doc.text(it.label, x, yy + rowH / 2 + 1, { maxWidth: labelW - 2 });
+      const gap = 1;
+      const barH = (rowH - gap) / it.values.length - gap;
+      it.values.forEach((v, i) => {
+        const by = yy + i * (barH + gap);
+        fill(pal.surfaceSunk); doc.roundedRect(barX, by, barW, barH, 0.5, 0.5, 'F');
+        const fw = v.value > 0 ? Math.max(barW * (v.value / max), 1.2) : 0;
+        if (fw > 0) { fill(v.color); doc.roundedRect(barX, by, fw, barH, 0.5, 0.5, 'F'); }
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(6.4); text(pal.inkMuted);
+        doc.text(String(v.value), x + w, by + barH - 0.4, { align: 'right' });
+      });
+      yy += rowH;
+    });
+    return yy;
+  }
+
+  function legendChip(x, y, color, label, fontSize = 6.8) {
+    fill(color); doc.rect(x, y - 2.2, 2.6, 2.6, 'F');
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(fontSize); text(pal.inkMuted);
+    doc.text(label, x + 3.6, y);
+    return x + 3.6 + doc.getTextWidth(label) + 6;
+  }
+
+  /** Single-series line chart with a point + value label at every date, and an
+   *  optional dashed target line — every 10-day trend in this project is exactly
+   *  this shape (see lineChart() in charts.js, which this mirrors in vector form). */
+  function lineChart(x, y, w, h, { labels, data, color, unit = '', target, targetLabel }) {
+    const padT = 5.5, padB = 6, padL = 1, padR = 1;
+    const innerW = w - padL - padR, innerH = h - padT - padB;
+    const allVals = data.concat(target != null ? [target] : []);
+    const max = niceMax(Math.max(...allVals, 1) * 1.18);
+    const n = labels.length;
+    const stepX = n > 1 ? innerW / (n - 1) : 0;
+    const X = (i) => x + padL + stepX * i;
+    const Y = (v) => y + padT + innerH - (v / max) * innerH;
+
+    draw(pal.hairline); doc.setLineWidth(0.15);
+    [0, 0.5, 1].forEach((f) => { const yy = y + padT + innerH * (1 - f); doc.line(x, yy, x + w, yy); });
+
+    if (target != null) {
+      draw(pal.danger); doc.setLineWidth(0.3);
+      doc.setLineDashPattern([1, 1], 0);
+      doc.line(x, Y(target), x + w, Y(target));
+      doc.setLineDashPattern([], 0);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(6); text(pal.dangerInk);
+      doc.text(targetLabel || `${target}${unit}`, x + w, Y(target) - 1, { align: 'right' });
+    }
+
+    draw(color); doc.setLineWidth(0.55);
+    for (let i = 0; i < n - 1; i++) doc.line(X(i), Y(data[i]), X(i + 1), Y(data[i + 1]));
+    fill(color);
+    data.forEach((v, i) => {
+      doc.circle(X(i), Y(v), 0.75, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(6); text(color);
+      const align = i === 0 ? 'left' : i === n - 1 ? 'right' : 'center';
+      doc.text(`${v}${unit}`, X(i), Y(v) - 1.6, { align });
+    });
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(6); text(pal.inkFaint);
+    labels.forEach((d, i) => {
+      const align = i === 0 ? 'left' : i === n - 1 ? 'right' : 'center';
+      doc.text(shortDate(d), X(i), y + h - 1, { align });
+    });
+  }
+
+  /** Two-series stacked vertical bars with the combined total labelled on top and a
+   *  small legend beneath — the print counterpart of stackedBarChart() in charts.js. */
+  function stackedBarChart(x, y, w, h, { labels, seriesA, seriesB, colorA, colorB, labelA, labelB }) {
+    const padT = 5.5, padB = 6, legendH = 5;
+    const innerW = w, innerH = h - padT - padB - legendH;
+    const totals = seriesA.map((v, i) => v + seriesB[i]);
+    const max = niceMax(Math.max(...totals, 1) * 1.15);
+    const n = seriesA.length;
+    const step = innerW / n, bw = step * 0.6;
+    const Y = (v) => y + padT + innerH - (v / max) * innerH;
+
+    draw(pal.hairline); doc.setLineWidth(0.15);
+    [0, 0.5, 1].forEach((f) => { const yy = y + padT + innerH * (1 - f); doc.line(x, yy, x + w, yy); });
+
+    seriesA.forEach((a, i) => {
+      const b = seriesB[i];
+      const xx = x + step * i + (step - bw) / 2;
+      const yA = Y(a), hA = (y + padT + innerH) - yA;
+      const yB = Y(a + b), hB = yA - yB;
+      fill(colorA); doc.rect(xx, yA, bw, Math.max(hA, 0), 'F');
+      fill(colorB); doc.rect(xx, yB, bw, Math.max(hB, 0), 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(6.2); text(pal.ink);
+      doc.text(String(a + b), xx + bw / 2, yB - 1, { align: 'center' });
+    });
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(6); text(pal.inkFaint);
+    labels.forEach((d, i) => doc.text(shortDate(d), x + step * i + step / 2, y + h - legendH - 1, { align: 'center' }));
+
+    const legendY = y + h - 1;
+    let lx = x + w / 2 - 30;
+    lx = legendChip(lx, legendY, colorA, labelA);
+    legendChip(lx, legendY, colorB, labelB);
+  }
+
+  /** A hand-rolled data table — no autoTable plugin is vendored, and this project's
+   *  tables are simple enough (flex/fixed columns, optional zebra rows) not to need one. */
+  function table(x, y, w, { columns, rows, rowH = 5.4, headerH = 5.8, maxRows }) {
+    const totalFlex = columns.reduce((s, c) => s + (c.flex || 0), 0) || 1;
+    const fixedW = columns.reduce((s, c) => s + (c.width || 0), 0);
+    const flexW = Math.max(w - fixedW, 0);
+    let cx = x;
+    const colBox = columns.map((c) => {
+      const cw = c.width != null ? c.width : flexW * (c.flex || 0) / totalFlex;
+      const box = { x: cx, w: cw };
+      cx += cw;
+      return box;
+    });
+
+    fill(pal.surfaceSunk); doc.rect(x, y, w, headerH, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.6); text(pal.inkMuted);
+    columns.forEach((c, i) => {
+      const { x: cx0, w: cw } = colBox[i];
+      doc.text(c.label.toUpperCase(), c.align === 'right' ? cx0 + cw - 2 : cx0 + 2, y + headerH - 1.8, { align: c.align === 'right' ? 'right' : 'left' });
+    });
+    let yy = y + headerH;
+
+    if (rows.length === 0) {
+      doc.setFont('helvetica', 'italic'); doc.setFontSize(7); text(pal.inkFaint);
+      doc.text('No data published for this date.', x + w / 2, yy + 5, { align: 'center' });
+      return yy + 9;
+    }
+
+    const shown = maxRows ? rows.slice(0, Math.max(maxRows, 0)) : rows;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7.2);
+    shown.forEach((r, ri) => {
+      if (ri % 2 === 1) { fill(pal.surfaceSunk); doc.rect(x, yy, w, rowH, 'F'); }
+      text(pal.ink);
+      columns.forEach((c, i) => {
+        const { x: cx0, w: cw } = colBox[i];
+        const val = c.format ? c.format(r) : r[c.key];
+        doc.text(String(val), c.align === 'right' ? cx0 + cw - 2 : cx0 + 2, yy + rowH - 1.5, { align: c.align === 'right' ? 'right' : 'left' });
+      });
+      yy += rowH;
+    });
+    draw(pal.hairline); doc.setLineWidth(0.15);
+    doc.line(x, y + headerH, x + w, y + headerH);
+
+    if (maxRows != null && rows.length > maxRows) {
+      doc.setFont('helvetica', 'italic'); doc.setFontSize(6.6); text(pal.inkFaint);
+      doc.text(`+ ${rows.length - maxRows} more — see the live dashboard for the full list`, x + 2, yy + 3);
+      yy += 4.6;
+    }
+    return yy;
+  }
+  /** Estimated total height of a table() call before drawing it, so callers can
+   *  ensure() the right amount of room (and know how many rows will actually fit). */
+  function tableRowsFor(available, headerH, rowH, hasMoreNote) {
+    const usable = available - headerH - (hasMoreNote ? 4.6 : 0);
+    return Math.max(0, Math.floor(usable / rowH));
+  }
+
+  /** The week-at-a-glance leave grid: a name column plus one status chip per day,
+   *  grouped by role, matching the colours the live leave.js page uses (vermillion =
+   *  on leave, blue = available, amber = public holiday — see STATUS in leave.js). */
+  function leaveGrid(x, y, w, { days, todayIndex, groups }) {
+    const nameW = 58, rowH = 6.6, groupH = 5.2;
+    const dayW = (w - nameW) / days.length;
+    let yy = y;
+
+    fill(pal.surfaceSunk); doc.rect(x, yy, w, rowH * 0.72, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.8); text(pal.inkMuted);
+    doc.text('NAME', x + 2, yy + rowH * 0.5);
+    days.forEach((d, i) => {
+      const dx = x + nameW + i * dayW;
+      if (i === todayIndex) { fill(pal.accentWeak); doc.rect(dx, yy, dayW, rowH * 0.72, 'F'); }
+      text(i === todayIndex ? pal.accentStrong : pal.inkMuted);
+      doc.text(d.slice(0, 3).toUpperCase(), dx + dayW / 2, yy + rowH * 0.5, { align: 'center' });
+    });
+    yy += rowH * 0.72;
+
+    groups.forEach((g) => {
+      fill(pal.ink); doc.rect(x, yy, w, groupH, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(6.8); doc.setTextColor(255, 255, 255);
+      doc.text(g.group.toUpperCase(), x + 2, yy + groupH - 1.7);
+      yy += groupH;
+      g.people.forEach((p, pi) => {
+        if (pi % 2 === 1) { fill(pal.surfaceSunk); doc.rect(x, yy, w, rowH, 'F'); }
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(7); text(pal.ink);
+        doc.text(p.name, x + 2, yy + rowH - 2, { maxWidth: nameW - 4 });
+        p.status.forEach((s, i) => {
+          const dx = x + nameW + i * dayW;
+          const chipColor = s === 'leave' ? pal.danger : s === 'public_holiday' ? pal.infer : pal.live;
+          const chipW = dayW - 2.4, chipH = 4;
+          fill(chipColor);
+          doc.roundedRect(dx + 1.2, yy + (rowH - chipH) / 2, chipW, chipH, 1, 1, 'F');
+          doc.setFont('helvetica', 'bold'); doc.setFontSize(5.6); doc.setTextColor(255, 255, 255);
+          const label = s === 'leave' ? 'Leave' : s === 'public_holiday' ? 'P.Hol' : 'Avail';
+          doc.text(label, dx + 1.2 + chipW / 2, yy + (rowH - chipH) / 2 + chipH - 1.1, { align: 'center' });
+        });
+        yy += rowH;
+      });
+    });
+    return yy;
+  }
+  function leaveGridH(groups, days) {
+    return 5.2 + groups.reduce((s, g) => s + 5.2 + g.people.length * 6.6, 0) - 5.2; // header row + one 5.2 group band per group + 6.6 per person
+  }
+
+  /** The dashboard's ".take" callout — a tinted, left-railed box of one or two lines
+   *  of plain-English interpretation under a chart or table. */
+  function takeaway(x, y, w, label) {
+    const pad = 2.6;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
+    const lines = doc.splitTextToSize(label, w - pad * 2 - 2);
+    const h = lines.length * 3.3 + pad * 1.8;
+    fill(pal.surfaceSunk); doc.roundedRect(x, y, w, h, 1.2, 1.2, 'F');
+    fill(pal.accent); doc.roundedRect(x, y, 1.2, h, 0.6, 0.6, 'F');
+    text(pal.inkMuted);
+    lines.forEach((l, i) => doc.text(l, x + pad + 1.4, y + pad + 1.4 + i * 3.3));
+    return y + h;
+  }
+  function takeawayH(label, w) {
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
+    return doc.splitTextToSize(label, w - 2.6 * 2 - 2).length * 3.3 + 2.6 * 1.8;
+  }
+
+  function placeholder(x, y, w, h, msg) {
+    draw(pal.hairline); doc.setLineWidth(0.2);
+    doc.roundedRect(x, y, w, h, 2, 2, 'S');
+    doc.setFont('helvetica', 'italic'); doc.setFontSize(7.6); text(pal.inkFaint);
+    doc.text(msg, x + w / 2, y + h / 2, { align: 'center', maxWidth: w - 10 });
+    return y + h;
+  }
+
+  return {
+    kpiTile, kpiRow, panelFrame, panelHeaderH, hBarRows, hBarGroupDual, legendChip,
+    lineChart, stackedBarChart, table, tableRowsFor, leaveGrid, leaveGridH, takeaway, takeawayH, placeholder,
+    fill, draw, text,
+  };
 }
 
-function drawCoverPage(doc, { date, sections, contentW, margin, pageH }) {
-  const centerX = margin + contentW / 2;
+// ---------------------------------------------------------------------------
+// Data fetching — every field a section builder reads is named in that builder,
+// so a JSON schema change surfaces as a clear diff right where it's used.
+// ---------------------------------------------------------------------------
+async function loadReportData(date) {
+  const get = (name) => fetchJSON(`assets/data/reports/${date}/${name}.json`).catch(() => null);
+  const [overview, tasks, callLogs, cloop, leave] = await Promise.all([
+    get('overview'), get('tasks'), get('call-logs'), get('cloop'), get('leave'),
+  ]);
+  return { overview, tasks, callLogs, cloop, leave };
+}
+
+function sinceLabel(streak, reportDate, longestStreak) {
+  if (streak.longest) return `since ${formatDate(longestStreak.startDate, { day: 'numeric', month: 'short', year: 'numeric' })}`;
+  if (streak.onHalt) return null;
+  const startDate = startOfWorkingStreak(reportDate, streak.days);
+  return startDate ? `est. since ${formatDate(startDate, { day: 'numeric', month: 'short', year: 'numeric' })}` : null;
+}
+
+function buildStaffActivity(callLogs) {
+  const byName = new Map();
+  const ensure = (name) => {
+    if (!byName.has(name)) byName.set(name, { name, inboundCalls: 0, inboundMins: 0, outboundCalls: 0, outboundMins: 0 });
+    return byName.get(name);
+  };
+  (callLogs.inboundByStaff || []).forEach((p) => { const r = ensure(p.name); r.inboundCalls = p.calls; r.inboundMins = p.durationMins; });
+  (callLogs.outboundByStaff || []).forEach((p) => { const r = ensure(p.name); r.outboundCalls = p.calls; r.outboundMins = p.durationMins; });
+  return Array.from(byName.values())
+    .map((r) => ({ ...r, totalCalls: r.inboundCalls + r.outboundCalls, totalMins: r.inboundMins + r.outboundMins }))
+    .sort((a, b) => b.totalCalls - a.totalCalls);
+}
+
+function weekOverWeek(totals) {
+  const latest = totals[totals.length - 1];
+  const prior = totals[totals.length - 6]; // 5 business days earlier = same weekday, 1 week prior
+  const delta = latest - prior;
+  const pct = prior !== 0 ? Math.round((delta / prior) * 1000) / 10 : null;
+  return { delta, pct };
+}
+function deltaLabel(wow) {
+  if (!wow) return null;
+  if (wow.delta === 0) return 'flat vs 1 week ago';
+  const sign = wow.delta > 0 ? '+' : '-';
+  return `${sign}${Math.abs(wow.delta)}${wow.pct != null ? ` (${sign}${Math.abs(wow.pct)}%)` : ''} vs 1 week ago`;
+}
+
+// ---------------------------------------------------------------------------
+// Cover page
+// ---------------------------------------------------------------------------
+function buildCoverPage(doc, kit, pal, { date, overview, sectionsMeta }) {
+  const centerX = PAGE_W / 2;
   const weekday = formatDate(date, { weekday: 'long' });
-  const long = formatDate(date);
 
-  doc.setFillColor(0, 140, 153); // matches the sidebar brand mark's --accent
-  doc.roundedRect(centerX - 9, 34, 18, 18, 4, 4, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  doc.text('Y', centerX, 45.5, { align: 'center' });
+  kit.fill(pal.accentStrong);
+  doc.roundedRect(centerX - 8, 22, 16, 16, 4, 4, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(13); doc.setTextColor(255, 255, 255);
+  doc.text('Y', centerX, 32.3, { align: 'center' });
 
-  doc.setTextColor(20, 20, 19);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(24);
-  doc.text('Daily Operations Report', centerX, 68, { align: 'center' });
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(21); kit.text(pal.ink);
+  doc.text('Daily Operations Report', centerX, 50, { align: 'center' });
+  doc.setFontSize(11.5); kit.text(pal.inkMuted);
+  doc.text(`${weekday}, ${formatDate(date)}`, centerX, 58, { align: 'center' });
+  if (overview?.report?.number) {
+    doc.setFontSize(8.5); kit.text(pal.inkFaint);
+    doc.text(`Report #${overview.report.number}`, centerX, 63.4, { align: 'center' });
+  }
 
-  doc.setFontSize(13);
-  doc.setTextColor(90, 90, 90);
-  doc.text(`${weekday} ${long}`, centerX, 77, { align: 'center' });
+  // KPI highlight strip — the day's headline numbers, pulled straight from
+  // overview.json, so the cover page is a summary in its own right rather than
+  // just a title screen someone has to flip past.
+  const stripY = 75;
+  const t = overview?.criticalTasks, c = overview?.callLogs, cl = overview?.cloop, lv = overview?.leave;
+  const tiles = [];
+  if (c) tiles.push({ label: 'Calls accepted', value: `${c.acceptedPct}%`, sub: `${c.accepted} of ${c.totalInbound}`, tone: c.acceptedPct >= 85 ? 'good' : 'crit' });
+  if (c) tiles.push({ label: 'Calls missed', value: `${c.missedPct}%`, sub: `${c.missed} of ${c.totalInbound}`, tone: c.missedPct > 15 ? 'crit' : 'neutral' });
+  if (cl) tiles.push({ label: 'Cloop in queue', value: cl.inQueue, sub: `oldest ${cl.oldestDays} days` });
+  if (t) {
+    const longest = t.streaks.find((s) => s.longest);
+    if (longest) tiles.push({ label: 'Longest streak', value: `${longest.days}d`, sub: longest.name });
+  }
+  if (t) tiles.push({ label: 'Sites on halt', value: t.streaks.filter((s) => s.onHalt).length, sub: `of ${t.streaks.length} tracked`, tone: 'crit' });
+  if (lv) tiles.push({ label: 'On leave, doctors', value: lv.doctorLinesOnLeave, sub: lv.weekLabel });
+  if (tiles.length) kit.kpiRow(MARGIN + 8, stripY, CONTENT_W - 16, 24, tiles.slice(0, 6));
+  else kit.placeholder(MARGIN + 8, stripY, CONTENT_W - 16, 24, 'No overview data published for this date.');
 
-  let y = 96;
-  doc.setDrawColor(225, 225, 220);
-  doc.line(margin, y, margin + contentW, y);
-  y += 10;
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10);
-  doc.setTextColor(120, 120, 115);
-  doc.text('CONTENTS', margin, y);
+  // Table of contents — real starting page numbers, computed after every section
+  // was actually built, so a section that overflowed to a continuation page
+  // doesn't throw off the numbering of everything after it.
+  let y = stripY + 34;
+  kit.draw(pal.hairline); doc.setLineWidth(0.2);
+  doc.line(MARGIN + 60, y, PAGE_W - MARGIN - 60, y);
   y += 8;
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(8); kit.text(pal.inkFaint);
+  doc.text('CONTENTS', centerX, y, { align: 'center' });
+  y += 7;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+  sectionsMeta.forEach((s) => {
+    const rowX = centerX - 55;
+    kit.fill(s.color); doc.circle(rowX, y - 1.4, 1.2, 'F');
+    kit.text(pal.ink);
+    doc.text(s.title, rowX + 5, y);
+    kit.text(pal.inkFaint);
+    doc.text(`page ${s.startPage}`, centerX + 55, y, { align: 'right' });
+    y += 7;
+  });
+}
 
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(12);
-  doc.setTextColor(20, 20, 19);
-  let page = 2;
-  sections.forEach((section) => {
-    doc.text(section.label, margin, y);
-    doc.text(`page ${page}`, margin + contentW, y, { align: 'right' });
-    y += 8;
-    page += section.slices.length;
+// ---------------------------------------------------------------------------
+// Section pages — each takes (doc, kit, pal, flow, data) and draws top to
+// bottom via flow.ensure(neededHeight), which starts a continuation page for
+// this same section automatically if a block wouldn't fit.
+// ---------------------------------------------------------------------------
+function buildOverviewPage(doc, kit, pal, flow, { overview }) {
+  if (!overview) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No overview report was published for this date.'); return; }
+  const t = overview.criticalTasks, c = overview.callLogs, cl = overview.cloop, lv = overview.leave;
+  const w = CONTENT_W, colW = (w - 6) / 2;
+
+  const pst = t.checklists.find((x) => x.name === 'PST');
+  const finance = t.checklists.find((x) => x.name === 'Finance');
+  const longest = t.streaks.find((s) => s.longest);
+  let y = flow.ensure(22);
+  y = kit.kpiRow(MARGIN, y, w, 22, [
+    pst && { label: 'PST checklist', value: `${pst.completionPct}%`, sub: `${t.streaks.find((s) => s.name === 'PST').days}-day streak`, tone: pst.completionPct === 100 ? 'good' : 'neutral' },
+    finance && { label: 'Finance checklist', value: `${finance.completionPct}%`, sub: finance.completionPct === 100 ? 'Fully complete' : (finance.incompleteExample || ''), tone: finance.completionPct < 100 ? 'crit' : 'good' },
+    { label: 'Longest streak', value: `${longest.days}d`, sub: `${longest.name} · since ${formatDate(t.longestStreak.startDate, { day: 'numeric', month: 'short', year: 'numeric' })}`, tone: 'good' },
+    { label: 'Sites on halt', value: t.streaks.filter((s) => s.onHalt).length, sub: `of ${t.streaks.length} tracked streaks`, tone: 'crit' },
+  ].filter(Boolean));
+  flow.y = y + 5;
+
+  const panel1H = 48;
+  const rowTop = flow.ensure(panel1H);
+  let leftY = kit.panelFrame(MARGIN, rowTop, colW, panel1H, 'Critical daily tasks — streak', 'Consecutive days at 100% checklist completion.');
+  const maxStreak = Math.max(...t.streaks.map((s) => s.days), 1);
+  leftY = kit.hBarRows(MARGIN + 4, leftY, colW - 8, 5.4, t.streaks.map((s) => ({
+    label: s.name, frac: s.days / maxStreak, valueLabel: `${s.days}d${s.onHalt ? ' *' : ''}`, color: s.onHalt ? pal.danger : pal.accent,
+  })));
+  kit.takeaway(MARGIN + 4, leftY + 1.5, colW - 8, `${longest.name}'s ${longest.days}-day streak is intact.`);
+
+  let rightY = kit.panelFrame(MARGIN + colW + 6, rowTop, colW, panel1H, 'Call queue snapshot', 'Accepted calls by queue, today.');
+  const maxQ = Math.max(...c.queueBreakdown.map((q) => q.accepted), 1);
+  rightY = kit.hBarRows(MARGIN + colW + 10, rightY, colW - 8, 6, c.queueBreakdown.map((q) => ({
+    label: q.queue, frac: q.accepted / maxQ, valueLabel: String(q.accepted), subLabel: `${q.missed} missed`, color: pal.accent,
+  })));
+  kit.takeaway(MARGIN + colW + 10, rightY + 1.5, colW - 8, `${c.topInboundAgent.name} answered the most calls today (${c.topInboundAgent.calls}).`);
+  flow.y = rowTop + panel1H + 5;
+
+  y = flow.ensure(20);
+  y = kit.kpiRow(MARGIN, y, w, 20, [
+    { label: 'Total inbound calls', value: c.totalInbound, sub: `${c.totalOutbound} outbound made` },
+    { label: 'Calls accepted', value: `${c.acceptedPct}%`, sub: `${c.accepted} of ${c.totalInbound}`, tone: 'good' },
+    { label: 'Calls missed', value: `${c.missedPct}%`, sub: `${c.missed} of ${c.totalInbound}`, tone: 'crit' },
+    { label: 'Cloop cases in queue', value: cl ? cl.inQueue : '—', sub: cl ? `oldest ${cl.oldestDays} days` : 'No Cloop report this date' },
+  ]);
+  flow.y = y + 5;
+
+  const panel2H = Math.max(46, Math.min(60, flow.remaining));
+  const rowTop2 = flow.ensure(panel2H);
+  let cloopY = kit.panelFrame(MARGIN, rowTop2, colW, panel2H, 'Cloop, at a glance', 'Case queue activity as of the report snapshot.');
+  if (cl) {
+    kit.fill(pal.accent); doc.roundedRect(MARGIN + 4, cloopY, colW - 8, 6, 1, 1, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); doc.setTextColor(255, 255, 255);
+    doc.text(`${cl.contactsQueuedYesterday ?? '—'} contacts queued yesterday`, MARGIN + 7, cloopY + 4);
+    kit.takeaway(MARGIN + 4, cloopY + 9, colW - 8, `${cl.emailsHandledYesterday} contacts handled yesterday, out of ${cl.totalOverallCases.toLocaleString()} total cases logged (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).`);
+  } else {
+    kit.placeholder(MARGIN + 4, cloopY, colW - 8, 20, 'No Cloop report was published for this date.');
+  }
+
+  let leaveY = kit.panelFrame(MARGIN + colW + 6, rowTop2, colW, panel2H, "Staff & doctors' leave — this week", lv.weekLabel);
+  leaveY = kit.hBarRows(MARGIN + colW + 10, leaveY, colW - 8, 6, [
+    { label: 'Doctor lines on leave', frac: lv.doctorLinesOnLeave / 4, valueLabel: String(lv.doctorLinesOnLeave), color: pal.dangerInk },
+    { label: 'Staff fully on leave', frac: lv.staffFullyOnLeave / 5, valueLabel: String(lv.staffFullyOnLeave), color: pal.dangerInk },
+    { label: 'Staff partially on leave', frac: lv.staffPartialLeave / 5, valueLabel: String(lv.staffPartialLeave), color: pal.infer },
+  ]);
+  if (lv.longTerm?.[0]) {
+    doc.setFont('helvetica', 'italic'); doc.setFontSize(6.8); kit.text(pal.inkFaint);
+    doc.text(`${lv.longTerm[0].name} remains on ${lv.longTerm[0].note.toLowerCase()}.`, MARGIN + colW + 10, leaveY + 3.5, { maxWidth: colW - 16 });
+  }
+  flow.y = rowTop2 + panel2H;
+}
+
+function buildTasksPage(doc, kit, pal, flow, { tasks }) {
+  if (!tasks) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No critical-tasks report was published for this date.'); return; }
+  const w = CONTENT_W;
+  const maxStreak = Math.max(...tasks.streaks.map((s) => s.days), 1);
+
+  let y = flow.ensure(20);
+  y = kit.kpiRow(MARGIN, y, w, 20, tasks.streaks.map((s) => ({
+    label: s.name, value: s.days, sub: `day${s.days === 1 ? '' : 's'} streak${s.onHalt ? ' · on halt' : ''}${s.longest ? ' · longest' : ''}`, tone: s.onHalt ? 'crit' : 'good',
+  })));
+  flow.y = y + 5;
+
+  const streakRowH = 5.6;
+  const streakH = kit.panelHeaderH('x') + tasks.streaks.length * streakRowH + 2;
+  const sy0 = flow.ensure(streakH);
+  const streakTop = kit.panelFrame(MARGIN, sy0, w, streakH, 'Streak history', 'Consecutive days each site/department hit 100% on its critical checklist.');
+  kit.hBarRows(MARGIN + 4, streakTop, w - 8, streakRowH, tasks.streaks.map((s) => {
+    const label = sinceLabel(s, tasks.reportDate, tasks.longestStreak);
+    return { label: s.name, frac: s.days / maxStreak, valueLabel: `${s.days}d`, subLabel: label, color: s.longest ? pal.live : s.onHalt ? pal.danger : pal.accent };
+  }), { labelW: 30, valueW: 22 });
+  flow.y = sy0 + streakH + 4;
+
+  const colW = (w - 6) / 2;
+  const panelH = Math.max(70, Math.min(100, flow.remaining));
+  const py0 = flow.ensure(panelH);
+  tasks.checklists.forEach((cl, i) => {
+    const px = MARGIN + i * (colW + 6);
+    let cy = py0 + 6;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5); kit.text(pal.ink);
+    doc.text(cl.name, px + 4, cy);
+    doc.setFontSize(15);
+    kit.text(cl.completionPct === 100 ? pal.liveInk : cl.completionPct < 50 ? pal.dangerInk : pal.ink);
+    doc.text(`${cl.completionPct}%`, px + colW - 4, cy, { align: 'right' });
+    kit.draw(pal.hairline); doc.setLineWidth(0.2); doc.roundedRect(px, py0, colW, panelH, 2, 2, 'S');
+    cy += 4;
+    const chartH = Math.min(30, panelH * 0.4);
+    if (cl.trend) {
+      kit.lineChart(px + 4, cy, colW - 8, chartH, { labels: tasks.trendDates, data: cl.trend, color: cl.completionPct === 100 ? pal.live : pal.accent, unit: '%' });
+      cy += chartH + 1;
+    } else {
+      cy = kit.placeholder(px + 4, cy, colW - 8, 16, 'No 10-day trend published.') + 2;
+    }
+    const availableH = py0 + panelH - cy - 3;
+    const maxCount = Math.max(cl.complete.length, cl.incomplete.length, 1);
+    const rowH = Math.max(3, Math.min(4.4, (availableH - 5) / maxCount));
+    const visible = Math.max(1, Math.floor((availableH - 5) / rowH));
+    const listColW = (colW - 12) / 2;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(6.6); kit.text(pal.inkFaint);
+    doc.text('COMPLETE', px + 4, cy);
+    doc.text('INCOMPLETE', px + 8 + listColW, cy);
+    let ly1 = cy + 3.6, ly2 = cy + 3.6;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(6.8);
+    kit.text(pal.liveInk);
+    cl.complete.slice(0, visible).forEach((task) => { doc.text(task.replace(/\s*\([^)]*\)\s*$/, ''), px + 4, ly1, { maxWidth: listColW - 2 }); ly1 += rowH; });
+    if (cl.complete.length > visible) { kit.text(pal.inkFaint); doc.setFont('helvetica', 'italic'); doc.text(`+ ${cl.complete.length - visible} more`, px + 4, ly1); }
+    kit.text(pal.dangerInk); doc.setFont('helvetica', 'normal');
+    (cl.incomplete.length ? cl.incomplete : ['None — fully complete.']).slice(0, visible).forEach((task) => { doc.text(task, px + 8 + listColW, ly2, { maxWidth: listColW - 2 }); ly2 += rowH; });
+  });
+  flow.y = py0 + panelH;
+}
+
+function buildCallLogsPage(doc, kit, pal, flow, { callLogs }) {
+  if (!callLogs) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No call-logs report was published for this date.'); return; }
+  const d = callLogs, t = d.tenDayTrend || {};
+  const w = CONTENT_W, colW = (w - 6) / 2;
+
+  let y = flow.ensure(20);
+  y = kit.kpiRow(MARGIN, y, w, 20, [
+    { label: 'Total inbound calls', value: d.summary.totalInbound, sub: 'across all queues today' },
+    { label: 'Calls accepted', value: `${d.summary.acceptedPct}%`, sub: `${d.summary.accepted} of ${d.summary.totalInbound}`, tone: 'good' },
+    { label: 'Calls missed', value: `${d.summary.missedPct}%`, sub: `${d.summary.missed} of ${d.summary.totalInbound}`, tone: 'crit' },
+    { label: 'Total outbound calls', value: d.summary.totalOutbound, sub: 'made by staff today' },
+  ]);
+  flow.y = y + 5;
+
+  const qRowH = 9;
+  const qH = kit.panelHeaderH('x') + d.queueReport.length * qRowH;
+  const qy0 = flow.ensure(qH);
+  const queueTop = kit.panelFrame(MARGIN, qy0, w, qH, 'Queue report', `Accepted vs missed calls, by queue — ${d.summary.totalInbound} calls today.`);
+  kit.hBarGroupDual(MARGIN + 4, queueTop, w - 8, qRowH, d.queueReport.map((q) => ({ label: q.queue, values: [{ value: q.accepted, color: pal.live }, { value: q.missed, color: pal.danger }] })));
+  let lx = MARGIN + w - 70;
+  lx = kit.legendChip(lx, qy0 + 6, pal.live, 'Accepted');
+  kit.legendChip(lx, qy0 + 6, pal.danger, 'Missed');
+  flow.y = qy0 + qH + 4;
+
+  const chartH = 38;
+  const cy0 = flow.ensure(chartH);
+  if (t.answerRatePct) kit.lineChart(MARGIN + 4, kit.panelFrame(MARGIN, cy0, colW, chartH, 'Call answer rate — 10-day trend', `Target: ${t.answerRateTargetPct}%`), colW - 8, chartH - kit.panelHeaderH('x') - 2, { labels: t.labels, data: t.answerRatePct, color: pal.accent, unit: '%', target: t.answerRateTargetPct, targetLabel: `${t.answerRateTargetPct}% target` });
+  else kit.placeholder(MARGIN, cy0, colW, chartH, 'Not published this date.');
+  if (t.accepted) kit.stackedBarChart(MARGIN + colW + 10, kit.panelFrame(MARGIN + colW + 6, cy0, colW, chartH, 'Call volume — 10-day trend', 'Accepted vs missed, all queues'), colW - 8, chartH - kit.panelHeaderH('x') - 2, { labels: t.labels, seriesA: t.accepted, seriesB: t.missed, colorA: pal.live, colorB: pal.danger, labelA: 'Accepted', labelB: 'Missed' });
+  else kit.placeholder(MARGIN + colW + 6, cy0, colW, chartH, 'Not published this date.');
+  flow.y = cy0 + chartH + 4;
+
+  if (d.patientServiceKpi) {
+    const k = d.patientServiceKpi;
+    y = flow.ensure(18);
+    y = kit.kpiRow(MARGIN, y, w, 18, [
+      { label: 'Longest call duration', value: fmtSec(k.longestCallDurationSec), sub: `${k.longestCallAt} · ${k.longestCallAgent}` },
+      { label: 'Longest waiting time', value: fmtSec(k.longestWaitingTimeSec), sub: k.longestWaitingAt, tone: 'crit' },
+      { label: 'Avg call handling', value: fmtSec(k.avgCallHandlingSec), sub: 'per accepted call, today' },
+    ]);
+    flow.y = y + 4;
+  }
+
+  const staff = buildStaffActivity(d);
+  const staffPanelH = Math.max(40, Math.min(70, flow.remaining));
+  const sy0 = flow.ensure(staffPanelH);
+  const tableTop = kit.panelFrame(MARGIN, sy0, w, staffPanelH, 'Staff activity', 'Inbound + outbound calls today, busiest first.');
+  const rowH = 5.2, headerH = 5.8;
+  const maxRows = kit.tableRowsFor(sy0 + staffPanelH - tableTop - 2, headerH, rowH, staff.length > 0);
+  kit.table(MARGIN + 4, tableTop, w - 8, {
+    columns: [
+      { label: 'Name', key: 'name', flex: 2 },
+      { label: 'Inbound', key: 'inboundCalls', flex: 1, align: 'right' },
+      { label: 'Outbound', key: 'outboundCalls', flex: 1, align: 'right' },
+      { label: 'Total calls', key: 'totalCalls', flex: 1, align: 'right' },
+      { label: 'Duration', flex: 1, align: 'right', format: (r) => `${r.totalMins}m` },
+    ],
+    rows: staff, rowH, headerH, maxRows,
+  });
+  flow.y = sy0 + staffPanelH;
+}
+
+function buildCloopPage(doc, kit, pal, flow, { cloop, callLogs }) {
+  if (!cloop) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No Cloop report was published for this date.'); return; }
+  const d = cloop;
+  const w = CONTENT_W, colW = (w - 6) / 2;
+  const yesterdayTotal = d.contactsQueuedYesterday ? d.contactsQueuedYesterday.reduce((s, q) => s + q.count, 0) : null;
+  const wowQueued = d.contactsQueuedTenDayTrend ? deltaLabel(weekOverWeek(d.contactsQueuedTenDayTrend.totals)) : null;
+  const wowProgress = d.inProgressTenDayTrend ? deltaLabel(weekOverWeek(d.inProgressTenDayTrend.totals)) : null;
+  const wowOpen = d.openCasesTenDayTrend ? deltaLabel(weekOverWeek(d.openCasesTenDayTrend.totals)) : null;
+
+  let y = flow.ensure(20);
+  y = kit.kpiRow(MARGIN, y, w, 20, [
+    { label: 'In queue right now', value: d.realTimeSummary.inQueue, sub: `across ${d.realTimeQueues.length} queues` },
+    { label: 'Oldest case in queue', value: `${d.realTimeSummary.oldestDays}d`, sub: `extracted ${d.extractedAtLabel}`, tone: 'crit' },
+    { label: 'Contacts queued, yesterday', value: yesterdayTotal ?? '—', sub: wowQueued || 'Not published this date' },
+    { label: 'Total overall cases', value: d.totalCasesToDate.totalOverallCases.toLocaleString(), sub: `to date, as of ${d.totalCasesToDate.date}` },
+  ]);
+  flow.y = y + 5;
+
+  const rtRowH = 4.6, rtHeaderH = 5.4, rtMaxRows = 5;
+  const rtShown = Math.min(d.realTimeQueues.length, rtMaxRows);
+  const rtHasMore = d.realTimeQueues.length > rtMaxRows;
+  const rtH = kit.panelHeaderH('x') + rtHeaderH + rtShown * rtRowH + (rtHasMore ? 4.6 : 0) + 2;
+  const cqRows = Math.min(d.contactsQueuedYesterday?.length || 0, 5);
+  const cqH = kit.panelHeaderH(d.contactsQueuedYesterday ? 'x' : '') + cqRows * 4.4 + 2;
+  const row1H = Math.max(rtH, cqH, 30);
+  const row1y = flow.ensure(row1H);
+  let rty = kit.panelFrame(MARGIN, row1y, colW, row1H, 'Real-time metrics, by queue', 'In queue now, and the age of the oldest case (days).');
+  kit.table(MARGIN + 4, rty, colW - 8, {
+    columns: [{ label: 'Queue', key: 'queue', flex: 2 }, { label: 'In queue', key: 'inQueue', flex: 1, align: 'right' }, { label: 'Oldest (d)', key: 'oldestDays', flex: 1, align: 'right' }],
+    rows: d.realTimeQueues, rowH: rtRowH, headerH: rtHeaderH, maxRows: rtMaxRows,
   });
 
-  y += 2;
-  doc.setDrawColor(225, 225, 220);
-  doc.line(margin, y, margin + contentW, y);
+  let cqy = kit.panelFrame(MARGIN + colW + 6, row1y, colW, row1H, 'Contacts queued yesterday, by queue', d.contactsQueuedYesterday ? `${yesterdayTotal} contacts queued in total.` : '');
+  if (d.contactsQueuedYesterday) {
+    const maxQ = Math.max(...d.contactsQueuedYesterday.map((q) => q.count), 1);
+    kit.hBarRows(MARGIN + colW + 10, cqy, colW - 8, 4.4, d.contactsQueuedYesterday.slice(0, cqRows).map((q) => ({ label: q.queue, frac: q.count / maxQ, valueLabel: String(q.count), color: pal.accent })), { labelW: 32, valueW: 16 });
+  } else kit.placeholder(MARGIN + colW + 6, row1y + 9, colW, 20, 'Not published this date.');
+  flow.y = row1y + row1H + 4;
 
-  doc.setFontSize(9);
-  doc.setTextColor(150, 150, 145);
-  doc.text('Generated automatically from the dashboard.', centerX, pageH - margin, { align: 'center' });
+  if (d.contactsQueuedTenDayTrend) {
+    const trendH = 32;
+    const ty0 = flow.ensure(trendH);
+    const ty = kit.panelFrame(MARGIN, ty0, w, trendH, 'Total contacts queued — 10-day trend', '');
+    kit.lineChart(MARGIN + 4, ty, w - 8, trendH - kit.panelHeaderH('') - 2, { labels: d.contactsQueuedTenDayTrend.labels, data: d.contactsQueuedTenDayTrend.totals, color: pal.accent });
+    flow.y = ty0 + trendH + 4;
+  }
+
+  const emailRows = d.emailsHandledYesterday.slice().sort((a, b) => b.total - a.total);
+  const emRowH = 4.4, emHeaderH = 5.4, emMaxRows = Math.min(emailRows.length, 6);
+  const emH = kit.panelHeaderH('x') + emHeaderH + emMaxRows * emRowH + (emailRows.length > emMaxRows ? 4.6 : 0) + 2;
+  const ey0 = flow.ensure(emH);
+  const ety = kit.panelFrame(MARGIN, ey0, w, emH, 'Emails handled yesterday, by agent', 'Incoming vs outbound contacts handled.');
+  kit.table(MARGIN + 4, ety, w - 8, {
+    columns: [{ label: 'Agent', key: 'agent', flex: 2 }, { label: 'Incoming', key: 'incoming', flex: 1, align: 'right' }, { label: 'Outbound', key: 'outbound', flex: 1, align: 'right' }, { label: 'Total handled', key: 'total', flex: 1, align: 'right' }],
+    rows: emailRows, rowH: emRowH, headerH: emHeaderH, maxRows: emMaxRows,
+  });
+  const activeNames = new Set([...(callLogs?.inboundByStaff || []), ...(callLogs?.outboundByStaff || [])].map((p) => p.name));
+  const alsoOnPhones = callLogs ? emailRows.map((a) => a.agent).filter((name) => activeNames.has(name)) : [];
+  flow.y = ey0 + emH + (alsoOnPhones.length ? 5 : 4);
+  if (alsoOnPhones.length) {
+    doc.setFont('helvetica', 'italic'); doc.setFontSize(6.4); kit.text(pal.inkFaint);
+    doc.text(`${alsoOnPhones.slice(0, 4).join(', ')}${alsoOnPhones.length > 4 ? ', …' : ''} also took phone calls today.`, MARGIN + 4, ey0 + emH - 0.6, { maxWidth: w - 8 });
+  }
+
+  y = flow.ensure(16);
+  y = kit.kpiRow(MARGIN, y, w, 16, [
+    { label: 'Total in progress', value: d.totalCasesToDate.totalInProgress, sub: wowProgress || 'Not published this date' },
+    { label: 'Total open cases', value: d.totalCasesToDate.totalOpenCases, sub: wowOpen || 'Not published this date' },
+  ]);
+  flow.y = y + 4;
+
+  if (d.inProgressTenDayTrend || d.openCasesTenDayTrend) {
+    const row2H = Math.max(34, Math.min(50, flow.remaining));
+    const row2y = flow.ensure(row2H);
+    if (d.inProgressTenDayTrend) {
+      const py = kit.panelFrame(MARGIN, row2y, colW, row2H, 'Total in progress — 10-day trend', '');
+      kit.lineChart(MARGIN + 4, py, colW - 8, row2H - kit.panelHeaderH('') - 2, { labels: d.inProgressTenDayTrend.labels, data: d.inProgressTenDayTrend.totals, color: pal.infer });
+    }
+    if (d.openCasesTenDayTrend) {
+      const py = kit.panelFrame(MARGIN + colW + 6, row2y, colW, row2H, 'Total open cases — 10-day trend', '');
+      kit.lineChart(MARGIN + colW + 10, py, colW - 8, row2H - kit.panelHeaderH('') - 2, { labels: d.openCasesTenDayTrend.labels, data: d.openCasesTenDayTrend.totals, color: pal.accent2 });
+    }
+    flow.y = row2y + row2H;
+  }
 }
+
+function buildLeavePage(doc, kit, pal, flow, { leave }) {
+  if (!leave) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No leave report was published for this date.'); return; }
+  const d = leave;
+  const w = CONTENT_W;
+  const todayISO = todayISOInCanberra();
+  const start = new Date(`${d.weekStart}T00:00:00Z`);
+  const diff = Math.round((new Date(`${todayISO}T00:00:00Z`) - start) / 86400000);
+  const todayIndex = diff >= 0 && diff <= 4 ? diff : -1;
+
+  const fullWeek = (p) => p.status.every((s) => s === 'leave');
+  const noneWeek = (p) => p.status.every((s) => s === 'available');
+  const leaveDayCount = (p) => p.status.filter((s) => s === 'leave').length;
+  const allPeople = d.groups.flatMap((g) => g.people);
+  const fullyOnLeave = allPeople.filter(fullWeek).length;
+  const partialLeave = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
+  const outToday = todayIndex >= 0 ? allPeople.filter((p) => p.status[todayIndex] === 'leave').length : null;
+
+  let y = flow.ensure(5);
+  doc.setFont('helvetica', 'italic'); doc.setFontSize(8); kit.text(pal.inkFaint);
+  doc.text(`Week of ${formatDate(d.weekStart, { day: 'numeric', month: 'long' })} – ${formatDate(d.weekEnd, { day: 'numeric', month: 'long', year: 'numeric' })}`, MARGIN, y + 3);
+  flow.y = y + 6;
+
+  y = flow.ensure(18);
+  y = kit.kpiRow(MARGIN, y, w, 18, [
+    { label: 'Out, all week', value: fullyOnLeave, sub: `of ${allPeople.length} on this roster`, tone: 'crit' },
+    { label: 'Partial leave this week', value: partialLeave, sub: 'see grid below' },
+    outToday != null && { label: `Out today (${d.days[todayIndex]})`, value: outToday, sub: `of ${allPeople.length} on this roster`, tone: outToday > 0 ? 'crit' : 'good' },
+    { label: 'Long-term leave', value: d.longTerm.length, sub: d.longTerm.map((p) => p.name).join(', ') },
+  ].filter(Boolean));
+  flow.y = y + 5;
+
+  // Condensed for print: everyone with at least one leave day, fully-out first —
+  // people fully available all week are summarised in one footnote line instead
+  // of taking up a row each (the live dashboard's own table shows everyone).
+  const condensedGroups = d.groups.map((g) => {
+    const withLeave = g.people.filter((p) => leaveDayCount(p) > 0).sort((a, b) => leaveDayCount(b) - leaveDayCount(a));
+    return { group: g.group, people: withLeave, hiddenCount: g.people.length - withLeave.length };
+  }).filter((g) => g.people.length || g.hiddenCount);
+  const gridGroups = condensedGroups.map((g) => ({ group: g.group, people: g.people }));
+  const gridInnerH = kit.leaveGridH(gridGroups, d.days);
+  const gridPanelH = kit.panelHeaderH('x') + gridInnerH + 5;
+
+  const gy0 = flow.ensure(Math.min(gridPanelH, BODY_H));
+  const gridTop = kit.panelFrame(MARGIN, gy0, w, gridPanelH, 'Week at a glance', 'People with at least one day of leave this week; fully-out first.');
+  const afterGrid = kit.leaveGrid(MARGIN + 4, gridTop, w - 8, { days: d.days, todayIndex, groups: gridGroups });
+  const hiddenNote = condensedGroups.filter((g) => g.hiddenCount > 0).map((g) => `${g.hiddenCount} ${g.group.toLowerCase()}${g.hiddenCount === 1 ? '' : 's'}`).join(', ');
+  if (hiddenNote) {
+    doc.setFont('helvetica', 'italic'); doc.setFontSize(6.6); kit.text(pal.inkFaint);
+    doc.text(`+ ${hiddenNote} fully available all week (not shown).`, MARGIN + 4, afterGrid + 3.5);
+  }
+  flow.y = gy0 + gridPanelH + 4;
+
+  if (d.longTerm.length) {
+    y = flow.ensure(6);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.6); kit.text(pal.ink);
+    doc.text('Long-term leave: ', MARGIN, y + 3.5);
+    doc.setFont('helvetica', 'normal'); kit.text(pal.inkMuted);
+    const w0 = doc.getTextWidth('Long-term leave: ');
+    doc.text(d.longTerm.map((p) => `${p.name} — ${p.note} (${formatDate(p.from, { day: 'numeric', month: 'short' })} – ${formatDate(p.to, { day: 'numeric', month: 'short', year: 'numeric' })})`).join('  ·  '), MARGIN + w0, y + 3.5, { maxWidth: w - w0 });
+    flow.y = y + 6;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Chrome (top accent strip, section header, footer) — drawn in a second pass
+// over every page once the total page count is known, onto the blank margin
+// area each page already reserved for it.
+// ---------------------------------------------------------------------------
+function drawChrome(doc, pal, meta, pageNum, totalPages) {
+  doc.setFillColor(...meta.color);
+  doc.rect(0, 0, PAGE_W, 2, 'F');
+
+  if (!meta.isCover) {
+    doc.setFillColor(...meta.color);
+    doc.roundedRect(MARGIN, MARGIN - 3.4, 3.6, 3.6, 1, 1, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(13); doc.setTextColor(...pal.ink);
+    doc.text(meta.title, MARGIN + 6.5, MARGIN);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(...pal.inkMuted);
+    doc.text(meta.dateLabel, PAGE_W - MARGIN, MARGIN, { align: 'right' });
+    doc.setDrawColor(...pal.hairline); doc.setLineWidth(0.25);
+    doc.line(MARGIN, MARGIN + 3.4, PAGE_W - MARGIN, MARGIN + 3.4);
+  }
+
+  doc.setDrawColor(...pal.hairline); doc.setLineWidth(0.2);
+  doc.line(MARGIN, PAGE_H - MARGIN - 6, PAGE_W - MARGIN, PAGE_H - MARGIN - 6);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7); doc.setTextColor(...pal.inkFaint);
+  doc.text('YourGP · Daily Operations Report', MARGIN, PAGE_H - MARGIN - 1.8);
+  doc.text(meta.dateLabel, PAGE_W / 2, PAGE_H - MARGIN - 1.8, { align: 'center' });
+  doc.text(`Page ${pageNum} of ${totalPages}`, PAGE_W - MARGIN, PAGE_H - MARGIN - 1.8, { align: 'right' });
+}
+
+const SECTIONS = [
+  { key: 'overview', title: 'Overview', colorKey: 'accentStrong', build: buildOverviewPage, needs: (data) => ({ overview: data.overview }) },
+  { key: 'tasks', title: 'Critical daily tasks', colorKey: 'live', build: buildTasksPage, needs: (data) => ({ tasks: data.tasks }) },
+  { key: 'calls', title: 'Call logs', colorKey: 'age3', build: buildCallLogsPage, needs: (data) => ({ callLogs: data.callLogs }) },
+  { key: 'cloop', title: 'Cloop', colorKey: 'accent2', build: buildCloopPage, needs: (data) => ({ cloop: data.cloop, callLogs: data.callLogs }) },
+  { key: 'leave', title: "Staff & doctors' leave", colorKey: 'dangerInk', build: buildLeavePage, needs: (data) => ({ leave: data.leave }) },
+];
 
 /**
- * Renders every section for `date` off-screen, exactly as the dashboard itself
- * would, and downloads one combined PDF: a cover page, then each section starting
- * on its own page.
+ * Renders the whole report as one native, vector-drawn landscape PDF: a cover page
+ * (title, headline KPIs, contents) followed by one densely laid-out page per
+ * section, in the same order as the sidebar nav — and a continuation page for any
+ * section whose content doesn't fit on one, rather than overlapping or truncating.
  *
  * @param {string} date
  * @param {{dates:string[], latest:string}} manifest
@@ -279,50 +941,46 @@ function drawCoverPage(doc, { date, sections, contentW, margin, pageH }) {
  * @returns {Promise<string>} the downloaded file's name
  */
 export async function exportFullReport(date, manifest, { onProgress } = {}) {
+  onProgress?.('Preparing…');
   await ensureLibs();
   await document.fonts.ready;
   const { jsPDF } = window.jspdf;
+  const pal = buildPalette();
 
-  // PRINT_LAYOUT_CSS stacks every section to one column, so this only has to be
-  // wide enough for a *single* panel to read comfortably — not two side by side —
-  // which is what actually keeps the printed font size legible (see captureSection
-  // and PRINT_LAYOUT_CSS above for why 1280px, right for the live 2-column desktop
-  // layout, printed at illegibly small text once squeezed onto one A4 page width).
-  const CAPTURE_WIDTH = 820; // CSS px baseline; a section only grows past this if a table needs more room
-  const SCALE = 2; // html2canvas render scale, for crisp text in the PDF
-  const PAGE_W = 210, PAGE_H = 297, MARGIN = 14; // A4, mm
-  const CONTENT_W = PAGE_W - MARGIN * 2;
-  const CONTENT_H = PAGE_H - MARGIN * 2;
+  onProgress?.('Fetching report data…');
+  const data = await loadReportData(date);
+  const dateLabel = `${formatDate(date, { weekday: 'long' })}, ${formatDate(date)}`;
 
-  const sandbox = buildSandbox(CAPTURE_WIDTH);
-  const sections = [];
-  try {
-    await withOklchOverride(async () => {
-      for (const section of SECTIONS) {
-        onProgress?.(`Rendering ${section.label}…`);
-        const canvas = await captureSection(sandbox, section, date, manifest, CAPTURE_WIDTH, SCALE);
-        // Computed from this canvas's own width rather than the shared baseline —
-        // a section that had to grow for a wide table prints at a smaller scale
-        // *only for that section*, instead of shrinking every other page too.
-        const mmPerCanvasPx = CONTENT_W / canvas.width;
-        const pageHeightPx = CONTENT_H / mmPerCanvasPx;
-        sections.push({ label: section.label, mmPerCanvasPx, slices: sliceCanvas(canvas, pageHeightPx) });
-      }
-    });
-  } finally {
-    sandbox.remove();
+  // Page 1 (the cover) is drawn LAST, once every section's actual page count is
+  // known — but it still occupies page 1 throughout, since jsPDF always starts a
+  // document with one page and drawing order doesn't have to match page order.
+  const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' });
+  const kit = makeKit(doc, pal);
+  const pageMeta = [null];
+  const sectionsMeta = [];
+
+  for (const section of SECTIONS) {
+    onProgress?.(`Building ${section.title}…`);
+    doc.addPage('a4', 'landscape');
+    const startPage = doc.internal.getNumberOfPages();
+    const meta = { title: section.title, color: pal[section.colorKey], dateLabel };
+    pageMeta.push({ isCover: false, ...meta });
+    const flow = makeFlow(doc, pageMeta, meta);
+    section.build(doc, kit, pal, flow, section.needs(data));
+    sectionsMeta.push({ title: section.title, color: pal[section.colorKey], startPage });
   }
 
-  onProgress?.('Assembling PDF…');
-  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-  drawCoverPage(doc, { date, sections, contentW: CONTENT_W, margin: MARGIN, pageH: PAGE_H });
+  onProgress?.('Building cover page…');
+  doc.setPage(1);
+  pageMeta[0] = { isCover: true, color: pal.accentStrong, dateLabel };
+  buildCoverPage(doc, kit, pal, { date, overview: data.overview, sectionsMeta });
 
-  sections.forEach((section) => {
-    section.slices.forEach((slice) => {
-      doc.addPage();
-      doc.addImage(slice.dataUrl, 'JPEG', MARGIN, MARGIN, CONTENT_W, slice.heightPx * section.mmPerCanvasPx);
-    });
-  });
+  onProgress?.('Finishing…');
+  const totalPages = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    drawChrome(doc, pal, pageMeta[i - 1], i, totalPages);
+  }
 
   const filename = `daily-report-${date}.pdf`;
   doc.save(filename);
@@ -331,8 +989,7 @@ export async function exportFullReport(date, manifest, { onProgress } = {}) {
 
 let toastTimer = null;
 
-/** A shared bottom-of-screen toast (design-system's own .toast component; this is
- *  its first real caller, so it creates the element the first time it's needed). */
+/** A shared bottom-of-screen toast (design-system's own .toast component). */
 export function showToast(message, { ok = true, duration = 3400 } = {}) {
   let toast = document.getElementById('dr-toast');
   if (!toast) {
