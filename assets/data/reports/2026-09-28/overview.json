@@ -46,14 +46,14 @@
   },
   "leave": {
     "weekLabel": "28 September – 2 October 2026",
-    "doctorLinesOnLeave": 9,
-    "staffFullyOnLeave": 7,
-    "staffPartialLeave": 0,
-    "staffPartialLeaveNames": [],
+    "doctorLinesOnLeave": 6,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": ["Val Zihhareva", "Anita Tammaro", "Amy Morton", "Renee Bowman", "Megan Moreno Pitcher", "Andrew Davies"],
     "longTerm": [
       { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
       { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
     ]
   },
-  "_leaveNote": "IMPORTANT, please review — see leave.json's own note. This is a genuinely new week (28 Sept - 2 Oct) whose per-day leave grid could not be read from this date's text at all (status is conveyed by cell colour only); every figure above is an INFERENCE that all 9 doctors and 7 listed staff are on leave the entire week, following the same convention already used for 2026-09-11, not a verified per-day reading. Partial corroboration: all 7 staff names are absent from today's own call-activity tables, consistent with (at least) today's leave — but Tue-Fri status for anyone is unconfirmed."
+  "_leaveNote": "CORRECTED — see leave.json's own note. The user supplied the source PDF's leave-page images directly, replacing the earlier text-extraction inference (which wrongly assumed full-week leave for everyone). Actual grid: 6 of 9 doctors and only 1 of 7 staff (Micah Haly) are out the full week; the rest are partial. Today (Monday) Micah Haly, Val Zihhareva and Anita Tammaro are on leave among staff, and 8 of the 9 doctors are on leave (only Dr Sheahan Ranasinghe is available today)."
 }

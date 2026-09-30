@@ -1,0 +1,46 @@
+{
+  "_source": "Daily Operations Report - 29th September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via direct visual inspection of the source PDF page images (not text extraction) — this table conveys status purely through cell colour, which text extraction cannot see.",
+  "reportTitle": "Daily Operations Report - 29th September 2026",
+  "reportDate": "2026-09-29",
+  "weekStart": "2026-09-28",
+  "weekEnd": "2026-10-02",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "available"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["available", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Gosling", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Frederick Chung", "site": "Lyneham", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Val Zihhareva", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Anita Tammaro", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Micah Haly", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Amy Morton", "site": null, "status": ["available", "leave", "leave", "available", "available"] },
+        { "name": "Renee Bowman", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+    { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "Same week as 2026-09-28 (28 Sept - 2 Oct); this report's own leave page reprints the identical grid, now visually confirmed directly from this date's own source PDF page images (pages 23-24 match exactly what was independently confirmed from the 28th's own PDF) — doubly verified, no longer an inference. Today (Tuesday) among staff: Val Zihhareva and Anita Tammaro are both available again (only Monday was their leave day), Micah Haly remains on leave all week, and Amy Morton is on leave today and tomorrow (Tue/Wed). Among doctors: Dr Sheahan Ranasinghe is on leave today (only Monday was available), Dr Adam Wiley remains on leave (Friday is the only day off), Dr Tracy Fox remains available (only Friday is leave). This week's staff roster does not overlap with the staff who actually answer calls (see call-logs.json), so no absence-from-call-tables cross-check is meaningful here."
+}

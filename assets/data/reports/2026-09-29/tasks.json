@@ -1,0 +1,32 @@
+{
+  "_source": "Daily Operations Report - 29th September 2026.pdf, pages 1-2 (Critical Daily Tasks), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 29th September 2026",
+  "reportDate": "2026-09-29",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 58, "onHalt": false },
+    { "name": "Finance", "days": 10, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": ["E-Referrals", "Action Failed Communications On Cloop", "Send Claim For Automed Payments", "Clinical Reminders", "Caregp Ai Tool", "Allocate - Healthlink Unallocated"],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": ["Xero accounts reconciled", "Tyro Health receipts captured", "Finance queue in Cloop has zero emails", "All Remittances from 3rd Party & Insurer (From Cloop) Allocated", "Unidentified payments resolved", "Reconcile All GPs' and Practices' Xero accounts", "90/60-day debt list actioned", "Best Practice Online Medicare Claim"],
+      "incomplete": []
+    }
+  ],
+  "_trendNote": "Both checklists' trend charts printed all 10 points cleanly and their positions 0-8 match 2026-09-28's own committed trend exactly (Finance's old Tue-15-Sep 89% point has now rolled off the 10-day window, so this is the first date since it appeared that Finance's whole trend reads a flat 100). Position 9 (today) is confirmed by the 100%/100% completion badges and by the explicit streak counters printed on this date's own cover page ('PST - 58 days', 'Finance - 10 days') — both exactly one more than 2026-09-28's own 57/9, consistent with both checklists staying at 100% two days running.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

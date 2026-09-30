@@ -1,5 +1,5 @@
 {
-  "_source": "Daily Operations Report - 28th September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. This routine's safety net is the cross-check noted below, not visual reading (that stays reserved for the manually-driven historical backlog).",
+  "_source": "Daily Operations Report - 28th September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via direct visual inspection of the source PDF page images (not text extraction) — this table conveys status purely through cell colour, which text extraction cannot see.",
   "reportTitle": "Daily Operations Report - 28th September 2026",
   "reportDate": "2026-09-28",
   "weekStart": "2026-09-28",
@@ -11,25 +11,25 @@
       "people": [
         { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
         { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "available"] },
         { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["available", "leave", "leave", "leave", "leave"] },
         { "name": "Dr Penny Gosling", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
         { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
         { "name": "Dr Frederick Chung", "site": "Lyneham", "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] }
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] }
       ]
     },
     {
       "group": "Staff",
       "people": [
-        { "name": "Val Zihhareva", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Anita Tammaro", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Val Zihhareva", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Anita Tammaro", "site": null, "status": ["leave", "available", "available", "available", "available"] },
         { "name": "Micah Haly", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Amy Morton", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Renee Bowman", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Megan Moreno Pitcher", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
-        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] }
+        { "name": "Amy Morton", "site": null, "status": ["available", "leave", "leave", "available", "available"] },
+        { "name": "Renee Bowman", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["available", "available", "available", "available", "leave"] }
       ]
     }
   ],
@@ -42,5 +42,5 @@
     { "key": "available", "label": "Available" },
     { "key": "public_holiday", "label": "Public Holiday" }
   ],
-  "_note": "IMPORTANT, please review: this is a genuinely NEW week (28 Sept - 2 Oct) with no already-visually-confirmed grid to fall back on (unlike 2026-09-14 through 09-25, which all reused a grid the user had visually verified earlier). Exactly like 2026-09-11's leave.json, this date's own extracted text carried NO per-day status grid at all — only a flat list of 9 doctor names and 7 staff names under 'DOCTOR'/'STAFF' headers, with no 'leave'/'available' words attached to individual day-cells (status in this table is conveyed purely by cell colour, which text extraction cannot see). Every person's status array above is therefore an INFERENCE — that appearing on this page at all means full-week leave — not a verified per-day reading, following the same convention already used for 2026-09-11. Partial corroboration: none of the 7 STAFF names above (Val Zihhareva, Anita Tammaro, Micah Haly, Amy Morton, Renee Bowman, Megan Moreno Pitcher, Andrew Davies) appear anywhere in today's own inboundByStaff/outboundByStaff call tables, consistent with all of them being on leave at least today (Monday) — but this does not confirm the Tuesday-Friday portion of the inferred grid. Given the previous week's roster (Bethany Tran, Rebecca Quinn, Nicole Regaspi, Joshua Saw, Anita Tammaro, Kiara Pfeffer, Val Zihhareva, Megan Moreno Pitcher) only partially overlaps this one, and the doctor list has grown from 6 to 9 names, this is flagged prominently for the user to double-check against the source PDF directly rather than trust as extracted fact."
+  "_note": "CORRECTED from an earlier text-extraction-only inference that wrongly showed every listed person on leave all week. The user supplied the source PDF page images directly, and this grid is now a direct visual read of pages 23-24: 6 of the 9 doctors are on leave the full week (Mara Matic, Tom Mills, Krystel Chin, Penny Gosling, Kristy Muir, Frederick Chung), while Adam Wiley, Sheahan Ranasinghe and Tracy Fox are only partially out. Among the 7 staff, only Micah Haly is out the full week; the other 6 (Val Zihhareva, Anita Tammaro, Amy Morton, Renee Bowman, Megan Moreno Pitcher, Andrew Davies) are each out just 1-2 days. This same grid was independently re-confirmed from the 29th September report's own source PDF (identical pages 23-24, same week), so it's now doubly visually verified. Note this week's staff roster (Val Zihhareva, Anita Tammaro, Micah Haly, Amy Morton, Renee Bowman, Megan Moreno Pitcher, Andrew Davies) does not overlap at all with the staff who actually answer calls (Rebecca Quinn, Kiara Pfeffer, De Ang Renfree, etc. — see call-logs.json), so no absence-from-call-tables cross-check is meaningful for this roster the way it was for prior weeks."
 }
