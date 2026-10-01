@@ -1,0 +1,60 @@
+{
+  "_source": "Daily Operations Report - 30th September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 324,
+    "date": "2026-09-30",
+    "weekday": "Wednesday",
+    "title": "Daily Operations Report - 30th September 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 59, "onHalt": false },
+      { "name": "Finance", "days": 11, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 226,
+    "accepted": 214,
+    "acceptedPct": 95,
+    "missed": 12,
+    "missedPct": 5,
+    "totalOutbound": 146,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 50 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 122, "missed": 7 },
+      { "queue": "General Enquiries", "accepted": 89, "missed": 4 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 1 }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence — Rebecca Quinn tops a fully clean inboundByStaff table (12 names, 12 values, 12 durations all lined up 1:1, summing exactly to the cover's confirmed accepted total of 214; the Queue Report's own grand total is 1 short, see call-logs.json's own note).",
+  "cloop": {
+    "inQueue": 30,
+    "oldestDays": 10.02,
+    "contactsQueuedYesterday": 107,
+    "emailsHandledYesterday": 125,
+    "totalOverallCases": 9285,
+    "totalInProgress": 102,
+    "totalOpenCases": 38
+  },
+  "_cloopNote": "totalOverallCases (9285) is a decrease from 2026-09-29's committed 9325 — flagged as an anomaly in cloop.json's own note, recorded verbatim.",
+  "leave": {
+    "weekLabel": "28 September – 2 October 2026",
+    "doctorLinesOnLeave": 6,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": ["Val Zihhareva", "Anita Tammaro", "Amy Morton", "Renee Bowman", "Megan Moreno Pitcher", "Andrew Davies"],
+    "longTerm": [
+      { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+      { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+    ]
+  },
+  "_leaveNote": "Same week as 2026-09-28/29 (28 Sept - 2 Oct). doctorLinesOnLeave/staffFullyOnLeave/staffPartialLeave are whole-week counts (doctors/staff on leave all 5 days, and partially, respectively) so they carry over unchanged from 2026-09-29's own committed file — see leave.json's own note. Today (Wednesday) Micah Haly and Amy Morton are on leave among staff, and 8 of the 9 doctors are on leave — only Dr Tracy Fox is available today, identical to Tuesday's pattern."
+}
