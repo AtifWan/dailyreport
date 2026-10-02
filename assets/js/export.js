@@ -561,39 +561,15 @@ function buildCoverPage(doc, kit, pal, { date, overview, sectionsMeta }) {
 // ---------------------------------------------------------------------------
 function buildOverviewPage(doc, kit, pal, flow, { overview }) {
   if (!overview) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No overview report was published for this date.'); return; }
-  const t = overview.criticalTasks, c = overview.callLogs, cl = overview.cloop, lv = overview.leave;
+  const c = overview.callLogs, cl = overview.cloop, lv = overview.leave;
   const w = CONTENT_W, colW = (w - 6) / 2;
 
-  const pst = t.checklists.find((x) => x.name === 'PST');
-  const finance = t.checklists.find((x) => x.name === 'Finance');
-  const longest = t.streaks.find((s) => s.longest);
-  let y = flow.ensure(22);
-  y = kit.kpiRow(MARGIN, y, w, 22, [
-    pst && { label: 'PST checklist', value: `${pst.completionPct}%`, sub: `${t.streaks.find((s) => s.name === 'PST').days}-day streak`, tone: pst.completionPct === 100 ? 'good' : 'neutral' },
-    finance && { label: 'Finance checklist', value: `${finance.completionPct}%`, sub: finance.completionPct === 100 ? 'Fully complete' : (finance.incompleteExample || ''), tone: finance.completionPct < 100 ? 'crit' : 'good' },
-    { label: 'Longest streak', value: `${longest.days}d`, sub: `${longest.name} · since ${formatDate(t.longestStreak.startDate, { day: 'numeric', month: 'short', year: 'numeric' })}`, tone: 'good' },
-    { label: 'Sites on halt', value: t.streaks.filter((s) => s.onHalt).length, sub: `of ${t.streaks.length} tracked streaks`, tone: 'crit' },
-  ].filter(Boolean));
-  flow.y = y + 5;
-
-  const panel1H = 48;
-  const rowTop = flow.ensure(panel1H);
-  let leftY = kit.panelFrame(MARGIN, rowTop, colW, panel1H, 'Critical daily tasks — streak', 'Consecutive days at 100% checklist completion.');
-  const maxStreak = Math.max(...t.streaks.map((s) => s.days), 1);
-  leftY = kit.hBarRows(MARGIN + 4, leftY, colW - 8, 5.4, t.streaks.map((s) => ({
-    label: s.name, frac: s.days / maxStreak, valueLabel: `${s.days}d${s.onHalt ? ' *' : ''}`, color: s.onHalt ? pal.danger : pal.accent,
-  })));
-  kit.takeaway(MARGIN + 4, leftY + 1.5, colW - 8, `${longest.name}'s ${longest.days}-day streak is intact.`);
-
-  let rightY = kit.panelFrame(MARGIN + colW + 6, rowTop, colW, panel1H, 'Call queue snapshot', 'Accepted calls by queue, today.');
-  const maxQ = Math.max(...c.queueBreakdown.map((q) => q.accepted), 1);
-  rightY = kit.hBarRows(MARGIN + colW + 10, rightY, colW - 8, 6, c.queueBreakdown.map((q) => ({
-    label: q.queue, frac: q.accepted / maxQ, valueLabel: String(q.accepted), subLabel: `${q.missed} missed`, color: pal.accent,
-  })));
-  kit.takeaway(MARGIN + colW + 10, rightY + 1.5, colW - 8, `${c.topInboundAgent.name} answered the most calls today (${c.topInboundAgent.calls}).`);
-  flow.y = rowTop + panel1H + 5;
-
-  y = flow.ensure(20);
+  // The checklist/streak KPIs and the "Critical daily tasks — streak" + "Call
+  // queue snapshot" panels that used to open this page are left out of the PDF
+  // on purpose — they're already front and centre on the live dashboard's own
+  // Overview tab, and in the full report the very next page (Critical daily
+  // tasks) covers the same streaks in more detail anyway.
+  let y = flow.ensure(20);
   y = kit.kpiRow(MARGIN, y, w, 20, [
     { label: 'Total inbound calls', value: c.totalInbound, sub: `${c.totalOutbound} outbound made` },
     { label: 'Calls accepted', value: `${c.acceptedPct}%`, sub: `${c.accepted} of ${c.totalInbound}`, tone: 'good' },
@@ -687,6 +663,22 @@ function buildTasksPage(doc, kit, pal, flow, { tasks }) {
   flow.y = py0 + panelH;
 }
 
+/** The three patient-facing call KPIs (longest call, longest wait, avg handling) —
+ *  shared between the full report's Call logs page and the short report's
+ *  at-a-glance page, which surfaces them a page earlier since the short report
+ *  has no separate Call logs page of its own. */
+function addPatientServiceKpiRow(doc, kit, pal, flow, patientServiceKpi, w) {
+  if (!patientServiceKpi) return;
+  const k = patientServiceKpi;
+  let y = flow.ensure(18);
+  y = kit.kpiRow(MARGIN, y, w, 18, [
+    { label: 'Longest call duration', value: fmtSec(k.longestCallDurationSec), sub: `${k.longestCallAt} · ${k.longestCallAgent}` },
+    { label: 'Longest waiting time', value: fmtSec(k.longestWaitingTimeSec), sub: k.longestWaitingAt, tone: 'crit' },
+    { label: 'Avg call handling', value: fmtSec(k.avgCallHandlingSec), sub: 'per accepted call, today' },
+  ]);
+  flow.y = y + 4;
+}
+
 function buildCallLogsPage(doc, kit, pal, flow, { callLogs }) {
   if (!callLogs) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No call-logs report was published for this date.'); return; }
   const d = callLogs, t = d.tenDayTrend || {};
@@ -719,16 +711,7 @@ function buildCallLogsPage(doc, kit, pal, flow, { callLogs }) {
   else kit.placeholder(MARGIN + colW + 6, cy0, colW, chartH, 'Not published this date.');
   flow.y = cy0 + chartH + 4;
 
-  if (d.patientServiceKpi) {
-    const k = d.patientServiceKpi;
-    y = flow.ensure(18);
-    y = kit.kpiRow(MARGIN, y, w, 18, [
-      { label: 'Longest call duration', value: fmtSec(k.longestCallDurationSec), sub: `${k.longestCallAt} · ${k.longestCallAgent}` },
-      { label: 'Longest waiting time', value: fmtSec(k.longestWaitingTimeSec), sub: k.longestWaitingAt, tone: 'crit' },
-      { label: 'Avg call handling', value: fmtSec(k.avgCallHandlingSec), sub: 'per accepted call, today' },
-    ]);
-    flow.y = y + 4;
-  }
+  addPatientServiceKpiRow(doc, kit, pal, flow, d.patientServiceKpi, w);
 
   const staff = buildStaffActivity(d);
   const staffPanelH = Math.max(40, Math.min(70, flow.remaining));
@@ -921,24 +904,11 @@ function fitLeaveGroups(groups, availableH) {
 // likely to need beyond the at-a-glance numbers on page 1, condensed to fit one
 // page together — everything else (trend charts, staff tables, task checklists)
 // stays in the full report and the live dashboard.
-function buildShortDetailPage(doc, kit, pal, flow, { callLogs, cloop, leave }) {
+function buildShortDetailPage(doc, kit, pal, flow, { cloop, leave }) {
   const w = CONTENT_W;
 
-  if (callLogs?.patientServiceKpi) {
-    const k = callLogs.patientServiceKpi;
-    let y = flow.ensure(18);
-    y = kit.kpiRow(MARGIN, y, w, 18, [
-      { label: 'Longest call duration', value: fmtSec(k.longestCallDurationSec), sub: `${k.longestCallAt} · ${k.longestCallAgent}` },
-      { label: 'Longest waiting time', value: fmtSec(k.longestWaitingTimeSec), sub: k.longestWaitingAt, tone: 'crit' },
-      { label: 'Avg call handling', value: fmtSec(k.avgCallHandlingSec), sub: 'per accepted call, today' },
-    ]);
-    flow.y = y + 5;
-  } else {
-    flow.y = kit.placeholder(MARGIN, flow.ensure(18), w, 18, 'No patient-service KPIs published for this date.') + 5;
-  }
-
   if (cloop) {
-    const rowH = 4.8, headerH = 5.6, maxRows = Math.min(cloop.realTimeQueues.length, 6);
+    const rowH = 4.8, headerH = 5.6, maxRows = Math.min(cloop.realTimeQueues.length, 10);
     const tableH = kit.panelHeaderH('x') + headerH + maxRows * rowH + (cloop.realTimeQueues.length > maxRows ? 4.6 : 0) + 2;
     const ty0 = flow.ensure(tableH);
     const tableTop = kit.panelFrame(MARGIN, ty0, w, tableH, 'Cloop — real-time metrics, by queue', 'In queue now, and the age of the oldest case (days).');
@@ -1074,13 +1044,18 @@ function buildShortReportDoc(doc, kit, pal, data, dateLabel, onProgress) {
   onProgress?.('Building at-a-glance page…');
   const meta1 = { title: 'Daily Operations Report', color: pal.accentStrong, dateLabel };
   const pageMeta = [{ isCover: false, ...meta1 }];
-  buildOverviewPage(doc, kit, pal, makeFlow(doc, pageMeta, meta1), { overview: data.overview });
+  const flow1 = makeFlow(doc, pageMeta, meta1);
+  buildOverviewPage(doc, kit, pal, flow1, { overview: data.overview });
+  // The patient-service call KPIs ride along on this page rather than the next —
+  // the short report has no separate Call logs page for them to live on, and
+  // there's room here now that the checklist/streak content above is gone.
+  addPatientServiceKpiRow(doc, kit, pal, flow1, data.callLogs?.patientServiceKpi, CONTENT_W);
 
   onProgress?.("Building today's detail page…");
   doc.addPage('a4', 'landscape');
   const meta2 = { title: "Today's detail", color: pal.live, dateLabel };
   pageMeta.push({ isCover: false, ...meta2 });
-  buildShortDetailPage(doc, kit, pal, makeFlow(doc, pageMeta, meta2), { callLogs: data.callLogs, cloop: data.cloop, leave: data.leave });
+  buildShortDetailPage(doc, kit, pal, makeFlow(doc, pageMeta, meta2), { cloop: data.cloop, leave: data.leave });
 
   onProgress?.('Building closing page…');
   doc.addPage('a4', 'landscape');
