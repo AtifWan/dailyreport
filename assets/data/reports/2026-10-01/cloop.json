@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 1st October 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 1st October 2026",
+  "extractedAt": "2026-10-02T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Friday 2 October 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 23, "oldestDays": 7.86 },
+    { "queue": "Unassigned", "inQueue": 5, "oldestDays": 0.62 },
+    { "queue": "GP Mail", "inQueue": 4, "oldestDays": 10.98 },
+    { "queue": "Documents", "inQueue": 3, "oldestDays": 0.66 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.1 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 1.82 }
+  ],
+  "realTimeSummary": { "inQueue": 38, "oldestDays": 10.98 },
+  "_realTimeQueuesNote": "6 queues printed this time, cleanly summing to the Summary row exactly (23+5+4+3+2+1=38), with the Summary's own oldestDays (10.98) matching GP Mail's own printed value exactly (the oldest individual queue) — high confidence, no duplicate/stray Summary text this time. This panel's own extraction timestamp reads 'Friday, 2nd October 2026' — one business day ahead of this report's own Thursday date, the same established one-business-day-ahead pattern seen on every prior date.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 34 },
+    { "queue": "Documents", "count": 9 },
+    { "queue": "Failed Communication", "count": 9 },
+    { "queue": "Finance", "count": 7 },
+    { "queue": "Medico-legal", "count": 2 },
+    { "queue": "Requests", "count": 2 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct"],
+    "totals": [85, 116, 95, 69, 63, 63, 70, 81, 107, 64]
+  },
+  "_note": "contactsQueuedYesterday sums to 64 exactly (34+9+9+7+2+2+1), matching this report's own contactsQueuedTenDayTrend chart's clean trailing value exactly — positions 0-8 chain-matched 2026-09-30's own committed trend exactly, same labelling convention (no day-ahead shift). emailsHandledYesterday rows all reconcile exactly to their own stated totals this time (Chloey Leow 67=53+14, Leh Peng Goh 7=7+0, Apurva Pathak 4=0+4, Emily Pettett 3=2+1, Lucinda Gonzalez 2=2+0) — no quirks to flag this date.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 53, "outbound": 14, "total": 67 },
+    { "agent": "Leh Peng Goh", "incoming": 7, "outbound": 0, "total": 7 },
+    { "agent": "Apurva Pathak", "incoming": 0, "outbound": 4, "total": 4 },
+    { "agent": "Emily Pettett", "incoming": 2, "outbound": 1, "total": 3 },
+    { "agent": "Lucinda Gonzalez", "incoming": 2, "outbound": 0, "total": 2 }
+  ],
+  "totalCasesToDate": { "date": "2026-10-01", "totalOverallCases": 9332, "totalInProgress": 105, "totalOpenCases": 44 },
+  "inProgressTenDayTrend": {
+    "labels": ["Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct", "Fri 02 Oct"],
+    "totals": [129, 122, 113, 111, 101, 105, 108, 100, 102, 105]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct", "Fri 02 Oct"],
+    "totals": [99, 65, 57, 57, 59, 65, 55, 45, 38, 44]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a one-business-day-ahead date/label stamp ('2/10/2026', a Friday) — recorded here against this date's own actual report date (2026-10-01), matching the same label convention already used in 2026-09-30's own committed file. totalInProgress (105) and totalOpenCases (44) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-09-30's own committed trend exactly — high confidence. totalOverallCases (9332) is a +47 increase from 2026-09-30's committed 9285, back in line with the typical small daily increase seen on most prior dates (2026-09-30's own -40 dip now reads as a one-off, not the start of a trend)."
+}

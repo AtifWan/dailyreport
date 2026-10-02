@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 1st October 2026.pdf, pages 23-24 (Staff & Doctors on Leave), inferred from OneDrive text extraction rather than visual inspection — this date's text extraction shows the same roster and week (28 Sept - 2 Oct) as 2026-09-28/29/30's own grids (independently visually confirmed from their own source PDF page images), EXCEPT for one new name — see note below.",
+  "reportTitle": "Daily Operations Report - 1st October 2026",
+  "reportDate": "2026-10-01",
+  "weekStart": "2026-09-28",
+  "weekEnd": "2026-10-02",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "available"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["available", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Gosling", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Frederick Chung", "site": "Lyneham", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Val Zihhareva", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Anita Tammaro", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Micah Haly", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Amy Morton", "site": null, "status": ["available", "leave", "leave", "available", "available"] },
+        { "name": "Renee Bowman", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Atif Wan", "site": null, "status": ["available", "available", "available", "available", "available"], "_unconfirmed": true }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+    { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "FLAG FOR USER REVIEW: 'Atif Wan' is a brand-new name on the Staff roster this date — not present in 2026-09-28/29/30's grids. This is a genuine roster change, not a carry-forward error. Per-day cell colour cannot be read from text extraction (see 2026-09-28/leave.json's own note on this), and there is no prior committed date for this person to carry forward from, so this routine could not determine his real daily status. His status array above is a placeholder (all 'available', so he reads as on-roster but never flagged as 'out' anywhere, the safest default) and is marked '_unconfirmed': true — it needs a visual check against the source PDF's actual coloured grid before it can be trusted. Everyone else: Doctor and remaining Staff grids are otherwise byte-for-byte identical to 2026-09-30's own doubly-verified version. Today (Thursday) among staff: Micah Haly is the only one on leave (Amy Morton, on leave Tue/Wed, is available again today). Among doctors: 8 of 9 are on leave — only Dr Tracy Fox is available today, identical to Tuesday/Wednesday's pattern."
+}
