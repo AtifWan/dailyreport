@@ -1051,6 +1051,21 @@ function buildShortReportDoc(doc, kit, pal, data, dateLabel, onProgress) {
   // there's room here now that the checklist/streak content above is gone.
   addPatientServiceKpiRow(doc, kit, pal, flow1, data.callLogs?.patientServiceKpi, CONTENT_W);
 
+  // Fills whatever's left on the page — a 10-day trend is the one piece of
+  // "is today normal?" context missing everywhere else in the short report
+  // (every trend chart in the full report was otherwise cut for space), and a
+  // chart reads better in leftover space than an empty bordered box would.
+  const trendH = Math.max(34, flow1.remaining);
+  const ty0 = flow1.ensure(trendH);
+  const t = data.callLogs?.tenDayTrend;
+  const chartTop = kit.panelFrame(MARGIN, ty0, CONTENT_W, trendH, 'Call volume — 10-day trend', 'Accepted vs missed, all queues');
+  if (t?.accepted) {
+    kit.stackedBarChart(MARGIN + 4, chartTop, CONTENT_W - 8, trendH - kit.panelHeaderH('x') - 2, { labels: t.labels, seriesA: t.accepted, seriesB: t.missed, colorA: pal.live, colorB: pal.danger, labelA: 'Accepted', labelB: 'Missed' });
+  } else {
+    kit.placeholder(MARGIN + 4, chartTop, CONTENT_W - 8, trendH - kit.panelHeaderH('x') - 4, 'Not published this date.');
+  }
+  flow1.y = ty0 + trendH;
+
   onProgress?.("Building today's detail page…");
   doc.addPage('a4', 'landscape');
   const meta2 = { title: "Today's detail", color: pal.live, dateLabel };
