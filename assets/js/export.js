@@ -20,6 +20,11 @@ const FOOTER_H = 9; // body end to page bottom
 const BODY_Y = MARGIN + HEADER_H;
 const BODY_H = PAGE_H - MARGIN - FOOTER_H - BODY_Y;
 
+// TODO: replace with the dashboard's real, stable production URL once one exists —
+// the only candidates in the repo today are a per-branch Vercel preview and a prod
+// Vercel project that's currently erroring, neither fit to print into every PDF.
+const DASHBOARD_URL = 'https://dashboard.example/';
+
 let libsPromise = null;
 function loadScript(src) {
   return new Promise((resolve, reject) => {
@@ -893,6 +898,111 @@ function buildLeavePage(doc, kit, pal, flow, { leave }) {
   }
 }
 
+// Trims leave-grid groups to fit a height budget, in the same units
+// leaveGrid/leaveGridH use internally (5.2mm per group band, 6.6mm per person
+// row) — needed where the grid shares a page with other content instead of
+// getting its own, so it can't just overflow onto a continuation page.
+function fitLeaveGroups(groups, availableH) {
+  let used = 0, hiddenCount = 0;
+  const kept = [];
+  for (const g of groups) {
+    if (!g.people.length) continue;
+    const roomForBand = availableH - used - 5.2;
+    const roomPeople = roomForBand < 6.6 ? 0 : Math.min(g.people.length, Math.floor(roomForBand / 6.6));
+    if (roomPeople === 0) { hiddenCount += g.people.length; continue; }
+    kept.push({ group: g.group, people: g.people.slice(0, roomPeople) });
+    used += 5.2 + roomPeople * 6.6;
+    hiddenCount += g.people.length - roomPeople;
+  }
+  return { groups: kept, hiddenCount };
+}
+
+// The short report's one detail page: the three things a same-day reader is most
+// likely to need beyond the at-a-glance numbers on page 1, condensed to fit one
+// page together — everything else (trend charts, staff tables, task checklists)
+// stays in the full report and the live dashboard.
+function buildShortDetailPage(doc, kit, pal, flow, { callLogs, cloop, leave }) {
+  const w = CONTENT_W;
+
+  if (callLogs?.patientServiceKpi) {
+    const k = callLogs.patientServiceKpi;
+    let y = flow.ensure(18);
+    y = kit.kpiRow(MARGIN, y, w, 18, [
+      { label: 'Longest call duration', value: fmtSec(k.longestCallDurationSec), sub: `${k.longestCallAt} · ${k.longestCallAgent}` },
+      { label: 'Longest waiting time', value: fmtSec(k.longestWaitingTimeSec), sub: k.longestWaitingAt, tone: 'crit' },
+      { label: 'Avg call handling', value: fmtSec(k.avgCallHandlingSec), sub: 'per accepted call, today' },
+    ]);
+    flow.y = y + 5;
+  } else {
+    flow.y = kit.placeholder(MARGIN, flow.ensure(18), w, 18, 'No patient-service KPIs published for this date.') + 5;
+  }
+
+  if (cloop) {
+    const rowH = 4.8, headerH = 5.6, maxRows = Math.min(cloop.realTimeQueues.length, 6);
+    const tableH = kit.panelHeaderH('x') + headerH + maxRows * rowH + (cloop.realTimeQueues.length > maxRows ? 4.6 : 0) + 2;
+    const ty0 = flow.ensure(tableH);
+    const tableTop = kit.panelFrame(MARGIN, ty0, w, tableH, 'Cloop — real-time metrics, by queue', 'In queue now, and the age of the oldest case (days).');
+    kit.table(MARGIN + 4, tableTop, w - 8, {
+      columns: [{ label: 'Queue', key: 'queue', flex: 2 }, { label: 'In queue', key: 'inQueue', flex: 1, align: 'right' }, { label: 'Oldest (d)', key: 'oldestDays', flex: 1, align: 'right' }],
+      rows: cloop.realTimeQueues, rowH, headerH, maxRows,
+    });
+    flow.y = ty0 + tableH + 5;
+  } else {
+    flow.y = kit.placeholder(MARGIN, flow.ensure(24), w, 24, 'No Cloop report was published for this date.') + 5;
+  }
+
+  if (leave) {
+    const condensedGroups = leave.groups.map((g) => {
+      const withLeave = g.people.filter((p) => p.status.some((s) => s === 'leave')).sort((a, b) => b.status.filter((s) => s === 'leave').length - a.status.filter((s) => s === 'leave').length);
+      return { group: g.group, people: withLeave, hiddenCount: g.people.length - withLeave.length };
+    }).filter((g) => g.people.length || g.hiddenCount);
+    const todayISO = todayISOInCanberra();
+    const start = new Date(`${leave.weekStart}T00:00:00Z`);
+    const diff = Math.round((new Date(`${todayISO}T00:00:00Z`) - start) / 86400000);
+    const todayIndex = diff >= 0 && diff <= 4 ? diff : -1;
+
+    // This panel shares the page with the two above it rather than getting a page
+    // of its own, so — unlike the full report's Leave page — it can't just let an
+    // overflow spill onto a continuation page: rows are fitted to whatever height
+    // is actually left, with any that don't fit folded into the footnote instead.
+    const dayHeaderRowH = 6.6 * 0.72; // matches leaveGrid's own top NAME/MON/TUE… row, which leaveGridH doesn't count
+    const panelChromeH = kit.panelHeaderH('x') + dayHeaderRowH + 5;
+    const { groups: gridGroups, hiddenCount: spaceHiddenCount } = fitLeaveGroups(
+      condensedGroups.map((g) => ({ group: g.group, people: g.people })),
+      Math.max(0, flow.remaining - panelChromeH),
+    );
+    const gridInnerH = kit.leaveGridH(gridGroups, leave.days);
+    const gridPanelH = panelChromeH + gridInnerH;
+    const gy0 = flow.ensure(gridPanelH);
+    const gridTop = kit.panelFrame(MARGIN, gy0, w, gridPanelH, "Staff & doctors' leave — week at a glance", 'People with at least one day of leave this week; fully-out first.');
+    const afterGrid = gridGroups.length
+      ? kit.leaveGrid(MARGIN + 4, gridTop, w - 8, { days: leave.days, todayIndex, groups: gridGroups })
+      : kit.placeholder(MARGIN + 4, gridTop, w - 8, 16, 'No room left on this page — see the live dashboard for the full grid.');
+    const availableNote = condensedGroups.filter((g) => g.hiddenCount > 0).map((g) => `${g.hiddenCount} ${g.group.toLowerCase()}${g.hiddenCount === 1 ? '' : 's'}`).join(', ');
+    const notes = [];
+    if (availableNote) notes.push(`+ ${availableNote} fully available all week (not shown)`);
+    if (spaceHiddenCount > 0) notes.push(`+ ${spaceHiddenCount} more on leave this week — see the live dashboard`);
+    if (notes.length) {
+      doc.setFont('helvetica', 'italic'); doc.setFontSize(6.6); kit.text(pal.inkFaint);
+      doc.text(`${notes.join('; ')}.`, MARGIN + 4, afterGrid + 3.5, { maxWidth: w - 8 });
+    }
+    flow.y = gy0 + gridPanelH;
+  } else {
+    kit.placeholder(MARGIN, flow.ensure(24), w, 24, 'No leave report was published for this date.');
+  }
+}
+
+// The short report's closing page: no section content, just a pointer back to the
+// live dashboard for everything this condensed version left out.
+function buildLinkPage(doc, pal, dateLabel) {
+  const centerX = PAGE_W / 2, centerY = PAGE_H / 2;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(13); doc.setTextColor(...pal.ink);
+  doc.textWithLink('For more information, visit the Daily Operations Dashboard', centerX, centerY, { align: 'center', url: DASHBOARD_URL });
+  doc.setDrawColor(...pal.accent); doc.setLineWidth(0.3);
+  const linkW = doc.getTextWidth('For more information, visit the Daily Operations Dashboard');
+  doc.line(centerX - linkW / 2, centerY + 1.4, centerX + linkW / 2, centerY + 1.4);
+}
+
 // ---------------------------------------------------------------------------
 // Chrome (top accent strip, section header, footer) — drawn in a second pass
 // over every page once the total page count is known, onto the blank margin
@@ -902,7 +1012,7 @@ function drawChrome(doc, pal, meta, pageNum, totalPages) {
   doc.setFillColor(...meta.color);
   doc.rect(0, 0, PAGE_W, 2, 'F');
 
-  if (!meta.isCover) {
+  if (!meta.isCover && !meta.noHeader) {
     doc.setFillColor(...meta.color);
     doc.roundedRect(MARGIN, MARGIN - 3.4, 3.6, 3.6, 1, 1, 'F');
     doc.setFont('helvetica', 'bold'); doc.setFontSize(13); doc.setTextColor(...pal.ink);
@@ -929,33 +1039,10 @@ const SECTIONS = [
   { key: 'leave', title: "Staff & doctors' leave", colorKey: 'dangerInk', build: buildLeavePage, needs: (data) => ({ leave: data.leave }) },
 ];
 
-/**
- * Renders the whole report as one native, vector-drawn landscape PDF: a cover page
- * (title, headline KPIs, contents) followed by one densely laid-out page per
- * section, in the same order as the sidebar nav — and a continuation page for any
- * section whose content doesn't fit on one, rather than overlapping or truncating.
- *
- * @param {string} date
- * @param {{dates:string[], latest:string}} manifest
- * @param {{onProgress?: (msg:string)=>void}} [opts]
- * @returns {Promise<string>} the downloaded file's name
- */
-export async function exportFullReport(date, manifest, { onProgress } = {}) {
-  onProgress?.('Preparing…');
-  await ensureLibs();
-  await document.fonts.ready;
-  const { jsPDF } = window.jspdf;
-  const pal = buildPalette();
-
-  onProgress?.('Fetching report data…');
-  const data = await loadReportData(date);
-  const dateLabel = `${formatDate(date, { weekday: 'long' })}, ${formatDate(date)}`;
-
+function buildFullReportDoc(doc, kit, pal, data, date, dateLabel, onProgress) {
   // Page 1 (the cover) is drawn LAST, once every section's actual page count is
   // known — but it still occupies page 1 throughout, since jsPDF always starts a
   // document with one page and drawing order doesn't have to match page order.
-  const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' });
-  const kit = makeKit(doc, pal);
   const pageMeta = [null];
   const sectionsMeta = [];
 
@@ -974,6 +1061,67 @@ export async function exportFullReport(date, manifest, { onProgress } = {}) {
   doc.setPage(1);
   pageMeta[0] = { isCover: true, color: pal.accentStrong, dateLabel };
   buildCoverPage(doc, kit, pal, { date, overview: data.overview, sectionsMeta });
+  return pageMeta;
+}
+
+// Short report: an at-a-glance page (reusing the same Overview layout as the full
+// report, just with the title folded into its own header instead of a separate
+// cover), one detail page for what's most likely to need same-day attention, and
+// a closing page pointing back to the dashboard for everything left out.
+function buildShortReportDoc(doc, kit, pal, data, dateLabel, onProgress) {
+  // Unlike the full report, page 1 here is real content, not a cover reserved for
+  // later — jsPDF already starts the document on it, so no addPage() for this one.
+  onProgress?.('Building at-a-glance page…');
+  const meta1 = { title: 'Daily Operations Report', color: pal.accentStrong, dateLabel };
+  const pageMeta = [{ isCover: false, ...meta1 }];
+  buildOverviewPage(doc, kit, pal, makeFlow(doc, pageMeta, meta1), { overview: data.overview });
+
+  onProgress?.("Building today's detail page…");
+  doc.addPage('a4', 'landscape');
+  const meta2 = { title: "Today's detail", color: pal.live, dateLabel };
+  pageMeta.push({ isCover: false, ...meta2 });
+  buildShortDetailPage(doc, kit, pal, makeFlow(doc, pageMeta, meta2), { callLogs: data.callLogs, cloop: data.cloop, leave: data.leave });
+
+  onProgress?.('Building closing page…');
+  doc.addPage('a4', 'landscape');
+  const meta3 = { title: null, color: pal.accentStrong, dateLabel, noHeader: true };
+  pageMeta.push({ isCover: false, ...meta3 });
+  buildLinkPage(doc, pal, dateLabel);
+
+  return pageMeta;
+}
+
+/**
+ * Renders the report as one native, vector-drawn landscape PDF.
+ *
+ * mode: 'full' (default) — a cover page (title, headline KPIs, contents) followed
+ * by one densely laid-out page per section, in the same order as the sidebar nav,
+ * with a continuation page for any section whose content doesn't fit on one.
+ *
+ * mode: 'short' — a 3-page condensed version: an at-a-glance page, one detail
+ * page, and a closing page linking back to the dashboard for everything else.
+ *
+ * @param {string} date
+ * @param {{dates:string[], latest:string}} manifest
+ * @param {{onProgress?: (msg:string)=>void, mode?: 'full'|'short'}} [opts]
+ * @returns {Promise<string>} the downloaded file's name
+ */
+export async function exportReport(date, manifest, { onProgress, mode = 'full' } = {}) {
+  onProgress?.('Preparing…');
+  await ensureLibs();
+  await document.fonts.ready;
+  const { jsPDF } = window.jspdf;
+  const pal = buildPalette();
+
+  onProgress?.('Fetching report data…');
+  const data = await loadReportData(date);
+  const dateLabel = `${formatDate(date, { weekday: 'long' })}, ${formatDate(date)}`;
+
+  const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' });
+  const kit = makeKit(doc, pal);
+  const pageMeta = mode === 'short'
+    ? buildShortReportDoc(doc, kit, pal, data, dateLabel, onProgress)
+    : buildFullReportDoc(doc, kit, pal, data, date, dateLabel, onProgress);
 
   onProgress?.('Finishing…');
   const totalPages = doc.internal.getNumberOfPages();
@@ -982,7 +1130,7 @@ export async function exportFullReport(date, manifest, { onProgress } = {}) {
     drawChrome(doc, pal, pageMeta[i - 1], i, totalPages);
   }
 
-  const filename = `daily-report-${date}.pdf`;
+  const filename = mode === 'short' ? `daily-report-short-${date}.pdf` : `daily-report-${date}.pdf`;
   doc.save(filename);
   return filename;
 }

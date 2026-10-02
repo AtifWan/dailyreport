@@ -5,7 +5,7 @@ import { renderTasks } from './pages/tasks.js';
 import { renderCallLogs } from './pages/call-logs.js';
 import { renderCloop } from './pages/cloop.js';
 import { renderLeave } from './pages/leave.js';
-import { exportFullReport, showToast } from './export.js';
+import { exportReport, showToast } from './export.js';
 
 // Each route: key -> { title, subtitle, navId, render(container, date, manifest) }
 const ROUTES = {
@@ -92,19 +92,34 @@ function closeDrawer() { sidebar.classList.remove('open'); backdrop.classList.re
 document.getElementById('menuBtn').addEventListener('click', openDrawer);
 backdrop.addEventListener('click', closeDrawer);
 
-// Export button: always builds the full combined report for whatever date is
-// currently selected, regardless of which tab is open — it renders all 5 tabs
-// off-screen (see export.js), so the file it downloads is the same one no matter
-// where on the dashboard you clicked it from.
+// Export split button: always builds the report for whatever date is currently
+// selected, regardless of which tab is open — it renders every section
+// off-screen (see export.js), so the file it downloads is the same one no
+// matter where on the dashboard you clicked it from. The main button re-runs
+// whichever report type was used last (Full, until the caret menu picks
+// Short); the caret just offers the choice, it doesn't perform an export itself.
+const exportMenu = document.getElementById('exportMenu');
 const exportBtn = document.getElementById('exportBtn');
 const exportBtnLabel = document.getElementById('exportBtnLabel');
-exportBtn.addEventListener('click', async () => {
+const exportCaretBtn = document.getElementById('exportCaretBtn');
+const exportPop = document.getElementById('exportPop');
+let lastExportMode = 'full';
+
+function closeExportPop() {
+  exportPop.hidden = true;
+  exportCaretBtn.setAttribute('aria-expanded', 'false');
+}
+
+async function runExport(mode) {
   if (exportBtn.disabled) return;
+  lastExportMode = mode;
+  exportBtn.setAttribute('aria-label', mode === 'short' ? 'Export short report' : 'Export full report');
   const idleLabel = exportBtnLabel.textContent;
-  exportBtn.disabled = true;
-  exportBtn.style.opacity = '.6';
+  exportMenu.querySelectorAll('button').forEach((b) => { b.disabled = true; });
+  exportMenu.style.opacity = '.6';
   try {
-    const filename = await exportFullReport(currentDate, manifest, {
+    const filename = await exportReport(currentDate, manifest, {
+      mode,
       onProgress: (msg) => { exportBtnLabel.textContent = msg; },
     });
     showToast(`Downloaded ${filename}`);
@@ -113,10 +128,29 @@ exportBtn.addEventListener('click', async () => {
     showToast("Couldn't export the report — try again.", { ok: false });
   } finally {
     exportBtnLabel.textContent = idleLabel;
-    exportBtn.disabled = false;
-    exportBtn.style.opacity = '';
+    exportMenu.querySelectorAll('button').forEach((b) => { b.disabled = false; });
+    exportMenu.style.opacity = '';
+  }
+}
+
+exportBtn.addEventListener('click', () => runExport(lastExportMode));
+exportCaretBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (exportPop.hidden) {
+    exportPop.hidden = false;
+    exportCaretBtn.setAttribute('aria-expanded', 'true');
+  } else {
+    closeExportPop();
   }
 });
+exportPop.addEventListener('click', (e) => {
+  const opt = e.target.closest('.dr-export-opt');
+  if (!opt) return;
+  closeExportPop();
+  runExport(opt.dataset.mode);
+});
+document.addEventListener('click', (e) => { if (!exportPop.hidden && !exportMenu.contains(e.target)) closeExportPop(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !exportPop.hidden) closeExportPop(); });
 
 window.addEventListener('hashchange', navigate);
 initChartTooltips(document.body);

@@ -126,10 +126,23 @@
 .dr-leave-badge--full { background: var(--danger-soft); color: var(--danger-ink); }
 .dr-leave-badge--partial { background: var(--infer-soft); color: var(--infer-ink); }
 
-/* Export button (topbar) — below the same breakpoint the sidebar itself collapses
-   to a drawer, .tb-titles is already tight against the menu button; a full-width
-   "Export full report" label pushed the longest page titles ("Staff & doctors'
-   leave") down to a truncated "St…". Icon-only keeps the button reachable without
+/* Export split button (topbar) — a main button (last-used report type, defaults
+   to Full) joined to a caret that opens a two-option popover, same button+popover
+   idiom as .dr-datepicker above. The two halves share one visual button: the
+   divider between them is a hairline, not a gap, and only the outer corners round. */
+.dr-export { position: relative; display: flex; }
+.dr-export-main { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.dr-export-caret { border-top-left-radius: 0; border-bottom-left-radius: 0; border-left: none; padding: 9px 10px; }
+.dr-export-pop { position: absolute; top: calc(100% + 6px); right: 0; z-index: 40; width: 260px; max-width: calc(100vw - 32px); background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); box-shadow: var(--shadow-pop); padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+.dr-export-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; border: none; background: none; text-align: left; padding: 8px 10px; border-radius: var(--radius-sm); cursor: pointer; }
+.dr-export-opt:hover { background: var(--surface-sunk); }
+.dr-export-opt-title { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.dr-export-opt-sub { font-size: 11.5px; color: var(--ink-faint); }
+
+/* Below the same breakpoint the sidebar itself collapses to a drawer,
+   .tb-titles is already tight against the menu button; a full-width "Export
+   report" label pushed the longest page titles ("Staff & doctors' leave")
+   down to a truncated "St…". Icon-only keeps the button reachable without
    crowding the title — aria-label carries the accessible name the hidden text
    would otherwise have supplied. */
 @media (max-width: 880px) {

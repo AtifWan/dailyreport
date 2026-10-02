@@ -59,10 +59,25 @@
         <div class="ts">At-a-glance summary of the daily operations report.</div>
       </div>
       <div class="spacer"></div>
-      <button class="btn" id="exportBtn" type="button" aria-label="Export full report">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
-        <span id="exportBtnLabel">Export full report</span>
-      </button>
+      <div class="dr-export" id="exportMenu">
+        <button class="btn dr-export-main" id="exportBtn" type="button" aria-label="Export full report">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <span id="exportBtnLabel">Export report</span>
+        </button>
+        <button class="btn dr-export-caret" id="exportCaretBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose report type">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="dr-export-pop" id="exportPop" hidden>
+          <button type="button" class="dr-export-opt" data-mode="full">
+            <span class="dr-export-opt-title">Full report</span>
+            <span class="dr-export-opt-sub">Every section, with charts &amp; tables</span>
+          </button>
+          <button type="button" class="dr-export-opt" data-mode="short">
+            <span class="dr-export-opt-title">Short report (3 pages)</span>
+            <span class="dr-export-opt-sub">At-a-glance summary + today's key details</span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="content">
