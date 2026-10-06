@@ -1,0 +1,45 @@
+{
+  "_source": "Daily Operations Report - 2nd October 2026.pdf, pages 17-21 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 2nd October 2026",
+  "extractedAt": "2026-10-06T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Tuesday 6 October 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 25, "oldestDays": 8.35 },
+    { "queue": "Unassigned", "inQueue": 24, "oldestDays": 3.74 },
+    { "queue": "Documents", "inQueue": 7, "oldestDays": 3.55 },
+    { "queue": "Medico-legal", "inQueue": 5, "oldestDays": 3.65 },
+    { "queue": "GP Mail", "inQueue": 3, "oldestDays": 13.8 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 5.76 }
+  ],
+  "realTimeSummary": { "inQueue": 65, "oldestDays": 13.8 },
+  "_realTimeQueuesNote": "6 queues printed this time, cleanly summing to the Summary row exactly (25+24+7+5+3+1=65), with the Summary's own oldestDays (13.8) matching GP Mail's own printed value exactly (the oldest individual queue) — high confidence. This panel's own extraction timestamp reads 'Tuesday, 6th October 2026' — several days ahead of this report's own Friday date, a bigger gap than the usual single business day, consistent with ACT's Labour Day public holiday falling on Monday 5 October 2026 pushing the next business day to Tuesday the 6th; the Total Cases To Date panel below carries the identical date stamp and the same holiday-adjusted jump in its own trend labels.",
+  "contactsQueuedYesterday": [
+    { "queue": "Documents", "count": 24 },
+    { "queue": "Unassigned", "count": 16 },
+    { "queue": "Finance", "count": 6 },
+    { "queue": "Requests", "count": 6 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct", "Fri 02 Oct"],
+    "totals": [116, 95, 69, 63, 63, 70, 81, 107, 64, 53]
+  },
+  "_note": "contactsQueuedYesterday sums to 53 exactly (24+16+6+6+1), matching this report's own contactsQueuedTenDayTrend chart's clean trailing value exactly — positions 0-8 chain-matched 2026-10-01's own committed trend exactly, same labelling convention (no day-ahead shift here, unlike the Cases panels below). emailsHandledYesterday rows all reconcile exactly to their own stated totals this time (Chloey Leow 57=41+16, Apurva Pathak 7=4+3, Leh Peng Goh 6=6+0, De Ang Renfree 4=2+2, Pinky De Paz 1=0+1) — no quirks to flag this date.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 41, "outbound": 16, "total": 57 },
+    { "agent": "Apurva Pathak", "incoming": 4, "outbound": 3, "total": 7 },
+    { "agent": "Leh Peng Goh", "incoming": 6, "outbound": 0, "total": 6 },
+    { "agent": "De Ang Renfree", "incoming": 2, "outbound": 2, "total": 4 },
+    { "agent": "Pinky De Paz", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "totalCasesToDate": { "date": "2026-10-02", "totalOverallCases": 9427, "totalInProgress": 106, "totalOpenCases": 69 },
+  "inProgressTenDayTrend": {
+    "labels": ["Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct", "Fri 02 Oct", "Tue 06 Oct"],
+    "totals": [122, 113, 111, 101, 105, 108, 100, 102, 105, 106]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct", "Fri 02 Oct", "Tue 06 Oct"],
+    "totals": [65, 57, 57, 59, 65, 55, 45, 38, 44, 69]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('6/10/2026', a Tuesday) — a larger gap than the usual single business day, because Monday 5 October 2026 is ACT's Labour Day public holiday, pushing the next business day to Tuesday the 6th. Both trend charts also dropped their oldest label (Mon 21 Sep) and added the new Tue 06 Oct label at the end, rather than the usual Fri 02 Oct — recorded verbatim against this date's own actual report date (2026-10-02). totalInProgress (106) and totalOpenCases (69) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-01's own committed trend exactly once shifted one slot (the window no longer includes Mon 21 Sep) — high confidence. totalOverallCases (9427) is a +95 increase from 2026-10-01's committed 9332, a larger jump than the typical daily increase but not unprecedented."
+}

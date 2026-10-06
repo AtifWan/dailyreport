@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 2nd October 2026.pdf (full-length) and (Short Version), pages 10-11 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. STRUCTURAL CHANGE this date — see _note.",
+  "reportTitle": "Daily Operations Report - 2nd October 2026",
+  "reportDate": "2026-10-02",
+  "weekStart": "2026-09-28",
+  "weekEnd": "2026-10-02",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "available"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["available", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Gosling", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Frederick Chung", "site": "Lyneham", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Val Zihhareva", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Anita Tammaro", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Micah Haly", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Amy Morton", "site": null, "status": ["available", "leave", "leave", "available", "available"] },
+        { "name": "Renee Bowman", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Atif Wan", "site": null, "status": ["available", "available", "available", "available", "available"], "_unconfirmed": true }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+    { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "STRUCTURAL CHANGE — FLAG FOR USER REVIEW: unlike every prior date, this report's own pages did not re-print the current week's (28 Sep - 2 Oct) day-by-day Doctor/Staff grid at all. Instead they printed (a) a NEXT-week preview (5-9 Oct) listing only Doctor names with no day-by-day status, and (b) a truncated current-week Staff list showing only 2 names (Micah Haly, Amy Morton) with no status cells either — identical in both the full-length and Short Version PDFs. Neither reading of that 2-name list reconciles cleanly: it doesn't match 'on leave today' (Friday 2 Oct: carried-forward data says Micah Haly, Renee Bowman, Megan Moreno Pitcher and Andrew Davies are on leave, not Amy Morton) nor 'on leave at any point this week' (would be 7 of 8 staff, not 2) — recorded here verbatim as a genuine open question rather than guessed at. Because this report's own date (Friday 2 Oct) falls inside the exact same week already fully captured in 2026-10-01's own leave.json — whose day arrays already extend through Friday, printed a day in advance — the full roster/day-array below is carried forward unchanged from that file rather than re-derived; it was already this week's correct data. Separately, the NEXT week's (5-9 Oct) Doctor-only preview shows two roster changes worth a glance once that week is processed: 'Dr Belinda Glasson' appears for the first time (no site given), while Dr Adam Wiley (Denman) and Dr Frederick Chung (Lyneham) do not appear in the 5-9 Oct list — not actioned now since it's next week's data, just recorded here for visibility."
+}
