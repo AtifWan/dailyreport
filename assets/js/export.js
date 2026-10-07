@@ -827,13 +827,20 @@ function buildLeavePage(doc, kit, pal, flow, { leave }) {
   const diff = Math.round((new Date(`${todayISO}T00:00:00Z`) - start) / 86400000);
   const todayIndex = diff >= 0 && diff <= 4 ? diff : -1;
 
-  const fullWeek = (p) => p.status.every((s) => s === 'leave');
-  const noneWeek = (p) => p.status.every((s) => s === 'available');
-  const leaveDayCount = (p) => p.status.filter((s) => s === 'leave').length;
+  // A person's whole status array can be missing rather than guessed at (e.g. a
+  // brand-new week with no prior report to carry a day-by-day grid forward from)
+  // — see this date's own leave.json note. Treated as its own bucket below
+  // rather than crashing .every()/.filter() against a null.
+  const hasStatus = (p) => Array.isArray(p.status);
+  const fullWeek = (p) => hasStatus(p) && p.status.every((s) => s === 'leave');
+  const noneWeek = (p) => hasStatus(p) && p.status.every((s) => s === 'available');
+  const leaveDayCount = (p) => hasStatus(p) ? p.status.filter((s) => s === 'leave').length : 0;
   const allPeople = d.groups.flatMap((g) => g.people);
-  const fullyOnLeave = allPeople.filter(fullWeek).length;
-  const partialLeave = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
-  const outToday = todayIndex >= 0 ? allPeople.filter((p) => p.status[todayIndex] === 'leave').length : null;
+  const confirmedPeople = allPeople.filter(hasStatus);
+  const unconfirmedCount = allPeople.length - confirmedPeople.length;
+  const fullyOnLeave = confirmedPeople.filter(fullWeek).length;
+  const partialLeave = confirmedPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
+  const outToday = todayIndex >= 0 ? confirmedPeople.filter((p) => p.status[todayIndex] === 'leave').length : null;
 
   let y = flow.ensure(5);
   doc.setFont('helvetica', 'italic'); doc.setFontSize(8); kit.text(pal.inkFaint);
@@ -852,10 +859,14 @@ function buildLeavePage(doc, kit, pal, flow, { leave }) {
   // Condensed for print: everyone with at least one leave day, fully-out first —
   // people fully available all week are summarised in one footnote line instead
   // of taking up a row each (the live dashboard's own table shows everyone).
+  // People with no status array at all (unconfirmed) are kept out of that
+  // "fully available" footnote entirely — that would misreport unknown as
+  // available — and counted in their own note instead.
   const condensedGroups = d.groups.map((g) => {
-    const withLeave = g.people.filter((p) => leaveDayCount(p) > 0).sort((a, b) => leaveDayCount(b) - leaveDayCount(a));
-    return { group: g.group, people: withLeave, hiddenCount: g.people.length - withLeave.length };
-  }).filter((g) => g.people.length || g.hiddenCount);
+    const withLeave = g.people.filter((p) => hasStatus(p) && leaveDayCount(p) > 0).sort((a, b) => leaveDayCount(b) - leaveDayCount(a));
+    const unconfirmed = g.people.filter((p) => !hasStatus(p)).length;
+    return { group: g.group, people: withLeave, hiddenCount: g.people.length - withLeave.length - unconfirmed, unconfirmedCount: unconfirmed };
+  }).filter((g) => g.people.length || g.hiddenCount || g.unconfirmedCount);
   const gridGroups = condensedGroups.map((g) => ({ group: g.group, people: g.people }));
   const gridInnerH = kit.leaveGridH(gridGroups, d.days);
   const gridPanelH = kit.panelHeaderH('x') + gridInnerH + 5;
@@ -864,9 +875,15 @@ function buildLeavePage(doc, kit, pal, flow, { leave }) {
   const gridTop = kit.panelFrame(MARGIN, gy0, w, gridPanelH, 'Week at a glance', 'People with at least one day of leave this week; fully-out first.');
   const afterGrid = kit.leaveGrid(MARGIN + 4, gridTop, w - 8, { days: d.days, todayIndex, groups: gridGroups });
   const hiddenNote = condensedGroups.filter((g) => g.hiddenCount > 0).map((g) => `${g.hiddenCount} ${g.group.toLowerCase()}${g.hiddenCount === 1 ? '' : 's'}`).join(', ');
+  let noteY = afterGrid;
   if (hiddenNote) {
     doc.setFont('helvetica', 'italic'); doc.setFontSize(6.6); kit.text(pal.inkFaint);
-    doc.text(`+ ${hiddenNote} fully available all week (not shown).`, MARGIN + 4, afterGrid + 3.5);
+    doc.text(`+ ${hiddenNote} fully available all week (not shown).`, MARGIN + 4, noteY + 3.5);
+    noteY += 3.5;
+  }
+  if (unconfirmedCount > 0) {
+    doc.setFont('helvetica', 'italic'); doc.setFontSize(6.6); kit.text(pal.inkFaint);
+    doc.text(`${unconfirmedCount} ${unconfirmedCount === 1 ? 'person' : 'people'} not shown — no day-by-day leave grid published for this week yet.`, MARGIN + 4, noteY + 3.5);
   }
   flow.y = gy0 + gridPanelH + 4;
 
@@ -922,9 +939,13 @@ function buildShortDetailPage(doc, kit, pal, flow, { cloop, leave }) {
   }
 
   if (leave) {
+    // See buildLeavePage's own note: a person's whole status array can be
+    // missing (unconfirmed) rather than guessed at — excluded from "fully
+    // available" here too, not folded in as if they were.
     const condensedGroups = leave.groups.map((g) => {
-      const withLeave = g.people.filter((p) => p.status.some((s) => s === 'leave')).sort((a, b) => b.status.filter((s) => s === 'leave').length - a.status.filter((s) => s === 'leave').length);
-      return { group: g.group, people: withLeave, hiddenCount: g.people.length - withLeave.length };
+      const withLeave = g.people.filter((p) => Array.isArray(p.status) && p.status.some((s) => s === 'leave')).sort((a, b) => b.status.filter((s) => s === 'leave').length - a.status.filter((s) => s === 'leave').length);
+      const unconfirmed = g.people.filter((p) => !Array.isArray(p.status)).length;
+      return { group: g.group, people: withLeave, hiddenCount: g.people.length - withLeave.length - unconfirmed };
     }).filter((g) => g.people.length || g.hiddenCount);
     const todayISO = todayISOInCanberra();
     const start = new Date(`${leave.weekStart}T00:00:00Z`);

@@ -18,6 +18,14 @@ function cell(status, isToday) {
   return `<td style="${isToday ? 'background:var(--accent-weak)' : ''}"><span class="chip" style="background:${s.bg};color:${s.ink}">${s.label}</span></td>`;
 }
 
+// A person's whole status array is missing (not individual days — the source
+// report simply never printed a day-by-day grid for this week at all, e.g. a
+// brand-new week with no prior report to carry it forward from) rather than
+// guessed at, per this project's standing data-integrity rule — see this
+// date's own leave.json note. Treated as its own bucket everywhere below
+// rather than crashing on .every()/.filter() against a null.
+const hasStatus = (p) => Array.isArray(p.status);
+
 function dayIndexOf(dateISO, weekStartISO) {
   const d = new Date(`${dateISO}T00:00:00Z`);
   const start = new Date(`${weekStartISO}T00:00:00Z`);
@@ -40,14 +48,16 @@ export async function renderLeave(container, date, manifest) {
   const todayISO = todayISOInCanberra();
   const todayIndex = dayIndexOf(todayISO, d.weekStart);
 
-  const fullWeek = (person) => person.status.every((s) => s === 'leave');
-  const noneWeek = (person) => person.status.every((s) => s === 'available');
-  const leaveDayCount = (person) => person.status.filter((s) => s === 'leave').length;
+  const fullWeek = (person) => hasStatus(person) && person.status.every((s) => s === 'leave');
+  const noneWeek = (person) => hasStatus(person) && person.status.every((s) => s === 'available');
+  const leaveDayCount = (person) => hasStatus(person) ? person.status.filter((s) => s === 'leave').length : 0;
   const allPeople = d.groups.flatMap((g) => g.people);
-  const fullyOnLeave = allPeople.filter(fullWeek).length;
-  const partialLeave = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
-  const outToday = todayIndex >= 0 ? allPeople.filter((p) => p.status[todayIndex] === 'leave').length : null;
-  const partialNames = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).map((p) => p.name);
+  const confirmedPeople = allPeople.filter(hasStatus);
+  const unconfirmedCount = allPeople.length - confirmedPeople.length;
+  const fullyOnLeave = confirmedPeople.filter(fullWeek).length;
+  const partialLeave = confirmedPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
+  const outToday = todayIndex >= 0 ? confirmedPeople.filter((p) => p.status[todayIndex] === 'leave').length : null;
+  const partialNames = confirmedPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).map((p) => p.name);
 
   container.innerHTML = `
     ${datePickerHtml(date, manifest)}
@@ -75,6 +85,12 @@ export async function renderLeave(container, date, manifest) {
         <div class="k-v num">${d.longTerm.length}</div>
         <div class="k-n">${d.longTerm.map((p) => esc(p.name)).join(', ')}</div>
       </div>
+      ${unconfirmedCount > 0 ? `
+      <div class="kpi">
+        <div class="k-l">Not yet available</div>
+        <div class="k-v num">${unconfirmedCount}</div>
+        <div class="k-n">no day-by-day grid published for this week yet — see table below</div>
+      </div>` : ''}
     </div>
 
     <div class="panel">
@@ -131,6 +147,13 @@ export async function renderLeave(container, date, manifest) {
   let query = '';
 
   function personRow(p) {
+    if (!hasStatus(p)) {
+      return `
+        <tr>
+          <td class="strong">${esc(p.name)}${p.site ? `<small style="color:var(--ink-faint)"> (${esc(p.site)})</small>` : ''}</td>
+          <td colspan="${d.days.length}" class="foot-note">Not yet available — no day-by-day grid published for this week.</td>
+        </tr>`;
+    }
     const days = leaveDayCount(p);
     const rowClass = fullWeek(p) ? 'dr-leave-row--full' : days > 0 ? 'dr-leave-row--partial' : '';
     const badge = fullWeek(p)
@@ -150,7 +173,9 @@ export async function renderLeave(container, date, manifest) {
     const rows = d.groups.map((g) => {
       const people = g.people
         .filter((p) => {
-          const matchesDay = dayFilter === -1 || p.status[dayFilter] === 'leave';
+          // An unconfirmed person has no per-day data to match against a specific
+          // day filter, but should still show up under "All" and name search.
+          const matchesDay = dayFilter === -1 || (hasStatus(p) && p.status[dayFilter] === 'leave');
           const matchesQuery = !q || p.name.toLowerCase().includes(q);
           return matchesDay && matchesQuery;
         })
