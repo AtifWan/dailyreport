@@ -64,12 +64,34 @@ def build():
     print(f"Embedded {len(data)} JSON files, {len(manifest['dates'])} dates, {len(embedded_json)} chars")
 
     # ---- 3. JS bundle ----
+    # Concatenating ES modules into one flat <script> (no module wrapping) means
+    # every top-level const/let/function/class name must be unique across ALL of
+    # JS_ORDER — two files can each validly declare the same name in real module
+    # scope (e.g. two unrelated calendar widgets both naming a local MONTH_LABELS)
+    # and still silently break this bundle: a duplicate top-level declaration is a
+    # hard SyntaxError that aborts the entire script, which (since index.html's own
+    # static markup already shows "Loading…" as a placeholder) looks exactly like
+    # the page hanging forever rather than an obvious crash. Caught once already
+    # (2026-10-07) only by chance; check for it on every build instead.
+    decl_re = re.compile(r'^(?:export\s+)?(?:const|let|var|function|class)\s+([A-Za-z_$][A-Za-z0-9_$]*)')
+    owners = {}
     js_parts = []
     for path in JS_ORDER:
         out_lines = []
         for line in read(path).split("\n"):
             if re.match(r'^\s*import\s', line):
                 continue  # drop import lines entirely
+            m = decl_re.match(line)
+            if m:
+                name = m.group(1)
+                if name in owners:
+                    raise SystemExit(
+                        f"build-artifact.py: '{name}' is declared at top level in both "
+                        f"{owners[name]} and {path} — fine as separate ES modules, but this "
+                        f"bundler flattens them into one scope, so this is a SyntaxError "
+                        f"once concatenated. Rename one of them before building."
+                    )
+                owners[name] = path
             out_lines.append(re.sub(r'^export\s+', '', line))
         js_parts.append(f"\n// ---- {path} ----\n" + "\n".join(out_lines))
     js_bundle = "\n".join(js_parts)

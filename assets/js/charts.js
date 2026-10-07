@@ -7,9 +7,7 @@
 // to a live feed, the page modules just fetch fresh JSON of the same shape — nothing
 // here needs to change.
 
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
+import { esc } from './util.js';
 
 // Edge points would otherwise centre their label past the viewBox edge and clip;
 // anchor the first/last label to start/end instead so nothing gets cut off.

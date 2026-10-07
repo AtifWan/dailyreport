@@ -1,7 +1,7 @@
 import { esc, formatDate } from './util.js';
 
-const WEEKDAY_LABELS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-const MONTH_LABELS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const DATEPICKER_WEEKDAY_LABELS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+const DATEPICKER_MONTH_LABELS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function ym(isoDate) {
   const [year, month] = isoDate.split('-').map(Number);
@@ -106,7 +106,7 @@ export function wireDatePicker(container, { manifest, onChange }) {
   let view = ym(selected);
 
   function paint() {
-    monLabel.textContent = `${MONTH_LABELS[view.month]} ${view.year}`;
+    monLabel.textContent = `${DATEPICKER_MONTH_LABELS[view.month]} ${view.year}`;
     prevBtn.disabled = monthIndex(view.year, view.month) <= monthIndex(minMonth.year, minMonth.month);
     nextBtn.disabled = monthIndex(view.year, view.month) >= monthIndex(maxMonth.year, maxMonth.month);
 
@@ -118,7 +118,7 @@ export function wireDatePicker(container, { manifest, onChange }) {
     for (let i = 0; i < startWeekday; i++) cells.push(null);
     for (let d = 1; d <= daysInMonth; d++) cells.push(d);
 
-    const header = WEEKDAY_LABELS.map((w) => `<div class="dr-pick-weekday">${w}</div>`).join('');
+    const header = DATEPICKER_WEEKDAY_LABELS.map((w) => `<div class="dr-pick-weekday">${w}</div>`).join('');
     const body = cells.map((d) => {
       if (d == null) return '<div class="dr-pick-cell dr-pick-cell--empty"></div>';
       const dateISO = isoOf(view.year, view.month, d);
