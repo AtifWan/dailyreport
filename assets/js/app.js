@@ -5,6 +5,7 @@ import { renderTasks } from './pages/tasks.js';
 import { renderCallLogs } from './pages/call-logs.js';
 import { renderCloop } from './pages/cloop.js';
 import { renderLeave } from './pages/leave.js';
+import { renderChecklist } from './pages/checklist.js';
 import { exportReport, showToast } from './export.js';
 
 // Each route: key -> { title, subtitle, navId, render(container, date, manifest) }
@@ -14,6 +15,7 @@ const ROUTES = {
   'call-logs': { title: 'Call logs', subtitle: 'Call volume, answer rate and per-queue performance.', navId: 'nav-calls', render: renderCallLogs },
   cloop: { title: 'Cloop', subtitle: 'Case queue volumes, handling and week-over-week movement.', navId: 'nav-cloop', render: renderCloop },
   leave: { title: "Staff & doctors' leave", subtitle: 'Week at a glance for clinical and admin staff.', navId: 'nav-leave', render: renderLeave },
+  'report-checklist': { title: 'Report checklist', subtitle: 'Status of this report’s required inputs — editors only.', navId: 'nav-checklist', render: (container) => renderChecklist(container) },
 };
 const DEFAULT_ROUTE = 'overview';
 
