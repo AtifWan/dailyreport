@@ -64,11 +64,25 @@ function renderBoard(container, data, { saving, onSaveCases }) {
   });
 }
 
-export async function renderChecklist(container) {
-  if (!window.claude || typeof window.claude.use !== 'function') {
-    renderMessage(container, 'Not available here', 'The report checklist only works on the main published dashboard link.');
-    return;
-  }
+function renderLoginForm(container, { error, signingIn, onSubmit }) {
+  container.innerHTML = `
+    <div class="panel">
+      <h3>Report checklist</h3>
+      <p class="q">This page is for whoever generates the report. Enter the shared password to continue.</p>
+      <form id="loginForm" class="dr-cases-form dr-section-gap">
+        <label>Password<input class="dinput" type="password" name="password" autocomplete="current-password" required></label>
+        <button class="btn btn-primary" type="submit"${signingIn ? ' disabled' : ''}>${signingIn ? 'Checking…' : 'Sign in'}</button>
+      </form>
+      ${error ? `<p class="dr-check-sub" style="color:var(--danger-ink);margin-top:10px">${esc(error)}</p>` : ''}
+    </div>`;
+  container.querySelector('#loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    onSubmit(String(fd.get('password') || ''));
+  });
+}
+
+async function renderChecklistViaArtifact(container) {
   const user = await window.claude.use('user');
   const canEdit = user ? await user.canEdit() : false;
   if (!canEdit) {
@@ -77,7 +91,7 @@ export async function renderChecklist(container) {
   }
   const db = await window.claude.use('db');
   if (!db) {
-    renderMessage(container, 'Not available here', 'The report checklist only works on the main published dashboard link.');
+    renderMessage(container, 'Not available here', 'The report checklist needs the db capability, which this view did not grant.');
     return;
   }
 
@@ -103,4 +117,102 @@ export async function renderChecklist(container) {
     (snap) => { latest = snap.exists ? snap.data() : null; draw(); },
     () => renderMessage(container, "Couldn't load", 'There was a problem reaching the checklist data.'),
   );
+}
+
+// Outside the Artifact runtime (e.g. the Vercel-hosted copy), there's no
+// window.claude to ask "who is this viewer" or to hold shared state — so this
+// path talks to real serverless endpoints (api/checklist/*) backed by Vercel
+// KV instead, gated by a single shared password rather than the Artifact's
+// own owner/editor model.
+async function renderChecklistViaApi(container) {
+  let latest = null;
+  let saving = false;
+  let signingIn = false;
+  let loginError = null;
+  let pollTimer = null;
+
+  function stopPolling() {
+    if (pollTimer) clearInterval(pollTimer);
+    pollTimer = null;
+  }
+
+  function drawBoard() {
+    renderBoard(container, latest, { saving, onSaveCases: save });
+  }
+
+  async function load() {
+    const res = await fetch('/api/checklist', { credentials: 'same-origin' });
+    if (res.status === 401) {
+      stopPolling();
+      renderLoginForm(container, { error: loginError, signingIn, onSubmit: login });
+      return;
+    }
+    if (!res.ok) {
+      stopPolling();
+      renderMessage(container, "Couldn't load", 'There was a problem reaching the checklist data.');
+      return;
+    }
+    ({ data: latest } = await res.json());
+    drawBoard();
+    if (!pollTimer) {
+      // No live-push channel here (no websocket backend) — a light poll picks
+      // up the daily routine's own writes without the editor refreshing by
+      // hand. Stops itself once this page is navigated away from.
+      pollTimer = setInterval(() => {
+        if (!document.contains(container)) { stopPolling(); return; }
+        load();
+      }, 30000);
+    }
+  }
+
+  async function login(password) {
+    signingIn = true;
+    loginError = null;
+    renderLoginForm(container, { error: loginError, signingIn, onSubmit: login });
+    try {
+      const res = await fetch('/api/checklist/login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      if (res.ok) {
+        await load();
+        return;
+      }
+      loginError = res.status === 401 ? 'Wrong password.' : "Couldn't sign in — try again.";
+    } catch {
+      loginError = "Couldn't reach the server — try again.";
+    } finally {
+      signingIn = false;
+    }
+    renderLoginForm(container, { error: loginError, signingIn, onSubmit: login });
+  }
+
+  async function save(values) {
+    saving = true;
+    drawBoard();
+    try {
+      const res = await fetch('/api/checklist/cases', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      if (res.ok) ({ data: latest } = await res.json());
+    } finally {
+      saving = false;
+      drawBoard();
+    }
+  }
+
+  await load();
+}
+
+export async function renderChecklist(container) {
+  if (window.claude && typeof window.claude.use === 'function') {
+    await renderChecklistViaArtifact(container);
+  } else {
+    await renderChecklistViaApi(container);
+  }
 }
