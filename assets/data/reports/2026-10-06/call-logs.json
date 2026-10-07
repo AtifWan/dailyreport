@@ -1,0 +1,586 @@
+{
+  "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, replacing PDF text-extraction for this section per the Phase 3 raw-source ingestion plan. Cross-checked against Daily Operations Report - 6th October 2026.pdf's own cover/queue figures where they overlap.",
+  "reportTitle": "Daily Operations Report - 6th October 2026",
+  "reportDate": "2026-10-06",
+  "summary": {
+    "totalInbound": 410,
+    "accepted": 329,
+    "missed": 81,
+    "acceptedPct": 80,
+    "missedPct": 20,
+    "totalOutbound": 199
+  },
+  "queueReport": [
+    {
+      "queue": "Appointments",
+      "accepted": 209,
+      "missed": 20
+    },
+    {
+      "queue": "General Enquiries",
+      "accepted": 118,
+      "missed": 17
+    },
+    {
+      "queue": "Health Professionals",
+      "accepted": 0,
+      "missed": 0
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "accepted": 4,
+      "missed": 0
+    }
+  ],
+  "grandTotal": {
+    "accepted": 331,
+    "missed": 37
+  },
+  "preQueueAbandoned": 43,
+  "_summaryVsGrandTotalNote": "summary.accepted (329, from InboundCalls_Detailed scoped to this day's reception lines) is 2 short of grandTotal.accepted (331, summed from the per-queue CallQueue_Detailed exports) — the same ~2-call gap this project has seen on nearly every prior PDF-extracted date, now reproduced from raw data instead of PDF text. summary.missed (81) is far larger than grandTotal.missed (37): the extra 44 are preQueueAbandoned — real callers whose call never reached any specific queue (hung up during the opening IVR/menu) before any queue's own log could record them. The PDF's own cover pie only ever reported the queue-level figure (37, 90% accepted) and has never surfaced this pre-queue abandonment at all.",
+  "_preQueueAbandonedFlag": "FLAG FOR USER: preQueueAbandoned is 43 today — much larger than the ~37 total queue-missed calls themselves, and far above what this metric would be on a typical day (it's usually a small fraction of queue-missed, not larger). Combined with this being the busiest inbound day in the last 10 (410 reception-line calls after target-number scoping, 368 by the PDF's own queue-only count), this may be worth a look — possibly IVR/menu slowness or an outage window that day rather than a data artifact. One caller even waited 447 seconds (nearly 7.5 minutes) in the IVR before giving up without ever reaching a queue.",
+  "tenDayTrend": {
+    "labels": [
+      "Tue 22 Sep",
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct"
+    ],
+    "answerRatePct": [
+      94,
+      84,
+      90,
+      94,
+      85,
+      95,
+      95,
+      88,
+      88,
+      80
+    ],
+    "answerRateTargetPct": 85,
+    "accepted": [
+      285,
+      282,
+      251,
+      216,
+      265,
+      225,
+      214,
+      206,
+      201,
+      329
+    ],
+    "missed": [
+      19,
+      53,
+      27,
+      15,
+      45,
+      11,
+      12,
+      27,
+      28,
+      81
+    ],
+    "overallAvgWaitSec": [
+      29,
+      28,
+      44,
+      32,
+      35,
+      34,
+      37,
+      41,
+      50,
+      124
+    ]
+  },
+  "_tenDayTrendNote": "accepted/missed/answerRatePct/overallAvgWaitSec here are InboundCalls_Detailed-scoped (same basis as summary above, not grandTotal) chained from 2026-10-02's own committed trend — so missed/overallAvgWaitSec/answerRatePct for today (81 missed, 124s avg wait, 80% answer rate) include the pre-queue-abandoned calls and read rougher than the PDF's own cover-pie-based trend would (37 missed, 90%). Recorded on this consistent raw-data basis going forward rather than mixed with the PDF's queue-only convention.",
+  "queues": {
+    "Appointments": {
+      "accepted": [
+        157,
+        178,
+        158,
+        123,
+        165,
+        133,
+        122,
+        123,
+        100,
+        209
+      ],
+      "missed": [
+        9,
+        24,
+        18,
+        8,
+        20,
+        7,
+        7,
+        13,
+        7,
+        20
+      ],
+      "avgWaitSec": [
+        25,
+        25,
+        42,
+        30,
+        30,
+        33,
+        36,
+        44,
+        37,
+        110
+      ]
+    },
+    "General Enquiries": {
+      "accepted": [
+        123,
+        97,
+        88,
+        85,
+        97,
+        90,
+        89,
+        79,
+        98,
+        118
+      ],
+      "missed": [
+        10,
+        23,
+        9,
+        7,
+        25,
+        3,
+        4,
+        13,
+        21,
+        17
+      ],
+      "avgWaitSec": [
+        36,
+        34,
+        49,
+        34,
+        44,
+        35,
+        39,
+        39,
+        63,
+        151
+      ]
+    },
+    "Health Professionals": {
+      "accepted": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "missed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "avgWaitSec": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "Canberra Vasectomy": {
+      "accepted": [
+        2,
+        5,
+        4,
+        8,
+        3,
+        2,
+        2,
+        3,
+        1,
+        4
+      ],
+      "missed": [
+        0,
+        6,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "avgWaitSec": [
+        18,
+        32,
+        26,
+        32,
+        20,
+        25,
+        43,
+        14,
+        12,
+        86
+      ]
+    }
+  },
+  "_queuesNote": "Per-queue accepted/missed/avgWaitSec chain-matched 2026-10-02's own committed data exactly at positions 0-8 (sourced here from the raw CallQueue_Detailed exports rather than PDF text). Appointments shows 209 accepted this date versus the PDF cover/queue tables' own 207 — a small 2-call divergence in the opposite direction found only in the raw data (likely two calls the PDF's own rendering dropped); recorded verbatim rather than reconciled, consistent with this project's standing data-integrity rule.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 1699,
+    "longestCallAt": "8:01 AM",
+    "longestCallAgent": "Pinky De Paz",
+    "longestWaitingTimeSec": 613,
+    "longestWaitingAt": "12:39 PM",
+    "avgCallHandlingSec": 150
+  },
+  "_patientServiceKpiNote": "FLAG: this date's deterministic longestWaitingTimeSec (613 sec, General Enquiries, 12:39 PM, Ambrosie Brassil's call) diverges from what the source PDF's own panel reported (534 sec at 12:42 PM, Samantha Cooper) — the raw CallQueue_Detailed export's own CallTimeToAnswer field (the consistent, authoritative field parse_call_logs.py uses throughout) shows a higher-waiting call than the PDF's rendering surfaced. The PDF's 534 figure corresponds to that same 12:42 PM call's UserTimeToAnswer (521 CallTimeToAnswer / 534 UserTimeToAnswer) rather than its CallTimeToAnswer — the same two-candidate-field ambiguity this project has flagged before, now resolved by consistently preferring CallTimeToAnswer from raw data over whichever field the PDF's own rendering happened to use.",
+  "longestWaitPerQueue": [
+    {
+      "queue": "Appointments",
+      "waitSec": 542,
+      "time": "8:03 AM",
+      "name": "Rebecca Quinn",
+      "waitLabel": "9 min 2 sec"
+    },
+    {
+      "queue": "General Enquiries",
+      "waitSec": 613,
+      "time": "12:39 PM",
+      "name": "Ambrosie Brassil",
+      "waitLabel": "10 min 13 sec"
+    },
+    {
+      "queue": "Health Professionals",
+      "waitSec": 0,
+      "time": null,
+      "name": null,
+      "waitLabel": "0 min 0 sec"
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "waitSec": 191,
+      "time": "9:40 AM",
+      "name": "Apurva Pathak",
+      "waitLabel": "3 min 11 sec"
+    }
+  ],
+  "inboundByStaff": [
+    {
+      "name": "Rebecca Quinn",
+      "calls": 83,
+      "durationMins": 178
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 53,
+      "durationMins": 138
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 46,
+      "durationMins": 125
+    },
+    {
+      "name": "David Antioch",
+      "calls": 44,
+      "durationMins": 79
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 27,
+      "durationMins": 62
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 17,
+      "durationMins": 74
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 17,
+      "durationMins": 48
+    },
+    {
+      "name": "Apurva Pathak",
+      "calls": 13,
+      "durationMins": 37
+    },
+    {
+      "name": "Hannah Searle",
+      "calls": 13,
+      "durationMins": 27
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 9,
+      "durationMins": 36
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 3,
+      "durationMins": 6
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 3,
+      "durationMins": 8
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 1,
+      "durationMins": 3
+    }
+  ],
+  "_inboundByStaffNote": "Full table from InboundCalls_Detailed, scoped to this day's reception lines. Sums to 331 (2 over grandTotal's 329 queue-summed accepted) — matches the PDF's own cover pie accepted figure (331) exactly.",
+  "outboundByStaff": [
+    {
+      "name": "Apurva Pathak",
+      "calls": 29,
+      "durationMins": 40
+    },
+    {
+      "name": "Jasmina Sodolovic",
+      "calls": 25,
+      "durationMins": 27
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 24,
+      "durationMins": 24
+    },
+    {
+      "name": "Rebecca Quinn",
+      "calls": 23,
+      "durationMins": 20
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 22,
+      "durationMins": 25
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 19,
+      "durationMins": 34
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 16,
+      "durationMins": 9
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 14,
+      "durationMins": 15
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 11,
+      "durationMins": 12
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 6,
+      "durationMins": 6
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 5,
+      "durationMins": 3
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 2,
+      "durationMins": 2
+    },
+    {
+      "name": "Hannah Searle",
+      "calls": 2,
+      "durationMins": 4
+    },
+    {
+      "name": "David Antioch",
+      "calls": 1,
+      "durationMins": 1
+    }
+  ],
+  "outboundOtherExtensionsTotal": 95,
+  "outboundOtherExtensions": [
+    {
+      "name": "Belinda",
+      "calls": 12,
+      "durationMins": 98
+    },
+    {
+      "name": "Joanna Lin/ Sandeep Pratap",
+      "calls": 8,
+      "durationMins": 25
+    },
+    {
+      "name": "RM8 Dr Somya Jhorar",
+      "calls": 8,
+      "durationMins": 68
+    },
+    {
+      "name": "Nurse 4 (TR2)",
+      "calls": 8,
+      "durationMins": 12
+    },
+    {
+      "name": "Raymond Liu",
+      "calls": 7,
+      "durationMins": 53
+    },
+    {
+      "name": "RM5 Dr Chi So / Dr Mel Deery",
+      "calls": 6,
+      "durationMins": 16
+    },
+    {
+      "name": "Denman Room 4",
+      "calls": 5,
+      "durationMins": 24
+    },
+    {
+      "name": "Fred/Mano",
+      "calls": 5,
+      "durationMins": 29
+    },
+    {
+      "name": "RM9 Dr Elliott Missen",
+      "calls": 5,
+      "durationMins": 44
+    },
+    {
+      "name": "RM3 Dr James Manley",
+      "calls": 4,
+      "durationMins": 66
+    },
+    {
+      "name": "Will Fong",
+      "calls": 4,
+      "durationMins": 20
+    },
+    {
+      "name": "Lisa Bron",
+      "calls": 3,
+      "durationMins": 7
+    },
+    {
+      "name": "Lyneham  - Nurse",
+      "calls": 3,
+      "durationMins": 4
+    },
+    {
+      "name": "Vanessa Thorn",
+      "calls": 2,
+      "durationMins": 3
+    },
+    {
+      "name": "Sam Primrose",
+      "calls": 2,
+      "durationMins": 16
+    },
+    {
+      "name": "RM1 Dr Elizabeth Muller / Dr Anna Colwell",
+      "calls": 2,
+      "durationMins": 12
+    },
+    {
+      "name": "John Pyae",
+      "calls": 2,
+      "durationMins": 12
+    },
+    {
+      "name": "JMO/ room 7",
+      "calls": 2,
+      "durationMins": 4
+    },
+    {
+      "name": "Crace Office",
+      "calls": 2,
+      "durationMins": 3
+    },
+    {
+      "name": "Ian Chan/ Andrew Mitchell",
+      "calls": 2,
+      "durationMins": 6
+    },
+    {
+      "name": "PM Alex Cownie",
+      "calls": 1,
+      "durationMins": 21
+    },
+    {
+      "name": "Denman - Nurse",
+      "calls": 1,
+      "durationMins": 0
+    },
+    {
+      "name": "Freya/Riana/John",
+      "calls": 1,
+      "durationMins": 3
+    }
+  ],
+  "_outboundNote": "outboundByStaff (199 calls) is the known-staff-roster-filtered total; outboundOtherExtensionsTotal (95 calls) covers doctors'/other rooms' direct outbound calls from the same raw export, kept separate as in prior known-staff filtering work. The source PDF's own 'Total Outbound Calls = 174' caption undercounts true reception-staff outbound activity by 25 calls relative to this raw count — consistent with the previously-identified PDF outbound undercount, not a new issue.",
+  "outboundTenDayTrend": {
+    "labels": [
+      "Tue 22 Sep",
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct"
+    ],
+    "totals": [
+      152,
+      170,
+      115,
+      123,
+      145,
+      122,
+      146,
+      94,
+      108,
+      199
+    ]
+  },
+  "_outboundTenDayTrendNote": "Position 9 here (199) is this date's own known-staff-filtered raw total, not the PDF's 'Total Outbound Calls = 174' caption — the first genuinely raw-sourced point in this trend; positions 0-8 remain the PDF-extraction-era carried-forward values from 2026-10-02, so this trend's basis changes from this date onward (expect a small step rather than a smooth continuation)."
+}

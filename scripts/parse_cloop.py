@@ -84,6 +84,14 @@ def hms_to_days(s):
 
 
 def parse_realtime(path):
+    """"Failed Communication" is an automated-retry queue, not a customer
+    contact waiting for a reply — the rendered report has always excluded it
+    (and every other zero-count queue) from both the panel and its own
+    Summary row, so the raw export's own "Summary" row (which includes it)
+    can't be trusted directly: it would inflate inQueue by an order of
+    magnitude the moment that queue holds anything. Recompute the summary
+    from the filtered queue list instead of reading the file's own Summary
+    row."""
     with open(path, newline="", encoding="utf-8-sig") as f:
         rows = list(csv.reader(f))
     # Row 0: "Queues" title. Row 1: group header. Row 2: column header
@@ -91,13 +99,15 @@ def parse_realtime(path):
     # Handled,Abandoned,AHT,SL 60 secs"). Data rows follow; "Summary" closes it.
     data_rows = [r for r in rows[3:] if r and r[0].strip()]
     queues = []
-    summary = None
     for r in data_rows:
         name, in_queue, oldest = r[0].strip(), int(r[9]), hms_to_days(r[10])
-        if name == "Summary":
-            summary = {"inQueue": in_queue, "oldestDays": oldest}
-        else:
-            queues.append({"queue": name, "inQueue": in_queue, "oldestDays": oldest})
+        if name in ("Summary", "Failed Communication") or in_queue == 0:
+            continue
+        queues.append({"queue": name, "inQueue": in_queue, "oldestDays": oldest})
+    summary = {
+        "inQueue": sum(q["inQueue"] for q in queues),
+        "oldestDays": max((q["oldestDays"] for q in queues), default=0.0),
+    }
     return queues, summary
 
 

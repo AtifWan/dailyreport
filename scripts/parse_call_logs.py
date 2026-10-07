@@ -101,8 +101,17 @@ def format_time(dt_str):
     return f"{int(h)}:{m} {ampm}"
 
 
-def parse_inbound(path):
+def parse_inbound(path, valid_targets=None):
+    """InboundCalls_Detailed.csv isn't scoped to the reception queues we report
+    on — it's every call the PBX logged, and includes other lines (fax,
+    decommissioned numbers, etc.) that ring with nobody ever answering and
+    never show up in any CallQueue_Detailed export. Without filtering, those
+    inflate 'missed' by multiples of the real figure. valid_targets (the
+    TargetNumbers actually seen in this date's --queue files) scopes this
+    file down to the lines this report is actually about."""
     rows = read_rows(path)
+    if valid_targets:
+        rows = [r for r in rows if r["TargetNumber"] in valid_targets]
     answered = [r for r in rows if r["FirstUserName"].strip()]
     missed = [r for r in rows if not r["FirstUserName"].strip()]
 
@@ -193,8 +202,6 @@ def main():
         queue_files[name] = path
 
     known_staff = load_known_staff(args.known_staff_dir)
-    inbound = parse_inbound(args.inbound)
-    outbound = parse_outbound(args.outbound, known_staff)
 
     queues = {}
     for name in ALL_QUEUES:
@@ -202,6 +209,10 @@ def main():
             queues[name] = parse_queue_file(queue_files[name])
         else:
             queues[name] = {"accepted": 0, "missed": 0, "avgWaitSec": 0, "longestWait": None, "rows": []}
+
+    valid_targets = {r["TargetNumber"] for q in queues.values() for r in q["rows"]}
+    inbound = parse_inbound(args.inbound, valid_targets)
+    outbound = parse_outbound(args.outbound, known_staff)
 
     queue_report = [{"queue": n, "accepted": q["accepted"], "missed": q["missed"]} for n, q in queues.items()]
     grand_total = {
