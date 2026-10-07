@@ -130,8 +130,15 @@ def kv_request(command_path, kv_url, kv_token):
         f"{kv_url}/{command_path}",
         headers={"Authorization": f"Bearer {kv_token}"},
     )
-    with urllib.request.urlopen(req, timeout=10) as resp:
-        return json.loads(resp.read().decode())
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return json.loads(resp.read().decode())
+    except urllib.error.HTTPError as e:
+        try:
+            payload = json.loads(e.read().decode())
+        except Exception:
+            payload = {}
+        raise RuntimeError(f"KV request failed ({e.code}): {payload.get('error', str(e))}") from None
 
 
 def kv_update_checklist(patch, kv_url, kv_token):
@@ -142,6 +149,11 @@ def kv_update_checklist(patch, kv_url, kv_token):
     current_raw = kv_request("get/checklist:current", kv_url, kv_token).get("result")
     current = json.loads(current_raw) if current_raw else {}
     next_doc = {**current, **patch}
-    encoded = urllib.parse.quote(json.dumps(next_doc))
+    # Upstash's GET-style REST calls take each command argument as its own
+    # URL path segment — quote()'s default safe='/' leaves literal slashes
+    # in the JSON unescaped, which splits the value across segments and
+    # gets rejected as a malformed command (400 Bad Request). safe='' forces
+    # every reserved character, slashes included, to be percent-encoded.
+    encoded = urllib.parse.quote(json.dumps(next_doc), safe='')
     kv_request(f"set/checklist:current/{encoded}", kv_url, kv_token)
     return next_doc
