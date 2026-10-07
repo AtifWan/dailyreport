@@ -34,6 +34,7 @@ JS_ORDER = [
     "assets/js/pages/call-logs.js",
     "assets/js/pages/cloop.js",
     "assets/js/pages/leave.js",
+    "assets/js/pages/checklist.js",
     "assets/js/app.js",
 ]
 DATA_FILES = ["overview", "tasks", "call-logs", "cloop", "leave"]
