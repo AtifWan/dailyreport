@@ -169,3 +169,11 @@
   .dr-cases-form { flex-direction: column; align-items: stretch; }
   .dr-cases-form input { width: 100%; }
 }
+
+.dr-generate-form { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; align-items: flex-start; }
+.dr-generate-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .04em; width: 100%; max-width: 420px; }
+.dr-generate-form input { font-size: 15px; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+.dr-queue-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 560px; }
+.dr-queue-row { display: flex; align-items: center; gap: 8px; }
+.dr-queue-row [data-queue-name] { flex: 1 1 180px; min-width: 0; }
+.dr-queue-row [data-queue-file] { flex: 1 1 220px; min-width: 0; }

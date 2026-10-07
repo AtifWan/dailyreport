@@ -25,6 +25,120 @@ function statusRow(label, done, subtitle) {
     </div>`;
 }
 
+const DEFAULT_QUEUES = ['Appointments', 'General Enquiries', 'Canberra Vasectomy'];
+
+function readFileText(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsText(file);
+  });
+}
+
+function queueRowHtml(name) {
+  return `
+    <div class="dr-queue-row">
+      <input class="dinput" type="text" placeholder="Queue name" value="${esc(name)}" data-queue-name required>
+      <input class="dinput" type="file" accept=".csv" data-queue-file required>
+      <button type="button" class="btn" data-remove-queue>Remove</button>
+    </div>`;
+}
+
+function renderGenerateCallLogs(el, state, { onSubmit }) {
+  el.innerHTML = `
+    <h4>Call logs</h4>
+    <form id="genCallLogsForm" class="dr-generate-form">
+      <label>Date<input class="dinput" type="date" name="date" required></label>
+      <label>Inbound calls CSV<input class="dinput" type="file" name="inbound" accept=".csv" required></label>
+      <label>Outbound calls CSV<input class="dinput" type="file" name="outbound" accept=".csv" required></label>
+      <div class="dr-queue-list" id="genQueueList">${DEFAULT_QUEUES.map(queueRowHtml).join('')}</div>
+      <button type="button" class="btn" id="genAddQueue">+ Add another queue file</button>
+      <button class="btn btn-primary" type="submit"${state.busy ? ' disabled' : ''}>${state.busy ? 'Generating…' : 'Generate call logs'}</button>
+    </form>
+    ${state.message ? `<div class="take">${esc(state.message)}</div>` : ''}`;
+
+  el.querySelector('#genAddQueue').addEventListener('click', () => {
+    el.querySelector('#genQueueList').insertAdjacentHTML('beforeend', queueRowHtml(''));
+  });
+  el.querySelector('#genQueueList').addEventListener('click', (e) => {
+    if (e.target.matches('[data-remove-queue]')) e.target.closest('.dr-queue-row').remove();
+  });
+  el.querySelector('#genCallLogsForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const date = form.date.value;
+    const inboundFile = form.inbound.files[0];
+    const outboundFile = form.outbound.files[0];
+    const queueRows = [...el.querySelectorAll('.dr-queue-row')];
+    const queueEntries = queueRows.map((row) => ({
+      name: row.querySelector('[data-queue-name]').value.trim(),
+      file: row.querySelector('[data-queue-file]').files[0],
+    }));
+    if (!inboundFile || !outboundFile || queueEntries.some((q) => !q.name || !q.file)) {
+      state.message = 'Fill in every field — date, inbound, outbound, and a name + file for each queue.';
+      renderGenerateCallLogs(el, state, { onSubmit });
+      return;
+    }
+    state.busy = true;
+    state.message = null;
+    renderGenerateCallLogs(el, state, { onSubmit });
+    try {
+      const [inbound, outbound, ...queueTexts] = await Promise.all([
+        readFileText(inboundFile), readFileText(outboundFile), ...queueEntries.map((q) => readFileText(q.file)),
+      ]);
+      const queues = {};
+      queueEntries.forEach((q, i) => { queues[q.name] = queueTexts[i]; });
+      await onSubmit({ date, inbound, outbound, queues });
+      state.message = `Generated for ${date}.`;
+    } catch (err) {
+      state.message = `Failed: ${err.message || err}`;
+    } finally {
+      state.busy = false;
+      renderGenerateCallLogs(el, state, { onSubmit });
+    }
+  });
+}
+
+function renderGenerateCloop(el, state, { onSubmit }) {
+  el.innerHTML = `
+    <h4>Cloop</h4>
+    <form id="genCloopForm" class="dr-generate-form">
+      <label>Real-Time snapshot date<input class="dinput" type="date" name="date" required></label>
+      <label>Historical reports cover (date)<input class="dinput" type="date" name="historicalDate" required></label>
+      <label>Real-Time Metrics Report CSV<input class="dinput" type="file" name="realtime" accept=".csv" required></label>
+      <label>Historical Metrics Report (queue) CSV<input class="dinput" type="file" name="queueHistorical" accept=".csv" required></label>
+      <label>Historical Metrics Report (agent) CSV<input class="dinput" type="file" name="agentHistorical" accept=".csv" required></label>
+      <button class="btn btn-primary" type="submit"${state.busy ? ' disabled' : ''}>${state.busy ? 'Generating…' : 'Generate Cloop'}</button>
+    </form>
+    ${state.message ? `<div class="take">${esc(state.message)}</div>` : ''}`;
+
+  el.querySelector('#genCloopForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const date = form.date.value;
+    const historicalDate = form.historicalDate.value;
+    const realtimeFile = form.realtime.files[0];
+    const queueHistFile = form.queueHistorical.files[0];
+    const agentHistFile = form.agentHistorical.files[0];
+    state.busy = true;
+    state.message = null;
+    renderGenerateCloop(el, state, { onSubmit });
+    try {
+      const [realtime, queueHistorical, agentHistorical] = await Promise.all([
+        readFileText(realtimeFile), readFileText(queueHistFile), readFileText(agentHistFile),
+      ]);
+      await onSubmit({ date, historicalDate, realtime, queueHistorical, agentHistorical });
+      state.message = `Generated for ${historicalDate}.`;
+    } catch (err) {
+      state.message = `Failed: ${err.message || err}`;
+    } finally {
+      state.busy = false;
+      renderGenerateCloop(el, state, { onSubmit });
+    }
+  });
+}
+
 function renderBoard(container, data, { saving, onSaveCases }) {
   const d = data || {};
   const cases = d.casesValues || {};
@@ -66,10 +180,34 @@ function renderBoard(container, data, { saving, onSaveCases }) {
   });
 }
 
+async function postGenerate(path, payload) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok || !body.ok) throw new Error(body.error || `request failed (${res.status})`);
+  return body;
+}
+
 export async function renderChecklist(container) {
   let latest = null;
   let saving = false;
   let pollTimer = null;
+
+  container.innerHTML = `
+    <div id="checklistBoard"></div>
+    <div class="panel dr-section-gap">
+      <h3>Generate from raw files</h3>
+      <p class="q">Upload the same raw exports the daily automated routine reads, and parse them right now. Runs alongside the daily routine, not instead of it — if this date already has a home in the dashboard (tasks and leave committed), the result is committed straight to GitHub; either way, the checklist above updates.</p>
+      <div id="genCallLogsArea"></div>
+      <div id="genCloopArea" class="dr-section-gap"></div>
+    </div>`;
+  const boardEl = container.querySelector('#checklistBoard');
+  const genCallLogsEl = container.querySelector('#genCallLogsArea');
+  const genCloopEl = container.querySelector('#genCloopArea');
 
   function stopPolling() {
     if (pollTimer) clearInterval(pollTimer);
@@ -77,7 +215,7 @@ export async function renderChecklist(container) {
   }
 
   function drawBoard() {
-    renderBoard(container, latest, { saving, onSaveCases: save });
+    renderBoard(boardEl, latest, { saving, onSaveCases: save });
   }
 
   async function load() {
@@ -86,12 +224,12 @@ export async function renderChecklist(container) {
       res = await fetch(`${API_BASE}/api/checklist`, { credentials: 'same-origin' });
     } catch {
       stopPolling();
-      renderMessage(container, "Couldn't load", 'There was a problem reaching the checklist data.');
+      renderMessage(boardEl, "Couldn't load", 'There was a problem reaching the checklist data.');
       return;
     }
     if (!res.ok) {
       stopPolling();
-      renderMessage(container, "Couldn't load", 'There was a problem reaching the checklist data.');
+      renderMessage(boardEl, "Couldn't load", 'There was a problem reaching the checklist data.');
       return;
     }
     ({ data: latest } = await res.json());
@@ -123,6 +261,19 @@ export async function renderChecklist(container) {
       drawBoard();
     }
   }
+
+  renderGenerateCallLogs(genCallLogsEl, { busy: false, message: null }, {
+    onSubmit: async (payload) => {
+      await postGenerate('/api/generate/call-logs', payload);
+      await load();
+    },
+  });
+  renderGenerateCloop(genCloopEl, { busy: false, message: null }, {
+    onSubmit: async (payload) => {
+      await postGenerate('/api/generate/cloop', payload);
+      await load();
+    },
+  });
 
   await load();
 }
