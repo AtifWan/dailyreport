@@ -28,6 +28,38 @@ from pathlib import Path
 
 ALL_QUEUES = ["Appointments", "General Enquiries", "Health Professionals", "Canberra Vasectomy"]
 
+# The reception/front-desk roster, taken verbatim (trailing spaces in some raw
+# names stripped) from the Source_Table sheet of the official
+# YourGP_CallLogs_DataProcessor workbook — the same lookup table it uses to
+# tag each call's "Agent Type" (practice). A one-time snapshot, not a live
+# daily feed, so it's hardcoded here as the authoritative baseline and
+# unioned with KNOWN_STAFF_FROM_HISTORY below for anyone hired since.
+KNOWN_RECEPTION_STAFF = {
+    "Andrew Davies", "Lucinda Gonzalez", "Bianca Mitchell", "David Antioch",
+    "Emily Pettett", "Ella Blackmore", "Georgia Moore", "Hannah Leitch",
+    "Hannah Searle", "Holly Archer", "Jasmine Deery", "Mikayla Jenkins",
+    "Shae Connors", "Jessica Hinchy", "Isaac Davis", "Kiara Pfeffer",
+    "Andrew Gunn", "Pawanni Chandrasegaran", "Frances Doble", "Lily Willmott",
+    "De Ang Renfree", "Mel Deery", "Crace - Rec 1", "Kate Chin", "Pinky De Paz",
+    "Apurva Pathak", "Ambrosie Brassil", "Samantha Cooper", "Rebecca Quinn",
+    "Megan Wright", "Aiden Chang", "Atif Wan", "Lyneham - Rec 1",
+}
+
+# Names that reached a committed call-logs.json's inboundByStaff/outboundByStaff
+# at some point in this project's history, but are confirmed NOT on the
+# official reception roster above (e.g. PST/admin staff who occasionally
+# answer an email queue but aren't phone reception) — excluded so the
+# historical-scan fallback below doesn't re-introduce them. Keep this list to
+# genuinely confirmed cases only, each with the evidence that got it here.
+KNOWN_NON_RECEPTION = {
+    # Appeared in 2026-08-10's committed outboundByStaff, but is absent from
+    # the official Source_Table roster and from 2026-10-06's own
+    # OutboundStaffSummary table in the official workbook (confirmed
+    # separately, see scripts/ commit history) — an email/admin staff member,
+    # not reception.
+    "Jasmina Sodolovic",
+}
+
 
 def read_rows(path):
     with open(path, newline="", encoding="utf-8-sig") as f:
@@ -38,10 +70,15 @@ def load_known_staff(reports_dir):
     """The raw outbound PBX export (ExportCallRecords) covers every extension in
     the building, not just reception — a doctor's room calling a pharmacy shows
     up with the same shape as a receptionist's call. There's no clean field to
-    tell them apart, so the known-staff roster is built from every name this
-    project has ever actually committed for inbound/outbound/email handling —
-    accumulated ground truth beats guessing at name patterns."""
-    names = set()
+    tell them apart, so the known-staff roster is the official Source_Table
+    snapshot (KNOWN_RECEPTION_STAFF) plus every name this project has since
+    committed for inbound/outbound call handling, minus any name confirmed NOT
+    to be reception staff despite appearing in that history (KNOWN_NON_RECEPTION).
+    Deliberately NOT sourced from cloop.json's emailsHandledYesterday:
+    email-handling staff (e.g. PST/admin) and phone-reception staff are
+    overlapping but different groups, and the official workbook's own
+    OutboundStaffSummary table excludes email-only staff."""
+    names = set(KNOWN_RECEPTION_STAFF)
     for path in glob.glob(f"{reports_dir}/*/call-logs.json"):
         try:
             d = json.loads(Path(path).read_text())
@@ -50,32 +87,47 @@ def load_known_staff(reports_dir):
         for key in ("inboundByStaff", "outboundByStaff"):
             for row in d.get(key, []):
                 names.add(row["name"].strip())
-    for path in glob.glob(f"{reports_dir}/*/cloop.json"):
-        try:
-            d = json.loads(Path(path).read_text())
-        except (OSError, json.JSONDecodeError):
-            continue
-        for row in d.get("emailsHandledYesterday", []):
-            names.add(row["agent"].strip())
-    return names
+    return names - KNOWN_NON_RECEPTION
 
 
 def mins(seconds_total, count):
     return round(seconds_total / 60) if count else 0
 
 
+def dedupe_by_guid(rows):
+    """The raw exports occasionally log the exact same call twice (identical
+    CallGUID, identical fields) — confirmed against the official
+    YourGP_CallLogs_DataProcessor workbook's own Cleaned_Call_Records sheet,
+    which is itself deduplicated by CallGUID. Keep the first occurrence."""
+    seen = set()
+    out = []
+    for r in rows:
+        if r["CallGUID"] in seen:
+            continue
+        seen.add(r["CallGUID"])
+        out.append(r)
+    return out
+
+
 def parse_queue_file(path):
     """One CallQueue_Detailed_*.csv: per-call rows for a single queue."""
-    rows = read_rows(path)
+    rows = dedupe_by_guid(read_rows(path))
     accepted = [r for r in rows if r["CallAnsweredInQueue"] == "1"]
     missed = [r for r in rows if r["CallTimedOutOrExit"] == "1"]
     wait_times = [int(r["CallTimeToAnswer"]) for r in accepted if r["CallTimeToAnswer"]]
     avg_wait = round(statistics.mean(wait_times)) if wait_times else 0
 
-    longest = max(rows, key=lambda r: int(r["CallTimeToAnswer"] or 0), default=None)
+    # "Longest wait" (here and in parse_inbound's overall figure) is
+    # UserTimeToAnswer — the time until the specific agent who ultimately
+    # answered engaged — not CallTimeToAnswer (how long the call sat in this
+    # queue before being routed to someone). Confirmed against the official
+    # workbook's KPI_Calculations sheet: its "Longest Waiting Time" value and
+    # timestamp match a call's UserTimeToAnswer, not its CallTimeToAnswer,
+    # which for that same call was a different (lower) number.
+    longest = max(rows, key=lambda r: int(r["UserTimeToAnswer"] or 0), default=None)
     longest_wait = None
-    if longest and int(longest["CallTimeToAnswer"] or 0) > 0:
-        wait_sec = int(longest["CallTimeToAnswer"])
+    if longest and int(longest["UserTimeToAnswer"] or 0) > 0:
+        wait_sec = int(longest["UserTimeToAnswer"])
         m, s = divmod(wait_sec, 60)
         longest_wait = {
             "waitSec": wait_sec,
@@ -101,19 +153,20 @@ def format_time(dt_str):
     return f"{int(h)}:{m} {ampm}"
 
 
-def parse_inbound(path, valid_targets=None):
-    """InboundCalls_Detailed.csv isn't scoped to the reception queues we report
-    on — it's every call the PBX logged, and includes other lines (fax,
-    decommissioned numbers, etc.) that ring with nobody ever answering and
-    never show up in any CallQueue_Detailed export. Without filtering, those
-    inflate 'missed' by multiples of the real figure. valid_targets (the
-    TargetNumbers actually seen in this date's --queue files) scopes this
-    file down to the lines this report is actually about."""
-    rows = read_rows(path)
-    if valid_targets:
-        rows = [r for r in rows if r["TargetNumber"] in valid_targets]
+def parse_inbound(path):
+    """InboundCalls_Detailed.csv covers every inbound call the PBX logged, not
+    just the ones that reached one of our named queues (a handful ring a line
+    with no queue behind it at all, e.g. a direct line to an unused extension).
+    Confirmed against the official workbook's own Cleaned_Call_Records sheet:
+    'accepted' there counts every answered row in this file regardless of
+    queue/target, full stop — there is no equivalent "missed but never reached
+    a queue" concept at all. A call that times out before reaching a queue
+    simply isn't tracked as a missed call anywhere in the official report, so
+    this script doesn't invent one either: the missed count this project
+    reports is the queue files' own missed count (see main()), not anything
+    counted from this file."""
+    rows = dedupe_by_guid(read_rows(path))
     answered = [r for r in rows if r["FirstUserName"].strip()]
-    missed = [r for r in rows if not r["FirstUserName"].strip()]
 
     by_staff = {}
     for r in answered:
@@ -127,35 +180,43 @@ def parse_inbound(path, valid_targets=None):
     )
 
     talk_times = [int(r["TotalTalkTimeAllUsers"] or 0) for r in answered]
-    # Overall average/longest wait are pooled across every call this file covers
-    # (every queue together) — NOT an average of each queue's own longest wait,
-    # which would overstate it by an order of magnitude.
+    # Average wait uses CallTimeToAnswer (queue wait); "longest wait" uses
+    # UserTimeToAnswer (wait until the actual answering agent engaged) — see
+    # parse_queue_file's own note for how this was confirmed.
     answered_wait_times = [int(r["CallTimeToAnswer"] or 0) for r in answered if r["CallTimeToAnswer"]]
-    all_wait_times = [int(r["CallTimeToAnswer"] or 0) for r in rows if r["CallTimeToAnswer"]]
+    all_user_wait_times = [int(r["UserTimeToAnswer"] or 0) for r in answered if r["UserTimeToAnswer"]]
     longest_call = max(answered, key=lambda r: int(r["TotalTalkTimeAllUsers"] or 0), default=None)
+    longest_wait_call = max(answered, key=lambda r: int(r["UserTimeToAnswer"] or 0), default=None)
 
     return {
-        "total": len(rows),
         "accepted": len(answered),
-        "missed": len(missed),
-        "missedGuids": {r["CallGUID"] for r in missed},
         "inboundByStaff": inbound_by_staff,
         "avgCallHandlingSec": round(statistics.mean(talk_times)) if talk_times else 0,
         "overallAvgWaitSec": round(statistics.mean(answered_wait_times)) if answered_wait_times else 0,
         "longestCallDurationSec": int(longest_call["TotalTalkTimeAllUsers"]) if longest_call else 0,
         "longestCallAt": format_time(longest_call["CallDateTime"]) if longest_call else None,
         "longestCallAgent": longest_call["FirstUserName"].strip() if longest_call else None,
-        "longestWaitingTimeSec": max(all_wait_times) if all_wait_times else 0,
+        "longestWaitingTimeSec": max(all_user_wait_times) if all_user_wait_times else 0,
+        "longestWaitingAt": format_time(longest_wait_call["CallDateTime"]) if longest_wait_call and all_user_wait_times else None,
     }
 
 
 def parse_outbound(path, known_staff):
-    rows = [r for r in read_rows(path) if r["Direction"] == "Out" and r["UserName"].strip()]
+    """ExportCallRecords.csv's Direction=='Out' rows split three ways: known
+    reception staff (outboundByStaff — this project's "Total Outbound Calls"
+    figure, matching the rendered report's own caption and the official
+    workbook's OutboundStaffSummary table), everyone else with a named
+    extension (otherExtensions — doctors' rooms, admin, etc.), and a handful
+    of rows with no UserName/extension at all (confirmed present in the
+    official workbook's own Cleaned_Call_Records — real calls, just
+    unattributed — bucketed here rather than silently dropped, which would
+    undercount the grand total against that source)."""
+    rows = dedupe_by_guid([r for r in read_rows(path) if r["Direction"] == "Out"])
     by_staff = {}
     other_by_staff = {}
     for r in rows:
-        name = r["UserName"].strip()
-        bucket = by_staff if (not known_staff or name in known_staff) else other_by_staff
+        name = r["UserName"].strip() or "(Unattributed)"
+        bucket = by_staff if (known_staff and name in known_staff) else other_by_staff
         bucket.setdefault(name, {"calls": 0, "seconds": 0})
         bucket[name]["calls"] += 1
         bucket[name]["seconds"] += int(r["BillableTime"] or 0)
@@ -170,6 +231,7 @@ def parse_outbound(path, known_staff):
     other_extensions = to_rows(other_by_staff)
     return {
         "total": sum(r["calls"] for r in outbound_by_staff),
+        "allOutboundTotal": len(rows),
         "outboundByStaff": outbound_by_staff,
         "otherExtensionsTotal": sum(r["calls"] for r in other_extensions),
         "otherExtensions": other_extensions,
@@ -210,8 +272,7 @@ def main():
         else:
             queues[name] = {"accepted": 0, "missed": 0, "avgWaitSec": 0, "longestWait": None, "rows": []}
 
-    valid_targets = {r["TargetNumber"] for q in queues.values() for r in q["rows"]}
-    inbound = parse_inbound(args.inbound, valid_targets)
+    inbound = parse_inbound(args.inbound)
     outbound = parse_outbound(args.outbound, known_staff)
 
     queue_report = [{"queue": n, "accepted": q["accepted"], "missed": q["missed"]} for n, q in queues.items()]
@@ -220,14 +281,16 @@ def main():
         "missed": sum(q["missed"] for q in queues.values()),
     }
 
-    # Some missed calls never reach any queue at all (the caller hangs up during
-    # the opening IVR/menu) — real calls, just not attributable to a queue, so
-    # queueReport/grandTotal will never sum to summary.missed. Surface the size
-    # of that gap explicitly rather than let it look like an unexplained mismatch.
-    queue_call_guids = {r["CallGUID"] for q in queues.values() for r in q["rows"]}
-    pre_queue_abandoned = len(inbound["missedGuids"] - queue_call_guids)
-
-    accepted_pct = round(100 * inbound["accepted"] / inbound["total"]) if inbound["total"] else 0
+    # "Missed" is only ever a queue-attributed figure in the official report —
+    # confirmed against the official workbook's Cleaned_Call_Records sheet,
+    # whose own "Total Inbound" is exactly accepted (every answered call, any
+    # line) + this queue-missed count, with no separate "missed but never
+    # reached a queue" figure anywhere. Total/accepted/missed below follow
+    # that same split rather than inventing a metric the source report
+    # doesn't track.
+    total_missed = grand_total["missed"]
+    total_inbound = inbound["accepted"] + total_missed
+    accepted_pct = round(100 * inbound["accepted"] / total_inbound) if total_inbound else 0
 
 
     prev = json.loads(Path(args.prev).read_text()) if args.prev else None
@@ -243,19 +306,18 @@ def main():
     result = {
         "reportDate": args.date,
         "summary": {
-            "totalInbound": inbound["total"],
+            "totalInbound": total_inbound,
             "accepted": inbound["accepted"],
-            "missed": inbound["missed"],
+            "missed": total_missed,
             "acceptedPct": accepted_pct,
-            "missedPct": 100 - accepted_pct if inbound["total"] else 0,
+            "missedPct": 100 - accepted_pct if total_inbound else 0,
             "totalOutbound": outbound["total"],
         },
         "queueReport": queue_report,
         "grandTotal": grand_total,
-        "preQueueAbandoned": pre_queue_abandoned,
         "tenDayTrend": {
             "accepted": shift_trend(prev_trend(["tenDayTrend", "accepted"]), inbound["accepted"]),
-            "missed": shift_trend(prev_trend(["tenDayTrend", "missed"]), inbound["missed"]),
+            "missed": shift_trend(prev_trend(["tenDayTrend", "missed"]), total_missed),
             "answerRatePct": shift_trend(prev_trend(["tenDayTrend", "answerRatePct"]), accepted_pct),
             "overallAvgWaitSec": shift_trend(
                 prev_trend(["tenDayTrend", "overallAvgWaitSec"]), inbound["overallAvgWaitSec"],
@@ -274,6 +336,7 @@ def main():
             "longestCallAt": inbound["longestCallAt"],
             "longestCallAgent": inbound["longestCallAgent"],
             "longestWaitingTimeSec": inbound["longestWaitingTimeSec"],
+            "longestWaitingAt": inbound["longestWaitingAt"],
             "avgCallHandlingSec": inbound["avgCallHandlingSec"],
         },
         "longestWaitPerQueue": [
@@ -284,8 +347,13 @@ def main():
         "outboundByStaff": outbound["outboundByStaff"],
         "outboundOtherExtensionsTotal": outbound["otherExtensionsTotal"],
         "outboundOtherExtensions": outbound["otherExtensions"],
+        # This tracks ALL outbound calls (every extension — reception, doctors'
+        # rooms, everyone), a different and much larger figure than
+        # summary.totalOutbound/outboundByStaff above (reception staff only).
+        # Confirmed against the official workbook's own Outbound_10Day_Trend
+        # sheet, which is exactly this broader count, not the reception-only one.
         "outboundTenDayTrend": {
-            "totals": shift_trend(prev_trend(["outboundTenDayTrend", "totals"]), outbound["total"]),
+            "totals": shift_trend(prev_trend(["outboundTenDayTrend", "totals"]), outbound["allOutboundTotal"]),
         },
     }
 

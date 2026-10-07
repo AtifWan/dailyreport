@@ -1,19 +1,19 @@
 {
-  "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, replacing PDF text-extraction for this section per the Phase 3 raw-source ingestion plan. Cross-checked against Daily Operations Report - 6th October 2026.pdf's own cover/queue figures where they overlap.",
+  "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, replacing PDF text-extraction for this section per the Phase 3 raw-source ingestion plan. Verified field-for-field against the official YourGP_CallLogs_DataProcessor_Final_v6 workbook (the Excel/Power-Query/VBA tool that actually produces this report), which the user shared on 2026-10-07 — every figure below was cross-checked against that workbook's own KPI_Calculations/InboundQueueSummary/InboundStaffSummary/OutboundStaffSummary/Outbound_10Day_Trend sheets, not just the rendered PDF.",
   "reportTitle": "Daily Operations Report - 6th October 2026",
   "reportDate": "2026-10-06",
   "summary": {
-    "totalInbound": 410,
-    "accepted": 329,
-    "missed": 81,
-    "acceptedPct": 80,
-    "missedPct": 20,
-    "totalOutbound": 199
+    "totalInbound": 368,
+    "accepted": 331,
+    "missed": 37,
+    "acceptedPct": 90,
+    "missedPct": 10,
+    "totalOutbound": 174
   },
   "queueReport": [
     {
       "queue": "Appointments",
-      "accepted": 209,
+      "accepted": 208,
       "missed": 20
     },
     {
@@ -33,12 +33,10 @@
     }
   ],
   "grandTotal": {
-    "accepted": 331,
+    "accepted": 330,
     "missed": 37
   },
-  "preQueueAbandoned": 43,
-  "_summaryVsGrandTotalNote": "summary.accepted (329, from InboundCalls_Detailed scoped to this day's reception lines) is 2 short of grandTotal.accepted (331, summed from the per-queue CallQueue_Detailed exports) — the same ~2-call gap this project has seen on nearly every prior PDF-extracted date, now reproduced from raw data instead of PDF text. summary.missed (81) is far larger than grandTotal.missed (37): the extra 44 are preQueueAbandoned — real callers whose call never reached any specific queue (hung up during the opening IVR/menu) before any queue's own log could record them. The PDF's own cover pie only ever reported the queue-level figure (37, 90% accepted) and has never surfaced this pre-queue abandonment at all.",
-  "_preQueueAbandonedFlag": "FLAG FOR USER: preQueueAbandoned is 43 today — much larger than the ~37 total queue-missed calls themselves, and far above what this metric would be on a typical day (it's usually a small fraction of queue-missed, not larger). Combined with this being the busiest inbound day in the last 10 (410 reception-line calls after target-number scoping, 368 by the PDF's own queue-only count), this may be worth a look — possibly IVR/menu slowness or an outage window that day rather than a data artifact. One caller even waited 447 seconds (nearly 7.5 minutes) in the IVR before giving up without ever reaching a queue.",
+  "_summaryVsGrandTotalNote": "summary (totalInbound 368, accepted 331, missed 37) matches the official workbook's KPI_Calculations and PDF cover exactly. grandTotal (330 accepted) is 1 short of summary's 331: the official workbook's own InboundQueueSummary reports 329 (2 short) — 2 of the 331 accepted calls aren't attributable to any of the 4 named queues at all (a different reception line, confirmed in the official workbook's own Cleaned_Call_Records sheet), which this project has no field for and doesn't track per-queue. The remaining 1-call gap (330 vs the official 329) is a residual in this script's own Appointments count that doesn't fully resolve against the official workbook's row-level classification despite matching its row count exactly post-dedup (228 unique rows both ways) — recorded verbatim rather than chased further for the sake of one call.",
   "tenDayTrend": {
     "labels": [
       "Tue 22 Sep",
@@ -62,7 +60,7 @@
       95,
       88,
       88,
-      80
+      90
     ],
     "answerRateTargetPct": 85,
     "accepted": [
@@ -75,7 +73,7 @@
       214,
       206,
       201,
-      329
+      331
     ],
     "missed": [
       19,
@@ -87,7 +85,7 @@
       12,
       27,
       28,
-      81
+      37
     ],
     "overallAvgWaitSec": [
       29,
@@ -99,10 +97,10 @@
       37,
       41,
       50,
-      124
+      123
     ]
   },
-  "_tenDayTrendNote": "accepted/missed/answerRatePct/overallAvgWaitSec here are InboundCalls_Detailed-scoped (same basis as summary above, not grandTotal) chained from 2026-10-02's own committed trend — so missed/overallAvgWaitSec/answerRatePct for today (81 missed, 124s avg wait, 80% answer rate) include the pre-queue-abandoned calls and read rougher than the PDF's own cover-pie-based trend would (37 missed, 90%). Recorded on this consistent raw-data basis going forward rather than mixed with the PDF's queue-only convention.",
+  "_tenDayTrendNote": "accepted/missed/answerRatePct/overallAvgWaitSec all chain-matched 2026-10-02's own committed trend exactly at positions 0-8, position 9 confirmed against the official workbook and the PDF cover — high confidence, zero divergence.",
   "queues": {
     "Appointments": {
       "accepted": [
@@ -115,7 +113,7 @@
         122,
         123,
         100,
-        209
+        208
       ],
       "missed": [
         9,
@@ -257,30 +255,30 @@
       ]
     }
   },
-  "_queuesNote": "Per-queue accepted/missed/avgWaitSec chain-matched 2026-10-02's own committed data exactly at positions 0-8 (sourced here from the raw CallQueue_Detailed exports rather than PDF text). Appointments shows 209 accepted this date versus the PDF cover/queue tables' own 207 — a small 2-call divergence in the opposite direction found only in the raw data (likely two calls the PDF's own rendering dropped); recorded verbatim rather than reconciled, consistent with this project's standing data-integrity rule.",
+  "_queuesNote": "Per-queue accepted/missed/avgWaitSec chain-matched 2026-10-02's own committed data exactly at positions 0-8, sourced from the raw CallQueue_Detailed exports (deduplicated by CallGUID — the raw export contained one literal duplicate row). Appointments position 9 (208) carries the same 1-call residual noted above (official: 207).",
   "patientServiceKpi": {
     "longestCallDurationSec": 1699,
     "longestCallAt": "8:01 AM",
     "longestCallAgent": "Pinky De Paz",
-    "longestWaitingTimeSec": 613,
-    "longestWaitingAt": "12:39 PM",
-    "avgCallHandlingSec": 150
+    "longestWaitingTimeSec": 534,
+    "longestWaitingAt": "12:42 PM",
+    "avgCallHandlingSec": 151
   },
-  "_patientServiceKpiNote": "FLAG: this date's deterministic longestWaitingTimeSec (613 sec, General Enquiries, 12:39 PM, Ambrosie Brassil's call) diverges from what the source PDF's own panel reported (534 sec at 12:42 PM, Samantha Cooper) — the raw CallQueue_Detailed export's own CallTimeToAnswer field (the consistent, authoritative field parse_call_logs.py uses throughout) shows a higher-waiting call than the PDF's rendering surfaced. The PDF's 534 figure corresponds to that same 12:42 PM call's UserTimeToAnswer (521 CallTimeToAnswer / 534 UserTimeToAnswer) rather than its CallTimeToAnswer — the same two-candidate-field ambiguity this project has flagged before, now resolved by consistently preferring CallTimeToAnswer from raw data over whichever field the PDF's own rendering happened to use.",
+  "_patientServiceKpiNote": "longestWaitingTimeSec/longestWaitingAt use UserTimeToAnswer (time until the specific agent who answered actually engaged), not CallTimeToAnswer (time in the queue before being routed) — confirmed against the official workbook's KPI_Calculations sheet, whose 'Longest Waiting Time' value and timestamp match a call's UserTimeToAnswer exactly. An earlier version of this file used CallTimeToAnswer instead and got 613 sec/12:39 PM/Ambrosie Brassil — that was this project's own bug, not a discrepancy with the PDF; corrected here to 534 sec/12:42 PM/Samantha Cooper, matching the official workbook and the PDF exactly.",
   "longestWaitPerQueue": [
     {
       "queue": "Appointments",
-      "waitSec": 542,
-      "time": "8:03 AM",
+      "waitSec": 325,
+      "time": "8:26 AM",
       "name": "Rebecca Quinn",
-      "waitLabel": "9 min 2 sec"
+      "waitLabel": "5 min 25 sec"
     },
     {
       "queue": "General Enquiries",
-      "waitSec": 613,
-      "time": "12:39 PM",
-      "name": "Ambrosie Brassil",
-      "waitLabel": "10 min 13 sec"
+      "waitSec": 534,
+      "time": "12:42 PM",
+      "name": "Samantha Cooper",
+      "waitLabel": "8 min 54 sec"
     },
     {
       "queue": "Health Professionals",
@@ -291,10 +289,10 @@
     },
     {
       "queue": "Canberra Vasectomy",
-      "waitSec": 191,
+      "waitSec": 53,
       "time": "9:40 AM",
       "name": "Apurva Pathak",
-      "waitLabel": "3 min 11 sec"
+      "waitLabel": "0 min 53 sec"
     }
   ],
   "inboundByStaff": [
@@ -359,22 +357,22 @@
       "durationMins": 8
     },
     {
+      "name": "Lyneham - Rec 1",
+      "calls": 2,
+      "durationMins": 10
+    },
+    {
       "name": "Shae Connors",
       "calls": 1,
       "durationMins": 3
     }
   ],
-  "_inboundByStaffNote": "Full table from InboundCalls_Detailed, scoped to this day's reception lines. Sums to 331 (2 over grandTotal's 329 queue-summed accepted) — matches the PDF's own cover pie accepted figure (331) exactly.",
+  "_inboundByStaffNote": "Full table from InboundCalls_Detailed (deduplicated by CallGUID). Sums to 331, matching the cover pie and the official workbook's InboundStaffSummary exactly, name-for-name and call-for-call.",
   "outboundByStaff": [
     {
       "name": "Apurva Pathak",
       "calls": 29,
       "durationMins": 40
-    },
-    {
-      "name": "Jasmina Sodolovic",
-      "calls": 25,
-      "durationMins": 27
     },
     {
       "name": "Holly Archer",
@@ -437,12 +435,22 @@
       "durationMins": 1
     }
   ],
-  "outboundOtherExtensionsTotal": 95,
+  "outboundOtherExtensionsTotal": 131,
   "outboundOtherExtensions": [
+    {
+      "name": "Jasmina Sodolovic",
+      "calls": 25,
+      "durationMins": 27
+    },
     {
       "name": "Belinda",
       "calls": 12,
       "durationMins": 98
+    },
+    {
+      "name": "(Unattributed)",
+      "calls": 11,
+      "durationMins": 25
     },
     {
       "name": "Joanna Lin/ Sandeep Pratap",
@@ -555,7 +563,7 @@
       "durationMins": 3
     }
   ],
-  "_outboundNote": "outboundByStaff (199 calls) is the known-staff-roster-filtered total; outboundOtherExtensionsTotal (95 calls) covers doctors'/other rooms' direct outbound calls from the same raw export, kept separate as in prior known-staff filtering work. The source PDF's own 'Total Outbound Calls = 174' caption undercounts true reception-staff outbound activity by 25 calls relative to this raw count — consistent with the previously-identified PDF outbound undercount, not a new issue.",
+  "_outboundNote": "outboundByStaff (174 calls, matching the PDF's own 'Total Outbound Calls = 174' caption) now matches the official workbook's OutboundStaffSummary table exactly, name-for-name and call-for-call, after two fixes: the known-staff roster now starts from the official workbook's own Source_Table sheet (the exact reception roster it uses) rather than only names seen in this project's own history, and Jasmina Sodolovic (an email/admin staff member who isn't reception, but had been pulled in by an earlier version of this script's now-removed Cloop-email-based roster heuristic) is explicitly excluded. outboundOtherExtensionsTotal (131, everyone else — doctors' rooms, admin extensions, and 11 calls with no attributed extension at all) plus outboundByStaff (174) now sums to 305, matching the official workbook's Outbound_10Day_Trend sheet exactly — see outboundTenDayTrend's own note below for what that number actually tracks.",
   "outboundTenDayTrend": {
     "labels": [
       "Tue 22 Sep",
@@ -570,17 +578,17 @@
       "Tue 06 Oct"
     ],
     "totals": [
-      152,
-      170,
-      115,
-      123,
-      145,
-      122,
-      146,
-      94,
-      108,
-      199
+      265,
+      312,
+      209,
+      201,
+      274,
+      249,
+      262,
+      173,
+      186,
+      305
     ]
   },
-  "_outboundTenDayTrendNote": "Position 9 here (199) is this date's own known-staff-filtered raw total, not the PDF's 'Total Outbound Calls = 174' caption — the first genuinely raw-sourced point in this trend; positions 0-8 remain the PDF-extraction-era carried-forward values from 2026-10-02, so this trend's basis changes from this date onward (expect a small step rather than a smooth continuation)."
+  "_outboundTenDayTrendNote": "FLAG FOR USER: this field tracks a DIFFERENT, larger metric than summary.totalOutbound/outboundByStaff above (174) — it's every outbound call from every extension in the building (reception, doctors' rooms, everyone), confirmed by directly matching the official workbook's own Outbound_10Day_Trend sheet (a 10-day rolling history, read in full from the file the user shared). Positions 0-8 here are that sheet's own verified values for 22 Sep - 2 Oct, NOT the carried-forward reception-only figures this project committed for those same dates historically (152, 170, 115, 123, 145, 122, 146, 94, 108) — this project had been dismissing this exact chart's numbers as unreliable PDF-extraction noise since at least 2026-10-02's own file, when they were actually a legitimate, different, and apparently fully trustworthy metric the whole time. This means every historical date's own outboundTenDayTrend.totals field (not just the labels/positions 0-8 overridden here) is very likely wrong in the same way — this file corrects today's entry using verified source data, but nothing upstream of today has been touched. Please let me know if you'd like those historical dates corrected too."
 }
