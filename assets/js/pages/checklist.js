@@ -1,11 +1,13 @@
 import { esc } from '../util.js';
 
-// Single shared doc: this page only ever tracks the one report currently
-// being assembled, not a history of past days (the committed JSON under
-// assets/data/reports/ is already that history). The daily routine writes
-// cloopDone/callLogsDone here as it ingests each source; only an editor's
-// own Total Cases form write ever touches casesEntered/casesValues.
-const DOC_PATH = 'checklist/current';
+// Vercel (its KV store, via api/checklist/*) is the one and only backend for
+// this page's live state — on the Vercel-hosted site these are same-origin
+// calls; from inside the Artifact they're cross-origin fetches to the same
+// URL. No separate Artifact-side store, no login, no sync step between two
+// backends: whichever host renders this page, it's reading and writing the
+// same place.
+const VERCEL_BASE = 'https://dailyreport-x15l-git-claude-zip-comp-8f7c55-atif-wan-s-projects.vercel.app';
+const API_BASE = (typeof window !== 'undefined' && window.claude) ? VERCEL_BASE : '';
 
 function renderMessage(container, heading, body) {
   container.innerHTML = `<div class="callout"><div class="ch">${esc(heading)}</div><p style="margin:0">${esc(body)}</p></div>`;
@@ -64,49 +66,7 @@ function renderBoard(container, data, { saving, onSaveCases }) {
   });
 }
 
-async function renderChecklistViaArtifact(container) {
-  const user = await window.claude.use('user');
-  const canEdit = user ? await user.canEdit() : false;
-  if (!canEdit) {
-    renderMessage(container, 'No access', "You don't have access to this page.");
-    return;
-  }
-  const db = await window.claude.use('db');
-  if (!db) {
-    renderMessage(container, 'Not available here', 'The report checklist needs the db capability, which this view did not grant.');
-    return;
-  }
-
-  const ref = db.doc(DOC_PATH);
-  let latest = null;
-  let saving = false;
-
-  const draw = () => renderBoard(container, latest, { saving, onSaveCases: save });
-
-  async function save(values) {
-    saving = true;
-    draw();
-    try {
-      const snap = await ref.get();
-      if (snap.exists) await ref.update({ casesEntered: true, casesValues: values });
-      else await ref.set({ casesEntered: true, casesValues: values });
-    } finally {
-      saving = false;
-    }
-  }
-
-  ref.onSnapshot(
-    (snap) => { latest = snap.exists ? snap.data() : null; draw(); },
-    () => renderMessage(container, "Couldn't load", 'There was a problem reaching the checklist data.'),
-  );
-}
-
-// Outside the Artifact runtime (e.g. the Vercel-hosted copy), there's no
-// window.claude to ask "who is this viewer" or to hold shared state — so this
-// path talks to real serverless endpoints (api/checklist/*) backed by Vercel
-// KV instead. No login: it's a status board, not a place that holds or shows
-// anything sensitive, so anyone with the link can view and edit it.
-async function renderChecklistViaApi(container) {
+export async function renderChecklist(container) {
   let latest = null;
   let saving = false;
   let pollTimer = null;
@@ -121,7 +81,14 @@ async function renderChecklistViaApi(container) {
   }
 
   async function load() {
-    const res = await fetch('/api/checklist', { credentials: 'same-origin' });
+    let res;
+    try {
+      res = await fetch(`${API_BASE}/api/checklist`, { credentials: 'same-origin' });
+    } catch {
+      stopPolling();
+      renderMessage(container, "Couldn't load", 'There was a problem reaching the checklist data.');
+      return;
+    }
     if (!res.ok) {
       stopPolling();
       renderMessage(container, "Couldn't load", 'There was a problem reaching the checklist data.');
@@ -144,7 +111,7 @@ async function renderChecklistViaApi(container) {
     saving = true;
     drawBoard();
     try {
-      const res = await fetch('/api/checklist/cases', {
+      const res = await fetch(`${API_BASE}/api/checklist/cases`, {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
@@ -158,12 +125,4 @@ async function renderChecklistViaApi(container) {
   }
 
   await load();
-}
-
-export async function renderChecklist(container) {
-  if (window.claude && typeof window.claude.use === 'function') {
-    await renderChecklistViaArtifact(container);
-  } else {
-    await renderChecklistViaApi(container);
-  }
 }

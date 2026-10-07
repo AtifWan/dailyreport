@@ -1,8 +1,9 @@
 const { kv } = require('@vercel/kv');
+const { withCors } = require('../_lib/cors');
 
 const DOC_KEY = 'checklist:current';
 
-module.exports = async function handler(req, res) {
+module.exports = withCors(async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'method_not_allowed' });
@@ -24,4 +25,4 @@ module.exports = async function handler(req, res) {
   };
   await kv.set(DOC_KEY, next);
   return res.status(200).json({ data: next });
-};
+});
