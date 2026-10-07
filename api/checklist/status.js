@@ -1,7 +1,6 @@
 // Server-to-server endpoint for the daily ingestion routine to flip
-// cloopDone/callLogsDone — a different trust boundary than the browser
-// password login above, so it uses a separate shared secret (x-api-key)
-// rather than the session cookie.
+// cloopDone/callLogsDone — the only write path that still needs a secret,
+// since it's the routine itself (not a browser) calling in.
 const crypto = require('crypto');
 const { kv } = require('@vercel/kv');
 
