@@ -143,24 +143,21 @@ def shift_trend(prev_list, new_value):
     return (prev_list + [new_value])[-10:]
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--date", required=True, help="Date the Real-Time snapshot was taken")
-    ap.add_argument("--realtime", required=True)
-    ap.add_argument("--historical-date", required=True, help="Date the two Historical reports cover (most recent business day)")
-    ap.add_argument("--queue-historical", required=True)
-    ap.add_argument("--agent-historical", required=True)
-    ap.add_argument("--known-staff-dir", default="assets/data/reports")
-    ap.add_argument("--prev", help="Previous date's committed cloop.json, for trend chaining")
-    ap.add_argument("--out")
-    args = ap.parse_args()
+def build_cloop(date, realtime_path, historical_date, queue_historical_path, agent_historical_path,
+                 prev=None, known_staff_dir="assets/data/reports"):
+    """Core computation, callable directly (e.g. by api/generate.py) as well as
+    from the CLI below — one implementation, so the on-demand "Generate" button
+    and the daily automated routine can never quietly drift apart.
 
-    known_staff = load_known_staff(args.known_staff_dir)
-    real_time_queues, real_time_summary = parse_realtime(args.realtime)
-    contacts_queued = parse_queue_historical(args.queue_historical)
-    emails_handled, unmatched = parse_agent_historical(args.agent_historical, known_staff)
-
-    prev = json.loads(Path(args.prev).read_text()) if args.prev else None
+    prev: the previous committed date's own cloop.json, already parsed (a
+    dict), or None if there isn't one yet. Returns (result, unmatched) — the
+    result dict and the list of agent emails that couldn't be matched to a
+    known name, so callers can decide how loudly to surface that.
+    """
+    known_staff = load_known_staff(known_staff_dir)
+    real_time_queues, real_time_summary = parse_realtime(realtime_path)
+    contacts_queued = parse_queue_historical(queue_historical_path)
+    emails_handled, unmatched = parse_agent_historical(agent_historical_path, known_staff)
 
     def prev_trend(path_keys):
         node = prev
@@ -173,7 +170,7 @@ def main():
     contacts_queued_total = sum(r["count"] for r in contacts_queued)
 
     result = {
-        "reportDate": args.date,
+        "reportDate": date,
         "realTimeQueues": real_time_queues,
         "realTimeSummary": real_time_summary,
         "contactsQueuedYesterday": contacts_queued,
@@ -181,9 +178,30 @@ def main():
             "totals": shift_trend(prev_trend(["contactsQueuedTenDayTrend", "totals"]), contacts_queued_total),
         },
         "emailsHandledYesterday": emails_handled,
-        "_historicalDate": args.historical_date,
+        "_historicalDate": historical_date,
         "_unmatchedAgentNames": unmatched,
     }
+    return result, unmatched
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--date", required=True, help="Date the Real-Time snapshot was taken")
+    ap.add_argument("--realtime", required=True)
+    ap.add_argument("--historical-date", required=True, help="Date the two Historical reports cover (most recent business day)")
+    ap.add_argument("--queue-historical", required=True)
+    ap.add_argument("--agent-historical", required=True)
+    ap.add_argument("--known-staff-dir", default="assets/data/reports")
+    ap.add_argument("--prev", help="Previous date's committed cloop.json, for trend chaining")
+    ap.add_argument("--out")
+    args = ap.parse_args()
+
+    prev = json.loads(Path(args.prev).read_text()) if args.prev else None
+
+    result, unmatched = build_cloop(
+        args.date, args.realtime, args.historical_date, args.queue_historical, args.agent_historical,
+        prev=prev, known_staff_dir=args.known_staff_dir,
+    )
 
     out = json.dumps(result, ensure_ascii=False, indent=2)
     if args.out:

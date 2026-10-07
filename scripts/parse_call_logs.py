@@ -246,24 +246,17 @@ def shift_trend(prev_list, new_value):
     return (prev_list + [new_value])[-10:]
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--date", required=True)
-    ap.add_argument("--inbound", required=True)
-    ap.add_argument("--outbound", required=True)
-    ap.add_argument("--queue", action="append", required=True, help="QueueName=path/to/file.csv")
-    ap.add_argument("--prev", help="Previous date's committed call-logs.json, for trend chaining")
-    ap.add_argument("--known-staff-dir", default="assets/data/reports",
-                     help="Root of committed report dates, used to tell reception-team outbound calls apart from direct room/doctor-extension calls")
-    ap.add_argument("--out")
-    args = ap.parse_args()
+def build_call_logs(date, inbound_path, outbound_path, queue_files, prev=None, known_staff_dir="assets/data/reports"):
+    """Core computation, callable directly (e.g. by api/generate.py) as well as
+    from the CLI below — one implementation, so the on-demand "Generate" button
+    and the daily automated routine can never quietly drift apart.
 
-    queue_files = {}
-    for spec in args.queue:
-        name, path = spec.split("=", 1)
-        queue_files[name] = path
-
-    known_staff = load_known_staff(args.known_staff_dir)
+    queue_files: {queueName: path}. prev: the previous committed date's own
+    call-logs.json, already parsed (a dict), or None if there isn't one yet.
+    Returns the result dict; callers decide what to do with it (write to a
+    file, commit via the GitHub API, print to stdout, ...).
+    """
+    known_staff = load_known_staff(known_staff_dir)
 
     queues = {}
     for name in ALL_QUEUES:
@@ -272,8 +265,8 @@ def main():
         else:
             queues[name] = {"accepted": 0, "missed": 0, "avgWaitSec": 0, "longestWait": None, "rows": []}
 
-    inbound = parse_inbound(args.inbound)
-    outbound = parse_outbound(args.outbound, known_staff)
+    inbound = parse_inbound(inbound_path)
+    outbound = parse_outbound(outbound_path, known_staff)
 
     queue_report = [{"queue": n, "accepted": q["accepted"], "missed": q["missed"]} for n, q in queues.items()]
     grand_total = {
@@ -292,9 +285,6 @@ def main():
     total_inbound = inbound["accepted"] + total_missed
     accepted_pct = round(100 * inbound["accepted"] / total_inbound) if total_inbound else 0
 
-
-    prev = json.loads(Path(args.prev).read_text()) if args.prev else None
-
     def prev_trend(path_keys, default=None):
         node = prev
         for k in path_keys:
@@ -304,7 +294,7 @@ def main():
         return node
 
     result = {
-        "reportDate": args.date,
+        "reportDate": date,
         "summary": {
             "totalInbound": total_inbound,
             "accepted": inbound["accepted"],
@@ -356,6 +346,32 @@ def main():
             "totals": shift_trend(prev_trend(["outboundTenDayTrend", "totals"]), outbound["allOutboundTotal"]),
         },
     }
+    return result
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--date", required=True)
+    ap.add_argument("--inbound", required=True)
+    ap.add_argument("--outbound", required=True)
+    ap.add_argument("--queue", action="append", required=True, help="QueueName=path/to/file.csv")
+    ap.add_argument("--prev", help="Previous date's committed call-logs.json, for trend chaining")
+    ap.add_argument("--known-staff-dir", default="assets/data/reports",
+                     help="Root of committed report dates, used to tell reception-team outbound calls apart from direct room/doctor-extension calls")
+    ap.add_argument("--out")
+    args = ap.parse_args()
+
+    queue_files = {}
+    for spec in args.queue:
+        name, path = spec.split("=", 1)
+        queue_files[name] = path
+
+    prev = json.loads(Path(args.prev).read_text()) if args.prev else None
+
+    result = build_call_logs(
+        args.date, args.inbound, args.outbound, queue_files,
+        prev=prev, known_staff_dir=args.known_staff_dir,
+    )
 
     out = json.dumps(result, ensure_ascii=False, indent=2)
     if args.out:
