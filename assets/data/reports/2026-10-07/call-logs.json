@@ -35,6 +35,18 @@
     "missed": 47
   },
   "tenDayTrend": {
+    "labels": [
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct"
+    ],
     "accepted": [
       282,
       251,
@@ -554,6 +566,18 @@
     }
   ],
   "outboundTenDayTrend": {
+    "labels": [
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct"
+    ],
     "totals": [
       312,
       209,
