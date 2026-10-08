@@ -1,35 +1,31 @@
 {
-  "_source": "Daily Operations Report - 7th October 2026.pdf, pages 17-21 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Total Cases to Date is taken from this same PDF, page 21, same as every prior date.",
-  "reportTitle": "Daily Operations Report - 7th October 2026",
-  "extractedAt": "2026-10-08T08:30:00+10:00",
-  "extractedAtLabel": "8:30 AM, Thursday 8 October 2026",
+  "reportDate": "2026-10-08",
   "realTimeQueues": [
-    {
-      "queue": "Unassigned",
-      "inQueue": 7,
-      "oldestDays": 0.72
-    },
-    {
-      "queue": "GP Mail",
-      "inQueue": 2,
-      "oldestDays": 13.69
-    },
     {
       "queue": "File Transfer",
       "inQueue": 1,
       "oldestDays": 0.58
     },
     {
+      "queue": "Unassigned",
+      "inQueue": 7,
+      "oldestDays": 0.72
+    },
+    {
       "queue": "Finance",
       "inQueue": 1,
       "oldestDays": 0.68
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 2,
+      "oldestDays": 13.69
     }
   ],
   "realTimeSummary": {
     "inQueue": 11,
     "oldestDays": 13.69
   },
-  "_realTimeQueuesNote": "FLAG: the source PDF's own printed Summary row reads '11 12.67' — inQueue (11) matches the recomputed sum of the four listed queues exactly (7+2+1+1=11), but its own oldestDays (12.67) does not match any of its own four listed queues, the closest/highest being GP Mail's own printed 13.69. Recorded here using the recomputed max (13.69, GP Mail's own value) rather than the printed Summary figure, consistent with this project's established practice of trusting the per-queue rows over a Summary line — but the printed 12.67 itself is an unexplained discrepancy in the source PDF, not reconciled further.",
   "contactsQueuedYesterday": [
     {
       "queue": "Requests",
@@ -90,7 +86,6 @@
       112
     ]
   },
-  "_note": "contactsQueuedYesterday sums to 112 exactly (26+25+22+14+12+11+1+1), matching this report's own contactsQueuedTenDayTrend chart's clean trailing value and chain-matching 2026-10-06's own committed trend exactly at positions 0-8 — high confidence. 'Failed Communication' (14) appears in this table for the first time in this project's committed history — unlike the Real-Time Metrics panel above, the Historical 'Contacts Queued' table has never excluded it (parse_cloop.py's own Failed-Communication filter is specific to the Real-Time panel only), so it's included here verbatim as genuine new data, not an anomaly. emailsHandledYesterday: FLAG — Jasmina Sodolovic's row (18/12/1) does not reconcile internally (12+1=13, not 18) — recorded verbatim, not corrected. The other four agents' rows all reconcile exactly to their own stated totals (Chloey Leow 68=55+13, Lucinda Gonzalez 23=19+4, Apurva Pathak 18=13+5, Leh Peng Goh 12=12+0).",
   "emailsHandledYesterday": [
     {
       "agent": "Chloey Leow",
@@ -123,6 +118,14 @@
       "total": 12
     }
   ],
+  "_historicalDate": "2026-10-07",
+  "_unmatchedAgentNames": [],
+  "_source": "Real-Time Metrics Report + two Historical Metrics Reports (queue, agent) from Cloop's own raw CSV exports, via scripts/parse_cloop.py, replacing the earlier PDF-text-extracted version first committed for this date (the OneDrive raw-source folder had this date's files ready on the very next daily routine firing). Total Cases to Date has no raw export (Cloop doesn't offer one) so it is carried over unchanged from Daily Operations Report - 7th October 2026.pdf, page 21, same as every prior date.",
+  "reportTitle": "Daily Operations Report - 7th October 2026",
+  "extractedAt": "2026-10-08T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Thursday 8 October 2026",
+  "_realTimeQueuesNote": "4 non-zero queues this time (Failed Communication, an automated-retry queue with 610 'in queue' in the raw export, is excluded as it is on every date — not a customer contact awaiting a reply; Documents also excluded, 0 in queue right now), cleanly summing to the recomputed Summary (7+2+1+1=11), with oldestDays (13.69) matching GP Mail's own printed value exactly. The raw export's own 'Summary' row itself reads inQueue=622 (because it naively includes Failed Communication's 610) — exactly the inflation this project's own filtering is designed to avoid, now confirmed directly against the raw export rather than inferred from the PDF's own (differently) garbled Summary row ('11 12.67', corrected to 11/13.69 when this date was first PDF-extracted).",
+  "_note": "contactsQueuedYesterday sums to 112 exactly, matching this report's own 10-day chart and chain-matching 2026-10-06's own committed trend exactly at positions 0-8 — high confidence. 'Failed Communication' (14) appears in this table for the first time in this project's committed history — unlike the Real-Time panel, the Historical 'Contacts Queued' export has never excluded it (parse_cloop.py's own filter is specific to the Real-Time panel only), so it's included verbatim as genuine new data. emailsHandledYesterday: Jasmina Sodolovic's row (18 total vs 12+1=13) does not reconcile internally — confirmed present in the raw agent-historical export itself (not a PDF-extraction artifact), recorded verbatim. Kenneth Lobo (0 contacts handled, idle the full day per the raw agent-historical export) is omitted from the list below, same convention as every prior date.",
   "totalCasesToDate": {
     "date": "2026-10-07",
     "totalOverallCases": 9580,
@@ -181,7 +184,5 @@
       33
     ]
   },
-  "_totalCasesToDateNote": "Per the established (now-confirmed-correct) convention, this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('8/10/2026', a Thursday — the next business day after this report's own Wednesday date), filed here against this date's own actual report date (2026-10-07). totalInProgress (112) and totalOpenCases (33) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-06's own committed trend exactly once shifted one slot — high confidence. totalOverallCases (9580, reconstructed from the OCR-split tokens '95'+'80') is a +65 increase from 2026-10-06's committed 9515, in line with the typical daily increase.",
-  "_historicalDate": "2026-10-07",
-  "_unmatchedAgentNames": []
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('8/10/2026', a Thursday), filed here against this date's own actual report date (2026-10-07). totalInProgress (112) and totalOpenCases (33) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-06's own committed trend exactly once shifted one slot. totalOverallCases (9580, reconstructed from the PDF's own OCR-split tokens '95'+'80') is a +65 increase from 2026-10-06's committed 9515, in line with the typical daily increase — this field still has no raw export to verify against directly."
 }

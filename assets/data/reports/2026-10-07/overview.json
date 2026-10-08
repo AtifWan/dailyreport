@@ -52,8 +52,8 @@
     ]
   },
   "callLogs": {
-    "totalInbound": 281,
-    "accepted": 234,
+    "totalInbound": 282,
+    "accepted": 235,
     "acceptedPct": 83,
     "missed": 47,
     "missedPct": 17,
@@ -80,7 +80,7 @@
       }
     ]
   },
-  "_topInboundAgentNote": "High confidence — Rebecca Quinn tops a fully clean inboundByStaff table (13 names, 13 values, 13 durations all lined up 1:1, summing exactly to the confirmed accepted total of 234), with the Queue Report's own grand total 1 short (see call-logs.json's own note). Quieter day than 2026-10-06 (281 total inbound vs 368), consistent with reverting to a typical midweek volume after that date's post-long-weekend spike.",
+  "_topInboundAgentNote": "High confidence — Rebecca Quinn tops a fully clean inboundByStaff table (13 names, 13 values, 13 durations all lined up 1:1, summing exactly to the confirmed raw-CSV accepted total of 235), 2 ahead of the Queue Report's own grand total (233 — 2 calls on a different reception line, not attributable to any of the 4 named queues, same pattern seen on 2026-10-06). Quieter day than 2026-10-06 (282 total inbound vs 368), consistent with reverting to a typical midweek volume after that date's own post-long-weekend spike.",
   "cloop": {
     "inQueue": 11,
     "oldestDays": 13.69,

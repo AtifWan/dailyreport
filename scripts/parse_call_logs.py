@@ -114,7 +114,15 @@ def parse_queue_file(path):
     rows = dedupe_by_guid(read_rows(path))
     accepted = [r for r in rows if r["CallAnsweredInQueue"] == "1"]
     missed = [r for r in rows if r["CallTimedOutOrExit"] == "1"]
-    wait_times = [int(r["CallTimeToAnswer"]) for r in accepted if r["CallTimeToAnswer"]]
+    # Confirmed 2026-10-07 by direct cross-check against the rendered report's
+    # own "Average Wait Time (10 Days)" charts: mean(UserTimeToAnswer) matches
+    # the PDF's printed figure exactly (per queue and overall), while
+    # mean(CallTimeToAnswer) — what this line used until now — reads roughly
+    # 3x too high. The "CallTimeToAnswer (queue wait)" rationale below this
+    # function and in parse_inbound was never independently verified for this
+    # specific field; it was carried over from the (correctly verified)
+    # longest-wait finding and turned out to be wrong for the average.
+    wait_times = [int(r["UserTimeToAnswer"]) for r in accepted if r["UserTimeToAnswer"]]
     avg_wait = round(statistics.mean(wait_times)) if wait_times else 0
 
     # "Longest wait" (here and in parse_inbound's overall figure) is
@@ -180,10 +188,9 @@ def parse_inbound(path):
     )
 
     talk_times = [int(r["TotalTalkTimeAllUsers"] or 0) for r in answered]
-    # Average wait uses CallTimeToAnswer (queue wait); "longest wait" uses
-    # UserTimeToAnswer (wait until the actual answering agent engaged) — see
-    # parse_queue_file's own note for how this was confirmed.
-    answered_wait_times = [int(r["CallTimeToAnswer"] or 0) for r in answered if r["CallTimeToAnswer"]]
+    # Average wait AND "longest wait" both use UserTimeToAnswer — see
+    # parse_queue_file's own note for how the average was confirmed (2026-10-07,
+    # cross-checked against the rendered report's own wait-time charts).
     all_user_wait_times = [int(r["UserTimeToAnswer"] or 0) for r in answered if r["UserTimeToAnswer"]]
     longest_call = max(answered, key=lambda r: int(r["TotalTalkTimeAllUsers"] or 0), default=None)
     longest_wait_call = max(answered, key=lambda r: int(r["UserTimeToAnswer"] or 0), default=None)
@@ -192,7 +199,7 @@ def parse_inbound(path):
         "accepted": len(answered),
         "inboundByStaff": inbound_by_staff,
         "avgCallHandlingSec": round(statistics.mean(talk_times)) if talk_times else 0,
-        "overallAvgWaitSec": round(statistics.mean(answered_wait_times)) if answered_wait_times else 0,
+        "overallAvgWaitSec": round(statistics.mean(all_user_wait_times)) if all_user_wait_times else 0,
         "longestCallDurationSec": int(longest_call["TotalTalkTimeAllUsers"]) if longest_call else 0,
         "longestCallAt": format_time(longest_call["CallDateTime"]) if longest_call else None,
         "longestCallAgent": longest_call["FirstUserName"].strip() if longest_call else None,
