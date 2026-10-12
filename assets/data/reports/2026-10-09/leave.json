@@ -1,0 +1,103 @@
+{
+  "_source": "Daily Operations Report - 9th October 2026.pdf (full-length), page 22 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) \u2014 not pixel-level image verification. STRUCTURAL CHANGE this date \u2014 see _note.",
+  "reportTitle": "Daily Operations Report - 9th October 2026",
+  "reportDate": "2026-10-09",
+  "weekStart": "2026-10-12",
+  "weekEnd": "2026-10-16",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Krystel Chin",
+          "site": "Crace",
+          "status": null,
+          "_unconfirmed": true
+        },
+        {
+          "name": "Dr Penny Gosling",
+          "site": "Crace",
+          "status": null,
+          "_unconfirmed": true
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Abbey Freestone",
+          "site": null,
+          "status": null,
+          "_unconfirmed": true
+        },
+        {
+          "name": "Sudina Rijal",
+          "site": null,
+          "status": null,
+          "_unconfirmed": true
+        },
+        {
+          "name": "Nita Sigdel",
+          "site": null,
+          "status": null,
+          "_unconfirmed": true
+        },
+        {
+          "name": "De Ang Renfree",
+          "site": null,
+          "status": null,
+          "_unconfirmed": true
+        },
+        {
+          "name": "Holly Archer",
+          "site": null,
+          "status": null,
+          "_unconfirmed": true
+        },
+        {
+          "name": "Samantha Cooper",
+          "site": null,
+          "status": null,
+          "_unconfirmed": true
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "FLAG FOR USER REVIEW: two changes from every prior committed date. (1) This report (dated Friday 2026-10-09) prints its leave roster for the WEEK AHEAD (12-16 October) rather than the week containing its own report date (5-9 October, as every date 2026-10-06 through 2026-10-08 did) \u2014 a shift in which week this page covers, not something we've seen before. (2) The roster itself is a much shorter list than prior dates' fixed 8-doctor/2-staff set (Dr Mara Matic, Dr Tom Mills, etc.) \u2014 only 2 doctors and 6 staff are named here, and three of those staff names (Abbey Freestone, Sudina Rijal, Nita Sigdel) have never appeared in this project's leave.json before. The page's own 'Monday Tuesday Wednesday Thursday Friday' column headers still don't resolve to any per-day text we can extract reliably, so every person's status remains null/_unconfirmed as before \u2014 we cannot tell from this text extraction whether this is now a 'rostered on leave that week' list (vs. the previous page's full staff roster) or something else. Needs a visual check of the source PDF's actual grid."
+}
