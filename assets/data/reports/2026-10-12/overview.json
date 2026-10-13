@@ -1,0 +1,115 @@
+{
+  "_source": "Daily Operations Report - 12th October 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) \u2014 not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 331,
+    "date": "2026-10-12",
+    "weekday": "Monday",
+    "title": "Daily Operations Report - 12th October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 66,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 18,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 100
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 341,
+    "accepted": 310,
+    "acceptedPct": 91,
+    "missed": 31,
+    "missedPct": 9,
+    "totalOutbound": 82,
+    "topInboundAgent": {
+      "name": "Rebecca Quinn",
+      "calls": 78
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 206,
+        "missed": 16
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 102,
+        "missed": 14
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 2,
+        "missed": 1
+      }
+    ]
+  },
+  "_topInboundAgentNote": "Rebecca Quinn tops a fully clean inboundByStaff table (10 names, 10 values, 10 durations all lined up 1:1, summing exactly to the confirmed accepted total of 310) \u2014 unambiguous, no tie this date. Busiest day since 2026-10-06 (341 total inbound vs 269 on 2026-10-08), a typical start-of-week level after the weekend.",
+  "cloop": {
+    "inQueue": 23,
+    "oldestDays": 12.82,
+    "contactsQueuedYesterday": 80,
+    "emailsHandledYesterday": 103,
+    "totalOverallCases": 9820,
+    "totalInProgress": 107,
+    "totalOpenCases": 47
+  },
+  "leave": {
+    "weekLabel": "12 October \u2013 16 October 2026",
+    "doctorLinesOnLeave": null,
+    "staffFullyOnLeave": null,
+    "staffPartialLeave": null,
+    "staffPartialLeaveNames": [],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "Same week (12-16 Oct) and roster as 2026-10-09's own leave page \u2014 confirms the page always shows the current working week, not an anomaly. Weekly leave counts left as null rather than guessed."
+}

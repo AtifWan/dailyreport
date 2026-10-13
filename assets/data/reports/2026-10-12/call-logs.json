@@ -1,0 +1,632 @@
+{
+  "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, built directly from raw-source data from the start (no PDF-first step). All headline figures matched Daily Operations Report - 12th October 2026.pdf exactly: total inbound 341/310/31, grand total per-queue sums matched the summary with zero gap this time (no residual, unlike 2026-10-09), and total outbound 82 matched exactly too. One small quirk recorded verbatim below rather than reconciled \u2014 see _outboundDurationNote.",
+  "reportDate": "2026-10-12",
+  "summary": {
+    "totalInbound": 341,
+    "accepted": 310,
+    "missed": 31,
+    "acceptedPct": 91,
+    "missedPct": 9,
+    "totalOutbound": 82
+  },
+  "queueReport": [
+    {
+      "queue": "Appointments",
+      "accepted": 206,
+      "missed": 16
+    },
+    {
+      "queue": "General Enquiries",
+      "accepted": 102,
+      "missed": 14
+    },
+    {
+      "queue": "Health Professionals",
+      "accepted": 0,
+      "missed": 0
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "accepted": 2,
+      "missed": 1
+    }
+  ],
+  "grandTotal": {
+    "accepted": 310,
+    "missed": 31
+  },
+  "tenDayTrend": {
+    "labels": [
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct"
+    ],
+    "accepted": [
+      265,
+      225,
+      214,
+      206,
+      201,
+      331,
+      235,
+      247,
+      217,
+      310
+    ],
+    "missed": [
+      45,
+      11,
+      12,
+      27,
+      28,
+      37,
+      47,
+      22,
+      33,
+      31
+    ],
+    "answerRatePct": [
+      85,
+      95,
+      95,
+      88,
+      88,
+      90,
+      83,
+      92,
+      87,
+      91
+    ],
+    "overallAvgWaitSec": [
+      35,
+      34,
+      37,
+      41,
+      50,
+      123,
+      43,
+      42,
+      45,
+      40
+    ]
+  },
+  "_tenDayTrendNote": "accepted/missed/answerRatePct/overallAvgWaitSec all chain-matched 2026-10-09's own committed trend exactly at positions 0-8; position 9 is this date's own raw-CSV-derived figure (310 accepted, 31 missed, 91% answer rate, 40 sec overall average wait), confirmed against the PDF's own 10-day charts exactly to the second/percent.",
+  "queues": {
+    "Appointments": {
+      "labels": [
+        "Mon 28 Sep",
+        "Tue 29 Sep",
+        "Wed 30 Sep",
+        "Thu 01 Oct",
+        "Fri 02 Oct",
+        "Tue 06 Oct",
+        "Wed 07 Oct",
+        "Thu 08 Oct",
+        "Fri 09 Oct",
+        "Mon 12 Oct"
+      ],
+      "accepted": [
+        165,
+        133,
+        122,
+        123,
+        100,
+        208,
+        133,
+        141,
+        115,
+        206
+      ],
+      "missed": [
+        20,
+        7,
+        7,
+        13,
+        7,
+        20,
+        17,
+        10,
+        14,
+        16
+      ],
+      "avgWaitSec": [
+        30,
+        33,
+        36,
+        44,
+        37,
+        110,
+        43,
+        37,
+        38,
+        39
+      ]
+    },
+    "General Enquiries": {
+      "labels": [
+        "Mon 28 Sep",
+        "Tue 29 Sep",
+        "Wed 30 Sep",
+        "Thu 01 Oct",
+        "Fri 02 Oct",
+        "Tue 06 Oct",
+        "Wed 07 Oct",
+        "Thu 08 Oct",
+        "Fri 09 Oct",
+        "Mon 12 Oct"
+      ],
+      "accepted": [
+        97,
+        90,
+        89,
+        79,
+        98,
+        118,
+        99,
+        104,
+        101,
+        102
+      ],
+      "missed": [
+        25,
+        3,
+        4,
+        13,
+        21,
+        17,
+        30,
+        12,
+        19,
+        14
+      ],
+      "avgWaitSec": [
+        44,
+        35,
+        39,
+        39,
+        63,
+        151,
+        44,
+        48,
+        54,
+        41
+      ]
+    },
+    "Health Professionals": {
+      "labels": [
+        "Mon 28 Sep",
+        "Tue 29 Sep",
+        "Wed 30 Sep",
+        "Thu 01 Oct",
+        "Fri 02 Oct",
+        "Tue 06 Oct",
+        "Wed 07 Oct",
+        "Thu 08 Oct",
+        "Fri 09 Oct",
+        "Mon 12 Oct"
+      ],
+      "accepted": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "missed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "avgWaitSec": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "Canberra Vasectomy": {
+      "labels": [
+        "Mon 28 Sep",
+        "Tue 29 Sep",
+        "Wed 30 Sep",
+        "Thu 01 Oct",
+        "Fri 02 Oct",
+        "Tue 06 Oct",
+        "Wed 07 Oct",
+        "Thu 08 Oct",
+        "Fri 09 Oct",
+        "Mon 12 Oct"
+      ],
+      "accepted": [
+        3,
+        2,
+        2,
+        3,
+        1,
+        4,
+        1,
+        2,
+        2,
+        2
+      ],
+      "missed": [
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "avgWaitSec": [
+        20,
+        25,
+        43,
+        14,
+        12,
+        86,
+        3,
+        38,
+        24,
+        26
+      ]
+    }
+  },
+  "_queuesNote": "accepted/missed for all four queues chain-match 2026-10-09's own committed data exactly at positions 0-8. avgWaitSec at position 9 matches the PDF's own per-queue 10-day charts exactly for Appointments (39 sec) and General Enquiries (41 sec). Canberra Vasectomy's own position 9 computes to 26 sec here (round(mean(6, 47)) using Python's round-half-to-even on the exact .5 tie), one second under the PDF's own printed 27 sec \u2014 same rounding-convention quirk on a 2-call sample as 2026-10-09, not a data error; recorded verbatim rather than adjusted to match.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 1049,
+    "longestCallAt": "1:25 PM",
+    "longestCallAgent": "Ambrosie Brassil",
+    "longestWaitingTimeSec": 428,
+    "longestWaitingAt": "9:40 AM",
+    "avgCallHandlingSec": 141
+  },
+  "longestWaitPerQueue": [
+    {
+      "queue": "Appointments",
+      "waitSec": 428,
+      "time": "9:40 AM",
+      "name": "Emily Pettett",
+      "waitLabel": "7 min 8 sec"
+    },
+    {
+      "queue": "General Enquiries",
+      "waitSec": 372,
+      "time": "1:58 PM",
+      "name": "Jasmine Deery",
+      "waitLabel": "6 min 12 sec"
+    },
+    {
+      "queue": "Health Professionals",
+      "waitSec": 0,
+      "time": null,
+      "name": null,
+      "waitLabel": "0 min 0 sec"
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "waitSec": 47,
+      "time": "12:26 PM",
+      "name": "Shae Connors",
+      "waitLabel": "0 min 47 sec"
+    }
+  ],
+  "inboundByStaff": [
+    {
+      "name": "Rebecca Quinn",
+      "calls": 78,
+      "durationMins": 173
+    },
+    {
+      "name": "David Antioch",
+      "calls": 55,
+      "durationMins": 107
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 49,
+      "durationMins": 101
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 31,
+      "durationMins": 83
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 31,
+      "durationMins": 77
+    },
+    {
+      "name": "Jasmine Deery",
+      "calls": 31,
+      "durationMins": 89
+    },
+    {
+      "name": "Isaac Davis",
+      "calls": 12,
+      "durationMins": 35
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 10,
+      "durationMins": 35
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 7,
+      "durationMins": 13
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 6,
+      "durationMins": 15
+    }
+  ],
+  "outboundByStaff": [
+    {
+      "name": "Jasmine Deery",
+      "calls": 16,
+      "durationMins": 14
+    },
+    {
+      "name": "Isaac Davis",
+      "calls": 15,
+      "durationMins": 14
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 11,
+      "durationMins": 15
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 11,
+      "durationMins": 22
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 8,
+      "durationMins": 11
+    },
+    {
+      "name": "Rebecca Quinn",
+      "calls": 6,
+      "durationMins": 4
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 6,
+      "durationMins": 6
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 4,
+      "durationMins": 1
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 2,
+      "durationMins": 1
+    },
+    {
+      "name": "David Antioch",
+      "calls": 2,
+      "durationMins": 2
+    },
+    {
+      "name": "Jessica Hinchy",
+      "calls": 1,
+      "durationMins": 16
+    }
+  ],
+  "_outboundDurationNote": "outboundByStaff's own call counts match the PDF's own 11-name outbound staff table exactly for every name (16/15/11/11/8/6/6/4/2/2/1, summing to the confirmed 82-call total). Several of the per-agent durationMins values differ from the PDF's own printed minutes by 1-2 (e.g. Jasmine Deery 14 here vs 16 printed, Ambrosie Brassil 22 vs 24) while Jessica Hinchy's own value matches exactly (16) \u2014 consistent with each source rounding individual call durations to the nearest minute before summing in a slightly different way, not a data error; recorded verbatim rather than adjusted to match.",
+  "outboundOtherExtensionsTotal": 153,
+  "outboundOtherExtensions": [
+    {
+      "name": "Jasmina Sodolovic",
+      "calls": 19,
+      "durationMins": 18
+    },
+    {
+      "name": "Raymond Liu",
+      "calls": 18,
+      "durationMins": 39
+    },
+    {
+      "name": "Denman - Nurse",
+      "calls": 14,
+      "durationMins": 18
+    },
+    {
+      "name": "RM7 Dr Kathleen O'Brien",
+      "calls": 14,
+      "durationMins": 66
+    },
+    {
+      "name": "(Unattributed)",
+      "calls": 8,
+      "durationMins": 16
+    },
+    {
+      "name": "Will Fong",
+      "calls": 7,
+      "durationMins": 38
+    },
+    {
+      "name": "Thinus",
+      "calls": 7,
+      "durationMins": 25
+    },
+    {
+      "name": "Belinda",
+      "calls": 7,
+      "durationMins": 126
+    },
+    {
+      "name": "RM2 Dr Tracy Fox / Dr Michelle De Jesus",
+      "calls": 5,
+      "durationMins": 18
+    },
+    {
+      "name": "Sam Primrose",
+      "calls": 5,
+      "durationMins": 29
+    },
+    {
+      "name": "Ian Chan/ Andrew Mitchell",
+      "calls": 5,
+      "durationMins": 4
+    },
+    {
+      "name": "John Pyae",
+      "calls": 4,
+      "durationMins": 36
+    },
+    {
+      "name": "Joanna Lin/ Sandeep Pratap",
+      "calls": 4,
+      "durationMins": 8
+    },
+    {
+      "name": "Lyneham  - Nurse",
+      "calls": 4,
+      "durationMins": 4
+    },
+    {
+      "name": "Denman Room 4",
+      "calls": 4,
+      "durationMins": 27
+    },
+    {
+      "name": "RM9 Dr Elliott Missen",
+      "calls": 3,
+      "durationMins": 26
+    },
+    {
+      "name": "Tom Mills",
+      "calls": 3,
+      "durationMins": 42
+    },
+    {
+      "name": "Lisa Bron",
+      "calls": 3,
+      "durationMins": 5
+    },
+    {
+      "name": "JMO/ room 7",
+      "calls": 3,
+      "durationMins": 11
+    },
+    {
+      "name": "Crace Office",
+      "calls": 2,
+      "durationMins": 1
+    },
+    {
+      "name": "RM1 Dr Elizabeth Muller / Dr Anna Colwell",
+      "calls": 2,
+      "durationMins": 8
+    },
+    {
+      "name": "Krystle Chin",
+      "calls": 2,
+      "durationMins": 3
+    },
+    {
+      "name": "Kristy Muir/ John Deery",
+      "calls": 2,
+      "durationMins": 3
+    },
+    {
+      "name": "Fred/Mano",
+      "calls": 2,
+      "durationMins": 23
+    },
+    {
+      "name": "Mara Matic",
+      "calls": 1,
+      "durationMins": 24
+    },
+    {
+      "name": "Freya/Riana/John",
+      "calls": 1,
+      "durationMins": 1
+    },
+    {
+      "name": "PM Alex Cownie",
+      "calls": 1,
+      "durationMins": 2
+    },
+    {
+      "name": "Nurse Consult",
+      "calls": 1,
+      "durationMins": 0
+    },
+    {
+      "name": "Vanessa Thorn",
+      "calls": 1,
+      "durationMins": 5
+    },
+    {
+      "name": "Janine Kelly",
+      "calls": 1,
+      "durationMins": 0
+    }
+  ],
+  "outboundTenDayTrend": {
+    "labels": [
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct"
+    ],
+    "totals": [
+      274,
+      249,
+      262,
+      173,
+      186,
+      305,
+      320,
+      268,
+      200,
+      235
+    ]
+  },
+  "_outboundTenDayTrendNote": "Chain-matches 2026-10-09's own committed trend exactly at positions 0-8; position 9 (235) matches the PDF's own 'Outbound 10 Day Trend Reporting' chart exactly \u2014 this total covers all outbound extensions (reception + other, 82+153=235), not just the reception-staff subset in outboundByStaff."
+}
