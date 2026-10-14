@@ -1,0 +1,178 @@
+{
+  "_source": "Daily Operations Report - 13th October 2026.pdf, pages 17-21 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) \u2014 not pixel-level image verification. The raw Cloop CSV exports (Real-Time + two Historical Metrics reports) in OneDrive were unchanged since 2026-10-07's own run (same file IDs/timestamps), so there was nothing new to raw-parse this cycle; this date reverts to PDF extraction. Total Cases to Date is taken from this same PDF, page 21, same as every prior date.",
+  "reportTitle": "Daily Operations Report - 13th October 2026",
+  "extractedAt": "2026-10-14T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Wednesday 14 October 2026",
+  "_extractedAtNote": "The report's own Real-Time snapshot is taken the next business morning (Wednesday 14 October), per the established convention, filed here under this report's own date (2026-10-13, a Tuesday).",
+  "realTimeQueues": [
+    {
+      "queue": "Failed Communication",
+      "inQueue": 30,
+      "oldestDays": 13.82
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 8,
+      "oldestDays": 0.69
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 3,
+      "oldestDays": 0.62
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 2,
+      "oldestDays": 0.7
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 13.81
+    },
+    {
+      "queue": "Nursing",
+      "inQueue": 1,
+      "oldestDays": 6.75
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 45,
+    "oldestDays": 13.82
+  },
+  "_realTimeQueuesNote": "FLAG FOR USER REVIEW: 'Failed Communication' now shows 30 items in queue with an oldest item 13.82 days old \u2014 this queue is normally filtered out of the daily contacts-queued breakdown as a non-reception line (see scripts/parse_cloop.py's own docstring), but its Real-Time snapshot count here is unusually high and is now also the queue driving the Summary row's own oldestDays. Combined with the much larger contacts-queued spike below, this looks like a genuine operational backlog rather than a data-quality quirk \u2014 flagged in the message to the user. The other 5 non-zero queues sum cleanly with Failed Communication to the printed Summary row (30+8+3+2+1+1=45).",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Failed Communication",
+      "count": 564
+    },
+    {
+      "queue": "Unassigned",
+      "count": 37
+    },
+    {
+      "queue": "Requests",
+      "count": 20
+    },
+    {
+      "queue": "Documents",
+      "count": 12
+    },
+    {
+      "queue": "File Transfer",
+      "count": 2
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct",
+      "Tue 13 Oct"
+    ],
+    "totals": [
+      81,
+      107,
+      64,
+      53,
+      93,
+      112,
+      65,
+      93,
+      80,
+      636
+    ]
+  },
+  "_note": "FLAG FOR USER REVIEW: contactsQueuedYesterday sums to 636 exactly, matching this report's own contactsQueuedTenDayTrend chart's trailing value and chain-matching 2026-10-12's own committed trend exactly at positions 0-8 \u2014 so the raw PDF data is internally consistent, but 636 is roughly 8x every other value in this 10-day window (all previously 53-112). Nearly all of it (564 of 636) is the 'Failed Communication' queue specifically, consistent with the Real-Time snapshot's own 30-item backlog and 13.82-day oldest-item age noted above \u2014 this reads as a genuine operational spike (a failed-communications backlog), not a parsing or data-quality issue, and is called out in the message to the user. emailsHandledYesterday: Apurva Pathak (30+25=55) and Chloey Leow (43+12=55) both reconcile exactly, but Jasmina Sodolovic's printed total (4) is 1 MORE than her own printed incoming+outbound split (1+2=3) \u2014 the same row that had a mismatch in the opposite direction on 2026-10-12 (10 vs 6) \u2014 recorded verbatim per the standing data-integrity rule rather than silently corrected.",
+  "emailsHandledYesterday": [
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 30,
+      "outbound": 25,
+      "total": 55
+    },
+    {
+      "agent": "Chloey Leow",
+      "incoming": 43,
+      "outbound": 12,
+      "total": 55
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 1,
+      "outbound": 2,
+      "total": 4
+    }
+  ],
+  "totalCasesToDate": {
+    "date": "2026-10-13",
+    "totalOverallCases": 9885,
+    "totalInProgress": 105,
+    "totalOpenCases": 37
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct",
+      "Tue 13 Oct"
+    ],
+    "totals": [
+      100,
+      102,
+      105,
+      106,
+      112,
+      112,
+      107,
+      101,
+      107,
+      105
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct",
+      "Tue 13 Oct"
+    ],
+    "totals": [
+      45,
+      38,
+      44,
+      69,
+      106,
+      33,
+      34,
+      60,
+      47,
+      37
+    ]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('14/10/2026', a Wednesday), filed here against this date's own actual report date (2026-10-13). totalInProgress (105) and totalOpenCases (37) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-12's own committed trend exactly \u2014 high confidence. totalOverallCases (9885) is a +65 increase from 2026-10-12's committed 9820, in line with the typical daily increase.",
+  "_historicalDate": "2026-10-13",
+  "_unmatchedAgentNames": []
+}
