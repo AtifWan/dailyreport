@@ -1,0 +1,38 @@
+{
+  "_source": "Daily Operations Report - 14th October 2026.pdf (full-length), page 22 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 14th October 2026",
+  "reportDate": "2026-10-14",
+  "weekStart": "2026-10-12",
+  "weekEnd": "2026-10-16",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {"name": "Dr Krystel Chin", "site": "Crace", "status": null, "_unconfirmed": true},
+        {"name": "Dr Penny Gosling", "site": "Crace", "status": null, "_unconfirmed": true}
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {"name": "Abbey Freestone", "site": null, "status": null, "_unconfirmed": true},
+        {"name": "Sudina Rijal", "site": null, "status": null, "_unconfirmed": true},
+        {"name": "Nita Sigdel", "site": null, "status": null, "_unconfirmed": true},
+        {"name": "De Ang Renfree", "site": null, "status": null, "_unconfirmed": true},
+        {"name": "Holly Archer", "site": null, "status": null, "_unconfirmed": true},
+        {"name": "Samantha Cooper", "site": null, "status": null, "_unconfirmed": true}
+      ]
+    }
+  ],
+  "longTerm": [
+    {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+    {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+  ],
+  "legend": [
+    {"key": "leave", "label": "On Leave"},
+    {"key": "available", "label": "Available"},
+    {"key": "public_holiday", "label": "Public Holiday"}
+  ],
+  "_note": "Same week (12-16 October) and identical roster as 2026-10-09, 2026-10-12 and 2026-10-13's own leave pages — continues to confirm the page shows the current Mon-Fri working week as of generation, not an anomaly. Still no per-day grid extractable from the text, so every person's status remains null/_unconfirmed as before."
+}

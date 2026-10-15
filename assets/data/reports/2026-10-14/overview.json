@@ -1,0 +1,64 @@
+{
+  "_source": "Daily Operations Report - 14th October 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 333,
+    "date": "2026-10-14",
+    "weekday": "Wednesday",
+    "title": "Daily Operations Report - 14th October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {"name": "Crace", "days": 1, "onHalt": true},
+      {"name": "Denman", "days": 109, "onHalt": true, "longest": true},
+      {"name": "Lyneham", "days": 0, "onHalt": true},
+      {"name": "PST", "days": 68, "onHalt": false},
+      {"name": "Finance", "days": 20, "onHalt": false}
+    ],
+    "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+    "checklists": [
+      {"name": "PST", "completionPct": 100},
+      {"name": "Finance", "completionPct": 100}
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 261,
+    "accepted": 229,
+    "acceptedPct": 88,
+    "missed": 32,
+    "missedPct": 12,
+    "totalOutbound": 96,
+    "topInboundAgent": {
+      "name": "Rebecca Quinn",
+      "calls": 58
+    },
+    "queueBreakdown": [
+      {"queue": "Appointments", "accepted": 147, "missed": 17},
+      {"queue": "General Enquiries", "accepted": 76, "missed": 15},
+      {"queue": "Canberra Vasectomy", "accepted": 3, "missed": 0}
+    ]
+  },
+  "_topInboundAgentNote": "Rebecca Quinn tops a cleanly aligned inboundByStaff table (10 names, 10 values, 10 durations lined up 1:1) — but unlike most prior dates, one of those names ('Denman - Rec 1', 2 calls/1 min) is NOT part of the PDF's own printed 9-name Inbound Calls - All Staff panel; excluding Denman, the remaining 9 names sum to exactly 227 calls, matching the PDF's own pie-chart Accepted Calls = 227 (88%) exactly — see call-logs.json's own _summaryVsGrandTotalNote and _staffCountNote for the full breakdown. Busier day than 2026-10-13 (261 total inbound vs 248).",
+  "cloop": {
+    "inQueue": 16,
+    "oldestDays": 7.75,
+    "contactsQueuedYesterday": 112,
+    "emailsHandledYesterday": 147,
+    "totalOverallCases": 9959,
+    "totalInProgress": 115,
+    "totalOpenCases": 31
+  },
+  "_cloopNote": "GOOD NEWS: the 'Failed Communication' backlog flagged on 2026-10-13 (636 contacts queued, 30 items in Real-Time queue, oldest 13.82 days) has cleared — this date's Real-Time snapshot no longer lists that queue at all, and yesterday's contacts-queued volume (112) is back in the normal range. See cloop.json's own notes for the full breakdown, including two small printed-total-vs-split mismatches in emailsHandledYesterday recorded verbatim.",
+  "_outboundTrendNote": "FLAG FOR USER REVIEW: call-logs.json's own outboundTenDayTrend (all-extensions total, chain-verified against 2026-10-13's committed figure) does not match this date's PDF-printed 'Outbound 10 Day Trend Reporting' chart — a 72-call gap for today and an 80-call gap when the same PDF re-prints 2026-10-13's own historical value. Doesn't affect the summary.totalOutbound figure above (96), which still matches the PDF's own headline exactly — see call-logs.json's own _outboundTenDayTrendNote for the full detail.",
+  "leave": {
+    "weekLabel": "12 October – 16 October 2026",
+    "doctorLinesOnLeave": null,
+    "staffFullyOnLeave": null,
+    "staffPartialLeave": null,
+    "staffPartialLeaveNames": [],
+    "longTerm": [
+      {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+      {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+    ]
+  },
+  "_leaveNote": "Same week (12-16 Oct) and roster as 2026-10-09/2026-10-12/2026-10-13's own leave pages. Weekly leave counts left as null rather than guessed."
+}
