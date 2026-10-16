@@ -1,0 +1,59 @@
+{
+  "_source": "Daily Operations Report - 6th October 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 327,
+    "date": "2026-10-06",
+    "weekday": "Tuesday",
+    "title": "Daily Operations Report - 6th October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 62, "onHalt": false },
+      { "name": "Finance", "days": 14, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 368,
+    "accepted": 331,
+    "acceptedPct": 90,
+    "missed": 37,
+    "missedPct": 10,
+    "totalOutbound": 174,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 83 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 207, "missed": 20 },
+      { "queue": "General Enquiries", "accepted": 118, "missed": 17 },
+      { "queue": "Canberra Vasectomy", "accepted": 4, "missed": 0 }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence — Rebecca Quinn tops a fully clean inboundByStaff table (14 names, 14 values, 14 durations all lined up 1:1, summing exactly to the confirmed accepted total of 331), with the Queue Report's own grand total 2 short (see call-logs.json's own note). Busiest day in the last 10 (368 total inbound vs the prior high of 265 on 2026-09-28), consistent with it being the first business day after the Labour Day long weekend.",
+  "cloop": {
+    "inQueue": 52,
+    "oldestDays": 12.67,
+    "contactsQueuedYesterday": 93,
+    "emailsHandledYesterday": 129,
+    "totalOverallCases": 9515,
+    "totalInProgress": 112,
+    "totalOpenCases": 106
+  },
+  "leave": {
+    "weekLabel": "5 October – 9 October 2026",
+    "doctorLinesOnLeave": null,
+    "staffFullyOnLeave": null,
+    "staffPartialLeave": null,
+    "staffPartialLeaveNames": [],
+    "longTerm": [
+      { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+      { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+    ]
+  },
+  "_leaveNote": "New week (5-9 Oct), never previously captured with a day-by-day grid — see leave.json's own note. Weekly leave counts left as null rather than guessed; do not surface a leave summary for this week on the dashboard until a future report fills in the actual grid or this is manually verified."
+}

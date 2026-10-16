@@ -1,0 +1,59 @@
+{
+  "_source": "Daily Operations Report - 1st October 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 325,
+    "date": "2026-10-01",
+    "weekday": "Thursday",
+    "title": "Daily Operations Report - 1st October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 60, "onHalt": false },
+      { "name": "Finance", "days": 12, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 233,
+    "accepted": 206,
+    "acceptedPct": 88,
+    "missed": 27,
+    "missedPct": 12,
+    "totalOutbound": 94,
+    "topInboundAgent": { "name": "Lucinda Gonzalez", "calls": 43 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 123, "missed": 13 },
+      { "queue": "General Enquiries", "accepted": 79, "missed": 13 },
+      { "queue": "Canberra Vasectomy", "accepted": 3, "missed": 1 }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence — Lucinda Gonzalez tops a fully clean inboundByStaff table (11 names, 11 values, 11 durations all lined up 1:1, summing exactly to the confirmed accepted total of 206, with the Queue Report's own grand total 1 short — see call-logs.json's own note). Missed calls jumped sharply today (27, 12%) against the typical 5-7% seen on recent prior dates — worth a glance, though every underlying number reconciles cleanly, so it reads as a genuinely busier/harder day rather than a data issue.",
+  "cloop": {
+    "inQueue": 38,
+    "oldestDays": 10.98,
+    "contactsQueuedYesterday": 64,
+    "emailsHandledYesterday": 83,
+    "totalOverallCases": 9332,
+    "totalInProgress": 105,
+    "totalOpenCases": 44
+  },
+  "leave": {
+    "weekLabel": "28 September – 2 October 2026",
+    "doctorLinesOnLeave": 6,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": ["Val Zihhareva", "Anita Tammaro", "Amy Morton", "Renee Bowman", "Megan Moreno Pitcher", "Andrew Davies"],
+    "longTerm": [
+      { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+      { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+    ]
+  },
+  "_leaveNote": "Same week as 2026-09-28/29/30 (28 Sept - 2 Oct). doctorLinesOnLeave/staffFullyOnLeave/staffPartialLeave are whole-week counts so they carry over unchanged — see leave.json's own note, including an important flag: a new name ('Atif Wan') appeared on the Staff roster this date with an unconfirmed placeholder status, not counted here. Today (Thursday) only Micah Haly is on leave among staff (Amy Morton is available again), and 8 of the 9 doctors are on leave — only Dr Tracy Fox is available today."
+}

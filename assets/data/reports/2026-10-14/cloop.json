@@ -1,0 +1,184 @@
+{
+  "_source": "Daily Operations Report - 14th October 2026.pdf, pages 17-21 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. The raw Cloop CSV exports (Real-Time + two Historical Metrics reports) in OneDrive remain unchanged since (at least) 2026-10-07's own run (same filenames/sizes: 'Historical Metrics Report - 2026-10-08T053725.431.csv', '...T053752.136.csv', 'Real Time Metrics Report (77).csv'), so there was nothing new to raw-parse this cycle; this date again reverts to PDF extraction. Total Cases to Date is taken from this same PDF, page 21, same as every prior date.",
+  "reportTitle": "Daily Operations Report - 14th October 2026",
+  "extractedAt": "2026-10-15T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Thursday 15 October 2026",
+  "_extractedAtNote": "The report's own Real-Time snapshot is taken the next business morning (Thursday 15 October), per the established convention, filed here under this report's own date (2026-10-14, a Wednesday).",
+  "realTimeQueues": [
+    {
+      "queue": "Unassigned",
+      "inQueue": 7,
+      "oldestDays": 0.69
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 4,
+      "oldestDays": 0.7
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 2,
+      "oldestDays": 1.7
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 2,
+      "oldestDays": 0.6
+    },
+    {
+      "queue": "Nursing",
+      "inQueue": 1,
+      "oldestDays": 7.75
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 16,
+    "oldestDays": 7.75
+  },
+  "_realTimeQueuesNote": "GOOD NEWS FOLLOW-UP: the 'Failed Communication' backlog flagged on 2026-10-13 (30 items in queue, oldest 13.82 days) no longer appears in this date's Real-Time snapshot at all — the queue isn't listed, implying it was cleared down to zero in-queue items. The 5 listed queues sum cleanly to the printed Summary row (7+4+2+2+1=16), and the oldest item (7.75 days, Nursing) now drives the Summary's own oldestDays — a much healthier snapshot than the prior date.",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Failed Communication",
+      "count": 35
+    },
+    {
+      "queue": "Unassigned",
+      "count": 35
+    },
+    {
+      "queue": "Finance",
+      "count": 18
+    },
+    {
+      "queue": "Documents",
+      "count": 17
+    },
+    {
+      "queue": "Requests",
+      "count": 4
+    },
+    {
+      "queue": "File Transfer",
+      "count": 1
+    },
+    {
+      "queue": "GP Mail",
+      "count": 1
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct",
+      "Tue 13 Oct",
+      "Wed 14 Oct"
+    ],
+    "totals": [107, 64, 53, 93, 112, 65, 93, 80, 636, 112]
+  },
+  "_note": "FOLLOW-UP TO 2026-10-13's FLAGGED SPIKE: contactsQueuedYesterday sums to 112 exactly, matching this report's own contactsQueuedTenDayTrend chart's trailing value and chain-matching 2026-10-13's own committed trend exactly at positions 0-8. The 636-contact Failed Communication spike flagged on 2026-10-13 was a one-day event — today's Failed Communication queue volume (35) is back in the normal 1-110 range seen on every other date in this window, consistent with the Real-Time backlog also having cleared (see _realTimeQueuesNote). emailsHandledYesterday: Atif Wan, Apurva Pathak, Shae Connors, De Ang Renfree, Kenneth Lobo, Frances Doble and Holly Archer all reconcile their incoming+outbound split to their own printed total exactly. Two don't: Chloey Leow's printed total (56) is 1 MORE than her own printed incoming+outbound split (41+14=55), and Leh Peng Goh's printed total (19) is 1 MORE than his own split (18+0=18) — recorded verbatim per the standing data-integrity rule rather than silently corrected.",
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 41,
+      "outbound": 14,
+      "total": 56
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 32,
+      "outbound": 0,
+      "total": 32
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 17,
+      "outbound": 12,
+      "total": 29
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 18,
+      "outbound": 0,
+      "total": 19
+    },
+    {
+      "agent": "Shae Connors",
+      "incoming": 0,
+      "outbound": 3,
+      "total": 3
+    },
+    {
+      "agent": "De Ang Renfree",
+      "incoming": 0,
+      "outbound": 3,
+      "total": 3
+    },
+    {
+      "agent": "Kenneth Lobo",
+      "incoming": 1,
+      "outbound": 2,
+      "total": 3
+    },
+    {
+      "agent": "Frances Doble",
+      "incoming": 0,
+      "outbound": 1,
+      "total": 1
+    },
+    {
+      "agent": "Holly Archer",
+      "incoming": 0,
+      "outbound": 1,
+      "total": 1
+    }
+  ],
+  "totalCasesToDate": {
+    "date": "2026-10-14",
+    "totalOverallCases": 9959,
+    "totalInProgress": 115,
+    "totalOpenCases": 31
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct",
+      "Tue 13 Oct",
+      "Wed 14 Oct"
+    ],
+    "totals": [102, 105, 106, 112, 112, 107, 101, 107, 105, 115]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct",
+      "Mon 12 Oct",
+      "Tue 13 Oct",
+      "Wed 14 Oct"
+    ],
+    "totals": [38, 44, 69, 106, 33, 34, 60, 47, 37, 31]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('15/10/2026', a Thursday), filed here against this date's own actual report date (2026-10-14). totalInProgress (115) and totalOpenCases (31) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-13's own committed trend exactly — high confidence. totalOverallCases (9959) is a +74 increase from 2026-10-13's committed 9885, in line with the typical daily increase.",
+  "_historicalDate": "2026-10-14",
+  "_unmatchedAgentNames": []
+}

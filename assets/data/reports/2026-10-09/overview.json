@@ -1,0 +1,115 @@
+{
+  "_source": "Daily Operations Report - 9th October 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) \u2014 not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 330,
+    "date": "2026-10-09",
+    "weekday": "Friday",
+    "title": "Daily Operations Report - 9th October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 65,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 17,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 100
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 250,
+    "accepted": 217,
+    "acceptedPct": 87,
+    "missed": 33,
+    "missedPct": 13,
+    "totalOutbound": 108,
+    "topInboundAgent": {
+      "name": "Pinky De Paz",
+      "calls": 38
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 115,
+        "missed": 14
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 101,
+        "missed": 19
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 2,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "Pinky De Paz ties De Ang Renfree at 38 calls each atop a fully clean inboundByStaff table (11 names, 11 values, 11 durations all lined up 1:1); Pinky De Paz is listed first in both the PDF's own table and this file, so the tie is broken by print order, not an assumption. inboundByStaff's own 11-call Apurva Pathak entry is 1 short of the PDF's own printed 12 \u2014 see call-logs.json's _summaryVsGrandTotalNote for the same gap. Similar volume to 2026-10-08 (250 total inbound vs 269), a typical end-of-week level.",
+  "cloop": {
+    "inQueue": 35,
+    "oldestDays": 11.81,
+    "contactsQueuedYesterday": 93,
+    "emailsHandledYesterday": 108,
+    "totalOverallCases": 9748,
+    "totalInProgress": 101,
+    "totalOpenCases": 60
+  },
+  "leave": {
+    "weekLabel": "12 October \u2013 16 October 2026",
+    "doctorLinesOnLeave": null,
+    "staffFullyOnLeave": null,
+    "staffPartialLeave": null,
+    "staffPartialLeaveNames": [],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "This report's leave page covers next week (12-16 October) rather than its own week (5-9 October, which every date 2026-10-06 through 2026-10-08 used) \u2014 see leave.json's own _note for the full flag, including the much shorter named roster this date. Weekly leave counts left as null rather than guessed."
+}

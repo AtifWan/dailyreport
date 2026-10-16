@@ -1,0 +1,46 @@
+{
+  "_source": "Daily Operations Report - 3rd September 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 3rd September 2026",
+  "extractedAt": "2026-09-04T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Friday 4 September 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 27, "oldestDays": 6.67 },
+    { "queue": "Unassigned", "inQueue": 14, "oldestDays": 1.01 },
+    { "queue": "Documents", "inQueue": 11, "oldestDays": 1.02 },
+    { "queue": "Medico-legal", "inQueue": 10, "oldestDays": 1.93 },
+    { "queue": "Failed Communication", "inQueue": 7, "oldestDays": 1.84 },
+    { "queue": "GP Mail", "inQueue": 4, "oldestDays": 9.96 },
+    { "queue": "Practice Finance", "inQueue": 3, "oldestDays": 6.58 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 1.03 },
+    { "queue": "Finance", "inQueue": 1, "oldestDays": 0.44 }
+  ],
+  "realTimeSummary": { "inQueue": 78, "oldestDays": 9.96 },
+  "contactsQueuedYesterday": [
+    { "queue": "Documents", "count": 24 },
+    { "queue": "Unassigned", "count": 21 },
+    { "queue": "Requests", "count": 8 },
+    { "queue": "Finance", "count": 6 },
+    { "queue": "Medico-legal", "count": 5 },
+    { "queue": "File Transfer", "count": 3 },
+    { "queue": "Failed Communication", "count": 2 },
+    { "queue": "Practice Finance", "count": 2 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep"],
+    "totals": [102, 104, 114, 91, 83, 79, 79, 117, 69, 71]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 63, "outbound": 16, "total": 79 },
+    { "agent": "Leh Peng Goh", "incoming": 6, "outbound": 1, "total": 7 },
+    { "agent": "Apurva Pathak", "incoming": 2, "outbound": 0, "total": 2 }
+  ],
+  "totalCasesToDate": { "date": "2026-09-04", "totalOverallCases": 7034, "totalInProgress": 97, "totalOpenCases": 82 },
+  "inProgressTenDayTrend": {
+    "labels": ["Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep"],
+    "totals": [144, 90, 85, 86, 89, 93, 86, 90, 95, 97]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep"],
+    "totals": [74, 80, 63, 57, 52, 77, 86, 60, 90, 82]
+  }
+}

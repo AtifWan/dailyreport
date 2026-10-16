@@ -1,0 +1,99 @@
+{
+  "_source": "Daily Operations Report - 16th September 2026.pdf, page 10 (Staff & Doctors on Leave). CORRECTED via direct visual inspection of the PDF page image (the user supplied the source PDF directly after flagging that leave data was wrong) — the prior text-extraction-only pass could not see this table's per-day status at all, since status is conveyed purely by cell color (orange=On Leave, green=Available, yellow=Public Holiday) with no text in the cells.",
+  "reportTitle": "Daily Operations Report - 16th September 2026",
+  "reportDate": "2026-09-16",
+  "weekStart": "2026-09-14",
+  "weekEnd": "2026-09-18",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Mara Matic",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Dr Tom Mills",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        },
+        {
+          "name": "Med Student Sarah Lucas",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "available"]
+        },
+        {
+          "name": "Adam Wiley",
+          "site": "Denman",
+          "status": ["available", "available", "available", "available", "leave"]
+        },
+        {
+          "name": "Tom Wigglesworth",
+          "site": "Crace",
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Nita Sigdel",
+          "site": null,
+          "status": ["leave", "available", "leave", "available", "available"]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": ["available", "available", "available", "leave", "leave"]
+        },
+        {
+          "name": "Atif Wan",
+          "site": null,
+          "status": ["leave", "leave", "available", "available", "available"]
+        },
+        {
+          "name": "Amy Morton",
+          "site": null,
+          "status": ["leave", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Joshua Saw",
+          "site": null,
+          "status": ["available", "available", "available", "available", "leave"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "CORRECTED (previously every person here was wrongly defaulted to 'available' because text extraction cannot see the leave grid's cell colors at all — confirmed by directly viewing the source PDF page as an image). This is the true Monday-Friday grid for the week of 14-18 September, unchanged from 2026-09-14/15's own grid (confirmed identical by direct visual comparison): Dr Mara Matic, Dr Tom Mills and Tom Wigglesworth are on leave the entire week; Med Student Sarah Lucas is on leave Mon-Thu and available Friday; Adam Wiley is available Mon-Thu and on leave Friday; Nita Sigdel is on leave Monday and Wednesday only; Rebecca Quinn is available Mon-Wed and on leave Thu-Fri; Atif Wan is on leave Mon-Tue and available Wed-Fri; Amy Morton is on leave Monday only; Joshua Saw is available Mon-Thu and on leave Friday. Verified directly against the PDF's own colored table, not inferred from context or call-activity signals."
+}

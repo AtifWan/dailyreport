@@ -1,0 +1,158 @@
+{
+  "_source": "Daily Operations Report - 17th September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 17th September 2026",
+  "extractedAt": "2026-09-18T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Friday 18 September 2026",
+  "realTimeQueues": [
+    {
+      "queue": "Requests",
+      "inQueue": 34,
+      "oldestDays": 7.75
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 17,
+      "oldestDays": 7.76
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 12,
+      "oldestDays": 0.82
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 7,
+      "oldestDays": 0.75
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 6,
+      "oldestDays": 10.81
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 4,
+      "oldestDays": 9.02
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 3,
+      "oldestDays": 7.74
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 3,
+      "oldestDays": 0.5
+    },
+    {
+      "queue": "Failed Communication",
+      "inQueue": 2,
+      "oldestDays": 0.52
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 6.99
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 89,
+    "oldestDays": 10.81
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Documents",
+      "count": 35
+    },
+    {
+      "queue": "Unassigned",
+      "count": 34
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 8
+    },
+    {
+      "queue": "Finance",
+      "count": 7
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 4
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep"
+    ],
+    "totals": [66, 109, 65, 82, 87, 92, 86, 60, 78, 88]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 73,
+      "outbound": 18,
+      "total": 91
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 7,
+      "outbound": 3,
+      "total": 11
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 8,
+      "outbound": 0,
+      "total": 8
+    }
+  ],
+  "_emailsHandledYesterdayNote": "Only 3 agent rows this time (fewer than the 4 seen on 2026-09-14/15/16 — Jasmina Sodolovic's row is simply absent from this date's table, recorded as printed rather than assumed). Leh Peng Goh's stated total (11) doesn't equal his own incoming+outbound (7+3=10) — a genuine source inconsistency, recorded verbatim rather than reconciled, the same 'total column doesn't match its own components' quirk documented on other dates in this project (Jasmina Sodolovic on 2026-09-15/16). Chloey Leow and Atif Wan's rows both reconcile exactly.",
+  "totalCasesToDate": {
+    "date": "2026-09-17",
+    "totalOverallCases": 7925,
+    "totalInProgress": 121,
+    "totalOpenCases": 80
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Fri 18 Sep"
+    ],
+    "totals": [105, 113, 117, 123, 124, 118, 125, 131, 122, 121]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Fri 04 Sep",
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Fri 18 Sep"
+    ],
+    "totals": [98, 94, 94, 77, 72, 69, 64, 72, 85, 80]
+  },
+  "_note": "Real-time queue table sums to the Summary row exactly (34+17+12+7+6+4+3+3+2+1=89), high confidence. contactsQueuedYesterday table has only 5 rows this time (down from 7 on prior dates) summing to 88 (35+34+8+7+4) — this agrees exactly with the one genuine leftover value found in the trend chart's own text once the historical chain was matched off, unlike 2026-09-16 where the two signals disagreed; high confidence this time. inProgressTenDayTrend and openCasesTenDayTrend both matched their historical chains and their own trailing chart values agree with this report's Total Cases To Date row (121 and 80 respectively) — high confidence. Per the established convention, totalCasesToDate.date is recorded as the report's own date (2026-09-17) even though the source table's literal date column and extraction timestamp both read one business day ahead ('18/9/2026', Friday). This report's own inProgress/openCases trend charts' date-label axes were themselves badly garbled and inconsistent (mixing in a 'Fri, 18-Sep' label not seen on any other axis in this report) — recorded here using the same one-business-day-ahead labelling convention applied on every prior date rather than the source chart's own inconsistent axis text.",
+  "_leaveCrossCheckNote": "Atif Wan appears in this date's emailsHandledYesterday table (8 handled) — continued active work, consistent with every prior date this window. See call-logs.json's own notes and leave.json for the notable change today: Rebecca Quinn does not appear in either staff call chart at all."
+}

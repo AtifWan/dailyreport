@@ -1,0 +1,109 @@
+{
+  "_source": "Daily Operations Report - 11th September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 311,
+    "date": "2026-09-11",
+    "weekday": "Friday",
+    "title": "Daily Operations Report - 11th September 2026 (Short Version)"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 46,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 1,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 100
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 229,
+    "accepted": 209,
+    "acceptedPct": 91,
+    "missed": 20,
+    "missedPct": 9,
+    "totalOutbound": 127,
+    "topInboundAgent": {
+      "name": "Apurva Pathak",
+      "calls": 41
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 113,
+        "missed": 11
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 94,
+        "missed": 9
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 2,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "Low confidence, more so than usual: the inbound-by-staff chart's text listed 12 names but only 6 call-count values, an even larger mismatch than prior dates (see call-logs.json's own note). Apurva Pathak was first in the name list with the highest surviving value (41) — used as a best-effort estimate on the same descending-order heuristic as prior dates, but treat this specific figure as unconfirmed. Notably Rebecca Quinn, this batch's usual top agent, does not appear in the name list at all this time.",
+  "cloop": {
+    "inQueue": 73,
+    "oldestDays": 13.82,
+    "contactsQueuedYesterday": 92,
+    "emailsHandledYesterday": 122,
+    "totalOverallCases": 7557,
+    "totalInProgress": 118,
+    "totalOpenCases": 69
+  },
+  "leave": {
+    "weekLabel": "14–18 September 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 3,
+    "staffPartialLeave": 0,
+    "staffPartialLeaveNames": [],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      }
+    ]
+  },
+  "_leaveNote": "See leave.json's own note — this week's roster is inferred (all listed people marked as full-week leave) since the source text carried no per-day status grid this time, and the week shown has jumped ahead to 14-18 September rather than the current 7-11 September week. Please verify against the source PDF."
+}

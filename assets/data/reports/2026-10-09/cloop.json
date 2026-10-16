@@ -1,0 +1,198 @@
+{
+  "_source": "Daily Operations Report - 9th October 2026.pdf, pages 17-21 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) \u2014 not pixel-level image verification. The raw Cloop CSV exports (Real-Time + two Historical Metrics reports) in OneDrive were unchanged since 2026-10-07's own run (same file IDs/timestamps: Real Time Metrics Report (77).csv at 2026-10-07T21:36:42Z, Historical Metrics Report - 2026-10-08T053725/053752), so there was nothing new to raw-parse this cycle; this date reverts to PDF extraction. Total Cases to Date is taken from this same PDF, page 21, same as every prior date.",
+  "reportTitle": "Daily Operations Report - 9th October 2026",
+  "extractedAt": "2026-10-12T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Monday 12 October 2026",
+  "_extractedAtNote": "The report's own Real-Time snapshot rolls the weekend forward to the next business morning (Monday 12 October), per the established convention \u2014 'yesterday' would have been Saturday, so it skips to the next business day. Filed here under this report's own date (2026-10-09, a Friday), same convention as every prior date.",
+  "realTimeQueues": [
+    {
+      "queue": "Unassigned",
+      "inQueue": 10,
+      "oldestDays": 2.7
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 9,
+      "oldestDays": 2.64
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 9,
+      "oldestDays": 2.6
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 3,
+      "oldestDays": 2.46
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 1,
+      "oldestDays": 2.93
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 1,
+      "oldestDays": 1.97
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 11.81
+    },
+    {
+      "queue": "Nursing",
+      "inQueue": 1,
+      "oldestDays": 4.75
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 35,
+    "oldestDays": 11.81
+  },
+  "_realTimeQueuesNote": "8 non-zero queues this time, cleanly summing to the printed Summary row exactly (10+9+9+3+1+1+1+1=35), with the Summary's own oldestDays (11.81) matching GP Mail's own printed value exactly (the oldest individual queue) \u2014 matches the source PDF's own panel exactly, no discrepancy this date.",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Failed Communication",
+      "count": 32
+    },
+    {
+      "queue": "Finance",
+      "count": 19
+    },
+    {
+      "queue": "Unassigned",
+      "count": 17
+    },
+    {
+      "queue": "Documents",
+      "count": 10
+    },
+    {
+      "queue": "Requests",
+      "count": 9
+    },
+    {
+      "queue": "File Transfer",
+      "count": 3
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 3
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct"
+    ],
+    "totals": [
+      63,
+      70,
+      81,
+      107,
+      64,
+      53,
+      93,
+      112,
+      65,
+      93
+    ]
+  },
+  "_note": "contactsQueuedYesterday sums to 93 exactly, matching this report's own contactsQueuedTenDayTrend chart's trailing value and chain-matching 2026-10-08's own committed trend exactly at positions 0-8 \u2014 high confidence. emailsHandledYesterday: Apurva Pathak (16+7=23), Leh Peng Goh (19+1=20) and Lucinda Gonzalez (1+0=1) all reconcile exactly, but Chloey Leow's printed total (64) is 1 more than her own printed incoming+outbound split (57+6=63) \u2014 recorded verbatim per the standing data-integrity rule rather than silently corrected.",
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 57,
+      "outbound": 6,
+      "total": 64
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 16,
+      "outbound": 7,
+      "total": 23
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 19,
+      "outbound": 1,
+      "total": 20
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 1,
+      "outbound": 0,
+      "total": 1
+    }
+  ],
+  "totalCasesToDate": {
+    "date": "2026-10-09",
+    "totalOverallCases": 9748,
+    "totalInProgress": 101,
+    "totalOpenCases": 60
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct"
+    ],
+    "totals": [
+      105,
+      108,
+      100,
+      102,
+      105,
+      106,
+      112,
+      112,
+      107,
+      101
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct",
+      "Fri 09 Oct"
+    ],
+    "totals": [
+      65,
+      55,
+      45,
+      38,
+      44,
+      69,
+      106,
+      33,
+      34,
+      60
+    ]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('12/10/2026', a Monday, skipping the weekend), filed here against this date's own actual report date (2026-10-09). totalInProgress (101) and totalOpenCases (60) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-08's own committed trend exactly \u2014 high confidence. totalOverallCases (9748) is a +98 increase from 2026-10-08's committed 9650, a larger-than-typical jump consistent with the extra non-business day (Saturday+Sunday+Monday morning) folded into this one snapshot.",
+  "_historicalDate": "2026-10-09",
+  "_unmatchedAgentNames": []
+}

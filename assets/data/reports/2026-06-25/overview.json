@@ -1,0 +1,52 @@
+{
+  "_source": "Daily Operations Report - 25th June 2026.pdf — headline figures assembled from the long version's own verified pages (there is no separate distinct 'overview' page in this report)",
+  "report": { "number": 255, "date": "2026-06-25", "weekday": "Thursday", "title": "Daily Operations Report - 25th June 2026" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 50 },
+      { "name": "Finance", "completionPct": 67 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 269,
+    "accepted": 246,
+    "acceptedPct": 91,
+    "missed": 23,
+    "missedPct": 9,
+    "totalOutbound": 125,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 60 },
+    "topOutboundAgent": { "name": "Ambrosie Brassil", "calls": 27 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 152, "missed": 8 },
+      { "queue": "General Enquiries", "accepted": 77, "missed": 8 },
+      { "queue": "Health Professionals", "accepted": 15, "missed": 7 },
+      { "queue": "Canberra Vasectomy", "accepted": 1, "missed": 0 }
+    ]
+  },
+  "_callLogsNote": "As on 2026-06-24, this date's 'Total Inbound Calls' pie (269 total; Accepted 246/91%, Missed 23/9%) and the 'Queue Report' bar chart (also headed '=269 calls') disagree in their own components: the bar chart's per-queue rows sum to only 245 accepted (152+77+15+1), matching its own Grand Total row (245/23), not the pie's 246. A THIRD breakdown ('Accepted/Missed Calls by Queue' pie charts, page 6) gives yet different queue figures again (148/75/14/1 accepted; 8/8/7/0 missed, summing to 238 accepted) — a third, still different total. Recorded here: accepted/acceptedPct/missed/missedPct from the pie (246/91/23/9, the better-corroborated figure — inbound-by-staff table also sums to exactly 246), queueBreakdown rows verbatim from the Queue Report bar chart (summing to 245, not 246, and not matching the third pie's 238 either) — none of the three reconciled.",
+  "cloop": {
+    "inQueue": 86,
+    "oldestDays": 9.98383,
+    "emailsHandledYesterday": 101,
+    "totalOverallCases": 2615,
+    "totalInProgress": 199,
+    "totalOpenCases": 118
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the six agents' printed 'Contacts handled' totals (69+21+6+3+1+1=101). The Real-Time Metrics Summary row's 'Oldest' value (239:36:42, hh:mm:ss) converts to ~9.9838 days, matching the Nursing row's own oldest item exactly — no discrepancy to flag. This date's real-time queue table also shows two queue rows not present on 2026-06-24 (a separate 'Finance' row alongside 'Practice Finance', and a new 'Escalation' row) — recorded verbatim in cloop.json's realTimeQueues, not treated as an error.",
+  "leave": {
+    "weekLabel": "22–26 June 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 1,
+    "staffPartialLeaveNames": ["Renee Bowman"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

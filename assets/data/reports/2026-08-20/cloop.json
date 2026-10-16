@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 20th August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 20th August 2026",
+  "extractedAt": "2026-08-21T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Friday 21 August 2026",
+  "_extractedAtNote": "This date's Cloop extraction timestamp is 8:45 AM rather than the usual 9:00 AM seen on other dates — recorded verbatim as printed in the source PDF.",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 29, "oldestDays": 9.97 },
+    { "queue": "Finance", "inQueue": 14, "oldestDays": 0.95 },
+    { "queue": "Unassigned", "inQueue": 12, "oldestDays": 0.92 },
+    { "queue": "Practice Finance", "inQueue": 9, "oldestDays": 9.61 },
+    { "queue": "Documents", "inQueue": 6, "oldestDays": 0.72 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 3.82 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 6.91 },
+    { "queue": "Failed Communication", "inQueue": 1, "oldestDays": 0.64 }
+  ],
+  "realTimeSummary": { "inQueue": 73, "oldestDays": 9.97 },
+  "contactsQueuedYesterday": [
+    { "queue": "Medico-legal", "count": 20 },
+    { "queue": "Unassigned", "count": 15 },
+    { "queue": "Documents", "count": 14 },
+    { "queue": "Failed Communication", "count": 12 },
+    { "queue": "Requests", "count": 12 },
+    { "queue": "Escalation", "count": 2 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug"],
+    "totals": [126, 108, 88, 71, 88, 102, 90, 87, 81, 75]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 38, "outbound": 15, "total": 53 },
+    { "agent": "Frances Doble", "incoming": 13, "outbound": 2, "total": 17 },
+    { "agent": "Lucinda Gonzalez", "incoming": 11, "outbound": 5, "total": 16 },
+    { "agent": "Atif Wan", "incoming": 11, "outbound": 0, "total": 11 },
+    { "agent": "De Ang Renfree", "incoming": 0, "outbound": 5, "total": 5 },
+    { "agent": "Megan Wright", "incoming": 1, "outbound": 1, "total": 2 },
+    { "agent": "Alexandra Cownie", "incoming": 0, "outbound": 1, "total": 1 },
+    { "agent": "Kenneth Lobo", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Frances Doble's stated total (17) doesn't equal incoming+outbound (13+2=15) in the source PDF itself — same recurring quirk already flagged on 2026-09-07's cloop.json. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-08-21", "totalOverallCases": 6083, "totalInProgress": 155, "totalOpenCases": 63 },
+  "inProgressTenDayTrend": {
+    "labels": ["Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug"],
+    "totals": [137, 130, 128, 124, 127, 132, 135, 136, 154, 155]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug"],
+    "totals": [43, 48, 49, 53, 60, 73, 70, 78, 70, 63]
+  }
+}

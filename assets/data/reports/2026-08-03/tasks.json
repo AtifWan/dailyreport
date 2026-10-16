@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 3rd August 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 3rd August 2026",
+  "reportDate": "2026-08-03",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 17, "onHalt": false },
+    { "name": "Finance", "days": 0, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul", "Fri 24 Jul", "Mon 27 Jul", "Tue 28 Jul", "Wed 29 Jul", "Thu 30 Jul", "Fri 31 Jul", "Mon 03 Aug"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Allocate - Healthlink Unallocated (C.Le@11:37)",
+        "Reports For Management Meetings (C.Le@11:37)",
+        "Caregp Ai Tool (C.Le@11:38)",
+        "Doctor To Advise (C.Le@11:44)",
+        "Send Claim For Automed Payments (C.Le@11:49)",
+        "Clinical Reminders (C.Le@12:00)",
+        "E-Referrals (A.Wa@15:45)",
+        "Action 10 Or More Failed Communications (A.Wa@15:45)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 88,
+      "trend": [78, 100, 100, 88, 100, 13, 63, 100, 100, 88],
+      "complete": [
+        "Xero accounts reconciled (L.Go@13:29)",
+        "Tyro Health receipts captured (L.Go@13:29)",
+        "Remittances allocated (L.Go@13:29)",
+        "Unidentified payments resolved (L.Go@20:18)",
+        "Debt chasing report updated (L.Go@20:18)",
+        "90/60-day debt list actioned (L.Go@20:18)",
+        "Finance queue in Cloop has zero emails (L.Go@20:18)"
+      ],
+      "incomplete": ["Online claiming run in Best Practice"]
+    }
+  ],
+  "_note": "First date in a new backlog batch (Jul 27 - Aug 03) — the preceding business day (Fri 31 Jul) has not yet been processed at extraction time, so position0 (Tue 21 Jul) of these trend arrays is not cross-validatable against a later already-committed date the way most other dates in this project are. All values still read directly from the rendered image and will be cross-validated backward once 2026-07-31 is processed.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

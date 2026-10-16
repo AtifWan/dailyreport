@@ -12,12 +12,30 @@ export async function fetchJSON(path) {
 
 export function pct(n) { return `${n}%`; }
 
+/** Add `n` calendar days to a date-only ISO string, returning another one.
+ *  UTC-based so it never drifts a day under a non-UTC viewer timezone — same
+ *  reasoning as formatDate() below. */
+export function addDaysISO(iso, n) {
+  const d = new Date(`${iso}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
 /** Format a date-only ISO string ("2026-01-13") without local-timezone drift.
  *  `new Date("2026-01-13").toLocaleDateString()` shifts a day back for any viewer
  *  west of UTC, because the string parses as UTC midnight; pinning timeZone:'UTC'
  *  makes the displayed date always match the literal string, everywhere. */
 export function formatDate(isoDate, opts = { day: 'numeric', month: 'long', year: 'numeric' }) {
   return new Date(`${isoDate}T00:00:00Z`).toLocaleDateString('en-AU', { ...opts, timeZone: 'UTC' });
+}
+
+/** Today's date, as YYYY-MM-DD, in the clinics' own timezone (ACT/Canberra — same
+ *  IANA zone as Sydney/NSW; there's no separate "Australia/Canberra" zone id) —
+ *  never the visitor's local timezone, which would silently disagree by a day for
+ *  anyone reading the dashboard from overseas around midnight. The 'en-CA' locale
+ *  is a standard trick for getting Intl to format a date as YYYY-MM-DD directly. */
+export function todayISOInCanberra() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Sydney' }).format(new Date());
 }
 
 /**

@@ -1,0 +1,64 @@
+{
+  "_source": "Daily Operations Report - 15th October 2026.pdf, read directly from the uploaded PDF's rendered page images — not OneDrive text extraction this date, since the user attached the PDFs directly. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 334,
+    "date": "2026-10-15",
+    "weekday": "Thursday",
+    "title": "Daily Operations Report - 15th October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {"name": "Crace", "days": 1, "onHalt": true},
+      {"name": "Denman", "days": 109, "onHalt": true, "longest": true},
+      {"name": "Lyneham", "days": 0, "onHalt": true},
+      {"name": "PST", "days": 69, "onHalt": false},
+      {"name": "Finance", "days": 21, "onHalt": false}
+    ],
+    "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+    "checklists": [
+      {"name": "PST", "completionPct": 100},
+      {"name": "Finance", "completionPct": 100}
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 296,
+    "accepted": 266,
+    "acceptedPct": 90,
+    "missed": 30,
+    "missedPct": 10,
+    "totalOutbound": 147,
+    "topInboundAgent": {
+      "name": "David Antioch",
+      "calls": 54
+    },
+    "queueBreakdown": [
+      {"queue": "Appointments", "accepted": 164, "missed": 18},
+      {"queue": "General Enquiries", "accepted": 98, "missed": 9},
+      {"queue": "Canberra Vasectomy", "accepted": 3, "missed": 3}
+    ]
+  },
+  "_topInboundAgentNote": "David Antioch tops the inboundByStaff table this date (54 calls) — a change from the usual top agent (Rebecca Quinn, who placed 6th today with 17 calls). All 11 names and their call counts/durations match the PDF's own printed Inbound Calls - All Staff table exactly, no gap this date. Busier day than 2026-10-14 (296 total inbound vs 261).",
+  "cloop": {
+    "inQueue": 26,
+    "oldestDays": 8.75,
+    "contactsQueuedYesterday": 98,
+    "emailsHandledYesterday": 132,
+    "totalOverallCases": 10040,
+    "totalInProgress": 117,
+    "totalOpenCases": 40
+  },
+  "_cloopNote": "The 'Failed Communication' backlog cleared on 2026-10-14 remains clear — that queue stays out of the Real-Time snapshot for a second consecutive date, and yesterday's queue volume (98 total) is in the normal range. All 9 emailsHandledYesterday rows reconcile their incoming+outbound split to their own printed total exactly this date.",
+  "_outboundTrendNote": "FLAG FOR USER REVIEW (second consecutive date): call-logs.json's own outboundTenDayTrend (all-extensions total, chain-verified against 2026-10-14's committed figure) continues to diverge sharply from this date's PDF-printed 'Outbound 10 Day Trend Reporting' chart — an 88-call gap for today specifically. Doesn't affect the summary.totalOutbound figure above (147), which still matches the PDF's own headline and full staff table exactly — see call-logs.json's own _outboundTenDayTrendNote for the full detail; this now looks like a persistent issue specific to that one chart's own generation on the source side.",
+  "leave": {
+    "weekLabel": "12 October – 16 October 2026",
+    "doctorLinesOnLeave": 2,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": ["Abbey Freestone", "Sudina Rijal", "Nita Sigdel", "De Ang Renfree", "Holly Archer", "Samantha Cooper"],
+    "longTerm": [
+      {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+      {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+    ]
+  },
+  "_leaveNote": "STRUCTURAL CHANGE (good news): for the first time, this date's leave page prints an actual day-by-day grid instead of just a name list, so the fields above are real confirmed counts rather than null placeholders. Same week (12-16 Oct) and roster as 2026-10-09/12/13/14. Both doctors are out the full week (doctorLinesOnLeave=2); none of the 6 staff are out the full week or fully available — all 6 are 'partial' by exactly one day. See leave.json's own _note for the full per-person breakdown."
+}

@@ -1,0 +1,115 @@
+{
+  "_source": "Daily Operations Report - 21st September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 317,
+    "date": "2026-09-21",
+    "weekday": "Monday",
+    "title": "Daily Operations Report - 21st September 2026 (Short Version)"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 52,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 4,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 100
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 349,
+    "accepted": 272,
+    "acceptedPct": 78,
+    "missed": 77,
+    "missedPct": 22,
+    "totalOutbound": 163,
+    "topInboundAgent": {
+      "name": "David Antioch",
+      "calls": 82
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 177,
+        "missed": 33
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 89,
+        "missed": 41
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 5,
+        "missed": 3
+      }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence this time — David Antioch tops a fully-recovered, non-mismatched inbound staff table (9 names, 9 values, 9 durations all lined up 1:1), the first clean read of this table all window. Rebecca Quinn is absent from it entirely for the third consecutive business date.",
+  "cloop": {
+    "inQueue": 54,
+    "oldestDays": 10.92,
+    "contactsQueuedYesterday": 116,
+    "emailsHandledYesterday": 148,
+    "totalOverallCases": 8111,
+    "totalInProgress": 122,
+    "totalOpenCases": 65
+  },
+  "leave": {
+    "weekLabel": "21–25 September 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 8,
+    "staffPartialLeaveNames": ["Bethany Tran", "Rebecca Quinn", "Nicole Regaspi", "Joshua Saw", "Anita Tammaro", "Kiara Pfeffer", "Val Zihhareva", "Megan Moreno Pitcher"],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "CORRECTED — see leave.json's own note. Dr Mara Matic, Dr Tom Mills, Dr Adam Wiley, Dr Tom Wigglesworth and Dr Sam Primrose are on leave the full week (doctorLinesOnLeave=5). No staff member is on leave the entire week, but all eight listed staff are on leave part of the week. Today (Monday) Rebecca Quinn is confirmed genuinely on leave, exactly matching her absence from today's call charts; Kiara Pfeffer is confirmed available today, exactly matching her active presence on today's call charts. See leave.json for the exact per-day grid, now verified directly against the source PDF's visual table rather than guessed."
+}

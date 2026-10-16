@@ -1,5 +1,6 @@
-import { esc, fetchJSON, formatDate } from '../util.js';
+import { esc, fetchJSON, formatDate, todayISOInCanberra } from '../util.js';
 import { renderMonthCalendar } from '../calendarview.js';
+import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
 // "On leave" is deliberately the LOUD colour (vermillion), matching the source PDF's
 // vivid orange — someone scanning the grid needs the exception (who's out) to pop,
@@ -17,51 +18,49 @@ function cell(status, isToday) {
   return `<td style="${isToday ? 'background:var(--accent-weak)' : ''}"><span class="chip" style="background:${s.bg};color:${s.ink}">${s.label}</span></td>`;
 }
 
-function dayIndexOf(reportDateISO, weekStartISO) {
-  const report = new Date(`${reportDateISO}T00:00:00Z`);
+// A person's whole status array is missing (not individual days — the source
+// report simply never printed a day-by-day grid for this week at all, e.g. a
+// brand-new week with no prior report to carry it forward from) rather than
+// guessed at, per this project's standing data-integrity rule — see this
+// date's own leave.json note. Treated as its own bucket everywhere below
+// rather than crashing on .every()/.filter() against a null.
+const hasStatus = (p) => Array.isArray(p.status);
+
+function dayIndexOf(dateISO, weekStartISO) {
+  const d = new Date(`${dateISO}T00:00:00Z`);
   const start = new Date(`${weekStartISO}T00:00:00Z`);
-  const diff = Math.round((report - start) / 86400000);
+  const diff = Math.round((d - start) / 86400000);
   return diff >= 0 && diff <= 4 ? diff : -1;
-}
-
-function addDaysISO(iso, n) {
-  const d = new Date(`${iso}T00:00:00Z`);
-  d.setUTCDate(d.getUTCDate() + n);
-  return d.toISOString().slice(0, 10);
-}
-
-/** date -> { count, names } for every day the leave grid actually covers (Mon-Fri
- *  of the one known week) — built from the same people/status arrays the week
- *  grid renders, so the calendar can never drift out of sync with it. */
-function buildLeaveByDate(d) {
-  const map = new Map();
-  const allPeople = d.groups.flatMap((g) => g.people);
-  d.days.forEach((_, i) => {
-    const dateISO = addDaysISO(d.weekStart, i);
-    const onLeave = allPeople.filter((p) => p.status[i] === 'leave').map((p) => p.name);
-    map.set(dateISO, { count: onLeave.length, names: onLeave });
-  });
-  return map;
 }
 
 const CAL_MIN = { year: 2026, month: 0 };
 const CAL_MAX = { year: 2026, month: 11 };
 
-export async function renderLeave(container) {
-  const d = await fetchJSON('assets/data/leave.json');
-  const todayIndex = dayIndexOf(d.reportDate, d.weekStart);
-  const leaveByDate = buildLeaveByDate(d);
-  const knownRange = { start: d.weekStart, end: addDaysISO(d.weekStart, d.days.length - 1) };
+export async function renderLeave(container, date, manifest) {
+  const d = await fetchJSON(`assets/data/reports/${date}/leave.json`);
+  // "Today" here means the real day someone is reading this — not reportDate,
+  // which is "the day this data is about" and stays retrospective everywhere
+  // else in the app. Anchoring it to the real Canberra clock (rather than the
+  // viewer's local timezone) means it only ever highlights a day in the current
+  // week's table (todayIndex is -1, no highlight, while browsing an older
+  // report), and the holiday calendar below always opens on the real current
+  // month regardless of which report is loaded.
+  const todayISO = todayISOInCanberra();
+  const todayIndex = dayIndexOf(todayISO, d.weekStart);
 
-  const fullWeek = (person) => person.status.every((s) => s === 'leave');
-  const noneWeek = (person) => person.status.every((s) => s === 'available');
+  const fullWeek = (person) => hasStatus(person) && person.status.every((s) => s === 'leave');
+  const noneWeek = (person) => hasStatus(person) && person.status.every((s) => s === 'available');
+  const leaveDayCount = (person) => hasStatus(person) ? person.status.filter((s) => s === 'leave').length : 0;
   const allPeople = d.groups.flatMap((g) => g.people);
-  const fullyOnLeave = allPeople.filter(fullWeek).length;
-  const partialLeave = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
-  const outToday = todayIndex >= 0 ? allPeople.filter((p) => p.status[todayIndex] === 'leave').length : null;
-  const partialNames = allPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).map((p) => p.name);
+  const confirmedPeople = allPeople.filter(hasStatus);
+  const unconfirmedCount = allPeople.length - confirmedPeople.length;
+  const fullyOnLeave = confirmedPeople.filter(fullWeek).length;
+  const partialLeave = confirmedPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).length;
+  const outToday = todayIndex >= 0 ? confirmedPeople.filter((p) => p.status[todayIndex] === 'leave').length : null;
+  const partialNames = confirmedPeople.filter((p) => !fullWeek(p) && !noneWeek(p)).map((p) => p.name);
 
   container.innerHTML = `
+    ${datePickerHtml(date, manifest)}
     <p class="result-meta">Week of ${formatDate(d.weekStart, { day: 'numeric', month: 'long' })} – ${formatDate(d.weekEnd, { day: 'numeric', month: 'long', year: 'numeric' })}</p>
 
     <div class="kpis">
@@ -86,13 +85,19 @@ export async function renderLeave(container) {
         <div class="k-v num">${d.longTerm.length}</div>
         <div class="k-n">${d.longTerm.map((p) => esc(p.name)).join(', ')}</div>
       </div>
+      ${unconfirmedCount > 0 ? `
+      <div class="kpi">
+        <div class="k-l">Not yet available</div>
+        <div class="k-v num">${unconfirmedCount}</div>
+        <div class="k-n">no day-by-day grid published for this week yet — see table below</div>
+      </div>` : ''}
     </div>
 
     <div class="panel">
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <div>
           <h3>Week at a glance</h3>
-          <p class="q">One row per person, one column per day. Filter by day, or search a name.</p>
+          <p class="q">Fully-out people first, then partial. Filter by day, or search a name.</p>
         </div>
         <input class="sinput dr-leave-search" type="text" placeholder="Search name">
       </div>
@@ -108,14 +113,16 @@ export async function renderLeave(container) {
       </div>
       <div class="dr-legend">
         ${d.legend.map((l) => `<span><i style="background:${STATUS[l.key].bg};border:1px solid ${STATUS[l.key].ink}"></i>${esc(l.label)}</span>`).join('')}
+        <span><i style="background:var(--danger);border:1px solid var(--danger-ink)"></i>Row rail: out all week</span>
+        <span><i style="background:var(--infer);border:1px solid var(--infer-ink)"></i>Row rail: partly out</span>
       </div>
     </div>
 
     <div class="panel dr-section-gap">
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <div>
-          <h3>Leave &amp; public holiday calendar</h3>
-          <p class="q">Real 2026 ACT (Canberra) public holidays, plus how many people are on leave each day.</p>
+          <h3>Public holiday calendar</h3>
+          <p class="q">Real 2026 ACT (Canberra) public holidays — browse ahead to see what's coming up.</p>
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <button class="locbtn dr-cal-prev" aria-label="Previous month">&larr;</button>
@@ -123,7 +130,7 @@ export async function renderLeave(container) {
         </div>
       </div>
       <div class="dr-cal-mount" style="margin-top:14px"></div>
-      <p class="foot-note">Public holidays are the real ACT calendar for all of 2026. Day-by-day leave counts are only known for the week above (7–11 Sept 2026) — other working days show <i>"No leave data"</i> rather than imply nobody's out.</p>
+      <p class="foot-note">Crace runs a Saturday clinic, 9am–1pm, every week (marked on each Saturday below) — every other clinic, and Crace itself outside those hours, is closed weekends.</p>
     </div>
 
     <div class="panel dr-section-gap">
@@ -132,29 +139,53 @@ export async function renderLeave(container) {
     </div>
   `;
 
-  // Week grid: day filter + name search
+  // Week grid: day filter + name search + priority ordering (fully-out first)
   const tbody = container.querySelector('.dr-leave-table tbody');
   const searchInput = container.querySelector('.dr-leave-search');
   const dayButtons = container.querySelectorAll('.dr-day-filter .locbtn');
   let dayFilter = -1;
   let query = '';
 
+  function personRow(p) {
+    if (!hasStatus(p)) {
+      return `
+        <tr>
+          <td class="strong">${esc(p.name)}${p.site ? `<small style="color:var(--ink-faint)"> (${esc(p.site)})</small>` : ''}</td>
+          <td colspan="${d.days.length}" class="foot-note">Not yet available — no day-by-day grid published for this week.</td>
+        </tr>`;
+    }
+    const days = leaveDayCount(p);
+    const rowClass = fullWeek(p) ? 'dr-leave-row--full' : days > 0 ? 'dr-leave-row--partial' : '';
+    const badge = fullWeek(p)
+      ? `<span class="dr-leave-badge dr-leave-badge--full">Out all week</span>`
+      : days > 0
+        ? `<span class="dr-leave-badge dr-leave-badge--partial">${days}/${p.status.length} days out</span>`
+        : '';
+    return `
+      <tr class="${rowClass}">
+        <td class="strong">${esc(p.name)}${p.site ? `<small style="color:var(--ink-faint)"> (${esc(p.site)})</small>` : ''}${badge}</td>
+        ${p.status.map((s, i) => cell(s, i === todayIndex)).join('')}
+      </tr>`;
+  }
+
   function paintWeek() {
     const q = query.trim().toLowerCase();
     const rows = d.groups.map((g) => {
-      const people = g.people.filter((p) => {
-        const matchesDay = dayFilter === -1 || p.status[dayFilter] === 'leave';
-        const matchesQuery = !q || p.name.toLowerCase().includes(q);
-        return matchesDay && matchesQuery;
-      });
+      const people = g.people
+        .filter((p) => {
+          // An unconfirmed person has no per-day data to match against a specific
+          // day filter, but should still show up under "All" and name search.
+          const matchesDay = dayFilter === -1 || (hasStatus(p) && p.status[dayFilter] === 'leave');
+          const matchesQuery = !q || p.name.toLowerCase().includes(q);
+          return matchesDay && matchesQuery;
+        })
+        // Priority order within each group: fully out, then partial (most days out
+        // first), then fully available — so who needs attention is always on top.
+        .sort((a, b) => leaveDayCount(b) - leaveDayCount(a));
       if (!people.length) return '';
       return `
         <tr class="dr-group-row"><td colspan="${d.days.length + 1}">${esc(g.group)}</td></tr>
-        ${people.map((p) => `
-          <tr>
-            <td class="strong">${esc(p.name)}${p.site ? `<small style="color:var(--ink-faint)"> (${esc(p.site)})</small>` : ''}</td>
-            ${p.status.map((s, i) => cell(s, i === todayIndex)).join('')}
-          </tr>`).join('')}`;
+        ${people.map(personRow).join('')}`;
     }).join('');
     tbody.innerHTML = rows || `<tr><td colspan="${d.days.length + 1}" class="foot-note">No one matches this filter.</td></tr>`;
   }
@@ -170,16 +201,17 @@ export async function renderLeave(container) {
   searchInput.addEventListener('input', () => { query = searchInput.value; paintWeek(); });
   paintWeek();
 
-  // Calendar: month navigation, starting on the report month
-  const reportDate = new Date(`${d.reportDate}T00:00:00Z`);
-  let calYear = reportDate.getUTCFullYear();
-  let calMonth = reportDate.getUTCMonth();
+  // Public holiday calendar: month navigation, starting on today's actual month
+  // (the real Canberra date, not reportDate — see the comment above).
+  const todayUTC = new Date(`${todayISO}T00:00:00Z`);
+  let calYear = todayUTC.getUTCFullYear();
+  let calMonth = todayUTC.getUTCMonth();
   const calMount = container.querySelector('.dr-cal-mount');
   const prevBtn = container.querySelector('.dr-cal-prev');
   const nextBtn = container.querySelector('.dr-cal-next');
 
   function paintCalendar() {
-    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO: d.reportDate, leaveByDate, knownRange });
+    calMount.innerHTML = renderMonthCalendar({ year: calYear, month: calMonth, todayISO });
     prevBtn.disabled = calYear === CAL_MIN.year && calMonth === CAL_MIN.month;
     nextBtn.disabled = calYear === CAL_MAX.year && calMonth === CAL_MAX.month;
     prevBtn.style.opacity = prevBtn.disabled ? .4 : 1;
@@ -196,4 +228,6 @@ export async function renderLeave(container) {
     paintCalendar();
   });
   paintCalendar();
+
+  wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/leave/${newDate}`; } });
 }

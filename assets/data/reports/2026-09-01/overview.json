@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 1st September 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 303, "date": "2026-09-01", "weekday": "Tuesday", "title": "Daily Operations Report - 1st September 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 38, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 89, "incompleteCount": 1, "incompleteExample": "Finance queries resolved" }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 326,
+    "accepted": 291,
+    "acceptedPct": 89,
+    "missed": 35,
+    "missedPct": 11,
+    "totalOutbound": 166,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 92 },
+    "topOutboundAgent": { "name": "Apurva Pathak", "calls": 59 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 179, "missed": 15 },
+      { "queue": "General Enquiries", "accepted": 111, "missed": 20 },
+      { "queue": "Canberra Vasectomy", "accepted": 0, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 64,
+    "oldestDays": 7.97,
+    "contactsQueuedYesterday": 117,
+    "emailsHandledYesterday": 148,
+    "totalOverallCases": 6858,
+    "totalInProgress": 90,
+    "totalOpenCases": 60
+  },
+  "leave": {
+    "weekLabel": "31 August – 4 September 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": ["Shae Connors", "Rebecca Quinn", "Kiara Pfeffer", "Emily Pettett", "Micah Haly", "Kate Chin"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

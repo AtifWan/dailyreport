@@ -1,0 +1,38 @@
+{
+  "_source": "Daily Operations Report - 15th October 2026.pdf (full-length), page 22 (Staff & Doctors on Leave), read directly from the uploaded PDF's rendered page image — not OneDrive text extraction this date, since the user attached the PDFs directly. The colour-coded Monday-Friday grid was legible cell-by-cell from the image.",
+  "reportTitle": "Daily Operations Report - 15th October 2026",
+  "reportDate": "2026-10-15",
+  "weekStart": "2026-10-12",
+  "weekEnd": "2026-10-16",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {"name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"]},
+        {"name": "Dr Penny Gosling", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"]}
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {"name": "Abbey Freestone", "site": null, "status": ["leave", "leave", "leave", "leave", "available"]},
+        {"name": "Sudina Rijal", "site": null, "status": ["leave", "leave", "leave", "leave", "available"]},
+        {"name": "Nita Sigdel", "site": null, "status": ["leave", "available", "available", "available", "available"]},
+        {"name": "De Ang Renfree", "site": null, "status": ["available", "leave", "available", "available", "available"]},
+        {"name": "Holly Archer", "site": null, "status": ["available", "available", "available", "available", "leave"]},
+        {"name": "Samantha Cooper", "site": null, "status": ["available", "available", "available", "available", "leave"]}
+      ]
+    }
+  ],
+  "longTerm": [
+    {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+    {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+  ],
+  "legend": [
+    {"key": "leave", "label": "On Leave"},
+    {"key": "available", "label": "Available"},
+    {"key": "public_holiday", "label": "Public Holiday"}
+  ],
+  "_note": "STRUCTURAL CHANGE (good news): this is the first date in this project's history where the source PDF actually rendered a colour-coded Monday-Friday grid for this page, instead of just a name list with no per-day detail. Same week (12-16 Oct) and identical 8-person roster as 2026-10-09/12/13/14's own leave pages, but every person's status is now a real confirmed 5-day array instead of null/_unconfirmed. Both doctors (Dr Krystel Chin, Dr Penny Gosling) are out the full week; of the 6 staff, none are out the full week and none are fully available — all 6 have exactly one day's difference from the rest of their week (Abbey Freestone and Sudina Rijal are out Mon-Thu and back Friday; Nita Sigdel is out Monday only; De Ang Renfree is out Tuesday only; Holly Archer and Samantha Cooper are out Friday only). No colour cell was ambiguous or required guessing."
+}

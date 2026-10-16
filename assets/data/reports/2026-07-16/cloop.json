@@ -1,0 +1,57 @@
+{
+  "_source": "Daily Operations Report - 16th July 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 16th July 2026",
+  "extractedAt": "2026-07-17T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Friday 17 July 2026",
+  "realTimeQueues": [
+    { "queue": "Unassigned", "inQueue": 8, "oldestDays": 0.73 },
+    { "queue": "Documents", "inQueue": 4, "oldestDays": 0.68 },
+    { "queue": "Nursing", "inQueue": 4, "oldestDays": 10.94 },
+    { "queue": "Medico-legal", "inQueue": 2, "oldestDays": 0.69 },
+    { "queue": "Requests", "inQueue": 2, "oldestDays": 0.65 },
+    { "queue": "Escalation", "inQueue": 2, "oldestDays": 6.8 },
+    { "queue": "Failed Communication", "inQueue": 2, "oldestDays": 0.08 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.07 },
+    { "queue": "Intake_Testing", "inQueue": 1, "oldestDays": 11.29 }
+  ],
+  "realTimeSummary": { "inQueue": 32, "oldestDays": 10.27 },
+  "_realTimeSummaryNote": "The Summary row's Oldest (10.27) does not equal the maximum of the per-queue Oldest values listed above (11.29, for Intake_Testing); it instead matches the prior date's (2026-07-15) real-time summary oldest value exactly. Recorded verbatim as printed.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 28 },
+    { "queue": "Documents", "count": 20 },
+    { "queue": "Medico-legal", "count": 19 },
+    { "queue": "Requests", "count": 11 },
+    { "queue": "Practice Finance", "count": 7 },
+    { "queue": "Failed Communication", "count": 3 },
+    { "queue": "File Transfer", "count": 3 },
+    { "queue": "GP Mail", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul"],
+    "totals": [76, 191, 172, 102, 90, 54, 89, 67, 90, 92]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 51, "outbound": 5, "total": 56 },
+    { "agent": "Ella Blackamore", "incoming": 22, "outbound": 1, "total": 29 },
+    { "agent": "Apurva Pathak", "incoming": 9, "outbound": 0, "total": 9 },
+    { "agent": "Lucinda Gonzalez", "incoming": 7, "outbound": 0, "total": 7 },
+    { "agent": "Jacob Kohane", "incoming": 0, "outbound": 4, "total": 4 },
+    { "agent": "Atif Wan", "incoming": 3, "outbound": 0, "total": 3 },
+    { "agent": "Kenneth Lobo", "incoming": 0, "outbound": 2, "total": 2 },
+    { "agent": "Pinky Mae De Paz", "incoming": 0, "outbound": 2, "total": 2 },
+    { "agent": "Emily Pettett", "incoming": 0, "outbound": 1, "total": 1 },
+    { "agent": "Megan Wright", "incoming": 0, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Ella Blackamore's stated total (29) doesn't equal incoming+outbound in the source PDF itself (22+1=23, a 6-off gap). Megan Wright's stated total (1) doesn't equal incoming+outbound (0+0=0). Same recurring quirk flagged on other dates in this project. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-07-17", "totalOverallCases": 3898, "totalInProgress": 80, "totalOpenCases": 40 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the rest of this Cloop section (through Fri 17 Jul rather than Thu 16 Jul) — the standard next-business-day extraction pattern used throughout this project.",
+  "inProgressTenDayTrend": {
+    "labels": ["Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul"],
+    "totals": [207, 214, 220, 229, 215, 223, 144, 102, 79, 80]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul"],
+    "totals": [104, 73, 76, 59, 60, 67, 47, 55, 39, 40]
+  },
+  "_tenDayTrendNote": "Cross-validated: contactsQueuedTenDayTrend, inProgressTenDayTrend and openCasesTenDayTrend all have positions 0-8 matching 2026-07-15's cloop.json positions 1-9 exactly. New/unverified final positions read directly from the images."
+}

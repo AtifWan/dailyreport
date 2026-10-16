@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 27th August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 27th August 2026",
+  "extractedAt": "2026-08-28T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Friday 28 August 2026",
+  "_extractedAtNote": "This date's Cloop extraction timestamp is 8:45 AM rather than the usual 9:00 AM seen on other dates — recorded verbatim as printed in the source PDF.",
+  "realTimeQueues": [
+    { "queue": "Unassigned", "inQueue": 15, "oldestDays": 1.02 },
+    { "queue": "Requests", "inQueue": 13, "oldestDays": 3.76 },
+    { "queue": "Practice Finance", "inQueue": 11, "oldestDays": 2.8 },
+    { "queue": "Medico-legal", "inQueue": 5, "oldestDays": 1.69 },
+    { "queue": "Documents", "inQueue": 3, "oldestDays": 0.79 },
+    { "queue": "GP Mail", "inQueue": 2, "oldestDays": 13.89 },
+    { "queue": "Failed Communication", "inQueue": 2, "oldestDays": 0.67 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 1.67 }
+  ],
+  "realTimeSummary": { "inQueue": 52, "oldestDays": 13.89 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 26 },
+    { "queue": "Finance", "count": 21 },
+    { "queue": "Documents", "count": 19 },
+    { "queue": "Requests", "count": 9 },
+    { "queue": "File Transfer", "count": 3 },
+    { "queue": "Failed Communication", "count": 2 },
+    { "queue": "Medico-legal", "count": 2 },
+    { "queue": "Practice Finance", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug"],
+    "totals": [102, 90, 87, 81, 75, 102, 104, 114, 91, 83]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 51, "outbound": 18, "total": 69 },
+    { "agent": "Leh Peng Goh", "incoming": 21, "outbound": 0, "total": 21 },
+    { "agent": "Lucinda Gonzalez", "incoming": 7, "outbound": 4, "total": 11 },
+    { "agent": "Apurva Pathak", "incoming": 2, "outbound": 1, "total": 3 },
+    { "agent": "Atif Wan", "incoming": 2, "outbound": 0, "total": 2 },
+    { "agent": "Ambrosie Brassil", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "totalCasesToDate": { "date": "2026-08-28", "totalOverallCases": 6545, "totalInProgress": 89, "totalOpenCases": 52 },
+  "inProgressTenDayTrend": {
+    "labels": ["Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug"],
+    "totals": [132, 135, 136, 154, 155, 144, 90, 85, 86, 89]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug"],
+    "totals": [73, 70, 78, 70, 63, 74, 80, 63, 57, 52]
+  }
+}

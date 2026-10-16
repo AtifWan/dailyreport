@@ -1,0 +1,31 @@
+{
+  "_source": "Daily Operations Report - 3rd August 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "Yet another distinct, small roster for this week (3-7 Aug) — only 1 doctor (Dr Kathleen O'Brien) and 1 staff member (Aman Singh, a name not seen elsewhere in this project) appear at all. Confirms the previously documented pattern that different calendar weeks show entirely different rosters.",
+  "reportTitle": "Daily Operations Report - 3rd August 2026",
+  "reportDate": "2026-08-03",
+  "weekStart": "2026-08-03",
+  "weekEnd": "2026-08-07",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Aman Singh", "site": null, "status": ["available", "leave", "leave", "leave", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "_source": "Daily Operations Report - 13th July 2026.pdf, pages 23-24 (Staff & Doctors on Leave) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 13th July 2026",
+  "reportDate": "2026-07-13",
+  "weekStart": "2026-07-13",
+  "weekEnd": "2026-07-17",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Maria Ianelli", "site": "Denman", "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "available", "available"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Reiham Ibrahim", "site": "Crace", "status": ["leave", "leave", "leave", "available", "available"] },
+        { "name": "Dr Sam Primrose", "site": "Crace", "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Dr Anna Calwell", "site": "Denman", "status": ["leave", "leave", "leave", "available", "available"] },
+        { "name": "Dr Janine Kelly", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Samantha Cooper", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Amy Morton", "site": null, "status": ["available", "leave", "available", "available", "available"] },
+        { "name": "Isaac Davis", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Katerina Gjorgievski", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Bethany Tran", "site": null, "status": ["leave", "leave", "available", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

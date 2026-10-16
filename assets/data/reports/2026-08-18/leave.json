@@ -1,0 +1,39 @@
+{
+  "_source": "Daily Operations Report - 18th August 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "Same week (17-21 Aug) and identical roster/statuses to the already-committed 2026-08-19/20 leave.json.",
+  "reportTitle": "Daily Operations Report - 18th August 2026",
+  "reportDate": "2026-08-18",
+  "weekStart": "2026-08-17",
+  "weekEnd": "2026-08-21",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Hall", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr William Fong", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Med Student Sarah Lucas", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Andy Davies", "site": null, "status": ["available", "available", "leave", "leave", "leave"] },
+        { "name": "David Antioch", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Apurva Pathak", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "De Ang Renfree", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Aiden Chang", "site": null, "status": ["available", "available", "leave", "leave", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

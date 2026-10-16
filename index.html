@@ -26,31 +26,31 @@
     <div class="brand"><div class="mark">Y</div><div class="nm">Daily Operations<span>YourGP</span></div></div>
     <div class="nav-label">Reports</div>
     <nav class="nav">
-      <button class="nav-item on" id="nav-overview" onclick="location.hash='#/overview'">
+      <button class="nav-item on" id="nav-overview" data-route="overview">
         <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12.5 16V8M17 16v-6"/></svg>
         Overview
       </button>
-      <button class="nav-item" id="nav-tasks" onclick="location.hash='#/critical-tasks'">
+      <button class="nav-item" id="nav-tasks" data-route="critical-tasks">
         <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8 12.5l2.4 2.4L16 9.5"/></svg>
         Critical daily tasks
       </button>
-      <button class="nav-item" id="nav-calls" onclick="location.hash='#/call-logs'">
+      <button class="nav-item" id="nav-calls" data-route="call-logs">
         <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5c-1.1 0-2 .9-2 2 0 8.3 6.7 15 15 15 1.1 0 2-.9 2-2v-2.4c0-.5-.3-.9-.8-1l-3.3-.8c-.4-.1-.9 0-1.1.4l-.9 1.4a10.6 10.6 0 0 1-4.7-4.7l1.4-.9c.4-.3.5-.7.4-1.1l-.8-3.3c-.1-.5-.5-.8-1-.8H6.5z"/></svg>
         Call logs
       </button>
-      <button class="nav-item" id="nav-cloop" onclick="location.hash='#/cloop'">
+      <button class="nav-item" id="nav-cloop" data-route="cloop">
         <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.2"/></svg>
         Cloop
       </button>
-      <button class="nav-item" id="nav-leave" onclick="location.hash='#/leave'">
+      <button class="nav-item" id="nav-leave" data-route="leave">
         <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="1.6"/><path d="M3.5 9.5h17M8 3v3M16 3v3"/></svg>
         Staff &amp; doctors' leave
       </button>
+      <button class="nav-item" id="nav-checklist" data-route="report-checklist">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M8 9.5l1.8 1.8L13.5 7.5M8 16h7"/></svg>
+        Report checklist
+      </button>
     </nav>
-    <div class="side-user">
-      <div class="su-id"><div class="su-av">A</div><span class="su-email">atif.wan@ygp.au</span></div>
-      <button class="signout">Sign out</button>
-    </div>
   </aside>
 
   <main class="main">
@@ -62,7 +62,26 @@
         <div class="tt">Overview</div>
         <div class="ts">At-a-glance summary of the daily operations report.</div>
       </div>
-      <button class="signout mob-only">Sign out</button>
+      <div class="spacer"></div>
+      <div class="dr-export" id="exportMenu">
+        <button class="btn dr-export-main" id="exportBtn" type="button" aria-label="Export full report">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <span id="exportBtnLabel">Export report</span>
+        </button>
+        <button class="btn dr-export-caret" id="exportCaretBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose report type">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="dr-export-pop" id="exportPop" hidden>
+          <button type="button" class="dr-export-opt" data-mode="full">
+            <span class="dr-export-opt-title">Full report</span>
+            <span class="dr-export-opt-sub">Every section, with charts &amp; tables</span>
+          </button>
+          <button type="button" class="dr-export-opt" data-mode="short">
+            <span class="dr-export-opt-title">Short report (3 pages)</span>
+            <span class="dr-export-opt-sub">At-a-glance summary + today's key details</span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="content">

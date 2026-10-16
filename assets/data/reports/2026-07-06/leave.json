@@ -1,0 +1,42 @@
+{
+  "_source": "Daily Operations Report - 6th July 2026.pdf, pages 20-21 (Staff & Doctors on Leave) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 6th July 2026",
+  "reportDate": "2026-07-06",
+  "weekStart": "2026-07-06",
+  "weekEnd": "2026-07-10",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Julie Beuth", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "available"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Reiham Ibrahim", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "JMO Ashley Kean", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Sudina Rijal", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Samantha Cooper", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Isaac Davis", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Bianca Mitchell", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Bethany Tran", "site": null, "status": ["leave", "available", "available", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "Roster is notably different from the later, already-committed July dates (2026-07-27 onward): this week's doctor list includes four additional Crace-based doctors (Dr Sheahan Ranasinghe, Dr Krystel Chin, Dr Reiham Ibrahim, JMO Ashley Kean) not seen in the later roster, and the staff list includes Samantha Cooper, Andrew Davies and Isaac Davis who don't appear in the 07-27+ roster either. Recorded verbatim as printed for this date; not reconciled against later dates' roster."
+}

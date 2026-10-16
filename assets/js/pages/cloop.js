@@ -1,5 +1,6 @@
 import { esc, fetchJSON, mountInteractiveTable } from '../util.js';
 import { lineChart, hBarGroup } from '../charts.js';
+import { datePickerHtml, wireDatePicker } from '../datepicker.js';
 
 function weekOverWeek(totals) {
   const latest = totals[totals.length - 1];
@@ -42,21 +43,39 @@ function mountEmailsTable(container, rows, totals) {
   if (tfoot) tfoot.innerHTML = `<tr><td>Total</td><td class="r num">${totals.incoming}</td><td class="r num">${totals.outbound}</td><td class="r num">${totals.total}</td></tr>`;
 }
 
-export async function renderCloop(container) {
+export async function renderCloop(container, date, manifest) {
   const [d, callLogs] = await Promise.all([
-    fetchJSON('assets/data/cloop.json'),
-    fetchJSON('assets/data/call-logs.json').catch(() => null),
+    fetchJSON(`assets/data/reports/${date}/cloop.json`).catch(() => null),
+    fetchJSON(`assets/data/reports/${date}/call-logs.json`).catch(() => null),
   ]);
-  const yesterdayTotal = d.contactsQueuedYesterday.reduce((s, q) => s + q.count, 0);
-  const wowQueued = weekOverWeek(d.contactsQueuedTenDayTrend.totals);
-  const wowProgress = weekOverWeek(d.inProgressTenDayTrend.totals);
-  const wowOpen = weekOverWeek(d.openCasesTenDayTrend.totals);
+
+  // A handful of the oldest reports in this project's backlog (see PHASE-2.md's
+  // Pattern B note) have no Cloop section published at all — not a thinner one,
+  // none whatsoever — so there's no cloop.json for this date to even omit fields
+  // from. Show that plainly instead of falling through to the generic page-load
+  // error a missing file would otherwise produce.
+  if (!d) {
+    container.innerHTML = `
+      ${datePickerHtml(date, manifest)}
+      <p class="dr-placeholder">No Cloop report was published for this date.</p>
+    `;
+    wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/cloop/${newDate}`; } });
+    return;
+  }
+  // Some earlier/thinner reports (see Pattern A/B notes in the backlog) don't publish
+  // every Cloop section — no per-queue "contacts queued yesterday" breakdown, or none
+  // of the three 10-day trend charts. Each is optional here rather than assumed present.
+  const yesterdayTotal = d.contactsQueuedYesterday ? d.contactsQueuedYesterday.reduce((s, q) => s + q.count, 0) : null;
+  const wowQueued = d.contactsQueuedTenDayTrend ? weekOverWeek(d.contactsQueuedTenDayTrend.totals) : null;
+  const wowProgress = d.inProgressTenDayTrend ? weekOverWeek(d.inProgressTenDayTrend.totals) : null;
+  const wowOpen = d.openCasesTenDayTrend ? weekOverWeek(d.openCasesTenDayTrend.totals) : null;
   const emailTotals = d.emailsHandledYesterday.reduce((acc, a) => ({ incoming: acc.incoming + a.incoming, outbound: acc.outbound + a.outbound, total: acc.total + a.total }), { incoming: 0, outbound: 0, total: 0 });
 
   const callNames = new Set((callLogs?.inboundByStaff || []).concat(callLogs?.outboundByStaff || []).map((p) => p.name));
   const alsoOnPhones = d.emailsHandledYesterday.map((a) => a.agent).filter((name) => callNames.has(name));
 
   container.innerHTML = `
+    ${datePickerHtml(date, manifest)}
     <div class="kpis">
       <div class="kpi">
         <div class="k-l">In queue right now</div>
@@ -70,8 +89,8 @@ export async function renderCloop(container) {
       </div>
       <div class="kpi">
         <div class="k-l">Contacts queued, yesterday</div>
-        <div class="k-v num">${yesterdayTotal}</div>
-        <div class="k-n">vs 1 week ago${' '}${deltaChip(wowQueued.delta, wowQueued.pct)}</div>
+        <div class="k-v num">${yesterdayTotal != null ? yesterdayTotal : '—'}</div>
+        <div class="k-n">${wowQueued ? `vs 1 week ago ${deltaChip(wowQueued.delta, wowQueued.pct)}` : 'Not published this date'}</div>
       </div>
       <div class="kpi">
         <div class="k-l">Total overall cases</div>
@@ -98,16 +117,20 @@ export async function renderCloop(container) {
       </div>
       <div class="panel">
         <h3>Contacts queued yesterday, by queue</h3>
+        ${d.contactsQueuedYesterday ? `
         <p class="q">${yesterdayTotal} contacts queued in total.</p>
         ${hBarGroup({ items: d.contactsQueuedYesterday.map((q) => ({ label: q.queue, values: [{ value: q.count, color: 'var(--accent)' }] })) })}
+        ` : `<p class="dr-placeholder">Not published this date.</p>`}
       </div>
     </div>
 
+    ${d.contactsQueuedTenDayTrend ? `
     <div class="panel dr-section-gap">
       <h3>Total contacts queued — 10-day trend</h3>
       <p class="q">All queues combined</p>
       <div class="dr-chart-wrap">${lineChart({ dates: d.contactsQueuedTenDayTrend.labels, series: [{ data: d.contactsQueuedTenDayTrend.totals, color: 'var(--accent)', label: 'Contacts queued' }], height: 210 })}</div>
     </div>
+    ` : ''}
 
     <div class="panel dr-section-gap">
       <h3>Emails handled yesterday, by agent</h3>
@@ -124,34 +147,41 @@ export async function renderCloop(container) {
           <tfoot></tfoot>
         </table>
       </div>
-      ${alsoOnPhones.length ? `<p class="foot-note">${alsoOnPhones.map(esc).join(' and ')} also took phone calls today — <a href="#/call-logs" style="color:var(--accent)">see the Staff activity table on Call Logs &rarr;</a></p>` : ''}
+      ${alsoOnPhones.length ? `<p class="foot-note">${alsoOnPhones.map(esc).join(' and ')} also took phone calls today — <a href="#/call-logs/${esc(date)}" style="color:var(--accent)">see the Staff activity table on Call Logs &rarr;</a></p>` : ''}
     </div>
 
     <div class="kpis dr-section-gap">
       <div class="kpi">
         <div class="k-l">Total in progress</div>
         <div class="k-v num">${d.totalCasesToDate.totalInProgress}</div>
-        <div class="k-n">vs 1 week ago ${deltaChip(wowProgress.delta, wowProgress.pct)}</div>
+        <div class="k-n">${wowProgress ? `vs 1 week ago ${deltaChip(wowProgress.delta, wowProgress.pct)}` : 'Not published this date'}</div>
       </div>
       <div class="kpi">
         <div class="k-l">Total open cases</div>
         <div class="k-v num">${d.totalCasesToDate.totalOpenCases}</div>
-        <div class="k-n">vs 1 week ago ${deltaChip(wowOpen.delta, wowOpen.pct)}</div>
+        <div class="k-n">${wowOpen ? `vs 1 week ago ${deltaChip(wowOpen.delta, wowOpen.pct)}` : 'Not published this date'}</div>
       </div>
     </div>
 
+    ${(d.inProgressTenDayTrend || d.openCasesTenDayTrend) ? `
     <div class="grid2">
+      ${d.inProgressTenDayTrend ? `
       <div class="panel">
         <h3>Total in progress — 10-day trend</h3>
         <div class="dr-chart-wrap">${lineChart({ dates: d.inProgressTenDayTrend.labels, series: [{ data: d.inProgressTenDayTrend.totals, color: 'var(--infer)', label: 'In progress' }], height: 200 })}</div>
       </div>
+      ` : ''}
+      ${d.openCasesTenDayTrend ? `
       <div class="panel">
         <h3>Total open cases — 10-day trend</h3>
         <div class="dr-chart-wrap">${lineChart({ dates: d.openCasesTenDayTrend.labels, series: [{ data: d.openCasesTenDayTrend.totals, color: 'var(--accent-2)', label: 'Open cases' }], height: 200 })}</div>
       </div>
+      ` : ''}
     </div>
+    ` : ''}
   `;
 
   mountRealTimeTable(container.querySelector('.dr-realtime-table'), d.realTimeQueues, d.realTimeSummary);
   mountEmailsTable(container.querySelector('.dr-emails-table'), d.emailsHandledYesterday, emailTotals);
+  wireDatePicker(container, { manifest, onChange: (newDate) => { location.hash = `#/cloop/${newDate}`; } });
 }

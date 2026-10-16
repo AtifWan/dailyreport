@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 10th July 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 10th July 2026",
+  "reportDate": "2026-07-10",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 0, "onHalt": false },
+    { "name": "Finance", "days": 2, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [56, 50, 60, 60, 45, 67, 60, 60, 60, 100],
+      "complete": [
+        "Clinical Reminders (C.Le@11:20)",
+        "Send Claim For Automed Payments (C.Le@11:48)",
+        "Caregp Ai Tool (C.Le@11:48)",
+        "Clinical Reminders (C.Le@11:48)",
+        "E-Referrals (A.Wa@12:14)",
+        "Allocate - Healthlink Unallocated (C.Le@12:21)",
+        "Action 10 Or More Failed Communications (A.Wa@14:11)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 100,
+      "trend": [25, 100, 100, 25, 88, 88, 88, 100, 100, 100],
+      "complete": [
+        "Online claiming run in Best Practice (J.Sa@7:51)",
+        "Remittances allocated (L.Go@18:43)",
+        "Finance queue in Cloop has zero emails (L.Go@18:44)",
+        "Tyro Health receipts captured (L.Go@18:43)",
+        "Unidentified payments resolved (L.Go@18:44)",
+        "Xero accounts reconciled (L.Go@18:43)",
+        "Debt chasing report updated (L.Go@18:44)",
+        "90/60-day debt list actioned (L.Go@18:44)"
+      ],
+      "incomplete": []
+    }
+  ],
+  "_trendNote": "Both charts render cleanly and both final points match this date's own 100%/100% badges exactly. Cross-validated: dropping 2026-07-09's own trend arrays' first value gives an exact match against this date's first 9 values for both PST ([56,50,60,60,45,67,60,60,60]) and Finance ([25,100,100,25,88,88,88,100,100]) — clean chain confirmed, continuing the reliable chain established since 2026-07-08.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

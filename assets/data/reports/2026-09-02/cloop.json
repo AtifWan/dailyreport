@@ -1,0 +1,49 @@
+{
+  "_source": "Daily Operations Report - 2nd September 2026.pdf, pages 18-23 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 2nd September 2026",
+  "extractedAt": "2026-09-03T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Thursday 3 September 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 28, "oldestDays": 5.67 },
+    { "queue": "Unassigned", "inQueue": 15, "oldestDays": 1.76 },
+    { "queue": "Documents", "inQueue": 14, "oldestDays": 1.79 },
+    { "queue": "Medico-legal", "inQueue": 8, "oldestDays": 0.95 },
+    { "queue": "Practice Finance", "inQueue": 7, "oldestDays": 6.37 },
+    { "queue": "GP Mail", "inQueue": 4, "oldestDays": 8.96 },
+    { "queue": "Failed Communication", "inQueue": 4, "oldestDays": 0.85 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 0.03 }
+  ],
+  "realTimeSummary": { "inQueue": 81, "oldestDays": 8.96 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 18 },
+    { "queue": "Documents", "count": 14 },
+    { "queue": "Failed Communication", "count": 9 },
+    { "queue": "Practice Finance", "count": 9 },
+    { "queue": "Finance", "count": 8 },
+    { "queue": "Medico-legal", "count": 7 },
+    { "queue": "File Transfer", "count": 2 },
+    { "queue": "Escalation", "count": 1 },
+    { "queue": "Requests", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep"],
+    "totals": [75, 102, 104, 114, 91, 83, 79, 79, 117, 69]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 45, "outbound": 16, "total": 61 },
+    { "agent": "Megan Wright", "incoming": 10, "outbound": 1, "total": 13 },
+    { "agent": "Leh Peng Goh", "incoming": 8, "outbound": 0, "total": 9 },
+    { "agent": "Atif Wan", "incoming": 6, "outbound": 0, "total": 6 },
+    { "agent": "Lucinda Gonzalez", "incoming": 0, "outbound": 2, "total": 2 }
+  ],
+  "_emailsHandledYesterdayNote": "Megan Wright's and Leh Peng Goh's stated totals (13 and 9) don't equal incoming+outbound (11 and 8) in the source PDF itself — same recurring quirk already flagged on 2026-09-07's cloop.json. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-09-03", "totalOverallCases": 6952, "totalInProgress": 95, "totalOpenCases": 90 },
+  "inProgressTenDayTrend": {
+    "labels": ["Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep"],
+    "totals": [155, 144, 90, 85, 86, 89, 93, 86, 90, 95]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Fri 21 Aug", "Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep"],
+    "totals": [63, 74, 80, 63, 57, 52, 77, 86, 60, 90]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "_source": "Daily Operations Report - 30th June 2026 (Short Version).pdf — headline figures assembled from the SHORT version's own pages",
+  "_criticalDataGapNote": "IMPORTANT: the 'long' version PNG renders supplied for 2026-06-30 in this batch (files named 0630_long_p01.png through p24.png) do NOT actually contain 30 June content — their own cover page reads 'Report #279, 29th July 2026, Wednesday' and every subsequent page (streak counters, checklist tasks, call volumes, the leave grid dated '27th July 2026 until 31st July 2026') confirms they are the 2026-07-29 report, evidently misfiled under the 0630 name during batch rendering. The 0630 SHORT version's own cover page correctly reads 'Report #258, 30th June 2026, Tuesday' and was used as the sole reliable source for this date instead. Because the short version omits the streak-counter page (Crace/Denman/Lyneham/PST/Finance day-counts) and the long version's 10-day trend charts, KPI page, per-queue detail, and hourly pattern, those fields could not be verified from any image for this date. The streaks below are NOT read from a 2026-06-30 image — they are inferred from the fact that this exact streak block (Crace 1 day, Denman 109 days, Lyneham 0 days, PST 0 days, Finance 0 days) was unchanged across every one of 2026-06-24 through 2026-06-29's own committed/verified reports; flagged here rather than silently presented as directly observed.",
+  "report": { "number": 258, "date": "2026-06-30", "weekday": "Tuesday", "title": "Daily Operations Report - 30th June 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true, "_inferred": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true, "_inferred": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true, "_inferred": true },
+      { "name": "PST", "days": 0, "onHalt": false, "_inferred": true },
+      { "name": "Finance", "days": 0, "onHalt": false, "_inferred": true }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13", "_inferred": true },
+    "checklists": [
+      { "name": "PST", "completionPct": 50 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 319,
+    "accepted": 282,
+    "acceptedPct": 88,
+    "missed": 37,
+    "missedPct": 12,
+    "totalOutbound": 193,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 64 },
+    "topOutboundAgent": { "name": "Apurva Pathak", "calls": 62 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 163, "missed": 12 },
+      { "queue": "General Enquiries", "accepted": 91, "missed": 15 },
+      { "queue": "Health Professionals", "accepted": 22, "missed": 9 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 1 }
+    ]
+  },
+  "_callLogsNote": "The pie chart (319 total; Accepted 282/88%, Missed 37/12%) and the Queue Report bar chart (also headed '=319 calls') disagree on accepted: the bar chart's per-queue rows sum to 278 accepted (163+91+22+2), matching its own Grand Total row (278/37), not the pie's 282. Missed calls agree everywhere (37). Recorded: accepted/acceptedPct from the pie (282/88, matching the inbound-by-staff table sum exactly — see call-logs.json), queueBreakdown rows verbatim from the Queue Report bar chart (summing to 278, not 282) — not reconciled. No 'Accepted/Missed Calls by Queue' pie-chart page exists in the short version to cross-check further.",
+  "cloop": {
+    "inQueue": 76,
+    "oldestDays": 12.89135,
+    "emailsHandledYesterday": 104,
+    "totalOverallCases": 2878,
+    "totalInProgress": 209,
+    "totalOpenCases": 115
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the eight agents' printed 'Contacts handled' totals (50+26+9+8+6+3+1+1=104). The Real-Time Metrics Summary row's 'Oldest' figure (309:23:33, hh:mm:ss) converts to ~12.8914 days and matches the Nursing row's own oldest item exactly. This date's real-time queue table shows both a standalone 'Finance' row and a 'Practice Finance' row (both inQueue=1) but no 'Escalation' row.",
+  "leave": {
+    "weekLabel": "29 June – 3 July 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 0,
+    "staffPartialLeaveNames": [],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "Same week and roster as 2026-06-29's committed leave.json (29 June - 3 July 2026, 2-doctor/5-staff roster), verified against this date's own source page. This report's own date (30 June, Tuesday) is the second day of the displayed week: doctorLinesOnLeave=1 (Dr Julie Beuth on leave Tuesday; Dr Tracy Fox available Tuesday, on leave only Friday); staffFullyOnLeave=4 (Andrew Davies, Pinky Mae De Paz, Samantha Cooper, Jasmine Deery); staffPartialLeave=0 (Megan Moreno Pitcher is available Tuesday — her one leave day is Wednesday 1 July)."
+}

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(assets/data/reports/index.json)"
+    ]
+  },
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash commands that write, overwrite, or append to assets/data/reports/index.json in this repository — the user has explicitly authorized the daily report-ingestion routine to update this manifest file (bump \"latest\" and append to \"dates\") without asking each time, even though the working tree may show it as modified from a separate, unrelated paused task."
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "_source": "Daily Operations Report - 23rd June 2026.pdf, pages 18-19 (Cloop Report) — verified against rendered page images.",
+  "reportTitle": "Daily Operations Report - 23rd June 2026",
+  "extractedAt": "2026-06-24T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Tuesday 24 June 2026",
+  "_structureNote": "Same thinner Cloop structure as 2026-06-22: only a Real-Time Metrics table, a Yesterday's Emails Handled table, and a single Total Cases to Date row — no per-queue 'contacts queued yesterday' breakdown and no 10-day trend charts anywhere in the source pages. Fields are omitted rather than fabricated.",
+  "realTimeQueues": [
+    { "queue": "Failed Communication", "inQueue": 53, "oldestDays": 8.86 },
+    { "queue": "Requests", "inQueue": 13, "oldestDays": 1.91 },
+    { "queue": "Unassigned", "inQueue": 12, "oldestDays": 0.72 },
+    { "queue": "Nursing", "inQueue": 6, "oldestDays": 13.75 },
+    { "queue": "File Transfer", "inQueue": 5, "oldestDays": 5.67 },
+    { "queue": "Documents", "inQueue": 4, "oldestDays": 0.7 },
+    { "queue": "Practice Finance", "inQueue": 4, "oldestDays": 5.67 },
+    { "queue": "Finance", "inQueue": 1, "oldestDays": 0.05 }
+  ],
+  "realTimeSummary": { "inQueue": 98, "oldestDays": 13.75 },
+  "_realTimeQueuesNote": "Source table prints every 'Oldest' figure as an hh:mm:ss duration (e.g. Nursing's '330:04:05') rather than decimal days — converted here (330:04:05 / 24 = 13.75 days) for schema consistency with every other committed date, same conversion already documented on 2026-06-22 and 2026-07-06. Summary row (98 in queue) matches the sum of all queues exactly (53+13+12+6+5+4+4+1=98); its Oldest (13.75 days) matches the Nursing row, the actual maximum.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 53, "outbound": 6, "total": 59 },
+    { "agent": "Frances Doble", "incoming": 15, "outbound": 4, "total": 19 },
+    { "agent": "Atif Wan", "incoming": 11, "outbound": 0, "total": 11 },
+    { "agent": "Megan Wright", "incoming": 4, "outbound": 1, "total": 7 },
+    { "agent": "Kiara Pfeffer", "incoming": 3, "outbound": 2, "total": 5 },
+    { "agent": "Leh Peng Goh", "incoming": 4, "outbound": 0, "total": 4 },
+    { "agent": "Kenneth Lobo", "incoming": 2, "outbound": 0, "total": 3 },
+    { "agent": "Holly Archer", "incoming": 2, "outbound": 0, "total": 2 },
+    { "agent": "De Ang Renfree", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledNote": "Megan Wright (4+1=5, printed total 7) and Kenneth Lobo (2+0=2, printed total 3) both show a small incoming+outbound-vs-total gap on the source table, same kind of small rounding/legibility gap already documented for other agents on other committed dates (e.g. 2026-06-22's Kate Chin) — recorded verbatim rather than corrected.",
+  "totalCasesToDate": { "date": "2026-06-24", "totalOverallCases": 2409, "totalInProgress": 208, "totalOpenCases": 99 },
+  "_totalCasesToDateNote": "Unlike 2026-06-22, this table is labeled with the NEXT business day's date (24/6/2026) rather than this report's own date — the usual next-day convention seen on most other committed dates."
+}

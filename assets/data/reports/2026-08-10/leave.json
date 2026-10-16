@@ -1,0 +1,32 @@
+{
+  "_source": "Daily Operations Report - 10th August 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "Same week (10-14 Aug, the report's own week) and identical small roster to the already-committed 2026-08-11/12/13 leave.json — only 2 doctors and 1 staff member (Rebecca Quinn) appear at all.",
+  "reportTitle": "Daily Operations Report - 10th August 2026",
+  "reportDate": "2026-08-10",
+  "weekStart": "2026-08-10",
+  "weekEnd": "2026-08-14",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Hall", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Rebecca Quinn", "site": null, "status": ["available", "available", "leave", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

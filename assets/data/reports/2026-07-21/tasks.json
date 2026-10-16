@@ -1,0 +1,48 @@
+{
+  "_source": "Daily Operations Report - 21st July 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 21st July 2026",
+  "reportDate": "2026-07-21",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 8, "onHalt": false },
+    { "name": "Finance", "days": 0, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [60, 60, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Clinical Reminders (C.Le@10:16)",
+        "Send Claim For Automed Payments (C.Le@10:17)",
+        "Caregp Ai Tool (C.Le@10:17)",
+        "Allocate - Healthlink Unallocated (C.Le@10:42)",
+        "E-Referrals (A.Wa@16:09)",
+        "Action 10 Or More Failed Communications (A.Wa@16:16)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 78,
+      "trend": [100, 100, 100, 13, 100, 100, 100, 88, 88, 78],
+      "complete": [
+        "90/60-day debt list actioned (L.Go@19:11)",
+        "Unidentified payments resolved (L.Go@19:11)",
+        "Debt chasing report updated (L.Go@19:11)",
+        "Remittances allocated (L.Go@19:11)",
+        "Finance queue in Cloop has zero emails (L.Go@19:11)",
+        "Tyro Health receipts captured (L.Go@19:11)",
+        "Xero accounts reconciled (L.Go@19:11)"
+      ],
+      "incomplete": ["Online claiming run in Best Practice", "Finance queries resolved"]
+    }
+  ],
+  "_financeChecklistNote": "9 Finance tasks are listed for this date (7 complete + 2 incomplete), giving 7/9 ≈ 78%, which is internally consistent as printed. This differs from 07-20's 8-item Finance list — the item count for this checklist varies day to day in the source PDFs.",
+  "_trendNote": "Cross-validated: PST trend positions1-9=[60,100,100,100,100,100,100,100,100] and Finance trend positions1-9=[100,100,13,100,100,100,88,88,78] both match 2026-07-20's already-written trend arrays' positions0-8 exactly (this batch's own chain). New/unverified final position (Tue 21 Jul) read directly from the image.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

@@ -1,0 +1,46 @@
+{
+  "_source": "Daily Operations Report - 28th September 2026.pdf, pages 23-24 (Staff & Doctors on Leave), read via direct visual inspection of the source PDF page images (not text extraction) — this table conveys status purely through cell colour, which text extraction cannot see.",
+  "reportTitle": "Daily Operations Report - 28th September 2026",
+  "reportDate": "2026-09-28",
+  "weekStart": "2026-09-28",
+  "weekEnd": "2026-10-02",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Adam Wiley", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "available"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["available", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Gosling", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Frederick Chung", "site": "Lyneham", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Val Zihhareva", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Anita Tammaro", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Micah Haly", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Amy Morton", "site": null, "status": ["available", "leave", "leave", "available", "available"] },
+        { "name": "Renee Bowman", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Megan Moreno Pitcher", "site": null, "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["available", "available", "available", "available", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+    { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "CORRECTED from an earlier text-extraction-only inference that wrongly showed every listed person on leave all week. The user supplied the source PDF page images directly, and this grid is now a direct visual read of pages 23-24: 6 of the 9 doctors are on leave the full week (Mara Matic, Tom Mills, Krystel Chin, Penny Gosling, Kristy Muir, Frederick Chung), while Adam Wiley, Sheahan Ranasinghe and Tracy Fox are only partially out. Among the 7 staff, only Micah Haly is out the full week; the other 6 (Val Zihhareva, Anita Tammaro, Amy Morton, Renee Bowman, Megan Moreno Pitcher, Andrew Davies) are each out just 1-2 days. This same grid was independently re-confirmed from the 29th September report's own source PDF (identical pages 23-24, same week), so it's now doubly visually verified. Note this week's staff roster (Val Zihhareva, Anita Tammaro, Micah Haly, Amy Morton, Renee Bowman, Megan Moreno Pitcher, Andrew Davies) does not overlap at all with the staff who actually answer calls (Rebecca Quinn, Kiara Pfeffer, De Ang Renfree, etc. — see call-logs.json), so no absence-from-call-tables cross-check is meaningful for this roster the way it was for prior weeks."
+}

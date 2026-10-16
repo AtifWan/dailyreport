@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 29th September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 29th September 2026",
+  "extractedAt": "2026-09-30T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Wednesday 30 September 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 15, "oldestDays": 6.52 },
+    { "queue": "Unassigned", "inQueue": 12, "oldestDays": 0.7 },
+    { "queue": "Medico-legal", "inQueue": 3, "oldestDays": 0.72 },
+    { "queue": "GP Mail", "inQueue": 3, "oldestDays": 8.98 }
+  ],
+  "realTimeSummary": { "inQueue": 33, "oldestDays": 8.98 },
+  "_realTimeQueuesNote": "4 queues printed this time; they sum to the Summary row exactly (15+12+3+3=33), and the Summary's own oldestDays (8.98) matches GP Mail's own printed value exactly (the oldest individual queue) — high confidence. This panel's own extraction timestamp reads 'Wednesday, 30th September 2026' — one business day ahead of this report's own Tuesday date, the same established one-business-day-ahead pattern seen on every prior date.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 31 },
+    { "queue": "Requests", "count": 16 },
+    { "queue": "Documents", "count": 13 },
+    { "queue": "Finance", "count": 6 },
+    { "queue": "Medico-legal", "count": 6 },
+    { "queue": "Practice Finance", "count": 5 },
+    { "queue": "File Transfer", "count": 3 },
+    { "queue": "Escalation", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep"],
+    "totals": [78, 88, 85, 116, 95, 69, 63, 63, 70, 81]
+  },
+  "_note": "contactsQueuedYesterday sums to 81 exactly (31+16+13+6+6+5+3+1), matching this report's own contactsQueuedTenDayTrend chart's clean trailing value exactly — this chart's own labels matched the report's actual date sequence directly this time (no one-day-ahead shift, same as 2026-09-25's own labelling), and positions 0-8 chain-matched 2026-09-28's own committed trend exactly. Two emailsHandledYesterday rows don't reconcile to their own stated total this time: Jasmina Sodolovic (16 vs 8+2=10, a larger gap than the usual off-by-one quirk) and Alexandra Cownie (5 vs 4+0=4, the familiar off-by-one). Recorded verbatim rather than reconciled; Chloey Leow, Lucinda Gonzalez, Leh Peng Goh and Apurva Pathak all reconcile exactly.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 41, "outbound": 15, "total": 56 },
+    { "agent": "Lucinda Gonzalez", "incoming": 18, "outbound": 3, "total": 21 },
+    { "agent": "Jasmina Sodolovic", "incoming": 8, "outbound": 2, "total": 16 },
+    { "agent": "Leh Peng Goh", "incoming": 6, "outbound": 0, "total": 6 },
+    { "agent": "Alexandra Cownie", "incoming": 4, "outbound": 0, "total": 5 },
+    { "agent": "Apurva Pathak", "incoming": 4, "outbound": 1, "total": 5 }
+  ],
+  "totalCasesToDate": { "date": "2026-09-29", "totalOverallCases": 9325, "totalInProgress": 100, "totalOpenCases": 45 },
+  "inProgressTenDayTrend": {
+    "labels": ["Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep"],
+    "totals": [122, 121, 129, 122, 113, 111, 101, 105, 108, 100]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep"],
+    "totals": [85, 80, 99, 65, 57, 57, 59, 65, 55, 45]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a one-business-day-ahead date/label stamp ('30/9/2026', a Wednesday) — recorded here against this date's own actual report date (2026-09-29), matching the same label convention already used in 2026-09-28's own committed file. totalInProgress (100) and totalOpenCases (45) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-09-28's own committed trend exactly — high confidence. totalOverallCases (9325) jumped unusually sharply from 2026-09-28's committed 8494 (+831 in one day, versus a typical daily increment of roughly 50-100 seen on every prior date) — recorded verbatim as printed since there's no chain or trend chart to cross-check this particular figure against, but flagged here as an anomaly worth a second look."
+}

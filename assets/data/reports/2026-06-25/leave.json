@@ -1,0 +1,42 @@
+{
+  "_source": "Daily Operations Report - 25th June 2026.pdf, page 20 (Staff & Doctors on Leave) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 25th June 2026",
+  "reportDate": "2026-06-25",
+  "weekStart": "2026-06-22",
+  "weekEnd": "2026-06-26",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Julie Beuth", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Neena Sood", "site": "Crace", "status": ["leave", "leave", "available", "available", "available"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Bethany Tran", "site": null, "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Georgina Bick", "site": null, "status": ["available", "leave", "available", "available", "available"] },
+        { "name": "Atif Wan", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Nicole Regaspi", "site": null, "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Renee Bowman", "site": null, "status": ["leave", "leave", "available", "leave", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Pinky Mae De Paz", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Samantha Cooper", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Abbey Freestone", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Emily Pettett", "site": null, "status": ["available", "available", "leave", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "This date's roster grid is identical to 2026-06-24's own committed leave.json (same week, 22-26 June, same 11-person roster and same per-day statuses) — verified against this date's own source page rather than assumed. overview.json's doctorLinesOnLeave/staffFullyOnLeave/staffPartialLeave counts are a same-day (Thursday) snapshot: doctorLinesOnLeave counts 'Dr'-titled rows on leave that day (Dr Julie Beuth only — Dr Neena Sood is available from Wednesday onward); staffFullyOnLeave counts staff on leave all 5 days this week (Andrew Davies, Pinky Mae De Paz, Samantha Cooper, Jasmine Deery); staffPartialLeave/staffPartialLeaveNames counts staff on leave specifically on Thursday who are not on leave the whole week (Renee Bowman only, who is on leave Mon/Tue/Thu/Fri but available Wednesday)."
+}

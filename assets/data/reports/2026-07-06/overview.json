@@ -1,0 +1,51 @@
+{
+  "_source": "Daily Operations Report - 6th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 262, "date": "2026-07-06", "weekday": "Monday", "title": "Daily Operations Report - 6th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 67 },
+      { "name": "Finance", "completionPct": 88 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 327,
+    "accepted": 308,
+    "acceptedPct": 94,
+    "missed": 19,
+    "missedPct": 6,
+    "totalOutbound": 110,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 81 },
+    "topOutboundAgent": { "name": "Ambrosie Brassil", "calls": 31 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 195, "missed": 11 },
+      { "queue": "General Enquiries", "accepted": 100, "missed": 7 },
+      { "queue": "Health Professionals", "accepted": 13, "missed": 1 },
+      { "queue": "Canberra Vasectomy", "accepted": 0, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 55,
+    "oldestDays": 10.9636,
+    "emailsHandledYesterday": 136,
+    "totalOverallCases": 3216,
+    "totalInProgress": 214,
+    "totalOpenCases": 73
+  },
+  "_cloopNote": "This early report's Cloop section carries only a same-day real-time queue snapshot, an emails-handled-yesterday per-agent table, and a single Total Cases to Date row — no 'contacts queued yesterday' breakdown and no 10-day trend charts are present in the source (unlike later, fuller reports). emailsHandledYesterday here is the sum of the five agents' printed 'Contacts handled' totals (63+43+15+11+4=136). The Real-Time Metrics table's Summary row prints its 'Oldest' value as a duration '263:07:35' (hh:mm:ss) rather than in days like every other row; 263:07:35 = ~10.964 days, which closely matches the Nursing row's 10.9636 days (the actual oldest item in queue) — recorded as 10.9636 here treating that as the same underlying figure in a different printed format, not a reconciliation of conflicting data.",
+  "leave": {
+    "weekLabel": "6–10 July 2026",
+    "doctorLinesOnLeave": 4,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Sudina Rijal", "Bianca Mitchell", "Bethany Tran"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

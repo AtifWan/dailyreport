@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 22nd July 2026.pdf, pages 1-2 (Critical Daily Tasks) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 22nd July 2026",
+  "reportDate": "2026-07-22",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 9, "onHalt": false },
+    { "name": "Finance", "days": 1, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Send Claim For Automed Payments (C.Le@8:48)",
+        "Caregp Ai Tool (C.Le@8:48)",
+        "Clinical Reminders (C.Le@8:48)",
+        "Allocate - Healthlink Unallocated (C.Le@10:32)",
+        "E-Referrals (A.Wa@18:15)",
+        "Action 10 Or More Failed Communications (A.Wa@18:24)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 78,
+      "trend": [100, 100, 13, 100, 100, 100, 88, 88, 78, 100],
+      "complete": [
+        "Online claiming run in Best Practice (J.Sa@13:12)",
+        "90/60-day debt list actioned (L.Go@19:19)",
+        "Finance queue in Cloop has zero emails (L.Go@19:19)",
+        "Xero accounts reconciled (L.Go@19:19)",
+        "Debt chasing report updated (L.Go@19:19)",
+        "Tyro Health receipts captured (L.Go@19:19)",
+        "Unidentified payments resolved (L.Go@19:19)"
+      ],
+      "incomplete": []
+    }
+  ],
+  "_financeBadgeDiscrepancyNote": "Finance's printed completion badge for this date reads 78%, but that conflicts with two other pieces of evidence on the very same source page: (1) the 10-day trend chart's own rightmost/newest point, which reads 100% (cross-validated: this chart's first 9 points — 100,100,13,100,100,100,88,88,78 — match 2026-07-21's trend positions1-9 exactly, so the 10th point is this date's own new reading), and (2) the complete/incomplete task lists, which show all 7 Finance tasks complete and none incomplete (7/7 = 100%). Recorded the badge value (78%) verbatim in completionPct per this project's convention of that field mirroring the printed badge; the trend array above is also recorded verbatim (10 values, ending in 100, i.e. NOT 78) rather than force-fitting it to match the badge. This three-way mismatch (badge vs trend vs task list, all on one page) is unlike any other date processed so far and is not silently reconciled.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

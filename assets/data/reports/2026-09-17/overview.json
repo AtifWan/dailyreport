@@ -1,0 +1,109 @@
+{
+  "_source": "Daily Operations Report - 17th September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 315,
+    "date": "2026-09-17",
+    "weekday": "Thursday",
+    "title": "Daily Operations Report - 17th September 2026 (Short Version)"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 50,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 2,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 100
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 281,
+    "accepted": 239,
+    "acceptedPct": 85,
+    "missed": 42,
+    "missedPct": 15,
+    "totalOutbound": 117,
+    "topInboundAgent": {
+      "name": "David Antioch",
+      "calls": 42
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 134,
+        "missed": 21
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 101,
+        "missed": 20
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 2,
+        "missed": 1
+      }
+    ]
+  },
+  "_topInboundAgentNote": "David Antioch is the first-listed name paired with the highest surviving value (42) in today's per-agent chart, the same positional convention used to identify the top agent on every prior date (including Rebecca Quinn on 09-11/14/15/16) — the chart's names (12) and values (9) still don't line up 1:1 overall, so the full inboundByStaff table remains empty (see call-logs.json's own note), but the top single value is high confidence regardless of the rest of the alignment. Worth flagging: Rebecca Quinn, who topped this same chart on each of the four preceding dates, does not appear in today's name list at all — see leave.json's own note for why this matters.",
+  "cloop": {
+    "inQueue": 89,
+    "oldestDays": 10.81,
+    "contactsQueuedYesterday": 88,
+    "emailsHandledYesterday": 110,
+    "totalOverallCases": 7925,
+    "totalInProgress": 121,
+    "totalOpenCases": 80
+  },
+  "leave": {
+    "weekLabel": "14–18 September 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Nita Sigdel", "Rebecca Quinn", "Atif Wan", "Amy Morton", "Joshua Saw"],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      }
+    ]
+  },
+  "_leaveNote": "CORRECTED — see leave.json's own note. Dr Mara Matic, Dr Tom Mills and Tom Wigglesworth are on leave for the full week (doctorLinesOnLeave=3). No staff member is on leave the entire week, but all five listed staff are on leave part of the week — today (Thursday) Rebecca Quinn is confirmed genuinely on leave, exactly matching her absence from today's call charts. See leave.json for the exact per-day grid, now verified directly against the source PDF's visual table rather than guessed."
+}

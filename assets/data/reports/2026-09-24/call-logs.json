@@ -1,0 +1,88 @@
+{
+  "_source": "Daily Operations Report - 24th September 2026.pdf, pages 2-4 (Call Logs Reporting) — the only Call Logs pages this date's PDF contains. Read via OneDrive text extraction (Microsoft 365 connector), not pixel-level image verification. See tasks.json's _source note for why this date's PDF and its '(Short Version)' companion were both unusable in the normal way.",
+  "reportTitle": "Daily Operations Report - 24th September 2026",
+  "reportDate": "2026-09-24",
+  "summary": {
+    "totalInbound": 278,
+    "accepted": 251,
+    "missed": 27,
+    "acceptedPct": 90,
+    "missedPct": 10,
+    "totalOutbound": 115
+  },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 158, "missed": 18 },
+    { "queue": "General Enquiries", "accepted": 88, "missed": 9 },
+    { "queue": "Health Professionals", "accepted": 0, "missed": 0 },
+    { "queue": "Canberra Vasectomy", "accepted": 4, "missed": 0 }
+  ],
+  "grandTotal": { "accepted": 250, "missed": 27 },
+  "_summaryVsGrandTotalNote": "This date's own Queue Report table printed Appointments/General Enquiries/Canberra Vasectomy figures directly (18/9/0 missed, 158/88/4 accepted, grand total 250/27) — Health Professionals wasn't in that table but is confirmed 0/0 by 2026-09-25's own per-queue chart carrying this date forward. The cover pie's own accepted total (251) runs 1 above the Queue Report's grand total (250) — the same recurring 'cover pie vs Queue Report total' gap seen on prior dates. The inboundByStaff table below independently sums to exactly 251, matching the cover pie precisely, so 251 is used as the trusted accepted total elsewhere in this file. All four queue-level figures (158/18, 88/9, 0/0, 4/0) are independently double-confirmed by 2026-09-25's own printed 10-day per-queue charts, which carry this date's value as their own second-to-last point — exact agreement in both directions.",
+  "tenDayTrend": {
+    "labels": ["Fri 11 Sep", "Mon 14 Sep", "Tue 15 Sep", "Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep"],
+    "answerRatePct": [91, 91, 87, 87, 85, 84, 78, 94, 84, 90],
+    "answerRateTargetPct": 85,
+    "accepted": [209, 284, 280, 263, 239, 173, 272, 285, 282, 251],
+    "missed": [20, 29, 41, 40, 42, 34, 77, 19, 53, 27],
+    "overallAvgWaitSec": [28, 42, 43, 41, 41, 52, 45, 29, 28, 44]
+  },
+  "_tenDayTrendNote": "This date's own PDF didn't print the overall Call Answer Rate / Call Volume / Wait Time 10-day charts at all (see tasks.json's _source note on the truncated PDF). Every array here is chain-reconstructed: positions 0-8 equal 2026-09-23's own committed chain with its first entry dropped, position 9 (today) confirmed against 2026-09-25's own printed charts, which independently carry today's value as their own second-to-last point. answerRatePct/accepted/missed matched exactly in both directions; overallAvgWaitSec matched at 8 of 9 overlapping positions — the one divergence (2026-09-25's own chart implies 37 at Mon 14 Sep, vs 42 already committed on 2026-09-23's own chain) is the same well-documented single-point instability this series has shown on every prior date, so the already-committed historical value (42) is kept per the established convention rather than the new reading.",
+  "queues": {
+    "Appointments": {
+      "accepted": [113, 189, 150, 149, 134, 95, 177, 157, 178, 158],
+      "missed": [11, 13, 18, 14, 21, 9, 33, 9, 24, 18],
+      "avgWaitSec": [42, 27, 42, 42, 42, 42, 42, 42, 42, 42]
+    },
+    "General Enquiries": {
+      "accepted": [94, 93, 127, 109, 101, 73, 89, 123, 97, 88],
+      "missed": [9, 16, 23, 26, 20, 25, 41, 10, 23, 9],
+      "avgWaitSec": [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+    },
+    "Health Professionals": {
+      "accepted": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "missed": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "avgWaitSec": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "Canberra Vasectomy": {
+      "accepted": [2, 2, 3, 3, 2, 3, 5, 2, 5, 4],
+      "missed": [0, 0, 0, 0, 1, 0, 3, 0, 6, 0],
+      "avgWaitSec": [44, 61, 61, 61, 61, 61, 61, 61, 61, 61]
+    }
+  },
+  "_queuesNote": "accepted/missed for all four queues chain-reconstructed the same way as tenDayTrend above, and all matched 2026-09-25's own carried-forward value exactly (high confidence). avgWaitSec per queue has shown well-documented chain instability on every prior date this series has been checked, and this date's own PDF didn't print it at all — rather than trust a single new unconfirmed reading, each queue's avgWaitSec is shifted the same way as its neighbours but the newly-appended point simply repeats the immediately-preceding value (this date's own true avgWaitSec is unknown), consistent with this metric's established 'carried forward unchanged' treatment on other dates.",
+  "patientServiceKpiNote": "Not published in this date's PDF (it's missing the whole KPI panel and Longest Call Duration/Longest Waiting Time page) and there's no chain mechanism to recover a same-day-only figure from a neighbouring date. Left out — the dashboard shows its own placeholder for this panel when absent.",
+  "longestWaitPerQueueNote": "Same as patientServiceKpi above: this date's PDF didn't print a Longest Wait Per Queue table, and it isn't a chain-carried figure, so there's nothing to recover. Left out — the dashboard shows its own placeholder for this table when absent.",
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 68, "durationMins": 155 },
+    { "name": "De Ang Renfree", "calls": 37, "durationMins": 123 },
+    { "name": "Andrew Davies", "calls": 28, "durationMins": 90 },
+    { "name": "Lucinda Gonzalez", "calls": 25, "durationMins": 61 },
+    { "name": "Pinky De Paz", "calls": 23, "durationMins": 86 },
+    { "name": "David Antioch", "calls": 22, "durationMins": 48 },
+    { "name": "Hannah Searle", "calls": 18, "durationMins": 50 },
+    { "name": "Apurva Pathak", "calls": 18, "durationMins": 54 },
+    { "name": "Emily Pettett", "calls": 10, "durationMins": 28 },
+    { "name": "Shae Connors", "calls": 1, "durationMins": 3 },
+    { "name": "Holly Archer", "calls": 1, "durationMins": 2 }
+  ],
+  "_inboundByStaffNote": "Full clean table: 11 names, 11 call-count values and 11 duration values all lined up 1:1, and the call counts sum to exactly 251 — matching this report's own cover pie precisely (rather than the Queue Report's lower grand total of 250, see _summaryVsGrandTotalNote).",
+  "outboundByStaff": [
+    { "name": "Apurva Pathak", "calls": 25, "durationMins": 27 },
+    { "name": "Rebecca Quinn", "calls": 22, "durationMins": 32 },
+    { "name": "Emily Pettett", "calls": 16, "durationMins": 14 },
+    { "name": "Andrew Davies", "calls": 15, "durationMins": 23 },
+    { "name": "Hannah Searle", "calls": 12, "durationMins": 10 },
+    { "name": "David Antioch", "calls": 8, "durationMins": 22 },
+    { "name": "De Ang Renfree", "calls": 7, "durationMins": 8 },
+    { "name": "Pinky De Paz", "calls": 5, "durationMins": 14 },
+    { "name": "Lucinda Gonzalez", "calls": 4, "durationMins": 5 },
+    { "name": "Holly Archer", "calls": 1, "durationMins": 1 }
+  ],
+  "_outboundByStaffNote": "Full clean table: 10 names, 10 call-count values and 10 duration values all lined up 1:1, and the call counts sum to exactly 115 — matching this report's own 'Total Outbound Calls = 115 Calls' caption precisely. Longest Call Outbound listed separately as Duration 33.47 (mins), Time 2:35 PM, Name 'RM7 Dr Kathleen O'Brien' (recorded verbatim — an odd combined role/name field, not otherwise explained by the source, the same kind of oddity seen on other dates).",
+  "outboundTenDayTrend": {
+    "labels": ["Fri 11 Sep", "Mon 14 Sep", "Tue 15 Sep", "Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep"],
+    "totals": [127, 120, 121, 159, 117, 117, 163, 152, 170, 115]
+  },
+  "_outboundTenDayTrendNote": "This date's own PDF didn't print this chart. Positions 0-8 are the exact carry-forward of 2026-09-23's own committed trend; position 9 (115) is taken from this date's own clean 'Total Outbound Calls = 115 Calls' caption, independently confirmed by the outboundByStaff table's own exact sum.",
+  "_hourlyPatternNote": "Not published in this date's PDF at all (it's missing that whole page) — left out, same as every other date regardless."
+}

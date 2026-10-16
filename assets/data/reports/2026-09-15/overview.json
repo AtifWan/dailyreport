@@ -1,0 +1,111 @@
+{
+  "_source": "Daily Operations Report - 15th September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 313,
+    "date": "2026-09-15",
+    "weekday": "Tuesday",
+    "title": "Daily Operations Report - 15th September 2026 (Short Version)"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 48,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 0,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 89,
+        "incompleteCount": 1,
+        "incompleteExample": "Finance queries resolved"
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 321,
+    "accepted": 280,
+    "acceptedPct": 87,
+    "missed": 41,
+    "missedPct": 13,
+    "totalOutbound": 121,
+    "topInboundAgent": {
+      "name": "Rebecca Quinn",
+      "calls": 62
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 150,
+        "missed": 18
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 127,
+        "missed": 23
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 3,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence — Rebecca Quinn is again at the top of the inbound-by-staff name list with the highest surviving value (62), her third consecutive appearance in this position since returning to the list on 2026-09-14.",
+  "cloop": {
+    "inQueue": 76,
+    "oldestDays": 11.71,
+    "contactsQueuedYesterday": 60,
+    "emailsHandledYesterday": 75,
+    "totalOverallCases": 7721,
+    "totalInProgress": 131,
+    "totalOpenCases": 72
+  },
+  "leave": {
+    "weekLabel": "14–18 September 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Nita Sigdel", "Rebecca Quinn", "Atif Wan", "Amy Morton", "Joshua Saw"],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      }
+    ]
+  },
+  "_leaveNote": "CORRECTED — see leave.json's own note. Dr Mara Matic, Dr Tom Mills and Tom Wigglesworth are on leave for the full week (doctorLinesOnLeave=3). No staff member is on leave the entire week, but all five listed staff are on leave part of the week on different specific days — see leave.json for the exact per-day grid, now verified directly against the source PDF's visual table rather than guessed."
+}

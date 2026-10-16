@@ -1,0 +1,177 @@
+{
+  "_source": "Daily Operations Report - 21st September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 21st September 2026",
+  "extractedAt": "2026-09-22T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Tuesday 22 September 2026",
+  "realTimeQueues": [
+    {
+      "queue": "Requests",
+      "inQueue": 30,
+      "oldestDays": 5.57
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 8,
+      "oldestDays": 0.73
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 7,
+      "oldestDays": 0.65
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 3,
+      "oldestDays": 4.7
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 3,
+      "oldestDays": 3.73
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 2,
+      "oldestDays": 10.92
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 1,
+      "oldestDays": 0.85
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 54,
+    "oldestDays": 10.92
+  },
+  "_realTimeQueuesNote": "Only 7 queues printed this time (down from the usual 9-10) and they sum to the Summary row exactly (30+8+7+3+3+2+1=54), high confidence. Finance, Practice Finance and Failed Communication are absent from this table — most likely because those queues emptied to zero and were simply omitted, consistent with the row count moving in lockstep with the confirmed sum rather than looking like a truncation.",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Documents",
+      "count": 33
+    },
+    {
+      "queue": "Unassigned",
+      "count": 32
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 17
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 12
+    },
+    {
+      "queue": "Requests",
+      "count": 11
+    },
+    {
+      "queue": "Finance",
+      "count": 6
+    },
+    {
+      "queue": "File Transfer",
+      "count": 2
+    },
+    {
+      "queue": "Practice Finance",
+      "count": 2
+    },
+    {
+      "queue": "Escalation",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep"
+    ],
+    "totals": [65, 82, 87, 92, 86, 60, 78, 88, 85, 116]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 65,
+      "outbound": 18,
+      "total": 83
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 20,
+      "outbound": 7,
+      "total": 33
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 17,
+      "outbound": 0,
+      "total": 17
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 6,
+      "outbound": 0,
+      "total": 6
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 5,
+      "outbound": 1,
+      "total": 6
+    },
+    {
+      "agent": "Megan Wright",
+      "incoming": 3,
+      "outbound": 0,
+      "total": 3
+    }
+  ],
+  "_emailsHandledYesterdayNote": "Titled 'Last Friday's Emails Handled' even though this report's own date is a Monday — expected and correct, since Cloop has no weekend activity to report and Monday's snapshot naturally covers the preceding Friday. Jasmina Sodolovic's stated total (33) doesn't equal her own incoming+outbound (20+7=27) — the same recurring 'total column doesn't match its own components' quirk seen on prior dates, but notably larger this time (off by 6, versus the usual off-by-1). Recorded verbatim rather than reconciled. Every other row reconciles exactly.",
+  "totalCasesToDate": {
+    "date": "2026-09-21",
+    "totalOverallCases": 8111,
+    "totalInProgress": 122,
+    "totalOpenCases": 65
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep"
+    ],
+    "totals": [117, 123, 124, 118, 125, 131, 122, 121, 129, 122]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep",
+      "Mon 21 Sep"
+    ],
+    "totals": [94, 77, 72, 69, 64, 72, 85, 80, 99, 65]
+  },
+  "_note": "A clean date overall: contactsQueuedYesterday table sums to 116 exactly (33+32+17+12+11+6+2+2+1), which matches this report's own contactsQueuedTenDayTrend chart's clean trailing value exactly — high confidence, no discrepancy. Both inProgressTenDayTrend and openCasesTenDayTrend printed all 10 values cleanly this time, with positions 0-8 matching 2026-09-18's own committed trend exactly and position 9 (122 and 65 respectively) matching this report's own Total Cases To Date row precisely. Per the established convention, totalCasesToDate.date is recorded as the report's own date (2026-09-21) even though the source table's literal date column and extraction timestamp both read one business day ahead ('22/9/2026', Tuesday) — the normal next-business-day snapshot cadence."
+}

@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 1st July 2026.pdf — headline figures assembled from the long version's own verified pages (there is no separate distinct 'overview' page in this report)",
+  "report": { "number": 259, "date": "2026-07-01", "weekday": "Wednesday", "title": "Daily Operations Report - 1st July 2026" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 2, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 60 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 293,
+    "accepted": 265,
+    "acceptedPct": 90,
+    "missed": 28,
+    "missedPct": 10,
+    "totalOutbound": 155,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 81 },
+    "topOutboundAgent": { "name": "Ambrosie Brassil", "calls": 55 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 155, "missed": 10 },
+      { "queue": "General Enquiries", "accepted": 91, "missed": 12 },
+      { "queue": "Health Professionals", "accepted": 15, "missed": 6 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 }
+    ]
+  },
+  "_callLogsNote": "The pie chart (293 total; Accepted 265/90%, Missed 28/10%) and the Queue Report bar chart (also headed '=293 calls') disagree on accepted: the bar chart's per-queue rows sum to 263 accepted (155+91+15+2), matching its own Grand Total row (263/28), not the pie's 265. Missed calls agree everywhere (28). The separate 'Accepted/Missed Calls by Queue' pie-chart page matches the Queue Report bar chart exactly (155/91/15/2 accepted, 10/12/6/0 missed) — no third figure. Recorded: accepted/acceptedPct from the pie (265/90, matching the inbound-by-staff table sum exactly), queueBreakdown rows verbatim from the Queue Report bar chart (summing to 263, not 265) — not reconciled.",
+  "cloop": {
+    "inQueue": 76,
+    "oldestDays": 13.85771,
+    "emailsHandledYesterday": 106,
+    "totalOverallCases": 2946,
+    "totalInProgress": 209,
+    "totalOpenCases": 103
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the eight agents' printed 'Contacts handled' totals (48+13+11+11+10+9+3+1=106); all eight agents' totals equal their own incoming+outbound components exactly this time — no per-agent mismatch. The Real-Time Metrics table itself is internally inconsistent: its 8 per-queue rows (38+11+7+4+2+2+1+1) sum to only 66, not the printed Summary row's 76 — a 10-call gap recorded verbatim, not reconciled. Separately, the Summary row's 'Oldest' figure (309:23:33) is LOWER than the Nursing row's own printed oldest-item value (332:35:06 ~13.858 days) — the opposite of every other date in this project, where the Summary's oldest always matched the single highest per-queue value exactly. 309:23:33 is also the exact same duration printed as 2026-06-30's own Summary-row oldest figure, strongly suggesting this date's Summary row is stale/unrefreshed data rather than a newly computed figure. Recorded oldestDays above using the Nursing row's own (higher, more plausible) value rather than the stale-looking Summary figure; both are recorded verbatim in cloop.json with this note.",
+  "leave": {
+    "weekLabel": "29 June – 3 July 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 1,
+    "staffPartialLeaveNames": ["Megan Moreno Pitcher"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "This report's leave grid, for the SAME displayed week (29 June - 3 July) as 2026-06-29/06-30, now shows 7 Doctor-group rows (Dr Julie Beuth, Dr Tracy Fox, Dr Sheahan Ranasinghe, Dr Freya Ashman, Dr Krystel Chin, Dr Reiham Ibrahim, JMO Ashley Kean) versus only 2 on 2026-06-29/06-30's own version of this identical week — a genuine roster inconsistency between reports covering the same calendar week, recorded verbatim rather than reconciled (same family of quirk as roster differences documented elsewhere in this project). The Staff group is unchanged (same 5 names). Wednesday (this report's own date) snapshot: doctorLinesOnLeave=5 (Julie Beuth, Sheahan Ranasinghe, Freya Ashman, Reiham Ibrahim and Ashley Kean all on leave Wednesday; Dr Tracy Fox and Dr Krystel Chin are available Wednesday); staffFullyOnLeave=4 (Andrew Davies, Pinky Mae De Paz, Samantha Cooper, Jasmine Deery); staffPartialLeave=1 (Megan Moreno Pitcher, on leave specifically Wednesday, available the other 4 days)."
+}

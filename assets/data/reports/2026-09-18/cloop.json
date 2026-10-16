@@ -1,0 +1,192 @@
+{
+  "_source": "Daily Operations Report - 18th September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 18th September 2026",
+  "extractedAt": "2026-09-21T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Monday 21 September 2026",
+  "realTimeQueues": [
+    {
+      "queue": "Requests",
+      "inQueue": 30,
+      "oldestDays": 6.83
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 20,
+      "oldestDays": 2.75
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 15,
+      "oldestDays": 10.71
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 15,
+      "oldestDays": 2.72
+    },
+    {
+      "queue": "Failed Communication",
+      "inQueue": 8,
+      "oldestDays": 2.68
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 2,
+      "oldestDays": 6.64
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 2,
+      "oldestDays": 2.76
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 2,
+      "oldestDays": 2.65
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 1,
+      "oldestDays": 2.66
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 9.95
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 96,
+    "oldestDays": 10.71
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 24
+    },
+    {
+      "queue": "Documents",
+      "count": 21
+    },
+    {
+      "queue": "Requests",
+      "count": 15
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 6
+    },
+    {
+      "queue": "Finance",
+      "count": 5
+    },
+    {
+      "queue": "Escalation",
+      "count": 4
+    },
+    {
+      "queue": "File Transfer",
+      "count": 4
+    },
+    {
+      "queue": "Practice Finance",
+      "count": 4
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 2
+    }
+  ],
+  "_contactsQueuedYesterdayNote": "This report's own table is titled 'Last Friday's Contacts Queued' rather than 'Yesterday's' — since the report date (2026-09-18) is itself a Friday and extraction happened the following Monday (21st), 'last Friday' correctly refers to this same report date's own data. Field name kept consistent with every other date's schema.",
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep"
+    ],
+    "totals": [109, 65, 82, 87, 92, 86, 60, 78, 88, 85]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 51,
+      "outbound": 10,
+      "total": 61
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 10,
+      "outbound": 5,
+      "total": 15
+    },
+    {
+      "agent": "Ambrosie Brassil",
+      "incoming": 11,
+      "outbound": 2,
+      "total": 13
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 5,
+      "outbound": 1,
+      "total": 7
+    },
+    {
+      "agent": "Megan Wright",
+      "incoming": 4,
+      "outbound": 0,
+      "total": 5
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 3,
+      "outbound": 0,
+      "total": 3
+    }
+  ],
+  "_emailsHandledYesterdayNote": "Titled 'Last Friday's Emails Handled' in the source, same reasoning as the contacts-queued table above. TWO rows have a total that doesn't equal their own incoming+outbound this time (both off by exactly 1): Leh Peng Goh (stated 7 vs 5+1=6) and Megan Wright (stated 5 vs 4+0=4) — the same recurring 'total column doesn't match its own components' quirk seen on other dates, just affecting two rows instead of the usual one. Recorded verbatim rather than reconciled. Chloey Leow, Apurva Pathak, Ambrosie Brassil and Atif Wan's rows all reconcile exactly.",
+  "totalCasesToDate": {
+    "date": "2026-09-18",
+    "totalOverallCases": 8036,
+    "totalInProgress": 129,
+    "totalOpenCases": 99
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep"
+    ],
+    "totals": [113, 117, 123, 124, 118, 125, 131, 122, 121, 129]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Mon 07 Sep",
+      "Tue 08 Sep",
+      "Wed 09 Sep",
+      "Thu 10 Sep",
+      "Fri 11 Sep",
+      "Mon 14 Sep",
+      "Tue 15 Sep",
+      "Wed 16 Sep",
+      "Thu 17 Sep",
+      "Fri 18 Sep"
+    ],
+    "totals": [94, 94, 77, 72, 69, 64, 72, 85, 80, 99]
+  },
+  "_note": "Real-time queue table sums to the Summary row exactly (30+20+15+15+8+2+2+2+1+1=96), high confidence. contactsQueuedYesterday table sums to 85 (24+21+15+6+5+4+4+4+2), which agrees exactly with the one genuine leftover value found in the trend chart's own text once the historical chain was matched off — high confidence, no discrepancy (unlike 2026-09-16's disagreement). inProgressTenDayTrend's own chart text fully matched the historical chain with nothing distinguishable left over — used the Total Cases To Date row's own value (129) instead. openCasesTenDayTrend's own chart text produced a clean trailing value (99) that agrees exactly with the Total Cases To Date row — high confidence. Per the established convention, totalCasesToDate.date is recorded as the report's own date (2026-09-18) even though the source table's literal date column and extraction timestamp both read several days ahead ('21/9/2026', Monday) — this date's snapshot crossed a weekend, so the usual 'one business day ahead' gap is instead a 'next business day after the weekend' gap (Friday → Monday), same underlying convention."
+}

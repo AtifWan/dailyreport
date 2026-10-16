@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 9th September 2026 (Short Version).pdf + long version, read via OneDrive text extraction (Microsoft 365 connector) — NOT pixel-level image verification. Cross-checked against the already-committed 2026-09-08 data using the shift-by-one-day technique.",
+  "_note": "This report was captured by the automated day-to-day pipeline (text extraction, not visual rendering). Most 10-day trend charts extracted garbled/incomplete (a known risk flagged when this pipeline was agreed) — see call-logs.json/tasks.json for exactly which fields are estimates vs directly confirmed. topInboundAgent's count (58) agreed between both the short and long PDF's independent extractions, so it's a reasonably solid read; topOutboundAgent could not be determined reliably and is omitted.",
+  "report": { "number": 309, "date": "2026-09-09", "weekday": "Wednesday", "title": "Daily Operations Report - 9th September 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 44, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 88, "incompleteCount": 1, "incompleteExample": "Online claiming run in Best Practice" }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 262,
+    "accepted": 242,
+    "acceptedPct": 92,
+    "missed": 20,
+    "missedPct": 8,
+    "totalOutbound": 148,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 58 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 154, "missed": 10 },
+      { "queue": "General Enquiries", "accepted": 86, "missed": 10 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 84,
+    "oldestDays": 12.97,
+    "contactsQueuedYesterday": 82,
+    "emailsHandledYesterday": 106,
+    "totalOverallCases": 7377,
+    "totalInProgress": 123,
+    "totalOpenCases": 77
+  },
+  "leave": {
+    "weekLabel": "7–11 September 2026",
+    "doctorLinesOnLeave": 4,
+    "staffFullyOnLeave": 2,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Kiara Pfeffer", "Bethany Tran", "Renee Bowman"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

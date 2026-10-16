@@ -1,0 +1,54 @@
+{
+  "_source": "Daily Operations Report - 21st July 2026.pdf, pages 19-23 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 21st July 2026",
+  "extractedAt": "2026-07-22T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Wednesday 22 July 2026",
+  "realTimeQueues": [
+    { "queue": "Unassigned", "inQueue": 7, "oldestDays": 0.61 },
+    { "queue": "Nursing", "inQueue": 4, "oldestDays": 9.01 },
+    { "queue": "Failed Communication", "inQueue": 3, "oldestDays": 0.67 },
+    { "queue": "Requests", "inQueue": 2, "oldestDays": 0.38 },
+    { "queue": "Documents", "inQueue": 2, "oldestDays": 0.65 },
+    { "queue": "Practice Finance", "inQueue": 2, "oldestDays": 0.61 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.58 }
+  ],
+  "realTimeSummary": { "inQueue": 22, "oldestDays": 9.01 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 33 },
+    { "queue": "Finance", "count": 18 },
+    { "queue": "Medico-legal", "count": 17 },
+    { "queue": "Documents", "count": 15 },
+    { "queue": "Practice Finance", "count": 10 },
+    { "queue": "Requests", "count": 10 },
+    { "queue": "Escalation", "count": 6 },
+    { "queue": "File Transfer", "count": 6 },
+    { "queue": "Failed Communication", "count": 5 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul"],
+    "totals": [102, 90, 54, 89, 67, 90, 92, 109, 115, 120]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 38, "outbound": 6, "total": 44 },
+    { "agent": "Ella Blackamore", "incoming": 29, "outbound": 0, "total": 33 },
+    { "agent": "Jasmina Sodolovic", "incoming": 19, "outbound": 10, "total": 29 },
+    { "agent": "Leh Peng Goh", "incoming": 18, "outbound": 0, "total": 18 },
+    { "agent": "Jessica Hinchy", "incoming": 7, "outbound": 3, "total": 13 },
+    { "agent": "Apurva Pathak", "incoming": 4, "outbound": 3, "total": 7 },
+    { "agent": "Kenneth Lobo", "incoming": 3, "outbound": 1, "total": 5 },
+    { "agent": "Atif Wan", "incoming": 2, "outbound": 0, "total": 2 },
+    { "agent": "Frances Doble", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Two agents' stated totals don't equal incoming+outbound in the source PDF itself: Ella Blackamore (29+0=29, but total printed as 33), Jessica Hinchy (7+3=10, but total printed as 13) and Kenneth Lobo (3+1=4, but total printed as 5). Same recurring quirk already flagged on other committed dates' cloop.json files. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-07-22", "totalOverallCases": 4171, "totalInProgress": 89, "totalOpenCases": 39 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the rest of this Cloop section (through Wed 22 Jul rather than Tue 21 Jul) — same next-business-day extraction pattern noted on other already-committed files.",
+  "inProgressTenDayTrend": {
+    "labels": ["Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul"],
+    "totals": [229, 215, 223, 144, 102, 79, 80, 93, 88, 89]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul"],
+    "totals": [59, 60, 67, 47, 55, 39, 40, 60, 50, 39]
+  },
+  "_tenDayTrendNote": "Cross-validated: contactsQueuedTenDayTrend positions1-9 and both Total Cases trends' positions1-9 match 2026-07-20's already-written arrays' positions0-8 exactly. New/unverified final positions read directly from the image."
+}

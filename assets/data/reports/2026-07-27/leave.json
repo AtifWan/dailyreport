@@ -1,0 +1,36 @@
+{
+  "_source": "Daily Operations Report - 27th July 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "Same week (27-31 Jul, the report's own week) and identical roster to the already-committed 2026-07-28/29/30 leave.json.",
+  "reportTitle": "Daily Operations Report - 27th July 2026",
+  "reportDate": "2026-07-27",
+  "weekStart": "2026-07-27",
+  "weekEnd": "2026-07-31",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Penny Gosling", "site": "Grace", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Nicole Regaspi", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Micah Haly", "site": null, "status": ["leave", "leave", "available", "leave", "leave"] },
+        { "name": "Atif Wan", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Peter Robens", "site": null, "status": ["leave", "leave", "leave", "leave", "available"] },
+        { "name": "Sudina Rijal", "site": null, "status": ["available", "available", "leave", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

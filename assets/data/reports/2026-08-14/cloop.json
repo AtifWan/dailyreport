@@ -1,0 +1,55 @@
+{
+  "_source": "Daily Operations Report - 14th August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 14th August 2026",
+  "extractedAt": "2026-08-17T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Monday 17 August 2026",
+  "_weekendSkipNote": "This report is for Friday 14th August. Per the established weekend-skip pattern, its Cloop data was extracted the following Monday morning (not Saturday), and the source PDF's own 'yesterday' tables are explicitly labeled 'Last Friday's' rather than 'Yesterday's'.",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 21, "oldestDays": 6.89 },
+    { "queue": "Documents", "inQueue": 11, "oldestDays": 2.71 },
+    { "queue": "Unassigned", "inQueue": 11, "oldestDays": 2.69 },
+    { "queue": "Practice Finance", "inQueue": 10, "oldestDays": 10.24 },
+    { "queue": "Escalation", "inQueue": 6, "oldestDays": 13.89 },
+    { "queue": "Failed Communication", "inQueue": 4, "oldestDays": 2.38 },
+    { "queue": "Finance", "inQueue": 3, "oldestDays": 2.61 },
+    { "queue": "Medico-legal", "inQueue": 2, "oldestDays": 2.74 },
+    { "queue": "File Transfer", "inQueue": 2, "oldestDays": 6.99 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 2.9 }
+  ],
+  "realTimeSummary": { "inQueue": 71, "oldestDays": 13.89 },
+  "contactsQueuedYesterday": [
+    { "queue": "Finance", "count": 29 },
+    { "queue": "Unassigned", "count": 29 },
+    { "queue": "Documents", "count": 14 },
+    { "queue": "Medico-legal", "count": 12 },
+    { "queue": "Requests", "count": 7 },
+    { "queue": "Failed Communication", "count": 6 },
+    { "queue": "File Transfer", "count": 4 },
+    { "queue": "Escalation", "count": 1 }
+  ],
+  "_contactsQueuedYesterdayLabel": "Last Friday's Contacts Queued in Each Queue",
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug"],
+    "totals": [122, 78, 69, 73, 126, 108, 88, 71, 88, 102]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 67, "outbound": 18, "total": 85 },
+    { "agent": "Leh Peng Goh", "incoming": 29, "outbound": 1, "total": 32 },
+    { "agent": "Atif Wan", "incoming": 4, "outbound": 0, "total": 4 },
+    { "agent": "Frances Doble", "incoming": 0, "outbound": 1, "total": 1 },
+    { "agent": "Lucinda Gonzalez", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayLabel": "Last Friday's Emails Handled",
+  "_emailsHandledYesterdayNote": "Leh Peng Goh's stated total (32) doesn't equal incoming+outbound in the source PDF itself (29+1=30). Same recurring quirk already flagged on 2026-09-07's cloop.json (and others in this batch). Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-08-17", "totalOverallCases": 5740, "totalInProgress": 132, "totalOpenCases": 73 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the rest of this Cloop section (through Mon 17 Aug rather than Fri 14 Aug) — same next-business-day extraction pattern as the report's overall Cloop timestamp, just applied to this sub-section's own date labels too, consistent with the already-committed 2026-08-17 file.",
+  "inProgressTenDayTrend": {
+    "labels": ["Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug"],
+    "totals": [138, 117, 120, 126, 137, 130, 128, 124, 127, 132]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug"],
+    "totals": [26, 34, 24, 42, 43, 48, 49, 53, 60, 73]
+  },
+  "_tenDayTrendNote": "Cross-validated: all three trend arrays' positions1-9 match the already-committed 2026-08-17 arrays' positions0-8 exactly (shift-by-one-day check, spanning the weekend cleanly since 08-14 Fri and 08-17 Mon are adjacent business days). New/unverified position0 in each read directly from the image."
+}

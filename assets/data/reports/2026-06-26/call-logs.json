@@ -1,0 +1,79 @@
+{
+  "_source": "Daily Operations Report - 26th June 2026.pdf, pages 3-17 (Call Logs Reporting) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 26th June 2026",
+  "reportDate": "2026-06-26",
+  "summary": { "totalInbound": 246, "accepted": 228, "missed": 18, "acceptedPct": 93, "missedPct": 7, "totalOutbound": 132 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 122, "missed": 6 },
+    { "queue": "General Enquiries", "accepted": 84, "missed": 5 },
+    { "queue": "Health Professionals", "accepted": 17, "missed": 6 },
+    { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 1 }
+  ],
+  "grandTotal": { "accepted": 225, "missed": 18 },
+  "_summaryVsGrandTotalNote": "The pie chart's Accepted Calls value (228) — which matches the inbound-by-staff sum exactly — is 3 higher than the Grand Total bar chart's sum of the printed per-queue rows (225). Both headers say '=246 calls' but only the pie's own components (228+18) total 246; the queue rows/Grand Total (225+18=243) don't. Unlike 2026-06-25, the separate 'Accepted/Missed Calls by Queue' pie-chart page agrees exactly with the Queue Report bar chart this time (122/84/17/2 accepted, 6/5/6/1 missed) — no third figure to reconcile.",
+  "tenDayTrend": {
+    "labels": ["Mon 15 Jun", "Tue 16 Jun", "Wed 17 Jun", "Thu 18 Jun", "Fri 19 Jun", "Mon 22 Jun", "Tue 23 Jun", "Wed 24 Jun", "Thu 25 Jun", "Fri 26 Jun"],
+    "answerRatePct": [78, 93, 89, 96, 86, 89, 81, 88, 91, 93],
+    "answerRateTargetPct": 85,
+    "accepted": [329, 281, 264, 218, 220, 308, 229, 234, 239, 228],
+    "missed": [93, 21, 31, 9, 37, 38, 54, 33, 23, 18],
+    "overallAvgWaitSec": [30, 28, 30, 23, 41, 36, 47, 46, 33, 30]
+  },
+  "queues": {
+    "Appointments": { "accepted": [206, 169, 152, 112, 123, 190, 144, 147, 148, 122], "missed": [40, 10, 11, 4, 15, 16, 21, 13, 8, 6], "avgWaitSec": [30, 29, 28, 18, 43, 32, 51, 39, 35, 28] },
+    "General Enquiries": { "accepted": [108, 91, 82, 89, 80, 101, 68, 72, 75, 84], "missed": [36, 7, 9, 2, 15, 16, 21, 10, 8, 5], "avgWaitSec": [21, 29, 33, 30, 42, 44, 43, 67, 31, 35] },
+    "Health Professionals": { "accepted": [13, 17, 23, 13, 17, 14, 15, 10, 14, 17], "missed": [17, 4, 11, 3, 7, 5, 11, 9, 7, 6], "avgWaitSec": [29, 23, 34, 11, 21, 29, 31, 12, 22, 31] },
+    "Canberra Vasectomy": { "accepted": [2, 3, 4, 4, 0, 1, 2, 1, 1, 2], "missed": [0, 0, 0, 0, 0, 1, 1, 1, 0, 1], "avgWaitSec": [39, 7, 10, 39, 0, 153, 37, 16, 54, 36] }
+  },
+  "_tenDayTrendNote": "Cross-validated against the already-committed 2026-06-25: every trend array's positions0-8 match 2026-06-25's own arrays' positions1-9 exactly — overall answerRatePct/accepted/missed/overallAvgWaitSec and all 4 per-queue accepted/missed/avgWaitSec series, including General Enquiries' avgWaitSec (this date's Mon-15-Jun value reads 21, matching 2026-06-25's own committed value at that position, further corroborating that 2026-06-25's reading of 21 there — which itself differed from 2026-06-24's committed 31 for the same calendar date — was read correctly rather than being a one-off misread). No reordering corrections were needed this time; all new (10th) points were read directly.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 678,
+    "longestCallAt": "4:01 PM",
+    "longestCallAgent": "Apurva Pathak",
+    "longestWaitingTimeSec": 233,
+    "longestWaitingAt": "11:05 AM",
+    "avgCallHandlingSec": 145
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 233, "time": "11:05 AM", "name": "David Antioch", "waitLabel": "3 min 53 sec" },
+    { "queue": "General Enquiries", "waitSec": 133, "time": "1:24 PM", "name": "Rebecca Quinn", "waitLabel": "2 min 13 sec" },
+    { "queue": "Health Professionals", "waitSec": 180, "time": "10:39 AM", "name": "David Antioch", "waitLabel": "3 min 0 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 65, "time": "10:44 AM", "name": "Holly Archer", "waitLabel": "1 min 5 sec" }
+  ],
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 55, "durationMins": 113 },
+    { "name": "Apurva Pathak", "calls": 38, "durationMins": 85 },
+    { "name": "David Antioch", "calls": 35, "durationMins": 80 },
+    { "name": "De Ang Renfree", "calls": 35, "durationMins": 95 },
+    { "name": "Kiara Pfeffer", "calls": 23, "durationMins": 59 },
+    { "name": "Ambrosie Brassil", "calls": 23, "durationMins": 59 },
+    { "name": "Holly Archer", "calls": 9, "durationMins": 32 },
+    { "name": "Shae Connors", "calls": 5, "durationMins": 17 },
+    { "name": "Ella Blackmore", "calls": 2, "durationMins": 2 },
+    { "name": "Crace - Rec 1", "calls": 2, "durationMins": 5 },
+    { "name": "Kate Chin", "calls": 1, "durationMins": 3 }
+  ],
+  "_inboundByStaffNote": "Per-staff calls sum to exactly 228, matching the pie chart's Accepted Calls figure exactly — this is the value trusted for summary.accepted (see _summaryVsGrandTotalNote).",
+  "outboundByStaff": [
+    { "name": "David Antioch", "calls": 31, "durationMins": 47 },
+    { "name": "Rebecca Quinn", "calls": 23, "durationMins": 29 },
+    { "name": "Ambrosie Brassil", "calls": 22, "durationMins": 20 },
+    { "name": "Apurva Pathak", "calls": 14, "durationMins": 31 },
+    { "name": "De Ang Renfree", "calls": 10, "durationMins": 11 },
+    { "name": "Kiara Pfeffer", "calls": 8, "durationMins": 12 },
+    { "name": "Shae Connors", "calls": 8, "durationMins": 28 },
+    { "name": "Holly Archer", "calls": 6, "durationMins": 7 },
+    { "name": "Hannah Searle", "calls": 4, "durationMins": 3 },
+    { "name": "Megan Wright", "calls": 4, "durationMins": 13 },
+    { "name": "Aiden Chang", "calls": 2, "durationMins": 1 }
+  ],
+  "_outboundByStaffNote": "Per-staff calls sum to exactly 132, matching the header's stated 'Total Outbound Calls = 132 Calls' exactly. Longest Call Outbound: 14.40 min duration at 10:41 AM by Shae Connors.",
+  "outboundTenDayTrend": { "labels": ["Mon 15 Jun", "Tue 16 Jun", "Wed 17 Jun", "Thu 18 Jun", "Fri 19 Jun", "Mon 22 Jun", "Tue 23 Jun", "Wed 24 Jun", "Thu 25 Jun", "Fri 26 Jun"], "totals": [264, 234, 213, 229, 160, 188, 192, 161, 135, 153] },
+  "_outboundTenDayTrendNote": "Positions0-8 match 2026-06-25's own committed outboundTenDayTrend.totals positions1-9 exactly. The new (10th) point reads 153, which does not equal the outbound-by-staff table's own sum (132, matching the table's own printed header) — recorded verbatim, not reconciled, the same trend-chart-vs-table mismatch documented on 2026-06-25.",
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [0, 21, 33, 37, 20, 31, 25, 21, 18, 17, 5],
+    "missed": [1, 2, 2, 1, 4, 2, 1, 1, 3, 1, 0]
+  },
+  "_hourlyPatternNote": "Hourly pattern's accepted values sum to 228, matching the pie's total accepted exactly, and missed values sum to 18, matching the day's total missed exactly — for once both series reconcile cleanly with the pie chart (rather than the Grand Total bar, which is 3 lower on accepted). The chart's own first category ('Hour Label', a dummy axis placeholder always reading 0/0) was excluded from the hours/accepted/missed arrays here, consistent with how 7 AM–5 PM are the only real hour buckets."
+}

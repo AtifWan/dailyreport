@@ -1,0 +1,44 @@
+{
+  "_source": "Daily Operations Report - 22nd June 2026.pdf (Report #252), pages 2-3 (Critical Daily Tasks) — verified against rendered page images",
+  "_formatTransitionNote": "This date is a genuine one-off: TWO independently-produced PDFs exist for the same report number (#252) and date, with different titles — \"Daily Operations Report\" (21 pages, used here) and \"Report on Critical Daily Tasks & Call Logs\" (22 pages, the older report-naming convention this project's earliest backlog dates used). Their Call Logs section is byte-identical in every figure spot-checked (Total Inbound=346, accepted/missed breakdown, per-queue Queue Report). But their Critical Daily Tasks section is structurally DIFFERENT: this PDF (used for this file) tracks PST and Finance as the detailed checklists with 10-day trend charts (matching every other date already committed in this project, both before and after this one), while the other PDF instead tracks Crace and Denman as the detailed checklists (both showing streak-based mini trend charts and full complete/incomplete task lists), with no PST/Finance section at all. 2026-06-23 (the very next business day) has only ONE PDF, using this same PST/Finance format — so 22 June appears to be the last day of dual-format overlap during this project's transition away from Crace/Denman-level task detail.",
+  "reportTitle": "Daily Operations Report - 22nd June 2026",
+  "reportDate": "2026-06-22",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 0, "onHalt": false },
+    { "name": "Finance", "days": 0, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Tue 09 Jun", "Wed 10 Jun", "Thu 11 Jun", "Fri 12 Jun", "Mon 15 Jun", "Tue 16 Jun", "Wed 17 Jun", "Thu 18 Jun", "Fri 19 Jun", "Mon 22 Jun"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 56,
+      "trend": [50, 50, 44, 50, 50, 50, 44, 56, 50, 50],
+      "complete": [
+        "Reports For Management Meetings (C.Le@8:38)",
+        "Allocate - Healthlink Unallocated (C.Le@8:38)",
+        "Caregp Ai Tool (C.Le@13:05)",
+        "Clinical Reminders (C.Le@13:05)",
+        "Send Claim For Automed Payments (C.Le@13:44)"
+      ],
+      "incomplete": ["HotDoc NUA - To Action (9-5)", "HotDoc NUA - To Call", "Manage Email Rejections", "ADH"]
+    },
+    {
+      "name": "Finance",
+      "completionPct": 55,
+      "complete": [
+        "Unidentified Payments Resolved (L.Go@19:58)",
+        "Xero Accounts Reconciled (L.Go@19:58)",
+        "Tyro Health Receipts Captured (L.Go@19:58)",
+        "Remittances Allocated (L.Go@19:58)",
+        "Finance Queue In Cloop Has Zero Emails (L.Go@19:57)"
+      ],
+      "incomplete": ["90/60-day debt list actioned", "Finance queries resolved", "Online claiming run in Best Practice", "Debt chasing report updated"]
+    }
+  ],
+  "_trendNote": "PST's mini chart renders as unevenly-spaced clusters with overlapping labels (same legibility issue documented on 2026-07-06/07-07 — no date axis on the chart itself, dates inferred from the call-log 10-day trend chart on a later page). Read via careful left-to-right label ordering: [50,50,44] + [50,50,50,44] + [56,50,50]. The chart's own rightmost/newest point reads 50%, which does NOT match the 56% completion badge shown for this same PST checklist on this date — recorded verbatim as plotted, per this project's established convention for this exact kind of badge-vs-chart mismatch (see 2026-07-06's tasks.json for the same situation). No Finance checklist trend chart appears anywhere on the source pages, consistent with every other date already processed in this project — only PST publishes one.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in this PDF — only PST and Finance publish task-level detail here. (The alternate same-date PDF described above shows the reverse: Crace/Denman detail, no PST/Finance section — see _formatTransitionNote.)"
+}

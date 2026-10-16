@@ -32,13 +32,21 @@ index.html                    <- app shell: sidebar + topbar + a #page-content m
 assets/
   css/app.css                 <- a handful of layout-only additions on top of the design system
   js/
-    app.js                    <- hash router (#/overview, #/critical-tasks, #/call-logs, #/cloop, #/leave)
+    app.js                    <- date-aware hash router: #/<route>/<date>, e.g. #/overview/2026-09-08
+    datepicker.js              <- the per-page native <input type="date"> (item 10) — markup + wiring
     charts.js                 <- dependency-free SVG chart helpers, built only from design tokens
-    util.js                   <- esc(), fetchJSON(), timezone-safe formatDate(), mountInteractiveTable()
+    util.js                   <- esc(), fetchJSON(), timezone-safe formatDate()/addDaysISO(), mountInteractiveTable()
     workdays.js                <- ACT (Canberra) 2026 public holidays (dated + named) + working-day math
     calendarview.js             <- renders one month grid: holidays + known leave counts
-    pages/*.js                <- one render(container) module per page; each fetches its own JSON
-  data/*.json                 <- one file per page — the Phase 2 seam (see PHASE-2.md)
+    pages/*.js                <- one render(container, date, manifest) module per page; each fetches its own dated JSON
+  data/
+    source-pdfs/                <- drop new report PDFs here (see "Historical reports" below); nothing reads this at runtime
+      processed/                 <- PDFs already extracted, archived here so they're not re-processed
+    reports/
+      index.json                 <- manifest: {"dates": [...], "latest": "..."} — the only file that lists what's available
+      <YYYY-MM-DD>/*.json        <- one dated folder per report, same 5 filenames each time — the Phase 2 seam (see PHASE-2.md)
+scripts/
+  detect_reports.py            <- reports which PDFs in source-pdfs/ are new/paired/pending — no data extraction, just bookkeeping
 design-system/                <- vendored, unmodified YourGP Design System package
 COMPONENT-ANALYSIS.md         <- which design-system components each page uses, and why
 PHASE-2.md                    <- what changes (and what doesn't) when this goes live
@@ -64,15 +72,93 @@ PHASE-2.md                    <- what changes (and what doesn't) when this goes 
   and the report date doesn't land on the stated 109-day streak either — so it's shown
   verbatim rather than recalculated, with both facts called out in the page's own
   footnote rather than silently papered over.
-- **Leave & public holiday calendar** — Staff & Doctors' Leave has a month-by-month
-  calendar (`calendarview.js`) marking every real 2026 ACT public holiday and, for the
-  one week the source data covers, how many people are on leave each day (hover a day
-  for names). Days outside that week honestly say "No leave data" rather than imply
-  a clear roster; month nav is clamped to Jan–Dec 2026, the span the holiday list
-  actually covers. "On leave" renders in the loud colour (vermillion) and "Available"
-  in the calm one, deliberately matching the source PDF's orange/green emphasis — the
-  first version had this backwards, which made a person's single leave day easy to
-  miss next to a run of fully-on-leave rows.
+- **Public holiday calendar** — Staff & Doctors' Leave has a month-by-month calendar
+  (`calendarview.js`) marking every real 2026 ACT public holiday, so admin staff can
+  browse ahead to what's coming up; month nav is clamped to Jan–Dec 2026, the span the
+  holiday list actually covers. It deliberately does *not* also show a per-day leave
+  count — that would just duplicate the "Week at a glance" table above it.
+- **"Today" vs. the report date** — a report is always published a day after the date
+  its figures describe (Report #308's data is *about* Tuesday, but is only ever read
+  starting Wednesday). Retrospective figures (call volumes, checklist completion,
+  streak day-counts) stay anchored to the report's own date throughout. The one
+  exception is anything showing "which day is today, right now" — the Leave page's
+  today-highlight and the Public holiday calendar's today-ring — which use the report
+  date plus one day instead (`addDaysISO()` in `util.js`), so "Today" always lands on
+  the actual day the report is being read, not the day its data is about.
+- **Timezone: always Australia/Canberra, never the viewer's device.** Every date in this
+  app is a date-only ISO string (`YYYY-MM-DD`, no time-of-day) describing an ACT
+  (Canberra) calendar day, parsed and formatted with an explicit UTC anchor (`T00:00:00Z`
+  / `timeZone:'UTC'` in `formatDate()`/`addDaysISO()`) precisely so it renders as the same
+  day regardless of which timezone the viewer's browser is in — a Sydney-based practice's
+  "today" shouldn't silently shift by a day for someone viewing from Perth or overseas.
+  Nothing in the app reads the viewer's or server's real clock (there's no `new Date()`
+  anywhere in `assets/js/`); the one wall-clock timestamp that exists, `cloop.json`'s
+  `extractedAt`, is recorded with an explicit Canberra offset (`+10:00` AEST /
+  `+11:00` AEDT, whichever applies to that date) rather than UTC or a bare local time. Any
+  future feature that needs the real current moment (e.g. a live refresh, or deciding
+  whether today's report has landed yet) must resolve "today" against the
+  **Australia/Sydney** IANA timezone (which Canberra follows) — never `UTC` and never
+  `Intl`/`Date` defaults, which pick up whatever timezone the process happens to run in.
+- **Week at a glance, redesigned for scanability** — "On leave" renders in the loud
+  colour (vermillion) and "Available" in the calm one, deliberately matching the
+  source PDF's orange/green emphasis (an earlier version had this backwards, which
+  made a person's single leave day easy to miss next to a run of fully-on-leave rows).
+  Rows are sorted fully-out-first, then by days-out descending, and each name carries
+  an "Out all week" / "N/5 days out" badge plus a left status rail (the same inset-rail
+  idiom the KPI cards use for good/crit) — so who needs attention is obvious before
+  you've read a single day cell.
+
+## Historical reports & the date picker
+
+Every report date lives in its own folder, `assets/data/reports/<YYYY-MM-DD>/`, holding
+the same five JSON files described above. `assets/data/reports/index.json` is the one
+manifest listing which dates exist (`dates`) and which is newest (`latest`) — nothing
+else in the app hardcodes a date list.
+
+**Adding a new report doesn't mean creating that dated folder yourself.** Drop the
+source PDF(s) into `assets/data/source-pdfs/` — no renaming, no subfolders, any number
+of dates at once — and ask Claude to process them. It identifies each PDF's date and
+version from its title (below), extracts and verifies the figures, creates
+`assets/data/reports/<date>/`, updates the manifest, and archives the PDFs into
+`assets/data/source-pdfs/processed/`. `scripts/detect_reports.py` does the bookkeeping
+half of that on its own — run it (`python3 scripts/detect_reports.py`) to see which
+dropped-in dates are new, already done, or missing one half of the pair, without it
+touching any data itself.
+
+**Telling the two source PDFs apart.** Every report date is published as two PDFs, and
+their title text — not the filename — is the reliable way to tell which is which:
+
+| Report | Title on the page | Feeds |
+|---|---|---|
+| Long/full version | `Daily Operations Report - [DATE]` | `tasks.json`, `call-logs.json`, `cloop.json`, `leave.json` |
+| Short version | `Daily Operations Report - [DATE] (Short Version)` | `overview.json` only |
+
+`[DATE]` is written out as "8th September 2026" (day-ordinal + full month name + year) —
+the same string that becomes that folder's `YYYY-MM-DD`. The only textual difference
+between the two titles is the trailing `(Short Version)`; everything else, including the
+date, matches exactly between the pair for a given day. Each of the five JSON files
+records the exact source title it came from in `report.title` (`overview.json`) or
+`reportTitle` (the other four) — so a mismatch between a file's stored title and its
+folder's date, or between the long/short pair's dates, is a sign the wrong PDF pair was
+used and worth flagging before extracting further.
+
+The selected date lives in the URL hash itself — `#/<route>/<date>`, e.g.
+`#/leave/2026-09-08` — not inside any one page's state, which is what makes it survive
+navigating between pages (item 11). `app.js` is the one place that reads/resolves it
+(from the URL, falling back to whatever was last selected, falling back to
+`manifest.latest`) and passes it into every page's `render(container, date, manifest)`;
+sidebar nav clicks carry the current date forward via `data-route` attributes rather
+than resetting it. `manifest.latest` is never the live/real calendar date — a report is
+always published a day after the date it covers (see "Today" below), so "newest
+available" and "today's real date" are two different things on purpose.
+
+Each page renders its own date picker (`datepicker.js`) — a plain native
+`<input type="date">`, not a custom calendar widget, per the explicit ask — clamped to
+the manifest's date range and backed by a `<datalist>` so browsers that support it show
+tick marks on the specific dates that actually have data. Changing it on any one page
+re-renders that page at the new date and updates the URL; the picker is per-page by
+design (so, e.g., picking an older date on Leave doesn't also jump Overview to it), but
+navigating via the sidebar always preserves whatever date you were last looking at.
 
 ## Pages
 

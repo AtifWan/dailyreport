@@ -1,0 +1,85 @@
+{
+  "_source": "Daily Operations Report - 14th September 2026.pdf, pages 1-2 (Critical Daily Tasks), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 14th September 2026",
+  "reportDate": "2026-09-14",
+  "streaks": [
+    {
+      "name": "Crace",
+      "days": 1,
+      "onHalt": true
+    },
+    {
+      "name": "Denman",
+      "days": 109,
+      "onHalt": true,
+      "longest": true
+    },
+    {
+      "name": "Lyneham",
+      "days": 0,
+      "onHalt": true
+    },
+    {
+      "name": "PST",
+      "days": 47,
+      "onHalt": false
+    },
+    {
+      "name": "Finance",
+      "days": 2,
+      "onHalt": false
+    }
+  ],
+  "longestStreak": {
+    "name": "Denman",
+    "days": 109,
+    "startDate": "2026-01-13"
+  },
+  "trendDates": [
+    "Tue 01 Sep",
+    "Wed 02 Sep",
+    "Thu 03 Sep",
+    "Fri 04 Sep",
+    "Mon 07 Sep",
+    "Tue 08 Sep",
+    "Wed 09 Sep",
+    "Thu 10 Sep",
+    "Fri 11 Sep",
+    "Mon 14 Sep"
+  ],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": [
+        "Caregp Ai Tool (C.Le@10:00)",
+        "Send Claim For Automed Payments (C.Le@10:00)",
+        "Allocate - Healthlink Unallocated (C.Le@10:00)",
+        "Reports For Management Meetings (C.Le@9:59)",
+        "Clinical Reminders (C.Le@10:00)",
+        "E-Referrals (A.Wa@20:24)",
+        "Action 10 Or More Failed Communications (A.Wa@20:24)"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 100,
+      "trend": [89, 100, 100, 13, 100, 88, 88, 0, 100, 100],
+      "complete": [
+        "Online claiming run in Best Practice (J.Sa@11:26)",
+        "Tyro Health receipts captured (L.Go@11:38)",
+        "Xero accounts reconciled (L.Go@11:38)",
+        "Remittances allocated (L.Go@11:38)",
+        "Finance queue in Cloop has zero emails (L.Go@11:38)",
+        "Unidentified payments resolved (L.Go@11:38)",
+        "90/60-day debt list actioned (L.Go@17:49)",
+        "Debt chasing report updated (L.Go@17:49)"
+      ],
+      "incomplete": []
+    }
+  ],
+  "_trendNote": "PST's chain from 2026-09-11's own committed trend (already all-100) plus today's badge (100%) and streak increment (46→47) agree, so all-100 is used as-is. Finance's positions 0-8 are the mathematical carry-forward of 2026-09-11's own committed trend ([100,89,100,100,13,100,88,88,0,100], dropping its first entry); position 9 (today, 100) is confirmed by the explicit 'Finance 100%' completion badge, the streak's continued run (1→2 days), AND directly by a leftover value in today's own chart text (which matched the chain up through position 7, then had position 9's own '100' as the very next legible figure) — same chain-trust approach documented on every prior date.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

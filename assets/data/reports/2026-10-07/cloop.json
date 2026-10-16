@@ -1,0 +1,188 @@
+{
+  "reportDate": "2026-10-08",
+  "realTimeQueues": [
+    {
+      "queue": "File Transfer",
+      "inQueue": 1,
+      "oldestDays": 0.58
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 7,
+      "oldestDays": 0.72
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 1,
+      "oldestDays": 0.68
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 2,
+      "oldestDays": 13.69
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 11,
+    "oldestDays": 13.69
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Requests",
+      "count": 26
+    },
+    {
+      "queue": "Unassigned",
+      "count": 25
+    },
+    {
+      "queue": "Documents",
+      "count": 22
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 14
+    },
+    {
+      "queue": "Finance",
+      "count": 12
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 11
+    },
+    {
+      "queue": "Escalation",
+      "count": 1
+    },
+    {
+      "queue": "Practice Finance",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct"
+    ],
+    "totals": [
+      69,
+      63,
+      63,
+      70,
+      81,
+      107,
+      64,
+      53,
+      93,
+      112
+    ]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 55,
+      "outbound": 13,
+      "total": 68
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 19,
+      "outbound": 4,
+      "total": 23
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 13,
+      "outbound": 5,
+      "total": 18
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 12,
+      "outbound": 1,
+      "total": 18
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 12,
+      "outbound": 0,
+      "total": 12
+    }
+  ],
+  "_historicalDate": "2026-10-07",
+  "_unmatchedAgentNames": [],
+  "_source": "Real-Time Metrics Report + two Historical Metrics Reports (queue, agent) from Cloop's own raw CSV exports, via scripts/parse_cloop.py, replacing the earlier PDF-text-extracted version first committed for this date (the OneDrive raw-source folder had this date's files ready on the very next daily routine firing). Total Cases to Date has no raw export (Cloop doesn't offer one) so it is carried over unchanged from Daily Operations Report - 7th October 2026.pdf, page 21, same as every prior date.",
+  "reportTitle": "Daily Operations Report - 7th October 2026",
+  "extractedAt": "2026-10-08T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Thursday 8 October 2026",
+  "_realTimeQueuesNote": "4 non-zero queues this time (Failed Communication, an automated-retry queue with 610 'in queue' in the raw export, is excluded as it is on every date — not a customer contact awaiting a reply; Documents also excluded, 0 in queue right now), cleanly summing to the recomputed Summary (7+2+1+1=11), with oldestDays (13.69) matching GP Mail's own printed value exactly. The raw export's own 'Summary' row itself reads inQueue=622 (because it naively includes Failed Communication's 610) — exactly the inflation this project's own filtering is designed to avoid, now confirmed directly against the raw export rather than inferred from the PDF's own (differently) garbled Summary row ('11 12.67', corrected to 11/13.69 when this date was first PDF-extracted).",
+  "_note": "contactsQueuedYesterday sums to 112 exactly, matching this report's own 10-day chart and chain-matching 2026-10-06's own committed trend exactly at positions 0-8 — high confidence. 'Failed Communication' (14) appears in this table for the first time in this project's committed history — unlike the Real-Time panel, the Historical 'Contacts Queued' export has never excluded it (parse_cloop.py's own filter is specific to the Real-Time panel only), so it's included verbatim as genuine new data. emailsHandledYesterday: Jasmina Sodolovic's row (18 total vs 12+1=13) does not reconcile internally — confirmed present in the raw agent-historical export itself (not a PDF-extraction artifact), recorded verbatim. Kenneth Lobo (0 contacts handled, idle the full day per the raw agent-historical export) is omitted from the list below, same convention as every prior date.",
+  "totalCasesToDate": {
+    "date": "2026-10-07",
+    "totalOverallCases": 9580,
+    "totalInProgress": 112,
+    "totalOpenCases": 33
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct"
+    ],
+    "totals": [
+      111,
+      101,
+      105,
+      108,
+      100,
+      102,
+      105,
+      106,
+      112,
+      112
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct",
+      "Thu 08 Oct"
+    ],
+    "totals": [
+      57,
+      59,
+      65,
+      55,
+      45,
+      38,
+      44,
+      69,
+      106,
+      33
+    ]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('8/10/2026', a Thursday), filed here against this date's own actual report date (2026-10-07). totalInProgress (112) and totalOpenCases (33) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-06's own committed trend exactly once shifted one slot. totalOverallCases (9580, reconstructed from the PDF's own OCR-split tokens '95'+'80') is a +65 increase from 2026-10-06's committed 9515, in line with the typical daily increase — this field still has no raw export to verify against directly."
+}

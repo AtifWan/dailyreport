@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 29th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 279, "date": "2026-07-29", "weekday": "Wednesday", "title": "Daily Operations Report - 29th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 14, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 63, "incompleteCount": 3, "incompleteExample": "Unidentified payments resolved" }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 307,
+    "accepted": 280,
+    "acceptedPct": 91,
+    "missed": 27,
+    "missedPct": 9,
+    "totalOutbound": 152,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 85 },
+    "topOutboundAgent": { "name": "Andrew Davies", "calls": 29 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 173, "missed": 10 },
+      { "queue": "General Enquiries", "accepted": 88, "missed": 6 },
+      { "queue": "Canberra Vasectomy", "accepted": 4, "missed": 2 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 25,
+    "oldestDays": 8.9,
+    "contactsQueuedYesterday": 62,
+    "emailsHandledYesterday": 72,
+    "totalOverallCases": 4667,
+    "totalInProgress": 106,
+    "totalOpenCases": 35
+  },
+  "leave": {
+    "weekLabel": "27–31 July 2026",
+    "doctorLinesOnLeave": 2,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Nicole Regaspi", "Micah Haly", "Atif Wan", "Peter Robens", "Sudina Rijal"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

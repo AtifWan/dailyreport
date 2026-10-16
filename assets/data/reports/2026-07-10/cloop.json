@@ -1,0 +1,52 @@
+{
+  "_source": "Daily Operations Report - 10th July 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 10th July 2026",
+  "extractedAt": "2026-07-13T08:50:00+10:00",
+  "extractedAtLabel": "8:50 AM, Monday 13 July 2026",
+  "realTimeQueues": [
+    { "queue": "Unassigned", "inQueue": 11, "oldestDays": 2.72 },
+    { "queue": "Documents", "inQueue": 10, "oldestDays": 2.70 },
+    { "queue": "Nursing", "inQueue": 4, "oldestDays": 13.71 },
+    { "queue": "Requests", "inQueue": 3, "oldestDays": 2.27 },
+    { "queue": "Failed Communication", "inQueue": 3, "oldestDays": 2.40 },
+    { "queue": "File Transfer", "inQueue": 2, "oldestDays": 0.83 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 2.88 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 2.80 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 3.79 },
+    { "queue": "Intake_Testing", "inQueue": 1, "oldestDays": 7.28 },
+    { "queue": "Finance", "inQueue": 1, "oldestDays": 2.11 }
+  ],
+  "realTimeSummary": { "inQueue": 38, "oldestDays": 13.71 },
+  "_realTimeSummaryNote": "This real-time snapshot was extracted the following Monday (13 July), 3 days after the report's own Friday date, since Cloop isn't monitored over the weekend — consistent with the next-business-day extraction convention used throughout this project. Summary row's Oldest (13.71) again equals the Nursing row's own value exactly.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 21 },
+    { "queue": "Documents", "count": 16 },
+    { "queue": "Finance", "count": 11 },
+    { "queue": "File Transfer", "count": 2 },
+    { "queue": "Medico-legal", "count": 2 },
+    { "queue": "Escalation", "count": 1 },
+    { "queue": "Failed Communication", "count": 1 }
+  ],
+  "_contactsQueuedYesterdayNote": "This table is titled 'Last Friday's Contacts Queued in Each Queue' rather than 'Yesterday's' — it refers to THIS report's own date (Fri 10 Jul), since the section was extracted the following Monday when 'yesterday' would have been a non-trading Sunday. Per-queue rows sum to exactly 54, matching the printed 'Total' row and the 10-day trend chart's own Fri 10 Jul point exactly.",
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul"],
+    "totals": [159, 153, 163, 162, 76, 191, 172, 102, 90, 54]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 42, "outbound": 10, "total": 52 },
+    { "agent": "Leh Peng Goh", "incoming": 11, "outbound": 0, "total": 11 },
+    { "agent": "Atif Wan", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Also titled 'Last Friday's Emails Handled', for the same reason as the contacts-queued table above.",
+  "totalCasesToDate": { "date": "2026-07-13", "totalOverallCases": 3532, "totalInProgress": 223, "totalOpenCases": 67 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table is labeled the following Monday (13 Jul) rather than the report's own Friday date (10 Jul) — a 3-day gap over the weekend, consistent with the next-business-day extraction convention used throughout this project.",
+  "inProgressTenDayTrend": {
+    "labels": ["Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul"],
+    "totals": [205, 209, 209, 192, 207, 214, 220, 229, 215, 223]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul"],
+    "totals": [118, 115, 103, 81, 104, 73, 76, 59, 60, 67]
+  },
+  "_tenDayTrendNote": "All three trend arrays chain-validate exactly against 2026-07-09's own arrays' positions1-9. inProgress/openCases trends jump straight from Fri 10 Jul to Mon 13 Jul (skipping the weekend), consistent with the next-business-day convention documented across this batch."
+}

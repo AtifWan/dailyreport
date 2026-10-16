@@ -1,37 +1,95 @@
 # Phase 2 — wiring this to live data
 
-Phase 1 (this build) hardcodes one day's numbers into `assets/data/*.json`, one file per
-page. Every page module (`assets/js/pages/*.js`) only ever touches the parsed object
-`fetchJSON()` hands back — it never knows or cares whether that came from a static file
-or a live API. That's the seam.
+Phase 1 (this build) hardcodes one day's numbers per page into
+`assets/data/reports/<YYYY-MM-DD>/*.json`, plus one manifest,
+`assets/data/reports/index.json`, listing which dates exist. Every page module
+(`assets/js/pages/*.js`) only ever touches the parsed object `fetchJSON()` hands back —
+it never knows or cares whether that came from a static file or a live API. That's the
+seam. The manifest is the second seam: it's the one place that lists "what dates exist",
+so a live version can grow that list without anything else in the app changing.
 
 ## What changes
 
-For each page, replace the `fetchJSON('assets/data/<page>.json')` call with a call to
-whatever the real extraction pipeline serves — same shape in, same shape out:
+For each page, replace the `fetchJSON(\`assets/data/reports/${date}/<page>.json\`)` call
+with a call to whatever the real extraction pipeline serves for that date — same shape
+in, same shape out:
 
 ```js
 // Phase 1
-const d = await fetchJSON('assets/data/call-logs.json');
+const d = await fetchJSON(`assets/data/reports/${date}/call-logs.json`);
 
 // Phase 2 — same object shape, different source
-const d = await fetchJSON('/api/reports/latest/call-logs');
+const d = await fetchJSON(`/api/reports/${date}/call-logs`);
+```
+
+And the manifest fetch in `app.js`:
+
+```js
+// Phase 1
+manifest = await fetchJSON('assets/data/reports/index.json');
+
+// Phase 2
+manifest = await fetchJSON('/api/reports/index');
 ```
 
 Concretely, that means:
 
-1. **Stand up an endpoint (or a build step) per data file** that returns JSON matching
-   the shape documented at the top of each file under `assets/data/`. The `_source`
-   field in each file is a comment for humans, not read by the app — safe to drop or
-   keep in the live version.
-2. **Point `fetchJSON()` at it** in each `pages/*.js` module (one line each).
-3. **Decide a refresh strategy.** Nothing here polls today. The simplest upgrade is a
-   `setInterval` in `app.js` that re-runs the current route's `render()` every few
-   minutes; a fancier one pushes updates over SSE/WebSocket and re-renders on message.
-   Either way, `render(container)` is already idempotent (it replaces the container's
-   `innerHTML` from scratch each call), so re-invoking it on a timer is enough.
-4. **Auth**, if the live endpoint needs it: add headers/credentials inside `fetchJSON()`
+1. **Stand up an endpoint (or a build step) per data file, per date** that returns JSON
+   matching the shape documented at the top of each file under `assets/data/reports/`.
+   The `_source` field in each file is a comment for humans, not read by the app — safe
+   to drop or keep in the live version.
+2. **Stand up (or generate) the manifest endpoint** — `{"dates": [...], "latest": "..."}`
+   — updated whenever a new day's report lands. `latest` should be whatever the
+   extraction pipeline just produced, not the live calendar date (see README's "Today
+   vs. the report date" — a report is always a day behind).
+3. **Point `fetchJSON()` at these** in `app.js` (the manifest) and each `pages/*.js`
+   module (one line each, already parameterised by `date`).
+4. **Decide a refresh strategy.** Nothing here polls today. The simplest upgrade is a
+   `setInterval` in `app.js` that re-fetches the manifest and re-runs the current route's
+   `render()` every few minutes; a fancier one pushes updates over SSE/WebSocket and
+   re-renders on message. Either way, `render(container, date, manifest)` is already
+   idempotent (it replaces the container's `innerHTML` from scratch each call), so
+   re-invoking it on a timer is enough.
+5. **Auth**, if the live endpoint needs it: add headers/credentials inside `fetchJSON()`
    in `util.js` — the one place every page module already funnels through.
+
+## Identifying which source PDF is which
+
+Each report date is published as two PDFs with near-identical titles — the extraction
+step (manual today, automatable later) needs to tell them apart correctly every time:
+
+- Long/full version: `Daily Operations Report - [DATE]` → feeds `tasks.json`,
+  `call-logs.json`, `cloop.json`, `leave.json`.
+- Short version: `Daily Operations Report - [DATE] (Short Version)` → feeds
+  `overview.json` only.
+
+`[DATE]` is the day-ordinal form ("8th September 2026") and must match between the pair
+and match the `YYYY-MM-DD` folder the pair is filed under. Trust the title text on the
+page over the filename — filenames drift, titles are the contract. Each JSON file
+already records the exact title it was extracted from (`report.title` in
+`overview.json`, `reportTitle` in the other four); an automated pipeline should do the
+same and flag a mismatch (wrong pairing, or a date that doesn't match the destination
+folder) rather than silently filing bad data.
+
+`scripts/detect_reports.py` implements exactly this classification (parses each PDF's
+first-page title with `pdfplumber`, groups by date, cross-checks against the manifest)
+against whatever's dropped into `assets/data/source-pdfs/`. It's deliberately
+bookkeeping-only — it doesn't extract a single figure — because the actual numbers
+still need the same read-and-verify treatment the 8 September 2026 report got (cross-
+checked cell-by-cell against the source), not a blind regex over the PDF body. A live
+pipeline that wants to go further would extend this script's classification step with
+real field extraction per page, but should keep the same verify-before-write posture:
+this dataset's whole premise is that every number traces back to something a human
+(or Claude) actually checked.
+
+## Timezone
+
+Every date in this app is a timezone-agnostic date-only string; the one thing that ever
+needs a real timezone is a live pipeline deciding "what day is it right now" (e.g. has
+today's report landed yet, what folder name to write next). That must always be resolved
+against **Australia/Sydney** (the IANA zone Canberra follows — AEST/AEDT), never the
+server's local time and never UTC. `cloop.json`'s `extractedAt` shows the expected
+format: an explicit `+10:00`/`+11:00` offset, not a bare timestamp.
 
 ## What doesn't change
 

@@ -1,0 +1,30 @@
+{
+  "_source": "Daily Operations Report - 22nd June 2026.pdf, pages 18-19 (Cloop Report) — verified against rendered page images.",
+  "reportTitle": "Daily Operations Report - 22nd June 2026",
+  "extractedAt": "2026-06-23T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Tuesday 23 June 2026",
+  "_structureNote": "This date's Cloop section is thinner than later Pattern A dates: only a Real-Time Metrics table, a Yesterday's Emails Handled table, and a single Total Cases to Date row are present — no per-queue \"contacts queued yesterday\" breakdown and no 10-day trend charts (contactsQueuedTenDayTrend/inProgressTenDayTrend/openCasesTenDayTrend) anywhere in the source pages, matching the same thinner structure already documented on 2026-07-06/07-07. Fields are omitted rather than fabricated.",
+  "realTimeQueues": [
+    { "queue": "Failed Communication", "inQueue": 58, "oldestDays": 11.73 },
+    { "queue": "Unassigned", "inQueue": 13, "oldestDays": 0.87 },
+    { "queue": "Requests", "inQueue": 13, "oldestDays": 3.96 },
+    { "queue": "Medico-legal", "inQueue": 11, "oldestDays": 4.93 },
+    { "queue": "File Transfer", "inQueue": 7, "oldestDays": 5.74 },
+    { "queue": "Nursing", "inQueue": 6, "oldestDays": 12.75 },
+    { "queue": "Practice Finance", "inQueue": 3, "oldestDays": 4.67 },
+    { "queue": "Documents", "inQueue": 3, "oldestDays": 0.66 },
+    { "queue": "Escalation", "inQueue": 2, "oldestDays": 9.92 },
+    { "queue": "Feedback", "inQueue": 0, "oldestDays": 0 },
+    { "queue": "Finance", "inQueue": 0, "oldestDays": 0 }
+  ],
+  "realTimeSummary": { "inQueue": 116, "oldestDays": 12.75 },
+  "_realTimeQueuesNote": "Source table prints every 'Oldest' figure as an hh:mm:ss duration (e.g. Nursing's '306:01:51') rather than decimal days — converted here (306:01:51 / 24 = 12.75 days) for schema consistency with every other committed date, same conversion already documented on 2026-07-06. Summary row (116 in queue) matches the sum of all queues exactly; its Oldest (12.75 days) matches the Nursing row, the actual maximum.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 81, "outbound": 6, "total": 87 },
+    { "agent": "Leh Peng Goh", "incoming": 9, "outbound": 0, "total": 9 },
+    { "agent": "Jessica Hinchy", "incoming": 4, "outbound": 0, "total": 4 },
+    { "agent": "Lucinda Gonzalez", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "totalCasesToDate": { "date": "2026-06-22", "totalOverallCases": 2327, "totalInProgress": 205, "totalOpenCases": 112 },
+  "_totalCasesToDateNote": "Unlike most other committed dates, this table is labeled with the report's OWN date (22/6/2026) rather than the usual next-business-day date — recorded verbatim as printed."
+}

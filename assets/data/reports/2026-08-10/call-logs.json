@@ -1,0 +1,82 @@
+{
+  "_source": "Daily Operations Report - 10th August 2026.pdf, pages 2-17 (Call Logs Reporting) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 10th August 2026",
+  "reportDate": "2026-08-10",
+  "summary": { "totalInbound": 430, "accepted": 360, "missed": 70, "acceptedPct": 84, "missedPct": 16, "totalOutbound": 196 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 240, "missed": 53 },
+    { "queue": "General Enquiries", "accepted": 103, "missed": 9 },
+    { "queue": "Health Professionals", "accepted": 12, "missed": 7 },
+    { "queue": "Canberra Vasectomy", "accepted": 3, "missed": 1 }
+  ],
+  "grandTotal": { "accepted": 358, "missed": 70 },
+  "_summaryVsGrandTotalNote": "Three different totals appear for accepted calls this date: the pie chart says 360, the Grand Total bar (sum of per-queue rows) says 358, and today's hourly pattern chart sums to 352 — the inbound-by-staff sum matches the pie's 360 exactly. Same recurring family of discrepancies flagged on prior dates, just with an extra wrinkle (three values instead of two) — recorded verbatim, not reconciled.",
+  "tenDayTrend": {
+    "labels": ["Tue 28 Jul", "Wed 29 Jul", "Thu 30 Jul", "Fri 31 Jul", "Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug"],
+    "answerRatePct": [88, 91, 95, 92, 89, 94, 86, 95, 94, 84],
+    "answerRateTargetPct": 85,
+    "accepted": [251, 280, 241, 237, 318, 292, 288, 249, 237, 360],
+    "missed": [33, 27, 13, 20, 39, 20, 48, 14, 14, 70],
+    "overallAvgWaitSec": [31, 36, 29, 42, 41, 30, 44, 30, 41, 42]
+  },
+  "queues": {
+    "Appointments": { "accepted": [160, 173, 149, 128, 189, 172, 172, 155, 128, 240], "missed": [12, 10, 4, 6, 19, 11, 20, 5, 10, 53], "avgWaitSec": [33, 37, 26, 46, 44, 35, 48, 30, 42, 42] },
+    "General Enquiries": { "accepted": [77, 88, 78, 89, 99, 93, 102, 75, 89, 103], "missed": [11, 6, 5, 8, 12, 4, 11, 7, 1, 9], "avgWaitSec": [30, 38, 36, 42, 41, 23, 37, 31, 41, 43] },
+    "Health Professionals": { "accepted": [11, 13, 9, 16, 24, 24, 13, 15, 19, 12], "missed": [10, 9, 4, 5, 7, 5, 17, 2, 1, 7], "avgWaitSec": [11, 30, 25, 19, 27, 23, 34, 18, 34, 27] },
+    "Canberra Vasectomy": { "accepted": [3, 4, 3, 4, 6, 2, 1, 4, 1, 3], "missed": [0, 2, 0, 1, 1, 0, 0, 0, 2, 1], "avgWaitSec": [12, 8, 37, 33, 26, 9, 71, 35, 48, 42] }
+  },
+  "_tenDayTrendNote": "Cross-validated: every trend array's positions1-9 match the already-committed 2026-08-11 arrays' positions0-8 exactly — overall trend and all 4 per-queue trends. New/unverified position0 (Tue 28 Jul) read directly from the image.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 808,
+    "longestCallAt": "8:52 AM",
+    "longestCallAgent": "Jasmine Deery",
+    "longestWaitingTimeSec": 613,
+    "longestWaitingAt": "10:11 AM",
+    "avgCallHandlingSec": 141
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 313, "time": "3:47 PM", "name": "Rebecca Quinn", "waitLabel": "5 min 13 sec" },
+    { "queue": "General Enquiries", "waitSec": 613, "time": "10:11 AM", "name": "David Antioch", "waitLabel": "10 min 13 sec" },
+    { "queue": "Health Professionals", "waitSec": 96, "time": "10:47 AM", "name": "Jasmina Sodolovic", "waitLabel": "1 min 36 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 52, "time": "3:08 PM", "name": "Shae Connors", "waitLabel": "0 min 52 sec" }
+  ],
+  "_longestWaitPerQueueNote": "'Jasmina Sodolovic' appears here as a new agent name not seen in the surrounding batch of dates — recorded verbatim as printed rather than assumed to be a typo for an existing name.",
+  "inboundByStaff": [
+    { "name": "Rebecca Quinn", "calls": 78, "durationMins": 186 },
+    { "name": "Ambrosie Brassil", "calls": 57, "durationMins": 122 },
+    { "name": "De Ang Renfree", "calls": 49, "durationMins": 129 },
+    { "name": "Jasmine Deery", "calls": 39, "durationMins": 91 },
+    { "name": "Ella Blackmore", "calls": 39, "durationMins": 71 },
+    { "name": "David Antioch", "calls": 35, "durationMins": 72 },
+    { "name": "Lucinda Gonzalez", "calls": 24, "durationMins": 64 },
+    { "name": "Kiara Pfeffer", "calls": 15, "durationMins": 41 },
+    { "name": "Shae Connors", "calls": 9, "durationMins": 37 },
+    { "name": "Holly Archer", "calls": 8, "durationMins": 19 },
+    { "name": "Pinky De Paz", "calls": 4, "durationMins": 10 },
+    { "name": "Emily Pettett", "calls": 2, "durationMins": 5 },
+    { "name": "Crace - Rec 1", "calls": 1, "durationMins": 1 }
+  ],
+  "outboundByStaff": [
+    { "name": "Ambrosie Brassil", "calls": 41, "durationMins": 51 },
+    { "name": "Jasmine Deery", "calls": 27, "durationMins": 50 },
+    { "name": "Emily Pettett", "calls": 23, "durationMins": 22 },
+    { "name": "Holly Archer", "calls": 20, "durationMins": 34 },
+    { "name": "Rebecca Quinn", "calls": 13, "durationMins": 17 },
+    { "name": "Ella Blackmore", "calls": 13, "durationMins": 10 },
+    { "name": "De Ang Renfree", "calls": 13, "durationMins": 12 },
+    { "name": "Shae Connors", "calls": 11, "durationMins": 20 },
+    { "name": "Lucinda Gonzalez", "calls": 11, "durationMins": 19 },
+    { "name": "Kiara Pfeffer", "calls": 10, "durationMins": 7 },
+    { "name": "Mel Deery", "calls": 10, "durationMins": 57 },
+    { "name": "David Antioch", "calls": 2, "durationMins": 2 },
+    { "name": "Crace - Rec 1", "calls": 1, "durationMins": 2 },
+    { "name": "Pinky De Paz", "calls": 1, "durationMins": 1 }
+  ],
+  "outboundTenDayTrend": { "labels": ["Tue 28 Jul", "Wed 29 Jul", "Thu 30 Jul", "Fri 31 Jul", "Mon 03 Aug", "Tue 04 Aug", "Wed 05 Aug", "Thu 06 Aug", "Fri 07 Aug", "Mon 10 Aug"], "totals": [248, 302, 186, 196, 302, 312, 346, 234, 238, 336] },
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [6, 39, 50, 50, 45, 41, 31, 28, 33, 27, 2],
+    "missed": [2, 22, 18, 5, 2, 3, 6, 2, 5, 5, 0]
+  },
+  "_todaysHourlyPatternNote": "Accepted values sum to 352, which matches neither the pie (360) nor the Grand Total (358) — missed values do sum to the missed total (70) exactly. Recorded verbatim; see _summaryVsGrandTotalNote."
+}

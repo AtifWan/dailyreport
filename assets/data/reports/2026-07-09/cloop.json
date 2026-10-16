@@ -1,0 +1,54 @@
+{
+  "_source": "Daily Operations Report - 9th July 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 9th July 2026",
+  "extractedAt": "2026-07-10T08:45:00+10:00",
+  "extractedAtLabel": "8:45 AM, Friday 10 July 2026",
+  "realTimeQueues": [
+    { "queue": "Documents", "inQueue": 7, "oldestDays": 0.70 },
+    { "queue": "Unassigned", "inQueue": 7, "oldestDays": 0.69 },
+    { "queue": "Nursing", "inQueue": 5, "oldestDays": 13.97 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.59 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 8.90 },
+    { "queue": "Intake_Testing", "inQueue": 1, "oldestDays": 4.28 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 0.79 },
+    { "queue": "Requests", "inQueue": 1, "oldestDays": 0.50 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 0.06 }
+  ],
+  "realTimeSummary": { "inQueue": 26, "oldestDays": 13.97 },
+  "_realTimeSummaryNote": "This date's table headers its age column 'Oldest (in Days)' and prints plain decimal-day values directly (no hh:mm:ss conversion needed, unlike 2026-07-06/07/08). Summary row's Oldest (13.97) again equals the Nursing row's own value exactly, consistent with the pattern already documented on the earlier dates in this batch.",
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 29 },
+    { "queue": "Documents", "count": 24 },
+    { "queue": "Medico-legal", "count": 16 },
+    { "queue": "Requests", "count": 14 },
+    { "queue": "Finance", "count": 4 },
+    { "queue": "Practice Finance", "count": 2 },
+    { "queue": "Failed Communication", "count": 1 }
+  ],
+  "_contactsQueuedYesterdayNote": "Per-queue rows sum to exactly 90, matching the printed 'Total' row exactly.",
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Fri 26 Jun", "Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul"],
+    "totals": [93, 159, 153, 163, 162, 76, 191, 172, 102, 90]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 53, "outbound": 6, "total": 59 },
+    { "agent": "Frances Doble", "incoming": 11, "outbound": 3, "total": 16 },
+    { "agent": "Lucinda Gonzalez", "incoming": 12, "outbound": 2, "total": 14 },
+    { "agent": "Apurva Pathak", "incoming": 4, "outbound": 3, "total": 7 },
+    { "agent": "Holly Archer", "incoming": 4, "outbound": 0, "total": 4 },
+    { "agent": "Leh Peng Goh", "incoming": 4, "outbound": 0, "total": 4 },
+    { "agent": "Atif Wan", "incoming": 1, "outbound": 1, "total": 2 },
+    { "agent": "Megan Wright", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "totalCasesToDate": { "date": "2026-07-10", "totalOverallCases": 3456, "totalInProgress": 215, "totalOpenCases": 60 },
+  "_totalCasesToDateNote": "As on other dates, the 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the report's own date (Fri 10 Jul rather than Thu 9 Jul).",
+  "inProgressTenDayTrend": {
+    "labels": ["Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul"],
+    "totals": [203, 205, 209, 209, 192, 207, 214, 220, 229, 215]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Mon 29 Jun", "Tue 30 Jun", "Wed 01 Jul", "Thu 02 Jul", "Fri 03 Jul", "Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul"],
+    "totals": [121, 118, 115, 103, 81, 104, 73, 76, 59, 60]
+  },
+  "_tenDayTrendNote": "All three trend arrays chain-validate exactly: dropping 2026-07-08's own arrays' first value gives an exact match against this date's first 9 values (contactsQueuedTenDayTrend, inProgressTenDayTrend, openCasesTenDayTrend all confirmed), with new final positions (Thu 09 Jul / Fri 10 Jul) read fresh from this date's image."
+}

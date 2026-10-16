@@ -1,0 +1,54 @@
+{
+  "_source": "Daily Operations Report - 17th July 2026.pdf, pages 17-21 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 17th July 2026",
+  "extractedAt": "2026-07-20T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Monday 20 July 2026",
+  "_extractedAtNote": "This is a Friday report; the real-time Cloop snapshot and 'Total Cases to Date' table were both extracted on the next business day (Monday 20 Jul, skipping the weekend), consistent with this project's standard next-business-day extraction pattern.",
+  "realTimeQueues": [
+    { "queue": "Unassigned", "inQueue": 14, "oldestDays": 2.66 },
+    { "queue": "Documents", "inQueue": 10, "oldestDays": 2.66 },
+    { "queue": "Requests", "inQueue": 7, "oldestDays": 2.96 },
+    { "queue": "Failed Communication", "inQueue": 6, "oldestDays": 2.72 },
+    { "queue": "Escalation", "inQueue": 5, "oldestDays": 9.8 },
+    { "queue": "Practice Finance", "inQueue": 4, "oldestDays": 2.88 },
+    { "queue": "Nursing", "inQueue": 4, "oldestDays": 13.93 },
+    { "queue": "Medico-legal", "inQueue": 2, "oldestDays": 2.73 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 2.67 }
+  ],
+  "realTimeSummary": { "inQueue": 54, "oldestDays": 13.93 },
+  "contactsQueuedYesterday": [
+    { "queue": "Finance", "count": 50 },
+    { "queue": "Unassigned", "count": 28 },
+    { "queue": "Documents", "count": 11 },
+    { "queue": "Medico-legal", "count": 8 },
+    { "queue": "Requests", "count": 7 },
+    { "queue": "Failed Communication", "count": 4 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "_contactsQueuedYesterdayNote": "This table is titled 'Last Friday's Contacts Queued' rather than 'Yesterday's Contacts Queued' as on other dates in this project (this report itself is dated Friday 17 Jul). Its total (109) matches this date's own position in the 10-day trend chart below exactly, so despite the unusual label it represents this report's own date, not a different prior Friday.",
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Mon 06 Jul", "Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul"],
+    "totals": [191, 172, 102, 90, 54, 89, 67, 90, 92, 109]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 25, "outbound": 2, "total": 27 },
+    { "agent": "Leh Peng Goh", "incoming": 15, "outbound": 0, "total": 16 },
+    { "agent": "Frances Doble", "incoming": 0, "outbound": 3, "total": 3 },
+    { "agent": "Lucinda Gonzalez", "incoming": 2, "outbound": 1, "total": 3 },
+    { "agent": "Pinky Mae De Paz", "incoming": 0, "outbound": 2, "total": 2 },
+    { "agent": "Ella Blackamore", "incoming": 1, "outbound": 0, "total": 1 },
+    { "agent": "Apurva Pathak", "incoming": 0, "outbound": 1, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Also titled 'Last Friday's Emails Handled' (see note on contactsQueuedYesterday above). Leh Peng Goh's stated total (16) doesn't equal incoming+outbound in the source PDF itself (15+0=15). Same recurring quirk flagged on other dates in this project. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-07-20", "totalOverallCases": 3994, "totalInProgress": 93, "totalOpenCases": 60 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are dated the following Monday (20 Jul) rather than this report's own Friday (17 Jul) — the standard next-business-day extraction pattern used throughout this project, here spanning the weekend.",
+  "inProgressTenDayTrend": {
+    "labels": ["Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul"],
+    "totals": [214, 220, 229, 215, 223, 144, 102, 79, 80, 93]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Tue 07 Jul", "Wed 08 Jul", "Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul"],
+    "totals": [73, 76, 59, 60, 67, 47, 55, 39, 40, 60]
+  },
+  "_tenDayTrendNote": "Cross-validated: contactsQueuedTenDayTrend, inProgressTenDayTrend and openCasesTenDayTrend all have positions 0-8 matching 2026-07-16's cloop.json positions 1-9 exactly. New/unverified final positions read directly from the images."
+}

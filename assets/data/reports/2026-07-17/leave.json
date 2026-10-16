@@ -1,0 +1,36 @@
+{
+  "_source": "Daily Operations Report - 17th July 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "Unlike 2026-07-13 through 07-16 (which all showed the CURRENT week, 13-17 Jul), this Friday report's leave table shows the UPCOMING week (20-24 Jul) instead, with a much shorter roster (3 doctors, 4 staff) than the current week's table. Recorded verbatim as printed; this is a genuine change in which week the report displays, not a data error. This report's long PDF also has only 25 pages (vs. 26 on other dates in this batch), consolidating the Doctor and Staff leave tables onto a single page instead of two.",
+  "reportTitle": "Daily Operations Report - 17th July 2026",
+  "reportDate": "2026-07-17",
+  "weekStart": "2026-07-20",
+  "weekEnd": "2026-07-24",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "available", "available", "available", "available"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Amy Morton", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Isaac Davis", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Apurva Pathak", "site": null, "status": ["leave", "available", "available", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

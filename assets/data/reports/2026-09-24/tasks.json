@@ -1,0 +1,32 @@
+{
+  "_source": "Daily Operations Report - 24th September 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector). This date's own PDF was structurally incomplete (12 report-pages ending 'Want to dive into the full extended report? Just click the \"Report\" icon below!', missing the streak-counter cover, per-queue 10-day charts, KPI panel and longest-wait table every other date has) and its accompanying '(Short Version)' file was mislabeled — it actually contained 2026-06-24's report (Report #254), not this date's. Every 10-day trend array below is instead reconstructed by chain: dropping 2026-09-23's own committed position 0 and appending this date's own new value, cross-verified in BOTH directions against 2026-09-23's committed chain and 2026-09-25's own printed 10-day charts (which, being a rolling window, independently carry this date's value too) — every array matched exactly in both directions except one single point noted below. Fields with no chain mechanism to recover them (patientServiceKpi, longestWaitPerQueue) are genuinely unavailable for this date and left out; the dashboard already shows a placeholder for either when absent.",
+  "reportTitle": "Daily Operations Report - 24th September 2026",
+  "reportDate": "2026-09-24",
+  "streaks": [
+    { "name": "Crace", "days": 1, "onHalt": true },
+    { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+    { "name": "Lyneham", "days": 0, "onHalt": true },
+    { "name": "PST", "days": 55, "onHalt": false },
+    { "name": "Finance", "days": 7, "onHalt": false }
+  ],
+  "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+  "trendDates": ["Fri 11 Sep", "Mon 14 Sep", "Tue 15 Sep", "Wed 16 Sep", "Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "complete": ["E-Referrals", "Action Failed Communications On Cloop", "Send Claim For Automed Payments", "Clinical Reminders", "Caregp Ai Tool", "Allocate - Healthlink Unallocated"],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 100,
+      "trend": [100, 100, 89, 100, 100, 100, 100, 100, 100, 100],
+      "complete": ["Xero accounts reconciled", "Tyro Health receipts captured", "Finance queue in Cloop has zero emails", "All Remittances from 3rd Party & Insurer (From Cloop) Allocated", "Unidentified payments resolved", "Reconcile All GPs' and Practices' Xero accounts", "90/60-day debt list actioned", "Best Practice Online Medicare Claim"],
+      "incomplete": []
+    }
+  ],
+  "_trendNote": "Both checklists' task lists and 100%/100% completion badges ARE printed directly on this date's own (otherwise truncated) PDF, so those are a direct read. The 10-day trend arrays themselves are chain-reconstructed (this date's own PDF didn't print either trend chart) — positions 0-8 equal 2026-09-23's own committed trend with its first entry dropped, position 9 (today) is confirmed twice over: it matches both this date's own printed completion badges (100%, 100%) AND 2026-09-25's own printed trend charts, which independently carry today's value as their own second-to-last point. PST=55/Finance=7 day-streak counts follow directly from incrementing 2026-09-23's committed 54/6 (both checklists at 100% today), independently confirmed against 2026-09-25's own explicit streak counters (PST 56, Finance 8 — i.e. one more than today's), which is the same increment-when-100% pattern already established across every prior date.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

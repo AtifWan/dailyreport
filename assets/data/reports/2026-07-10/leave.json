@@ -1,0 +1,46 @@
+{
+  "_source": "Daily Operations Report - 10th July 2026.pdf, pages 23-24 (Staff & Doctors on Leave) — verified against rendered page images",
+  "_note": "This Friday report's leave section shows the UPCOMING week (13-17 July 2026) rather than the current week (6-10 July, shown identically on 2026-07-06/07/08/09) — a notably different roster: new doctors Dr Maria Ianelli, Dr Kathleen O'Brien, Dr Kristy Muir, Dr Sam Primrose, Dr Anna Calwell and Dr Janine Kelly appear (Dr Sheahan Ranasinghe and Dr Krystel Chin continue from the prior roster); on staff, Katerina Gjorgievski replaces Bianca Mitchell. Recorded verbatim as printed; not merged with or reconciled against the earlier dates' 6-10 July roster.",
+  "reportTitle": "Daily Operations Report - 10th July 2026",
+  "reportDate": "2026-07-10",
+  "weekStart": "2026-07-13",
+  "weekEnd": "2026-07-17",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Maria Ianelli", "site": "Denman", "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kathleen O'Brien", "site": "Denman", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": ["leave", "leave", "leave", "available", "available"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Reiham Ibrahim", "site": "Crace", "status": ["leave", "leave", "leave", "available", "available"] },
+        { "name": "Dr Sam Primrose", "site": "Crace", "status": ["leave", "leave", "available", "available", "available"] },
+        { "name": "Dr Anna Calwell", "site": "Denman", "status": ["leave", "leave", "leave", "available", "available"] },
+        { "name": "Dr Janine Kelly", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Sudina Rijal", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Samantha Cooper", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Isaac Davis", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Katerina Gjorgievski", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Bethany Tran", "site": null, "status": ["leave", "leave", "available", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

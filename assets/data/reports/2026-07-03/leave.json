@@ -1,0 +1,42 @@
+{
+  "_source": "Daily Operations Report - 3rd July 2026.pdf, pages 20-21 (Staff & Doctors on Leave) — verified against rendered page images. Note: unlike every prior date, the Doctor and Staff groups are split across TWO separate printed pages this time (Page 20 = Doctor group only, Page 21 = Staff group only) rather than one combined page.",
+  "reportTitle": "Daily Operations Report - 3rd July 2026",
+  "reportDate": "2026-07-03",
+  "weekStart": "2026-07-06",
+  "weekEnd": "2026-07-10",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Julie Beuth", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "available"] },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": ["available", "available", "available", "available", "leave"] },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Reiham Ibrahim", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "JMO Ashley Kean", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Sudina Rijal", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Samantha Cooper", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Jasmine Deery", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Andrew Davies", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Isaac Davis", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Bianca Mitchell", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Bethany Tran", "site": null, "status": ["leave", "available", "available", "available", "available"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "As on 2026-06-26 (also a Friday), this report's leave grid already previews the FOLLOWING week (6-10 July) — this report's own date (3 July) isn't a column on the grid at all. The roster has changed substantially from 2026-07-01/07-02's version of the 29 June - 3 July week: Dr Julie Beuth now has Friday off from leave (available Fri, on leave Mon-Thu, the reverse of Dr Tracy Fox's pattern) and Dr Freya Ashman no longer appears at all; the Staff group is entirely different names (Sudina Rijal, Samantha Cooper, Jasmine Deery, Andrew Davies, Isaac Davis, Bianca Mitchell, Bethany Tran) with Pinky Mae De Paz and Megan Moreno Pitcher — fixtures of every prior week's roster in this project — absent entirely, and several names here (Isaac Davis, Bianca Mitchell, Bethany Tran) are otherwise only seen in this project as call-centre staff, not leave-roster regulars. All recorded verbatim as printed, not reconciled against prior weeks. overview.json's counts use Monday 6 July (the first day of the displayed week) as a stand-in snapshot: doctorLinesOnLeave=5 (all but Dr Tracy Fox, who is available Monday); staffFullyOnLeave=3 (Samantha Cooper, Jasmine Deery, Andrew Davies, on leave all 5 days); staffPartialLeave=4 (Sudina Rijal, Isaac Davis, Bianca Mitchell, Bethany Tran, each on leave Monday only)."
+}

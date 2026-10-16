@@ -1,0 +1,190 @@
+{
+  "_source": "Real-Time Metrics Report + two Historical Metrics Reports (queue, agent) from Cloop's own raw CSV exports, via scripts/parse_cloop.py, replacing PDF text-extraction for this section per the Phase 3 raw-source ingestion plan. Total Cases to Date has no raw export (Cloop doesn't offer one) so it's taken from Daily Operations Report - 6th October 2026.pdf, page 21, same as every prior date.",
+  "reportTitle": "Daily Operations Report - 6th October 2026",
+  "extractedAt": "2026-10-07T08:30:00+10:00",
+  "extractedAtLabel": "8:30 AM, Wednesday 7 October 2026",
+  "realTimeQueues": [
+    {
+      "queue": "Requests",
+      "inQueue": 23,
+      "oldestDays": 7.78
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 9,
+      "oldestDays": 0.59
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 4,
+      "oldestDays": 4.66
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 7,
+      "oldestDays": 0.95
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 6,
+      "oldestDays": 0.65
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 1,
+      "oldestDays": 6.76
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 2,
+      "oldestDays": 12.67
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 52,
+    "oldestDays": 12.67
+  },
+  "_realTimeQueuesNote": "7 non-zero queues this time (Failed Communication, an automated-retry queue with 617 'in queue' in the raw export, is excluded by scripts/parse_cloop.py as it is on every date — not a customer contact awaiting a reply, and never shown in the rendered report either), cleanly summing to the recomputed Summary (23+9+4+7+6+1+2=52), with oldestDays (12.67) matching GP Mail's own printed value exactly (the oldest individual queue) — matches the source PDF's own panel exactly.",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 55
+    },
+    {
+      "queue": "Documents",
+      "count": 26
+    },
+    {
+      "queue": "Requests",
+      "count": 8
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 3
+    },
+    {
+      "queue": "GP Mail",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Tue 22 Sep",
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct"
+    ],
+    "totals": [
+      95,
+      69,
+      63,
+      63,
+      70,
+      81,
+      107,
+      64,
+      53,
+      93
+    ]
+  },
+  "_note": "contactsQueuedYesterday sums to 93 exactly (55+26+8+3+1), matching this date's own contactsQueuedTenDayTrend chart's clean trailing value and chain-matching 2026-10-02's own committed trend exactly at positions 0-8 — high confidence, matches the source PDF exactly. emailsHandledYesterday rows all reconcile exactly to their own stated totals (Chloey Leow 109=79+30, Jasmina Sodolovic 9=6+3, Apurva Pathak 5=3+2, De Ang Renfree 4=2+2, Lucinda Gonzalez 2=2+0) and all 5 agent names matched the known-staff roster cleanly (_unmatchedAgentNames was empty) — no quirks to flag this date. Leh Peng Goh (0 contacts handled, idle the full day per the raw agent-historical export) is omitted from the list below, same as the source PDF's own page 20 table.",
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 79,
+      "outbound": 30,
+      "total": 109
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 6,
+      "outbound": 3,
+      "total": 9
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 3,
+      "outbound": 2,
+      "total": 5
+    },
+    {
+      "agent": "De Ang Renfree",
+      "incoming": 2,
+      "outbound": 2,
+      "total": 4
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 2,
+      "outbound": 0,
+      "total": 2
+    }
+  ],
+  "totalCasesToDate": {
+    "date": "2026-10-06",
+    "totalOverallCases": 9515,
+    "totalInProgress": 112,
+    "totalOpenCases": 106
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct"
+    ],
+    "totals": [
+      113,
+      111,
+      101,
+      105,
+      108,
+      100,
+      102,
+      105,
+      106,
+      112
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct",
+      "Wed 07 Oct"
+    ],
+    "totals": [
+      57,
+      57,
+      59,
+      65,
+      55,
+      45,
+      38,
+      44,
+      69,
+      106
+    ]
+  },
+  "_totalCasesToDateNote": "Per the established convention (same as 2026-10-02), this date's own Total Cases To Date row and its two trend charts are printed with a forward-dated stamp ('7/10/2026', a Wednesday — the next business day after this report's own Tuesday 6 October date, a plain single-day shift since no holiday falls between them). Recorded against this date's own actual report date (2026-10-06), per convention. totalInProgress (112) and totalOpenCases (106) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-10-02's own committed trend exactly once shifted one slot — high confidence. totalOverallCases (9515) is a +88 increase from 2026-10-02's committed 9427, in line with the typical daily increase. CONFIRMED 2026-10-07: the user shared Cloop_Data_Report_v5.xlsx, whose own Status sheet rows this exactly — row dated 2026-10-02 reads 9332/105/44, row dated 2026-10-06 reads 9427/106/69 (what this project has filed under 2026-10-02), and row dated 2026-10-07 reads 9515/112/106 (filed here under 2026-10-06) — a clean, mechanical one-business-day-ahead offset on every row, not an occasional glitch. This resolves an older, still-pending 'FLAG FOR USER REVIEW: possible one-business-day mislabeling' concern from an earlier session: the forward-dated stamp is Cloop's own normal behaviour (its 'Total Cases to Date' panel is always a live snapshot taken the next business morning), and this project's convention of filing it under the report's own earlier date, with a note, was already the right call — no historical correction needed after all.",
+  "_historicalDate": "2026-10-06",
+  "_unmatchedAgentNames": []
+}

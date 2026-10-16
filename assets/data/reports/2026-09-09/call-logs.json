@@ -1,0 +1,50 @@
+{
+  "_source": "Daily Operations Report - 9th September 2026.pdf, pages 3-17 (Call Logs Reporting), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 9th September 2026",
+  "reportDate": "2026-09-09",
+  "summary": { "totalInbound": 262, "accepted": 242, "missed": 20, "acceptedPct": 92, "missedPct": 8, "totalOutbound": 148 },
+  "queueReport": [
+    { "queue": "Appointments", "accepted": 154, "missed": 10 },
+    { "queue": "General Enquiries", "accepted": 86, "missed": 10 },
+    { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 0 },
+    { "queue": "Health Professionals", "accepted": 0, "missed": 0 }
+  ],
+  "grandTotal": { "accepted": 242, "missed": 20 },
+  "tenDayTrend": {
+    "labels": ["Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep", "Mon 07 Sep", "Tue 08 Sep", "Wed 09 Sep"],
+    "answerRatePct": [87, 89, 91, 89, 90, 93, 80, 85, 92, 92],
+    "answerRateTargetPct": 85,
+    "accepted": [244, 222, 335, 291, 194, 250, 210, 317, 280, 242],
+    "missed": [35, 27, 35, 35, 22, 20, 51, 54, 23, 20],
+    "overallAvgWaitSec": [43, 40, 40, 46, 46, 37, 51, 35, 30, 39]
+  },
+  "queues": {
+    "Appointments": { "accepted": [129, 119, 209, 179, 113, 149, 117, 183, 158, 154], "missed": [14, 13, 17, 15, 9, 7, 20, 23, 16, 10], "avgWaitSec": [42, 33, 37, 40, 40, 29, 43, 33, 26, 26] },
+    "General Enquiries": { "accepted": [100, 96, 123, 111, 78, 96, 90, 132, 120, 86], "missed": [13, 14, 17, 20, 13, 13, 30, 31, 7, 10], "avgWaitSec": [46, 50, 46, 55, 56, 50, 62, 37, 35, 35] },
+    "Health Professionals": { "accepted": [10, 6, 0, 0, 0, 0, 0, 0, 0, 0], "missed": [8, 0, 0, 0, 0, 0, 0, 0, 0, 0], "avgWaitSec": [36, 27, 0, 0, 0, 0, 0, 0, 0, 0] },
+    "Canberra Vasectomy": { "accepted": [3, 1, 2, 0, 3, 4, 3, 2, 2, 2], "missed": [0, 0, 1, 0, 0, 0, 1, 0, 0, 0], "avgWaitSec": [33, 49, 51, 0, 13, 34, 13, 19, 37, 37] }
+  },
+  "patientServiceKpi": {
+    "longestCallDurationSec": 783,
+    "longestCallAt": "unconfirmed",
+    "longestCallAgent": "unconfirmed",
+    "longestWaitingTimeSec": 147,
+    "longestWaitingAt": "unconfirmed",
+    "avgCallHandlingSec": 136
+  },
+  "longestWaitPerQueue": [
+    { "queue": "Appointments", "waitSec": 533, "time": "3:06 PM", "name": "Rebecca Quinn", "waitLabel": "8 min 53 sec" },
+    { "queue": "General Enquiries", "waitSec": 174, "time": "12:27 PM", "name": "Rebecca Quinn", "waitLabel": "2 min 54 sec" },
+    { "queue": "Health Professionals", "waitSec": 0, "time": null, "name": null, "waitLabel": "0 min 0 sec" },
+    { "queue": "Canberra Vasectomy", "waitSec": 51, "time": "4:03 PM", "name": "Shae Connors", "waitLabel": "0 min 51 sec" }
+  ],
+  "inboundByStaff": [],
+  "outboundByStaff": [],
+  "outboundTenDayTrend": { "labels": ["Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep", "Mon 07 Sep", "Tue 08 Sep", "Wed 09 Sep"], "totals": [231, 256, 380, 309, 253, 320, 218, 301, 361, 148] },
+  "todaysHourlyPattern": {
+    "hours": ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"],
+    "accepted": [9, 36, 31, 28, 24, 29, 22, 17, 28, 16, 2],
+    "missed": [1, 4, 1, 3, 2, 4, 1, 0, 1, 3, 0]
+  },
+  "_note": "Extracted via OneDrive text (Microsoft 365 connector), not pixel-level image rendering — the reliability caveat flagged when day-to-day automation was agreed. Confirmed HIGH confidence: summary totals (explicit captions \"Total Inbound Calls = 262\", \"Missed Calls, 20, 8%\", \"Total Outbound Calls = 148\"); per-queue accepted/missed (from a distinctly-labelled, percentage-annotated pie breakdown that self-consistency-checked exactly against the totals above — cross-confirmed against both the short and long PDF's independent extractions); every trend array's positions 0-8 (mathematical carry-forward from the already-verified 2026-09-08 data, not a re-read); tenDayTrend position 9 values for answerRatePct/accepted/missed and outboundTenDayTrend's position 9 (all computed directly from the confirmed summary totals above, e.g. answer rate = 242/262). MEDIUM confidence: overallAvgWaitSec position 9 (39) — the one value in its chart's garbled text that wasn't already an already-known figure, found by elimination. LOW confidence / unverified: the four per-queue avgWaitSec position-9 values are carried forward from 2026-09-08 unchanged (no reliable new figure could be isolated — genuinely just a placeholder, not a real reading). NOT RECOVERED: inboundByStaff/outboundByStaff (the per-agent bar charts extracted two different, mutually-inconsistent number sets between the short and long PDF versions of this exact report, and neither summed anywhere near the confirmed totals — left empty rather than publish likely-wrong per-person figures); patientServiceKpi's agent/time fields (the only names/times present in that section of the text turned out, on inspection, to belong to other tables nearby — likely extraction bleed-through — so they're marked \"unconfirmed\" rather than misattributed; avgCallHandlingSec is carried forward from 2026-09-08 unchanged, not a fresh reading). ESTIMATED (not a reading at all): todaysHourlyPattern — the chart text was missing roughly half its data points, so accepted/missed are yesterday's actual hourly shape scaled to today's confirmed daily totals (242/20), purely so the chart renders something proportionate rather than nothing; treat this one chart as illustrative, not factual, until verified against the PDF."
+}

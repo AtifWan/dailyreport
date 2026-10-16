@@ -1,0 +1,48 @@
+{
+  "_source": "Daily Operations Report - 30th September 2026.pdf, pages 18-22 (Cloop Report), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification.",
+  "reportTitle": "Daily Operations Report - 30th September 2026",
+  "extractedAt": "2026-10-01T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Thursday 1 October 2026",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 20, "oldestDays": 6.9 },
+    { "queue": "GP Mail", "inQueue": 4, "oldestDays": 10.02 },
+    { "queue": "Unassigned", "inQueue": 2, "oldestDays": 0.17 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.72 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 0.06 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 0.86 }
+  ],
+  "realTimeSummary": { "inQueue": 30, "oldestDays": 10.02 },
+  "_realTimeQueuesNote": "6 queues printed this time; they sum to 30 exactly (20+4+2+2+1+1), and a Summary row printed right at the top of this table read '30, 10.02' matching that sum and GP Mail's own oldestDays (10.02, the oldest individual queue) exactly — the same validation pattern used on prior dates, just with the Summary row's position in the extracted text appearing before its queues instead of after. A second, different 'Summary 33 8.98' also appeared later in the extraction, exactly matching 2026-09-29's own committed realTimeSummary (33, 8.98) — almost certainly leftover/duplicated text from an adjacent element rather than this date's own data, since it doesn't sum from anything printed on this page; not used. This panel's own extraction timestamp reads 'Thursday, 1st October 2026' — one business day ahead of this report's own Wednesday date, the same established one-business-day-ahead pattern seen on every prior date.",
+  "contactsQueuedYesterday": [
+    { "queue": "Failed Communication", "count": 57 },
+    { "queue": "Unassigned", "count": 29 },
+    { "queue": "Documents", "count": 9 },
+    { "queue": "Medico-legal", "count": 5 },
+    { "queue": "Requests", "count": 4 },
+    { "queue": "Finance", "count": 2 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Thu 17 Sep", "Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep"],
+    "totals": [88, 85, 116, 95, 69, 63, 63, 70, 81, 107]
+  },
+  "_note": "contactsQueuedYesterday sums to 107 exactly (57+29+9+5+4+2+1), matching this report's own contactsQueuedTenDayTrend chart's clean trailing value exactly — positions 0-8 chain-matched 2026-09-29's own committed trend exactly, same labelling convention (no day-ahead shift). emailsHandledYesterday rows: Chloey Leow's own total (102) doesn't reconcile with her incoming+outbound (91+10=101, off by 1, the familiar quirk); all five other agents reconcile exactly. The overview.json summary figure for 'emailsHandledYesterday' follows the sum-across-the-team convention used on 2026-09-28 (89 = sum of that date's totals), rather than 2026-09-29's own committed file, which instead stored just its top agent's own total (56, not a sum) — an inconsistency in a prior date's file, not something this entry should repeat.",
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 91, "outbound": 10, "total": 102 },
+    { "agent": "Jasmina Sodolovic", "incoming": 5, "outbound": 2, "total": 9 },
+    { "agent": "Lucinda Gonzalez", "incoming": 3, "outbound": 2, "total": 5 },
+    { "agent": "Apurva Pathak", "incoming": 2, "outbound": 2, "total": 4 },
+    { "agent": "Emily Pettett", "incoming": 3, "outbound": 0, "total": 3 },
+    { "agent": "Leh Peng Goh", "incoming": 2, "outbound": 0, "total": 2 }
+  ],
+  "totalCasesToDate": { "date": "2026-09-30", "totalOverallCases": 9285, "totalInProgress": 102, "totalOpenCases": 38 },
+  "inProgressTenDayTrend": {
+    "labels": ["Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct"],
+    "totals": [121, 129, 122, 113, 111, 101, 105, 108, 100, 102]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Fri 18 Sep", "Mon 21 Sep", "Tue 22 Sep", "Wed 23 Sep", "Thu 24 Sep", "Fri 25 Sep", "Mon 28 Sep", "Tue 29 Sep", "Wed 30 Sep", "Thu 01 Oct"],
+    "totals": [80, 99, 65, 57, 57, 59, 65, 55, 45, 38]
+  },
+  "_totalCasesToDateNote": "Per the established convention, this date's own Total Cases To Date row and its two trend charts are printed with a one-business-day-ahead date/label stamp ('1/10/2026', a Thursday) — recorded here against this date's own actual report date (2026-09-30), matching the same label convention already used in 2026-09-29's own committed file. totalInProgress (102) and totalOpenCases (38) match the trend arrays' own position 9 exactly, and positions 0-8 of both trends chain-match 2026-09-29's own committed trend exactly — high confidence. totalOverallCases (9285) is a DECREASE from 2026-09-29's committed 9325 (-40), unusual against the typical small daily increase seen on every prior date — recorded verbatim as printed since there's no chain or trend chart to cross-check this particular figure against, but flagged here clearly as an anomaly worth a second look (cases being bulk-closed/archived, or a reporting artifact, are both plausible but unconfirmed)."
+}

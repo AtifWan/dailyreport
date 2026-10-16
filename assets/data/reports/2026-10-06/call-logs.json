@@ -1,0 +1,594 @@
+{
+  "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, replacing PDF text-extraction for this section per the Phase 3 raw-source ingestion plan. Verified field-for-field against the official YourGP_CallLogs_DataProcessor_Final_v6 workbook (the Excel/Power-Query/VBA tool that actually produces this report), which the user shared on 2026-10-07 — every figure below was cross-checked against that workbook's own KPI_Calculations/InboundQueueSummary/InboundStaffSummary/OutboundStaffSummary/Outbound_10Day_Trend sheets, not just the rendered PDF.",
+  "reportTitle": "Daily Operations Report - 6th October 2026",
+  "reportDate": "2026-10-06",
+  "summary": {
+    "totalInbound": 368,
+    "accepted": 331,
+    "missed": 37,
+    "acceptedPct": 90,
+    "missedPct": 10,
+    "totalOutbound": 174
+  },
+  "queueReport": [
+    {
+      "queue": "Appointments",
+      "accepted": 208,
+      "missed": 20
+    },
+    {
+      "queue": "General Enquiries",
+      "accepted": 118,
+      "missed": 17
+    },
+    {
+      "queue": "Health Professionals",
+      "accepted": 0,
+      "missed": 0
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "accepted": 4,
+      "missed": 0
+    }
+  ],
+  "grandTotal": {
+    "accepted": 330,
+    "missed": 37
+  },
+  "_summaryVsGrandTotalNote": "summary (totalInbound 368, accepted 331, missed 37) matches the official workbook's KPI_Calculations and PDF cover exactly. grandTotal (330 accepted) is 1 short of summary's 331: the official workbook's own InboundQueueSummary reports 329 (2 short) — 2 of the 331 accepted calls aren't attributable to any of the 4 named queues at all (a different reception line, confirmed in the official workbook's own Cleaned_Call_Records sheet), which this project has no field for and doesn't track per-queue. The remaining 1-call gap (330 vs the official 329) is a residual in this script's own Appointments count that doesn't fully resolve against the official workbook's row-level classification despite matching its row count exactly post-dedup (228 unique rows both ways) — recorded verbatim rather than chased further for the sake of one call.",
+  "tenDayTrend": {
+    "labels": [
+      "Tue 22 Sep",
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct"
+    ],
+    "answerRatePct": [
+      94,
+      84,
+      90,
+      94,
+      85,
+      95,
+      95,
+      88,
+      88,
+      90
+    ],
+    "answerRateTargetPct": 85,
+    "accepted": [
+      285,
+      282,
+      251,
+      216,
+      265,
+      225,
+      214,
+      206,
+      201,
+      331
+    ],
+    "missed": [
+      19,
+      53,
+      27,
+      15,
+      45,
+      11,
+      12,
+      27,
+      28,
+      37
+    ],
+    "overallAvgWaitSec": [
+      29,
+      28,
+      44,
+      32,
+      35,
+      34,
+      37,
+      41,
+      50,
+      123
+    ]
+  },
+  "_tenDayTrendNote": "accepted/missed/answerRatePct/overallAvgWaitSec all chain-matched 2026-10-02's own committed trend exactly at positions 0-8, position 9 confirmed against the official workbook and the PDF cover — high confidence, zero divergence.",
+  "queues": {
+    "Appointments": {
+      "accepted": [
+        157,
+        178,
+        158,
+        123,
+        165,
+        133,
+        122,
+        123,
+        100,
+        208
+      ],
+      "missed": [
+        9,
+        24,
+        18,
+        8,
+        20,
+        7,
+        7,
+        13,
+        7,
+        20
+      ],
+      "avgWaitSec": [
+        25,
+        25,
+        42,
+        30,
+        30,
+        33,
+        36,
+        44,
+        37,
+        110
+      ]
+    },
+    "General Enquiries": {
+      "accepted": [
+        123,
+        97,
+        88,
+        85,
+        97,
+        90,
+        89,
+        79,
+        98,
+        118
+      ],
+      "missed": [
+        10,
+        23,
+        9,
+        7,
+        25,
+        3,
+        4,
+        13,
+        21,
+        17
+      ],
+      "avgWaitSec": [
+        36,
+        34,
+        49,
+        34,
+        44,
+        35,
+        39,
+        39,
+        63,
+        151
+      ]
+    },
+    "Health Professionals": {
+      "accepted": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "missed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "avgWaitSec": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "Canberra Vasectomy": {
+      "accepted": [
+        2,
+        5,
+        4,
+        8,
+        3,
+        2,
+        2,
+        3,
+        1,
+        4
+      ],
+      "missed": [
+        0,
+        6,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "avgWaitSec": [
+        18,
+        32,
+        26,
+        32,
+        20,
+        25,
+        43,
+        14,
+        12,
+        86
+      ]
+    }
+  },
+  "_queuesNote": "Per-queue accepted/missed/avgWaitSec chain-matched 2026-10-02's own committed data exactly at positions 0-8, sourced from the raw CallQueue_Detailed exports (deduplicated by CallGUID — the raw export contained one literal duplicate row). Appointments position 9 (208) carries the same 1-call residual noted above (official: 207).",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 1699,
+    "longestCallAt": "8:01 AM",
+    "longestCallAgent": "Pinky De Paz",
+    "longestWaitingTimeSec": 534,
+    "longestWaitingAt": "12:42 PM",
+    "avgCallHandlingSec": 151
+  },
+  "_patientServiceKpiNote": "longestWaitingTimeSec/longestWaitingAt use UserTimeToAnswer (time until the specific agent who answered actually engaged), not CallTimeToAnswer (time in the queue before being routed) — confirmed against the official workbook's KPI_Calculations sheet, whose 'Longest Waiting Time' value and timestamp match a call's UserTimeToAnswer exactly. An earlier version of this file used CallTimeToAnswer instead and got 613 sec/12:39 PM/Ambrosie Brassil — that was this project's own bug, not a discrepancy with the PDF; corrected here to 534 sec/12:42 PM/Samantha Cooper, matching the official workbook and the PDF exactly.",
+  "longestWaitPerQueue": [
+    {
+      "queue": "Appointments",
+      "waitSec": 325,
+      "time": "8:26 AM",
+      "name": "Rebecca Quinn",
+      "waitLabel": "5 min 25 sec"
+    },
+    {
+      "queue": "General Enquiries",
+      "waitSec": 534,
+      "time": "12:42 PM",
+      "name": "Samantha Cooper",
+      "waitLabel": "8 min 54 sec"
+    },
+    {
+      "queue": "Health Professionals",
+      "waitSec": 0,
+      "time": null,
+      "name": null,
+      "waitLabel": "0 min 0 sec"
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "waitSec": 53,
+      "time": "9:40 AM",
+      "name": "Apurva Pathak",
+      "waitLabel": "0 min 53 sec"
+    }
+  ],
+  "inboundByStaff": [
+    {
+      "name": "Rebecca Quinn",
+      "calls": 83,
+      "durationMins": 178
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 53,
+      "durationMins": 138
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 46,
+      "durationMins": 125
+    },
+    {
+      "name": "David Antioch",
+      "calls": 44,
+      "durationMins": 79
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 27,
+      "durationMins": 62
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 17,
+      "durationMins": 74
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 17,
+      "durationMins": 48
+    },
+    {
+      "name": "Apurva Pathak",
+      "calls": 13,
+      "durationMins": 37
+    },
+    {
+      "name": "Hannah Searle",
+      "calls": 13,
+      "durationMins": 27
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 9,
+      "durationMins": 36
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 3,
+      "durationMins": 6
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 3,
+      "durationMins": 8
+    },
+    {
+      "name": "Lyneham - Rec 1",
+      "calls": 2,
+      "durationMins": 10
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 1,
+      "durationMins": 3
+    }
+  ],
+  "_inboundByStaffNote": "Full table from InboundCalls_Detailed (deduplicated by CallGUID). Sums to 331, matching the cover pie and the official workbook's InboundStaffSummary exactly, name-for-name and call-for-call.",
+  "outboundByStaff": [
+    {
+      "name": "Apurva Pathak",
+      "calls": 29,
+      "durationMins": 40
+    },
+    {
+      "name": "Holly Archer",
+      "calls": 24,
+      "durationMins": 24
+    },
+    {
+      "name": "Rebecca Quinn",
+      "calls": 23,
+      "durationMins": 20
+    },
+    {
+      "name": "Ambrosie Brassil",
+      "calls": 22,
+      "durationMins": 25
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 19,
+      "durationMins": 34
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 16,
+      "durationMins": 9
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 14,
+      "durationMins": 15
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 11,
+      "durationMins": 12
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 6,
+      "durationMins": 6
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 5,
+      "durationMins": 3
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 2,
+      "durationMins": 2
+    },
+    {
+      "name": "Hannah Searle",
+      "calls": 2,
+      "durationMins": 4
+    },
+    {
+      "name": "David Antioch",
+      "calls": 1,
+      "durationMins": 1
+    }
+  ],
+  "outboundOtherExtensionsTotal": 131,
+  "outboundOtherExtensions": [
+    {
+      "name": "Jasmina Sodolovic",
+      "calls": 25,
+      "durationMins": 27
+    },
+    {
+      "name": "Belinda",
+      "calls": 12,
+      "durationMins": 98
+    },
+    {
+      "name": "(Unattributed)",
+      "calls": 11,
+      "durationMins": 25
+    },
+    {
+      "name": "Joanna Lin/ Sandeep Pratap",
+      "calls": 8,
+      "durationMins": 25
+    },
+    {
+      "name": "RM8 Dr Somya Jhorar",
+      "calls": 8,
+      "durationMins": 68
+    },
+    {
+      "name": "Nurse 4 (TR2)",
+      "calls": 8,
+      "durationMins": 12
+    },
+    {
+      "name": "Raymond Liu",
+      "calls": 7,
+      "durationMins": 53
+    },
+    {
+      "name": "RM5 Dr Chi So / Dr Mel Deery",
+      "calls": 6,
+      "durationMins": 16
+    },
+    {
+      "name": "Denman Room 4",
+      "calls": 5,
+      "durationMins": 24
+    },
+    {
+      "name": "Fred/Mano",
+      "calls": 5,
+      "durationMins": 29
+    },
+    {
+      "name": "RM9 Dr Elliott Missen",
+      "calls": 5,
+      "durationMins": 44
+    },
+    {
+      "name": "RM3 Dr James Manley",
+      "calls": 4,
+      "durationMins": 66
+    },
+    {
+      "name": "Will Fong",
+      "calls": 4,
+      "durationMins": 20
+    },
+    {
+      "name": "Lisa Bron",
+      "calls": 3,
+      "durationMins": 7
+    },
+    {
+      "name": "Lyneham  - Nurse",
+      "calls": 3,
+      "durationMins": 4
+    },
+    {
+      "name": "Vanessa Thorn",
+      "calls": 2,
+      "durationMins": 3
+    },
+    {
+      "name": "Sam Primrose",
+      "calls": 2,
+      "durationMins": 16
+    },
+    {
+      "name": "RM1 Dr Elizabeth Muller / Dr Anna Colwell",
+      "calls": 2,
+      "durationMins": 12
+    },
+    {
+      "name": "John Pyae",
+      "calls": 2,
+      "durationMins": 12
+    },
+    {
+      "name": "JMO/ room 7",
+      "calls": 2,
+      "durationMins": 4
+    },
+    {
+      "name": "Crace Office",
+      "calls": 2,
+      "durationMins": 3
+    },
+    {
+      "name": "Ian Chan/ Andrew Mitchell",
+      "calls": 2,
+      "durationMins": 6
+    },
+    {
+      "name": "PM Alex Cownie",
+      "calls": 1,
+      "durationMins": 21
+    },
+    {
+      "name": "Denman - Nurse",
+      "calls": 1,
+      "durationMins": 0
+    },
+    {
+      "name": "Freya/Riana/John",
+      "calls": 1,
+      "durationMins": 3
+    }
+  ],
+  "_outboundNote": "outboundByStaff (174 calls, matching the PDF's own 'Total Outbound Calls = 174' caption) now matches the official workbook's OutboundStaffSummary table exactly, name-for-name and call-for-call, after two fixes: the known-staff roster now starts from the official workbook's own Source_Table sheet (the exact reception roster it uses) rather than only names seen in this project's own history, and Jasmina Sodolovic (an email/admin staff member who isn't reception, but had been pulled in by an earlier version of this script's now-removed Cloop-email-based roster heuristic) is explicitly excluded. outboundOtherExtensionsTotal (131, everyone else — doctors' rooms, admin extensions, and 11 calls with no attributed extension at all) plus outboundByStaff (174) now sums to 305, matching the official workbook's Outbound_10Day_Trend sheet exactly — see outboundTenDayTrend's own note below for what that number actually tracks.",
+  "outboundTenDayTrend": {
+    "labels": [
+      "Tue 22 Sep",
+      "Wed 23 Sep",
+      "Thu 24 Sep",
+      "Fri 25 Sep",
+      "Mon 28 Sep",
+      "Tue 29 Sep",
+      "Wed 30 Sep",
+      "Thu 01 Oct",
+      "Fri 02 Oct",
+      "Tue 06 Oct"
+    ],
+    "totals": [
+      265,
+      312,
+      209,
+      201,
+      274,
+      249,
+      262,
+      173,
+      186,
+      305
+    ]
+  },
+  "_outboundTenDayTrendNote": "FLAG FOR USER: this field tracks a DIFFERENT, larger metric than summary.totalOutbound/outboundByStaff above (174) — it's every outbound call from every extension in the building (reception, doctors' rooms, everyone), confirmed by directly matching the official workbook's own Outbound_10Day_Trend sheet (a 10-day rolling history, read in full from the file the user shared). Positions 0-8 here are that sheet's own verified values for 22 Sep - 2 Oct, NOT the carried-forward reception-only figures this project committed for those same dates historically (152, 170, 115, 123, 145, 122, 146, 94, 108) — this project had been dismissing this exact chart's numbers as unreliable PDF-extraction noise since at least 2026-10-02's own file, when they were actually a legitimate, different, and apparently fully trustworthy metric the whole time. This means every historical date's own outboundTenDayTrend.totals field (not just the labels/positions 0-8 overridden here) is very likely wrong in the same way — this file corrects today's entry using verified source data, but nothing upstream of today has been touched. Please let me know if you'd like those historical dates corrected too."
+}

@@ -1,0 +1,40 @@
+{
+  "_source": "Daily Operations Report - 6th October 2026.pdf (full-length) and (Short Version), pages 22-23 (Staff & Doctors on Leave), read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. STRUCTURAL GAP this date — see _note. Leave remains PDF-sourced for now; only Cloop/Call Logs have moved to raw-CSV ingestion in this phase.",
+  "reportTitle": "Daily Operations Report - 6th October 2026",
+  "reportDate": "2026-10-06",
+  "weekStart": "2026-10-05",
+  "weekEnd": "2026-10-09",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": null, "_unconfirmed": true },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": null, "_unconfirmed": true },
+        { "name": "Dr Penny Gosling", "site": "Crace", "status": null, "_unconfirmed": true },
+        { "name": "Dr Krystel Chin", "site": "Crace", "status": null, "_unconfirmed": true },
+        { "name": "Dr Belinda Glasson", "site": null, "status": null, "_unconfirmed": true },
+        { "name": "Dr Sheahan Ranasinghe", "site": "Crace", "status": null, "_unconfirmed": true },
+        { "name": "Dr Kristy Muir", "site": "Crace", "status": null, "_unconfirmed": true },
+        { "name": "Dr Tracy Fox", "site": "Denman", "status": null, "_unconfirmed": true }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Micah Haly", "site": null, "status": null, "_unconfirmed": true },
+        { "name": "Amy Morton", "site": null, "status": null, "_unconfirmed": true }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" },
+    { "name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ],
+  "_note": "FLAG FOR USER REVIEW — bigger gap than 2026-10-02's: this is a genuinely new week (5-9 October) with NO day-by-day Doctor/Staff grid ever printed in any report so far. This date's own source pages list only 8 doctor names (no per-day status at all, not even a grid) and a truncated 2-name Staff list (Micah Haly, Amy Morton — also with no status), identical in both the full-length and Short Version PDFs. Unlike 2026-10-02, there is no prior same-week file to carry forward from (2026-10-02's own 'next week preview' only had the Doctor names, which is exactly what's repeated here). Every person's status is recorded as null/_unconfirmed rather than guessed — do not treat this file's groups as usable leave-roster data until a future report in this same week prints the full grid, or until this is manually verified. The loose trailing fragment '...2nd July 2027 Public Holiday' at the end of the source text likely refers to Monday 5 October 2026 (ACT Labour Day, already noted in cloop.json's own history) rather than being part of the Dr Michelle De Jesus leave line — recorded verbatim, not parsed into a field."
+}

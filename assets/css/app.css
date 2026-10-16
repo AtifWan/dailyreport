@@ -36,18 +36,42 @@
 
 .dr-placeholder { border: 1px dashed var(--hairline-strong); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: var(--ink-faint); background: var(--surface-sunk); }
 
+/* Overview's Cloop "contacts queued yesterday" bar reuses design-system's .splitbar/.seg,
+   but as a single label-only segment rather than the two-part ratio (paid vs unpaid)
+   that class is meant for. It's not clickable — no data-tip, no handler — yet it still
+   picked up the shared .seg:hover brightening design-system uses to hint "this segment
+   has a tooltip", which reads as a button hover with nothing behind it. Scoped back off
+   for just this one static usage rather than touching the shared design-system rule
+   (comp-seg/al-seg/daybar genuinely are interactive elsewhere and should keep it). */
+.splitbar .seg.dr-splitbar-static:hover { filter: none; }
+
+/* design-system's .brow sizes its 3rd (value) column to that row's own text width
+   ("auto") — since each .brow is its own independent grid, a row with a long note
+   ("est. since 10 July 2026") gets a wider 3rd column than a row with a short one
+   ("8"), which pushes the 1fr label column to a different width too, so the bar in
+   between starts at a different x-position per row. Pinning the 3rd column's width
+   and letting long notes wrap (instead of forcing the column wider) keeps every
+   bar's left edge aligned down the panel. */
+.brow { grid-template-columns: 1fr 46% 130px; }
+.brow .bv { white-space: normal; }
+@media (max-width: 880px) {
+  .brow { grid-template-columns: 1fr 30% 96px; }
+}
+
 /* Expandable table rows (mountInteractiveTable's renderDetail) carry data-key and a
    pointer cursor inline; this just gives them a hover cue consistent with .thsort's
    own hover-toward-accent convention. */
 .rtable tbody tr[data-key]:hover td { background: var(--surface-sunk); }
 
-/* Month calendar (assets/js/calendarview.js) — no design-system precedent to extend,
-   so it borrows the same tokens a .panel would: hairline dividers, --radius-sm cells,
-   --surface-sunk for a receding day, --infer/--danger/--live for holiday/leave/clear. */
+/* Month calendar (assets/js/calendarview.js) — public holidays only (the per-day
+   leave count was dropped: it duplicated the "Week at a glance" table above it).
+   No design-system precedent to extend, so it borrows the same tokens a .panel
+   would: hairline dividers, --radius-sm cells, --surface-sunk for a receding day,
+   --infer for a holiday. */
 .dr-cal-title { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 16px; margin: 0 0 10px; }
 .dr-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--radius-sm); overflow: hidden; }
 .dr-cal-weekday { background: var(--surface-sunk); color: var(--ink-faint); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-align: center; padding: 7px 4px; }
-.dr-cal-cell { background: var(--surface); min-height: 72px; padding: 6px 7px; position: relative; }
+.dr-cal-cell { background: var(--surface); min-height: 56px; padding: 6px 7px; position: relative; }
 .dr-cal-cell--empty { background: var(--surface-sunk); }
 .dr-cal-cell--weekend { background: var(--surface-sunk); }
 .dr-cal-cell--holiday { background: var(--infer-soft); }
@@ -55,12 +79,101 @@
 .dr-cal-daynum { font-size: 12.5px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 5px; }
 .dr-cal-today-tag { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--accent-strong); background: var(--accent-weak); border-radius: 999px; padding: 1px 6px; }
 .dr-cal-holiday { font-size: 11px; font-weight: 600; color: var(--infer-ink); margin-top: 4px; line-height: 1.25; }
-.dr-cal-leave { font-size: 11px; font-weight: 600; margin-top: 4px; }
-.dr-cal-leave:not(.dr-cal-leave--none):not(.dr-cal-leave--unknown) { color: var(--danger-ink); cursor: help; border-bottom: 1px dashed var(--danger-ink); display: inline-block; }
-.dr-cal-leave--none { color: var(--live-ink); }
-.dr-cal-leave--unknown { color: var(--ink-faint); font-weight: 400; font-style: italic; }
+.dr-cal-note { font-size: 11px; font-weight: 600; color: var(--accent-strong); margin-top: 4px; line-height: 1.25; }
 @media (max-width: 520px) {
   .dr-cal-weekday { font-size: 9.5px; padding: 5px 2px; }
-  .dr-cal-cell { min-height: 58px; padding: 4px 5px; }
-  .dr-cal-holiday, .dr-cal-leave { font-size: 9.5px; }
+  .dr-cal-cell { min-height: 46px; padding: 4px 5px; }
+  .dr-cal-holiday, .dr-cal-note { font-size: 9.5px; }
 }
+
+/* Report-date picker (assets/js/datepicker.js) — replaces a native <input
+   type=date>, whose <datalist> "which days have data" hint rendered as an
+   actual calendar with tick marks in some browsers but as a plain scrolling
+   list of every date in others. This is a button + popover instead, so the
+   calendar grid always looks the same everywhere. Sized/coloured off the same
+   tokens as .dr-cal-* (the read-only holiday month view) but kept in its own
+   dr-pick-* namespace since the two aren't visually identical (this one is
+   much smaller and every cell is a real, focusable <button>). */
+.dr-datepicker { position: relative; }
+.dr-datepicker-btn { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; cursor: pointer; text-align: left; white-space: nowrap; color: var(--ink); }
+.dr-datepicker-btn:hover { border-color: var(--hairline-strong); }
+.dr-datepicker-btn svg { flex: none; color: var(--ink-faint); }
+.dr-datepicker-pop { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; width: 260px; max-width: calc(100vw - 32px); background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); box-shadow: var(--shadow-pop); padding: 12px; }
+.dr-datepicker-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.dr-datepicker-mon { font-weight: 700; font-size: 14px; color: var(--ink); }
+.dr-datepicker-prev, .dr-datepicker-next { border: none; background: var(--surface-sunk); width: 26px; height: 26px; border-radius: 8px; font-size: 15px; line-height: 1; cursor: pointer; color: var(--ink-muted); }
+.dr-datepicker-prev:hover:not(:disabled), .dr-datepicker-next:hover:not(:disabled) { background: var(--accent-weak); color: var(--accent-strong); }
+.dr-datepicker-prev:disabled, .dr-datepicker-next:disabled { opacity: .35; cursor: default; }
+.dr-pick-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.dr-pick-weekday { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); text-align: center; padding: 4px 0 6px; }
+.dr-pick-cell { display: flex; }
+.dr-pick-day { width: 100%; aspect-ratio: 1; border: none; background: none; border-radius: 8px; font-size: 12.5px; font-weight: 600; color: var(--ink-muted); cursor: pointer; }
+.dr-pick-day--empty { color: var(--hairline-strong); cursor: default; }
+.dr-pick-day--has:hover { background: var(--surface-sunk); color: var(--ink); }
+.dr-pick-day--sel { background: var(--accent); color: #fff; }
+.dr-pick-day--sel:hover { background: var(--accent); color: #fff; }
+
+/* Leave-grid row status rail (item 5 redesign) — same inset-rail idiom as .kpi.crit/
+   .kpi.good, so "who's fully out" and "who's partly out" register before you've read
+   a single cell. Two things make this trickier than a card: box-shadow on a <tr>
+   doesn't reliably paint (a table row isn't a single box), so the rail lives on the
+   name cell instead; and design-system's own `.rtable tbody td:first-child` rule
+   (needed for the sticky first column) is more specific than a bare class selector,
+   so this has to out-specify it rather than just come later in the file. */
+.dr-leave-table tbody tr.dr-leave-row--full td:first-child { background: var(--danger-soft); box-shadow: inset 3px 0 0 var(--danger), 1px 0 0 var(--hairline); }
+.dr-leave-table tbody tr.dr-leave-row--partial td:first-child { box-shadow: inset 3px 0 0 var(--infer), 1px 0 0 var(--hairline); }
+.dr-leave-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; margin-left: 8px; white-space: nowrap; }
+.dr-leave-badge--full { background: var(--danger-soft); color: var(--danger-ink); }
+.dr-leave-badge--partial { background: var(--infer-soft); color: var(--infer-ink); }
+
+/* Export split button (topbar) — a main button (last-used report type, defaults
+   to Full) joined to a caret that opens a two-option popover, same button+popover
+   idiom as .dr-datepicker above. The two halves share one visual button: the
+   divider between them is a hairline, not a gap, and only the outer corners round. */
+.dr-export { position: relative; display: flex; }
+.dr-export-main { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.dr-export-caret { border-top-left-radius: 0; border-bottom-left-radius: 0; border-left: none; padding: 9px 10px; }
+.dr-export-pop { position: absolute; top: calc(100% + 6px); right: 0; z-index: 40; width: 260px; max-width: calc(100vw - 32px); background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); box-shadow: var(--shadow-pop); padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+.dr-export-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; border: none; background: none; text-align: left; padding: 8px 10px; border-radius: var(--radius-sm); cursor: pointer; }
+.dr-export-opt:hover { background: var(--surface-sunk); }
+.dr-export-opt-title { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.dr-export-opt-sub { font-size: 11.5px; color: var(--ink-faint); }
+
+/* Below the same breakpoint the sidebar itself collapses to a drawer,
+   .tb-titles is already tight against the menu button; a full-width "Export
+   report" label pushed the longest page titles ("Staff & doctors' leave")
+   down to a truncated "St…". Icon-only keeps the button reachable without
+   crowding the title — aria-label carries the accessible name the hidden text
+   would otherwise have supplied. */
+@media (max-width: 880px) {
+  #exportBtn { padding: 9px 11px; }
+  #exportBtn #exportBtnLabel { display: none; }
+}
+
+/* Report checklist (owner/editor-only page, backed by the Artifact's `db`
+   capability) — a status row per required input, same dot+pill idiom as the
+   leave-grid's status rail, plus a plain form for the one manually-entered
+   field (Total Cases to Date) that has no automated source yet. */
+.dr-check-list { display: flex; flex-direction: column; gap: 10px; }
+.dr-check-row { display: flex; align-items: center; gap: 12px; padding: 10px 2px; border-bottom: 1px solid var(--hairline); }
+.dr-check-row:last-child { border-bottom: none; }
+.dr-check-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; background: var(--hairline-strong); }
+.dr-check-dot.on { background: var(--live); }
+.dr-check-text { flex: 1 1 auto; min-width: 0; }
+.dr-check-label { font-size: 14.5px; font-weight: 600; color: var(--ink); }
+.dr-check-sub { font-size: 13px; color: var(--ink-faint); margin-top: 2px; }
+.dr-cases-form { display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+.dr-cases-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .04em; }
+.dr-cases-form input { width: 160px; padding: 0 12px; font-size: 15px; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+@media (max-width: 520px) {
+  .dr-cases-form { flex-direction: column; align-items: stretch; }
+  .dr-cases-form input { width: 100%; }
+}
+
+.dr-generate-form { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; align-items: flex-start; }
+.dr-generate-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .04em; width: 100%; max-width: 420px; }
+.dr-generate-form input { font-size: 15px; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+.dr-queue-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 560px; }
+.dr-queue-row { display: flex; align-items: center; gap: 8px; }
+.dr-queue-row [data-queue-name] { flex: 1 1 180px; min-width: 0; }
+.dr-queue-row [data-queue-file] { flex: 1 1 220px; min-width: 0; }

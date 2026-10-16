@@ -1,0 +1,52 @@
+{
+  "_source": "Daily Operations Report - 14th July 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 268, "date": "2026-07-14", "weekday": "Tuesday", "title": "Daily Operations Report - 14th July 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 3, "onHalt": false },
+      { "name": "Finance", "days": 1, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 100 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 259,
+    "accepted": 248,
+    "acceptedPct": 96,
+    "missed": 11,
+    "missedPct": 4,
+    "totalOutbound": 184,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 51 },
+    "topOutboundAgent": { "name": "De Ang Renfree", "calls": 40 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 149, "missed": 7 },
+      { "queue": "General Enquiries", "accepted": 85, "missed": 2 },
+      { "queue": "Health Professionals", "accepted": 13, "missed": 1 },
+      { "queue": "Canberra Vasectomy", "accepted": 1, "missed": 1 }
+    ]
+  },
+  "cloop": {
+    "inQueue": 31,
+    "oldestDays": 9.3,
+    "contactsQueuedYesterday": 67,
+    "emailsHandledYesterday": 80,
+    "totalOverallCases": 3692,
+    "totalInProgress": 102,
+    "totalOpenCases": 55
+  },
+  "leave": {
+    "weekLabel": "13–17 July 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 3,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Amy Morton", "Katerina Gjorgievski", "Bethany Tran"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "Same week (13-17 Jul, the report's own week) and identical roster to 2026-07-13's leave.json — this report falls on the Tuesday of that same week."
+}

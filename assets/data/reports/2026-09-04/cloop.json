@@ -1,0 +1,47 @@
+{
+  "_source": "Daily Operations Report - 4th September 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 4th September 2026",
+  "extractedAt": "2026-09-07T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Monday 7 September 2026",
+  "_extractedAtNote": "This report is dated Friday 4 Sept, but Cloop's real-time snapshot and 'yesterday' tables are extracted the next business morning — Monday 7 Sept, skipping the weekend — same as the weekend-skip pattern on later Monday reports. That happens to make the 'yesterday' figures below describe this same Friday, not the day before it.",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 37, "oldestDays": 9.67 },
+    { "queue": "Unassigned", "inQueue": 20, "oldestDays": 4 },
+    { "queue": "Medico-legal", "inQueue": 14, "oldestDays": 4.93 },
+    { "queue": "Documents", "inQueue": 10, "oldestDays": 4.01 },
+    { "queue": "Failed Communication", "inQueue": 8, "oldestDays": 4.8 },
+    { "queue": "GP Mail", "inQueue": 4, "oldestDays": 12.96 },
+    { "queue": "Practice Finance", "inQueue": 3, "oldestDays": 9.58 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 2.55 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 4.02 }
+  ],
+  "realTimeSummary": { "inQueue": 99, "oldestDays": 12.96 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 26 },
+    { "queue": "Documents", "count": 21 },
+    { "queue": "Finance", "count": 8 },
+    { "queue": "Failed Communication", "count": 3 },
+    { "queue": "Medico-legal", "count": 3 },
+    { "queue": "Practice Finance", "count": 2 },
+    { "queue": "Requests", "count": 2 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Mon 24 Aug", "Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep"],
+    "totals": [104, 114, 91, 83, 79, 79, 117, 69, 71, 66]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 55, "outbound": 14, "total": 69 },
+    { "agent": "Leh Peng Goh", "incoming": 8, "outbound": 1, "total": 9 },
+    { "agent": "Atif Wan", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "totalCasesToDate": { "date": "2026-09-07", "totalOverallCases": 7122, "totalInProgress": 105, "totalOpenCases": 98 },
+  "inProgressTenDayTrend": {
+    "labels": ["Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep", "Mon 07 Sep"],
+    "totals": [90, 85, 86, 89, 93, 86, 90, 95, 97, 105]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Tue 25 Aug", "Wed 26 Aug", "Thu 27 Aug", "Fri 28 Aug", "Mon 31 Aug", "Tue 01 Sep", "Wed 02 Sep", "Thu 03 Sep", "Fri 04 Sep", "Mon 07 Sep"],
+    "totals": [80, 63, 57, 52, 77, 86, 60, 90, 82, 98]
+  }
+}

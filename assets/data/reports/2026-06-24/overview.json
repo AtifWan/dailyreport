@@ -1,0 +1,52 @@
+{
+  "_source": "Daily Operations Report - 24th June 2026 (Short Version).pdf (condensed headline figures) — cross-checked against the long version's verified figures",
+  "report": { "number": 254, "date": "2026-06-24", "weekday": "Wednesday", "title": "Daily Operations Report - 24th June 2026 (Short Version)" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 1, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 50 },
+      { "name": "Finance", "completionPct": 100 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 267,
+    "accepted": 234,
+    "acceptedPct": 88,
+    "missed": 33,
+    "missedPct": 12,
+    "totalOutbound": 136,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 67 },
+    "topOutboundAgent": { "name": "Rebecca Quinn", "calls": 35 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 147, "missed": 13 },
+      { "queue": "General Enquiries", "accepted": 72, "missed": 10 },
+      { "queue": "Health Professionals", "accepted": 10, "missed": 9 },
+      { "queue": "Canberra Vasectomy", "accepted": 1, "missed": 1 }
+    ]
+  },
+  "_callLogsNote": "The pie chart's own header and slices ('Total Inbound Calls = 267', Accepted 234/88%, Missed 33/12%) are internally consistent (234+33=267) and match the inbound-by-staff table's sum (234) exactly. However the 'Queue Report' bar chart directly beside it — despite its header also claiming '=267 calls' — has per-queue rows that sum to only 230 accepted (147+72+10+1), matching its own Grand Total row (230/33=263), not the pie's 267. Recorded here: accepted/acceptedPct/missed/missedPct from the pie (234/88/33/12, the better-corroborated figure), queueBreakdown rows verbatim as printed (summing to 230, not 234) — not reconciled.",
+  "cloop": {
+    "inQueue": 86,
+    "oldestDays": 8.98264,
+    "emailsHandledYesterday": 122,
+    "totalOverallCases": 2504,
+    "totalInProgress": 198,
+    "totalOpenCases": 110
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the six agents' printed 'Contacts handled' totals (60+32+11+10+8+1=122). Unlike some other dates in this project, the Real-Time Metrics Summary row's 'Oldest' value (215:35:00, hh:mm:ss) converts to ~8.9826 days, which matches the Nursing row's oldest item exactly — no format-vs-value discrepancy to flag here.",
+  "leave": {
+    "weekLabel": "22–26 June 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 1,
+    "staffPartialLeaveNames": ["Emily Pettett"],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  }
+}

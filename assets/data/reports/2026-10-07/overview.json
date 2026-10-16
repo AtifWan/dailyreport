@@ -1,0 +1,115 @@
+{
+  "_source": "Daily Operations Report - 7th October 2026.pdf, read via OneDrive text extraction (Microsoft 365 connector) — not pixel-level image verification. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance.",
+  "report": {
+    "number": 328,
+    "date": "2026-10-07",
+    "weekday": "Wednesday",
+    "title": "Daily Operations Report - 7th October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true
+      },
+      {
+        "name": "PST",
+        "days": 63,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 15,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 100
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 282,
+    "accepted": 235,
+    "acceptedPct": 83,
+    "missed": 47,
+    "missedPct": 17,
+    "totalOutbound": 184,
+    "topInboundAgent": {
+      "name": "Rebecca Quinn",
+      "calls": 69
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 133,
+        "missed": 17
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 99,
+        "missed": 30
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 1,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "High confidence — Rebecca Quinn tops a fully clean inboundByStaff table (13 names, 13 values, 13 durations all lined up 1:1, summing exactly to the confirmed raw-CSV accepted total of 235), 2 ahead of the Queue Report's own grand total (233 — 2 calls on a different reception line, not attributable to any of the 4 named queues, same pattern seen on 2026-10-06). Quieter day than 2026-10-06 (282 total inbound vs 368), consistent with reverting to a typical midweek volume after that date's own post-long-weekend spike.",
+  "cloop": {
+    "inQueue": 11,
+    "oldestDays": 13.69,
+    "contactsQueuedYesterday": 112,
+    "emailsHandledYesterday": 139,
+    "totalOverallCases": 9580,
+    "totalInProgress": 112,
+    "totalOpenCases": 33
+  },
+  "leave": {
+    "weekLabel": "5 October – 9 October 2026",
+    "doctorLinesOnLeave": null,
+    "staffFullyOnLeave": null,
+    "staffPartialLeave": null,
+    "staffPartialLeaveNames": [],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "Same week (5-9 Oct) as 2026-10-06, still no day-by-day grid — see leave.json's own note. Weekly leave counts left as null rather than guessed."
+}

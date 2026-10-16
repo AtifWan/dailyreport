@@ -1,0 +1,48 @@
+{
+  "_source": "Daily Operations Report - 22nd July 2026.pdf, pages 19-23 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 22nd July 2026",
+  "extractedAt": "2026-07-22T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Wednesday 22 July 2026",
+  "_extractedAtNote": "Unlike every other date processed in this project (where the Real-Time Metrics note is dated one business day after the report's own date), this section's note is printed as the SAME day as the report itself (Wed 22 Jul, not Thu 23 Jul) — printed verbatim, not corrected. Note this file's own Total Cases to Date section below still uses the usual next-day convention (dated 23/7/2026), so the two sections of this same source PDF disagree with each other on which day the data was actually extracted.",
+  "realTimeQueues": [
+    { "queue": "Unassigned", "inQueue": 7, "oldestDays": 0.67 },
+    { "queue": "Nursing", "inQueue": 4, "oldestDays": 9.99 },
+    { "queue": "Finance", "inQueue": 2, "oldestDays": 0.60 },
+    { "queue": "Medico-legal", "inQueue": 1, "oldestDays": 0.86 }
+  ],
+  "realTimeSummary": { "inQueue": 14, "oldestDays": 9.99 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 31 },
+    { "queue": "Documents", "count": 15 },
+    { "queue": "Requests", "count": 10 },
+    { "queue": "Failed Communication", "count": 8 },
+    { "queue": "Finance", "count": 5 },
+    { "queue": "Practice Finance", "count": 4 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Thu 09 Jul", "Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul"],
+    "totals": [90, 54, 89, 67, 90, 92, 109, 115, 120, 74]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 44, "outbound": 9, "total": 54 },
+    { "agent": "Jasmina Sodolovic", "incoming": 10, "outbound": 5, "total": 16 },
+    { "agent": "Atif Wan", "incoming": 8, "outbound": 0, "total": 8 },
+    { "agent": "Apurva Pathak", "incoming": 6, "outbound": 1, "total": 7 },
+    { "agent": "Leh Peng Goh", "incoming": 5, "outbound": 0, "total": 5 },
+    { "agent": "Frances Doble", "incoming": 0, "outbound": 1, "total": 1 },
+    { "agent": "Lucinda Gonzalez", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Two agents' stated totals don't equal incoming+outbound in the source PDF itself: Chloey Leow (44+9=53, but total printed as 54) and Jasmina Sodolovic (10+5=15, but total printed as 16). Same recurring quirk already flagged on other committed dates' cloop.json files. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-07-23", "totalOverallCases": 4230, "totalInProgress": 83, "totalOpenCases": 29 },
+  "_totalCasesToDateNote": "The 'Total Cases to Date' table and its two trend charts are labeled one day ahead of the rest of this Cloop section (through Thu 23 Jul rather than Wed 22 Jul) — same next-business-day extraction pattern noted on other already-committed files (contrast with the Real-Time Metrics note above, which for this date breaks that pattern).",
+  "inProgressTenDayTrend": {
+    "labels": ["Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul"],
+    "totals": [215, 223, 144, 102, 79, 80, 93, 88, 89, 83]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Fri 10 Jul", "Mon 13 Jul", "Tue 14 Jul", "Wed 15 Jul", "Thu 16 Jul", "Fri 17 Jul", "Mon 20 Jul", "Tue 21 Jul", "Wed 22 Jul", "Thu 23 Jul"],
+    "totals": [60, 67, 47, 55, 39, 40, 60, 50, 39, 29]
+  },
+  "_tenDayTrendNote": "Cross-validated: contactsQueuedTenDayTrend positions1-9 and both Total Cases trends' positions1-9 match 2026-07-21's already-written arrays' positions0-8 exactly. New/unverified final positions read directly from the image."
+}

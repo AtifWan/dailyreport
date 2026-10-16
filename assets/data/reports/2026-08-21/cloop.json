@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 21st August 2026.pdf, pages 18-22 (Cloop Report) — verified against rendered page images",
+  "reportTitle": "Daily Operations Report - 21st August 2026",
+  "extractedAt": "2026-08-24T09:00:00+10:00",
+  "extractedAtLabel": "9:00 AM, Monday 24 August 2026",
+  "_extractedAtNote": "21 August is a Friday, so per the established pattern the Cloop data is extracted the next business morning (skipping the weekend) — Monday 24 August. The source PDF itself labels the yesterday-tables 'Last Friday's' instead of 'Yesterday's' for this same reason.",
+  "realTimeQueues": [
+    { "queue": "Requests", "inQueue": 33, "oldestDays": 12.97 },
+    { "queue": "Unassigned", "inQueue": 22, "oldestDays": 2.74 },
+    { "queue": "Practice Finance", "inQueue": 11, "oldestDays": 12.61 },
+    { "queue": "Medico-legal", "inQueue": 6, "oldestDays": 3 },
+    { "queue": "Documents", "inQueue": 6, "oldestDays": 2.59 },
+    { "queue": "Finance", "inQueue": 1, "oldestDays": 0.23 },
+    { "queue": "Escalation", "inQueue": 1, "oldestDays": 2.8 },
+    { "queue": "GP Mail", "inQueue": 1, "oldestDays": 9.91 },
+    { "queue": "Failed Communication", "inQueue": 1, "oldestDays": 0.79 },
+    { "queue": "File Transfer", "inQueue": 1, "oldestDays": 6.82 }
+  ],
+  "realTimeSummary": { "inQueue": 83, "oldestDays": 12.97 },
+  "contactsQueuedYesterday": [
+    { "queue": "Unassigned", "count": 34 },
+    { "queue": "Finance", "count": 32 },
+    { "queue": "Documents", "count": 19 },
+    { "queue": "Requests", "count": 7 },
+    { "queue": "Medico-legal", "count": 6 },
+    { "queue": "Failed Communication", "count": 2 },
+    { "queue": "Escalation", "count": 1 },
+    { "queue": "File Transfer", "count": 1 }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Mon 10 Aug", "Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug"],
+    "totals": [108, 88, 71, 88, 102, 90, 87, 81, 75, 102]
+  },
+  "emailsHandledYesterday": [
+    { "agent": "Chloey Leow", "incoming": 62, "outbound": 12, "total": 74 },
+    { "agent": "Leh Peng Goh", "incoming": 32, "outbound": 3, "total": 36 },
+    { "agent": "Atif Wan", "incoming": 2, "outbound": 20, "total": 30 },
+    { "agent": "De Ang Renfree", "incoming": 0, "outbound": 4, "total": 4 },
+    { "agent": "Frances Doble", "incoming": 0, "outbound": 3, "total": 3 },
+    { "agent": "Kenneth Lobo", "incoming": 0, "outbound": 1, "total": 1 },
+    { "agent": "Megan Wright", "incoming": 1, "outbound": 0, "total": 1 }
+  ],
+  "_emailsHandledYesterdayNote": "Two agents' stated totals don't equal incoming+outbound in the source PDF itself: Leh Peng Goh (32+3=35, stated 36) and Atif Wan (2+20=22, stated 30). Same recurring quirk already flagged on 2026-09-07's cloop.json. Recorded verbatim.",
+  "totalCasesToDate": { "date": "2026-08-24", "totalOverallCases": 6193, "totalInProgress": 144, "totalOpenCases": 74 },
+  "inProgressTenDayTrend": {
+    "labels": ["Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug"],
+    "totals": [130, 128, 124, 127, 132, 135, 136, 154, 155, 144]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Tue 11 Aug", "Wed 12 Aug", "Thu 13 Aug", "Fri 14 Aug", "Mon 17 Aug", "Tue 18 Aug", "Wed 19 Aug", "Thu 20 Aug", "Fri 21 Aug", "Mon 24 Aug"],
+    "totals": [48, 49, 53, 60, 73, 70, 78, 70, 63, 74]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "_source": "Daily Operations Report - 28th August 2026.pdf, page 23 (Staff & Doctors on Leave) — verified against rendered page image",
+  "_note": "This is a Friday report previewing the FOLLOWING week (31 Aug - 4 Sept). Unlike the later Monday-Thursday reports of that same week (2026-08-31 through 2026-09-04), which show 6 staff on the grid, this Friday preview shows only 3 staff (Shae Connors, Rebecca Quinn, Kiara Pfeffer) — Emily Pettett, Micah Haly and Kate Chin are simply absent from this earlier snapshot. Same Friday-preview-vs-later-snapshot roster discrepancy already documented for the 4 Sept vs 7/8 Sept week. Recorded verbatim per this PDF — not reconciled against the later, more complete snapshot.",
+  "reportTitle": "Daily Operations Report - 28th August 2026",
+  "reportDate": "2026-08-28",
+  "weekStart": "2026-08-31",
+  "weekEnd": "2026-09-04",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        { "name": "Dr Mara Matic", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Dr Tom Mills", "site": "Crace", "status": ["leave", "leave", "leave", "leave", "leave"] },
+        { "name": "Med Student Sarah Lucas", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"] }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        { "name": "Shae Connors", "site": null, "status": ["leave", "available", "available", "available", "available"] },
+        { "name": "Rebecca Quinn", "site": null, "status": ["available", "available", "leave", "available", "available"] },
+        { "name": "Kiara Pfeffer", "site": null, "status": ["available", "available", "available", "leave", "leave"] }
+      ]
+    }
+  ],
+  "longTerm": [
+    { "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }
+  ],
+  "legend": [
+    { "key": "leave", "label": "On Leave" },
+    { "key": "available", "label": "Available" },
+    { "key": "public_holiday", "label": "Public Holiday" }
+  ]
+}

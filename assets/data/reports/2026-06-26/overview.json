@@ -1,0 +1,53 @@
+{
+  "_source": "Daily Operations Report - 26th June 2026.pdf — headline figures assembled from the long version's own verified pages (there is no separate distinct 'overview' page in this report)",
+  "report": { "number": 256, "date": "2026-06-26", "weekday": "Friday", "title": "Daily Operations Report - 26th June 2026" },
+  "criticalTasks": {
+    "streaks": [
+      { "name": "Crace", "days": 1, "onHalt": true },
+      { "name": "Denman", "days": 109, "onHalt": true, "longest": true },
+      { "name": "Lyneham", "days": 0, "onHalt": true },
+      { "name": "PST", "days": 0, "onHalt": false },
+      { "name": "Finance", "days": 0, "onHalt": false }
+    ],
+    "longestStreak": { "name": "Denman", "days": 109, "startDate": "2026-01-13" },
+    "checklists": [
+      { "name": "PST", "completionPct": 44 },
+      { "name": "Finance", "completionPct": 75 }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 246,
+    "accepted": 228,
+    "acceptedPct": 93,
+    "missed": 18,
+    "missedPct": 7,
+    "totalOutbound": 132,
+    "topInboundAgent": { "name": "Rebecca Quinn", "calls": 55 },
+    "topOutboundAgent": { "name": "David Antioch", "calls": 31 },
+    "queueBreakdown": [
+      { "queue": "Appointments", "accepted": 122, "missed": 6 },
+      { "queue": "General Enquiries", "accepted": 84, "missed": 5 },
+      { "queue": "Health Professionals", "accepted": 17, "missed": 6 },
+      { "queue": "Canberra Vasectomy", "accepted": 2, "missed": 1 }
+    ]
+  },
+  "_callLogsNote": "As on prior dates, the 'Total Inbound Calls' pie (246 total; Accepted 228/93%, Missed 18/7%) and the 'Queue Report' bar chart (also headed '=246 calls') disagree on accepted: the bar chart's per-queue rows sum to only 225 accepted (122+84+17+2), matching its own Grand Total row (225/18), not the pie's 228. Missed calls agree everywhere (18). Unlike 2026-06-25, this date's separate 'Accepted/Missed Calls by Queue' pie-chart page matches the Queue Report bar chart exactly (122/84/17/2 accepted, 6/5/6/1 missed) rather than introducing a third figure — no further discrepancy there. Recorded: accepted/acceptedPct from the pie (228/93, matching the inbound-by-staff table sum exactly), queueBreakdown rows verbatim from the Queue Report bar chart (summing to 225, not 228) — not reconciled.",
+  "cloop": {
+    "inQueue": 92,
+    "oldestDays": 12.99193,
+    "emailsHandledYesterday": 104,
+    "totalOverallCases": 2720,
+    "totalInProgress": 203,
+    "totalOpenCases": 121
+  },
+  "_cloopNote": "emailsHandledYesterday is the sum of the four agents' printed 'Contacts handled' totals (74+15+9+6=104). This table is titled 'Last Friday's Emails Handled' rather than 'Yesterday's Emails Handled' as on other dates — recorded verbatim, not corrected (this report's own date, 26 June, is itself a Friday, so 'Last Friday' would literally mean a week earlier; this looks like a copy/paste label quirk in the source rather than a real change in what data is shown). The Real-Time Metrics Summary row's 'Oldest' figure (311:48:23) matches the Nursing row's own oldest item exactly. The source page's own extraction-time note reads 'Note: The data was extracted at 8:45 AM, on Monday 26th June 2026' — but 26 June 2026 is a Friday (per this report's own cover page and title), not a Monday; the note's weekday label and its own date do not agree, recorded verbatim as printed.",
+  "leave": {
+    "weekLabel": "29 June – 3 July 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 4,
+    "staffPartialLeave": 0,
+    "staffPartialLeaveNames": [],
+    "longTerm": [{ "name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14" }]
+  },
+  "_leaveNote": "Unlike 2026-06-24/25, this report's Staff & Doctors on Leave page already displays the FOLLOWING week (29 June - 3 July 2026) rather than the current week containing the report's own date (26 June, a Friday, isn't a column on this grid at all). The doctorLinesOnLeave/staffFullyOnLeave/staffPartialLeave counts above are therefore a Monday-29-June snapshot (the first day of the displayed week) rather than a same-day snapshot of 26 June itself — see leave.json's own note for the full per-day grid and roster change (a smaller 2-doctor/5-staff roster, with Dr Tracy Fox and Megan Moreno Pitcher replacing Dr Neena Sood and the wider staff list seen in the 22-26 June roster)."
+}
