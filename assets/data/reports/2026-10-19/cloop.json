@@ -1,0 +1,60 @@
+{
+  "_source": "Daily Operations Report - 20th October 2026.pdf (full + short versions), pages covering the Cloop Report, read directly from the user-uploaded PDFs' rendered page images. Report's cover is misdated — true date is 2026-10-19 (Monday); see tasks.json's own _source note for the full date-correction evidence (user independently confirmed this correction mid-session). Both PDF versions agree on every figure in this file.",
+  "reportTitle": "Daily Operations Report - 20th October 2026 (cover misdated; corrected to 2026-10-19 Monday — see _source)",
+  "extractedAt": "2026-10-20T08:45:00+11:00",
+  "extractedAtLabel": "8:45 AM, Tuesday 20 October 2026",
+  "_extractedAtNote": "The report's own Real-Time snapshot is taken the next business morning (Tuesday 20 October), per the established convention, filed here under this report's own (corrected) date (2026-10-19, a Monday). This is the normal 1-business-day-forward pattern resuming after the 3-day-late exception on 2026-10-16.",
+  "realTimeQueues": [
+    {"queue": "Requests", "inQueue": 31, "oldestDays": 4.85},
+    {"queue": "Unassigned", "inQueue": 13, "oldestDays": 0.7},
+    {"queue": "Failed Communication", "inQueue": 12, "oldestDays": 3.87},
+    {"queue": "Documents", "inQueue": 3, "oldestDays": 0.72},
+    {"queue": "Medico-legal", "inQueue": 2, "oldestDays": 3.74},
+    {"queue": "Practice Finance", "inQueue": 2, "oldestDays": 4.87},
+    {"queue": "Nursing", "inQueue": 1, "oldestDays": 12.78}
+  ],
+  "realTimeSummary": {"inQueue": 64, "oldestDays": 12.78},
+  "_realTimeQueuesNote": "The 7 listed queues sum cleanly to the printed Summary row (31+13+12+3+2+2+1=64), no PDF-internal gap this date. 'Failed Communication' remains present (12 items) after reappearing on 2026-10-16. The single Nursing item has now aged to 12.78 days (up from 8.75 on 2026-10-15), consistent with it still being the same unresolved ticket.",
+  "contactsQueuedYesterday": [
+    {"queue": "Unassigned", "count": 34},
+    {"queue": "Documents", "count": 27},
+    {"queue": "Medico-legal", "count": 7},
+    {"queue": "Finance", "count": 6},
+    {"queue": "Requests", "count": 5},
+    {"queue": "Failed Communication", "count": 2}
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Tue 06 Oct", "Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct"],
+    "totals": [93, 112, 65, 93, 80, 636, 112, 98, 35, 81]
+  },
+  "_note": "contactsQueuedYesterday sums to 81 exactly, matching this report's own contactsQueuedTenDayTrend chart's trailing value (position 9, labelled 'Mon, 19-Oct' on the PDF's own chart — directly the report's own corrected date, no relabelling needed) and chain-matching 2026-10-16's own committed-equivalent trend exactly at positions 0-8. This trend's chain integrity is unaffected by the wait-time-chart revision issue noted elsewhere in this date's files. emailsHandledYesterday: 8 of 9 agents' incoming+outbound splits reconcile exactly to their own printed totals — see _emailsHandledNote for the one exception.",
+  "emailsHandledYesterday": [
+    {"agent": "Chloey Leow", "incoming": 65, "outbound": 14, "total": 79},
+    {"agent": "Frances Doble", "incoming": 5, "outbound": 2, "total": 7},
+    {"agent": "Leh Peng Goh", "incoming": 6, "outbound": 1, "total": 7},
+    {"agent": "Jasmina Sodolovic", "incoming": 4, "outbound": 0, "total": 5},
+    {"agent": "Emily Pettett", "incoming": 1, "outbound": 1, "total": 2},
+    {"agent": "Ambrosie Brassil", "incoming": 0, "outbound": 1, "total": 1},
+    {"agent": "De Ang Renfree", "incoming": 0, "outbound": 1, "total": 1},
+    {"agent": "Jasmine Deery", "incoming": 0, "outbound": 1, "total": 1},
+    {"agent": "Pinky Mae De Paz", "incoming": 0, "outbound": 1, "total": 1}
+  ],
+  "_emailsHandledNote": "This date's table prints agents as display names again (unlike 2026-10-16's email-address format). One row doesn't reconcile internally: Jasmina Sodolovic's own printed total (5) doesn't equal her own printed incoming+outbound split (4+0=4), a 1-contact gap in the PDF's own table — recorded verbatim as printed, not corrected, per policy. All other 8 rows reconcile exactly.",
+  "totalCasesToDate": {
+    "date": "2026-10-19",
+    "totalOverallCases": 10210,
+    "totalInProgress": 134,
+    "totalOpenCases": 56
+  },
+  "inProgressTenDayTrend": {
+    "labels": ["Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct", "Tue 20 Oct"],
+    "totals": [112, 112, 107, 101, 107, 105, 115, 117, 142, 134]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct", "Tue 20 Oct"],
+    "totals": [106, 33, 34, 60, 47, 37, 31, 40, 35, 56]
+  },
+  "_totalCasesToDateNote": "DELIBERATE DEVIATION FROM THE USUAL RELABELLING CONVENTION — explained in full: on every other clean date, this section's final trend point is relabelled from the PDF's own printed (next-business-morning) date down to the report's own date, because the two always refer to the same close-of-day snapshot. That doesn't work here. This report's own chart literally ends with TWO distinct, genuinely different points: position 8, printed as 'Mon 19-Oct' (142/35), and position 9, printed as 'Tue 20-Oct' (134/56). Position 8's values (142/35) are not a new discovery — they exactly match the Total Cases To Date snapshot already recorded in 2026-10-16's own (not-yet-committed) cloop.json, which was itself captured 3 business days late on 'Monday 19 October' due to that report's delayed compilation. Position 9 (134/56, stamped 20/10/2026) is THIS report's own genuine next-business-morning snapshot, taken under the normal 1-day-forward convention now that it has resumed. Relabelling position 9 down to 'Mon 19 Oct' per the usual convention would collide with the already-distinct, already-correct 'Mon 19 Oct' value at position 8 and misrepresent which day's close is which — so both labels are left exactly as the PDF prints them, and totalCasesToDate.date is set to this report's own corrected date (2026-10-19) per the usual filing convention, with its value (10210/134/56) taken from the position-9 snapshot as normal. Positions 0-7 chain-match 2026-10-16's own file exactly. totalOverallCases (10210) is a +38 increase over 2026-10-16's committed 10172.",
+  "_historicalDate": "2026-10-19",
+  "_unmatchedAgentNames": []
+}

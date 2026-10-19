@@ -1,0 +1,36 @@
+{
+  "_source": "Daily Operations Report - 16th October 2026.pdf (full-length), page 22 (Staff & Doctors on Leave), read directly from the user-uploaded PDF's rendered page image.",
+  "reportTitle": "Daily Operations Report - 16th October 2026",
+  "reportDate": "2026-10-16",
+  "weekStart": "2026-10-19",
+  "weekEnd": "2026-10-23",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {"name": "Somya Jhorar", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"]}
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {"name": "Lucinda Gonzalez", "site": null, "status": ["leave", "leave", "available", "available", "available"]},
+        {"name": "Sudina Rijal", "site": null, "status": ["leave", "leave", "leave", "available", "available"]},
+        {"name": "Apurva Pathak", "site": null, "status": ["available", "leave", "available", "available", "available"]},
+        {"name": "Holly Archer", "site": null, "status": ["leave", "available", "available", "available", "available"]},
+        {"name": "Atif Wan", "site": null, "status": ["leave", "available", "available", "available", "available"]}
+      ]
+    }
+  ],
+  "longTerm": [
+    {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+    {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+  ],
+  "legend": [
+    {"key": "leave", "label": "On Leave"},
+    {"key": "available", "label": "Available"},
+    {"key": "public_holiday", "label": "Public Holiday"}
+  ],
+  "_note": "GENUINE PROVENANCE QUIRK (same root cause as cloop.json's own note): this report's own date (2026-10-16, a Friday) falls in the week of 12-16 October, but the leave grid printed on its page 22 shows the FOLLOWING week, 19-23 October — because this report was compiled late, on or after Monday 19 October, and the leave page always reflects the current Mon-Fri working week as of generation, not the report's own date. Recorded verbatim as printed rather than back-filled to the 12-16 Oct week (which this PDF simply doesn't show). The roster itself is also entirely different from the 12-16 Oct week seen on 2026-10-09/12/13/14/15 (new names: Somya Jhorar, Lucinda Gonzalez, Sudina Rijal, Apurva Pathak, Holly Archer, Atif Wan) — a new week, a new roster, not an error. Every status cell was legible from the colour grid directly, no guessing."
+}

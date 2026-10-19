@@ -1,0 +1,103 @@
+{
+  "_source": "Daily Operations Report - 16th October 2026.pdf, read directly from the user-uploaded PDF's rendered page images. Unlike recent dates, this one is PDF-extracted rather than raw-CSV-parsed: by the time this report was processed, OneDrive's Call Logs raw-source folder had already rotated past 2026-10-16 (it only ever holds the most recent day's exports), so the underlying CallQueue_Detailed/InboundCalls_Detailed/ExportCallRecords files for this date are no longer retrievable. Every figure below is cross-checked against at least two independent panels of the PDF itself (pie/queue-table/per-queue-chart/staff-table), and all of it lines up cleanly — see _summaryVsGrandTotalNote and _staffCountNote.",
+  "reportDate": "2026-10-16",
+  "summary": {
+    "totalInbound": 281,
+    "accepted": 219,
+    "missed": 62,
+    "acceptedPct": 78,
+    "missedPct": 22,
+    "totalOutbound": 148
+  },
+  "_summaryVsGrandTotalNote": "This file's own summary (281 total/219 accepted) matches the PDF's own pie chart exactly (281 total, 219 accepted/78%, 62 missed/22%). The queue-level grandTotal below sums to 218 accepted/62 missed (280 total) — 1 short of the pie, the same small pre-existing PDF-internal inconsistency (its own cover doesn't equal its own queue-breakdown sum) seen on prior dates, not introduced here.",
+  "queueReport": [
+    {"queue": "Appointments", "accepted": 131, "missed": 34},
+    {"queue": "General Enquiries", "accepted": 84, "missed": 24},
+    {"queue": "Health Professionals", "accepted": 0, "missed": 0},
+    {"queue": "Canberra Vasectomy", "accepted": 3, "missed": 4}
+  ],
+  "grandTotal": {"accepted": 218, "missed": 62},
+  "tenDayTrend": {
+    "labels": ["Fri 02 Oct", "Tue 06 Oct", "Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct"],
+    "accepted": [201, 331, 235, 247, 217, 310, 223, 229, 266, 219],
+    "missed": [28, 37, 47, 22, 33, 31, 25, 32, 30, 62],
+    "answerRatePct": [88, 90, 83, 92, 87, 91, 90, 88, 90, 78],
+    "overallAvgWaitSec": [50, 123, 43, 42, 45, 40, 44, 35, 50, 53]
+  },
+  "_tenDayTrendNote": "accepted/missed/answerRatePct/overallAvgWaitSec all chain-match 2026-10-15's own committed trend exactly at positions 0-8; position 9 matches the PDF's own printed charts exactly across the board (Call Answer Rate 78%, Overall Average Wait Time 53 sec, and the Call Volume/pie split 219/62).",
+  "queues": {
+    "Appointments": {
+      "accepted": [100, 208, 133, 141, 115, 206, 143, 147, 164, 131],
+      "missed": [7, 20, 17, 10, 14, 16, 7, 17, 18, 34],
+      "avgWaitSec": [37, 110, 43, 37, 38, 39, 40, 30, 45, 59]
+    },
+    "General Enquiries": {
+      "accepted": [98, 118, 99, 104, 101, 102, 77, 76, 98, 84],
+      "missed": [21, 17, 30, 12, 19, 14, 18, 15, 9, 24],
+      "avgWaitSec": [63, 151, 44, 48, 54, 41, 53, 46, 61, 45]
+    },
+    "Health Professionals": {
+      "accepted": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "missed": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "avgWaitSec": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "Canberra Vasectomy": {
+      "accepted": [1, 4, 1, 2, 2, 2, 1, 3, 3, 3],
+      "missed": [0, 0, 0, 0, 0, 1, 0, 0, 3, 4],
+      "avgWaitSec": [12, 86, 3, 38, 24, 26, 56, 24, 30, 21]
+    }
+  },
+  "_queuesNote": "accepted/missed/avgWaitSec for all four queues chain-match 2026-10-15's own committed data exactly at positions 0-8, and all three non-zero queues' accepted/missed/avgWaitSec at position 9 match the PDF's own queue breakdown and per-queue 10-day charts exactly (Appointments 131/34, 59 sec; General Enquiries 84/24, 45 sec; Canberra Vasectomy 3/4, 21 sec) — clean match, no queue-level gap this date.",
+  "patientServiceKpi": {
+    "longestCallDurationSec": 847,
+    "longestCallAt": "2:10 PM",
+    "longestCallAgent": "Kiara Pfeffer",
+    "longestWaitingTimeSec": 588,
+    "longestWaitingAt": "4:57 PM",
+    "avgCallHandlingSec": 160
+  },
+  "_patientServiceKpiNote": "All figures match the PDF's own Patient Service KPI panel and Longest Wait Per Queue table exactly (847 sec longest call at 2:10 PM by Kiara Pfeffer; 588 sec longest wait at 4:57 PM in the Appointments queue, attributed to Ambrosie Brassil in the queue-level table).",
+  "longestWaitPerQueue": [
+    {"queue": "Appointments", "waitSec": 588, "time": "4:57 PM", "name": "Ambrosie Brassil", "waitLabel": "9 min 48 sec"},
+    {"queue": "General Enquiries", "waitSec": 305, "time": "11:00 AM", "name": "De Ang Renfree", "waitLabel": "5 min 5 sec"},
+    {"queue": "Health Professionals", "waitSec": 0, "time": null, "name": null, "waitLabel": "0 min 0 sec"},
+    {"queue": "Canberra Vasectomy", "waitSec": 50, "time": "11:12 AM", "name": "Isaac Davis", "waitLabel": "0 min 50 sec"}
+  ],
+  "inboundByStaff": [
+    {"name": "Andrew Davies", "calls": 39, "durationMins": 132},
+    {"name": "De Ang Renfree", "calls": 37, "durationMins": 100},
+    {"name": "David Antioch", "calls": 36, "durationMins": 72},
+    {"name": "Kiara Pfeffer", "calls": 25, "durationMins": 90},
+    {"name": "Pinky De Paz", "calls": 18, "durationMins": 63},
+    {"name": "Samantha Cooper", "calls": 17, "durationMins": 23},
+    {"name": "Apurva Pathak", "calls": 14, "durationMins": 42},
+    {"name": "Ambrosie Brassil", "calls": 14, "durationMins": 12},
+    {"name": "Isaac Davis", "calls": 9, "durationMins": 22},
+    {"name": "Hannah Searle", "calls": 7, "durationMins": 13},
+    {"name": "Shae Connors", "calls": 2, "durationMins": 12},
+    {"name": "Crace - Rec 1", "calls": 1, "durationMins": 1}
+  ],
+  "_staffCountNote": "All 12 inboundByStaff names match the PDF's own printed Inbound Calls - All Staff table exactly on both calls and duration — clean match, no gap this date (calls sum to 219, matching the PDF's own pie chart exactly).",
+  "outboundByStaff": [
+    {"name": "Apurva Pathak", "calls": 39, "durationMins": 67},
+    {"name": "Andrew Davies", "calls": 29, "durationMins": 33},
+    {"name": "David Antioch", "calls": 19, "durationMins": 37},
+    {"name": "Hannah Searle", "calls": 12, "durationMins": 20},
+    {"name": "Kiara Pfeffer", "calls": 11, "durationMins": 10},
+    {"name": "Pinky De Paz", "calls": 10, "durationMins": 11},
+    {"name": "Isaac Davis", "calls": 8, "durationMins": 13},
+    {"name": "De Ang Renfree", "calls": 7, "durationMins": 8},
+    {"name": "Samantha Cooper", "calls": 6, "durationMins": 7},
+    {"name": "Shae Connors", "calls": 4, "durationMins": 16},
+    {"name": "Ambrosie Brassil", "calls": 3, "durationMins": 2}
+  ],
+  "_outboundDurationNote": "outboundByStaff's own call counts match the PDF's own 11-name outbound staff table exactly for every name (39/29/19/12/11/10/8/7/6/4/3, summing to the confirmed 148-call total, which also matches this file's own summary.totalOutbound and the PDF's own 'Total Outbound Calls = 148 Calls' header exactly). Duration minutes are taken verbatim from the same table; no raw per-call data was available this date to cross-check them further (see this file's own _source note).",
+  "outboundOtherExtensionsTotal": null,
+  "outboundOtherExtensions": [],
+  "outboundTenDayTrend": {
+    "labels": ["Fri 02 Oct", "Tue 06 Oct", "Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct"],
+    "totals": [186, 305, 320, 268, 200, 235, 172, 105, 160, 158]
+  },
+  "_outboundTenDayTrendNote": "FLAG FOR USER REVIEW: this is taken directly from the PDF's own chart this date (positions 0-5 chain-match 2026-10-14/15's own committed chain-verified totals exactly: 186, 305, 320, 268, 200, 235). Positions 6-8 (Tue 13-Oct 172, Wed 14-Oct 105, Thu 15-Oct 160) continue the same divergence from the chain-verified totals already flagged and recorded on 2026-10-14 and 2026-10-15 (252/177/248 there) — this is now the THIRD consecutive date confirming it's a persistent, systemic issue in how this one chart renders its own trailing ~3 days, not a one-off glitch. Position 9 (158, today's own value) could NOT be independently cross-checked against a raw-CSV-derived total this date, because the OneDrive raw-source folder had already rotated past 2026-10-16 by the time this report was processed (see this file's own top-level _source note) — so unlike prior dates, this field is NOT chain-verified for today and is taken on the PDF's own authority alone. summary.totalOutbound (148) remains independently confirmed via the PDF's own staff table and matches its own header exactly.",
+  "_duplicateSourceNote": "No raw CSV source was available for this date to check for duplicate records; see top-level _source note."
+}
