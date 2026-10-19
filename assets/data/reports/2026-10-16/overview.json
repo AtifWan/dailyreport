@@ -1,0 +1,64 @@
+{
+  "_source": "Daily Operations Report - 16th October 2026.pdf, read directly from the user-uploaded PDF's rendered page images. No short-version PDF was provided for this date (only the full version), so these headline figures are drawn from the full version's own pages rather than a separate short-version cover — same underlying numbers either way. Values here are drawn from the same-date tasks.json/call-logs.json/cloop.json/leave.json already extracted; see those files' own notes for full provenance, including a genuine late-compilation quirk affecting the Cloop and Leave sections.",
+  "report": {
+    "number": 335,
+    "date": "2026-10-16",
+    "weekday": "Friday",
+    "title": "Daily Operations Report - 16th October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {"name": "Crace", "days": 1, "onHalt": true},
+      {"name": "Denman", "days": 109, "onHalt": true, "longest": true},
+      {"name": "Lyneham", "days": 0, "onHalt": true},
+      {"name": "PST", "days": 70, "onHalt": false},
+      {"name": "Finance", "days": 22, "onHalt": false}
+    ],
+    "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+    "checklists": [
+      {"name": "PST", "completionPct": 100},
+      {"name": "Finance", "completionPct": 100}
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 281,
+    "accepted": 219,
+    "acceptedPct": 78,
+    "missed": 62,
+    "missedPct": 22,
+    "totalOutbound": 148,
+    "topInboundAgent": {
+      "name": "Andrew Davies",
+      "calls": 39
+    },
+    "queueBreakdown": [
+      {"queue": "Appointments", "accepted": 131, "missed": 34},
+      {"queue": "General Enquiries", "accepted": 84, "missed": 24},
+      {"queue": "Canberra Vasectomy", "accepted": 3, "missed": 4}
+    ]
+  },
+  "_topInboundAgentNote": "Andrew Davies tops a cleanly aligned inboundByStaff table (12 names, 12 values, 12 durations all lined up 1:1, summing to 219 — matching the PDF's own pie chart exactly, no gap this date). Quieter day than 2026-10-15 (281 total inbound vs 296).",
+  "cloop": {
+    "inQueue": 50,
+    "oldestDays": 12.08,
+    "contactsQueuedYesterday": 35,
+    "emailsHandledYesterday": 90,
+    "totalOverallCases": 10172,
+    "totalInProgress": 142,
+    "totalOpenCases": 35
+  },
+  "_cloopNote": "This report was compiled late (3 business days after its own date — the user was away and a colleague produced it) so its Cloop section's own Real-Time and Total-Cases-To-Date snapshots were taken on Monday 19 October rather than the usual next business morning. The underlying 10-day trends still chain-verify cleanly against 2026-10-15 — see cloop.json's own notes for the full detail. 'Failed Communication' reappears in the Real-Time queue (12 items) after being absent on 2026-10-14/15, but given the 3-day-later snapshot this reads as ordinary aging rather than a new backlog spike.",
+  "_outboundTrendNote": "FLAG FOR USER REVIEW (third consecutive date): call-logs.json's own outboundTenDayTrend chart continues to diverge from the chain-verified totals seen on 2026-10-14/15, now confirmed as a persistent pattern rather than a one-off. This date couldn't be independently cross-checked against raw call data at all, since OneDrive's raw-source folder had already rotated past 2026-10-16 by the time this report was processed — see call-logs.json's own _outboundTenDayTrendNote. summary.totalOutbound (148) remains solid, matching the PDF's own staff table and header exactly.",
+  "leave": {
+    "weekLabel": "19 October – 23 October 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Lucinda Gonzalez", "Sudina Rijal", "Apurva Pathak", "Holly Archer", "Atif Wan"],
+    "longTerm": [
+      {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+      {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+    ]
+  },
+  "_leaveNote": "GENUINE PROVENANCE QUIRK: because this report was compiled late, its leave grid shows the week AFTER its own report date (19-23 Oct, not 12-16 Oct) with an entirely new roster — recorded verbatim, not an error. See leave.json's own _note for the full detail. One doctor (Somya Jhorar) is out the full week; none of the 5 staff are out the full week or fully available — all 5 are 'partial'."
+}

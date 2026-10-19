@@ -1,0 +1,35 @@
+{
+  "_source": "PDF cover page prints 'Report #336' and '20th October 2026, Monday' — but 20 Oct 2026 is a Tuesday, and every internal cross-check (this PDF's own trend-chart trailing labels ending 'Mon, 19-Oct', the Cloop Real-Time extraction note stamped 'Tuesday, 20th October 2026' i.e. the usual next-business-morning snapshot, the Staff & Doctors on Leave page's own header reading 'This week, 19th October 2026 until 23rd October 2026', and Report #336 following directly from Report #335/2026-10-16-Friday with no other business day between) converges on the report's true date being Monday 2026-10-19, not the 20th. Filed under the corrected date; the title/date-field mismatch is the source PDF's own error, not ours. Data below is read directly from the full-version PDF (page 1, Critical Daily Tasks) and the short-version PDF (page 1, identical content, both user-uploaded).",
+  "reportTitle": "Daily Operations Report - 20th October 2026 (cover misdated; corrected to 2026-10-19 Monday — see _source)",
+  "reportDate": "2026-10-19",
+  "streaks": [
+    {"name": "Crace", "days": 1, "onHalt": true, "_carriedForward": true},
+    {"name": "Denman", "days": 109, "onHalt": true, "longest": true, "_carriedForward": true},
+    {"name": "Lyneham", "days": 0, "onHalt": true, "_carriedForward": true},
+    {"name": "PST", "days": 0, "onHalt": false},
+    {"name": "Finance", "days": 0, "onHalt": false}
+  ],
+  "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+  "trendDates": ["Tue 06 Oct", "Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct"],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 67,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 100, 100, 67],
+      "complete": ["Send Claim For Automed Payments", "Clinical Reminders", "Caregp Ai Tool", "Allocate - Healthlink Unallocated"],
+      "incomplete": ["E-Referrals", "Action Failed Communications on Cloop"]
+    },
+    {
+      "name": "Finance",
+      "completionPct": 88,
+      "trend": [100, 100, 100, 100, 100, 100, 100, 88, 88, 88],
+      "complete": ["Xero accounts reconciled", "Tyro Health receipts captured", "Finance queue in Cloop has zero emails", "All Remittances from 3rd Party & Insurer (From Cloop) Allocated", "Unidentified payments resolved", "Reconcile All GPs' and Practices' Xero accounts", "90/60-day debt list actioned"],
+      "incomplete": ["Best Practice Online Medicare Claim"],
+      "incompleteCount": 1,
+      "incompleteExample": "Best Practice Online Medicare Claim"
+    }
+  ],
+  "_trendNote": "FLAG FOR USER REVIEW (first break since tracking began): PST drops to 67% today (2 of 6 tasks incomplete: E-Referrals, Action Failed Communications on Cloop) and Finance drops to 88% (1 of 8 incomplete: Best Practice Online Medicare Claim) — the first non-100% completion for either checklist recorded anywhere in this project's history. PST's trend chain-matches cleanly at positions 0-8 (nine 100s) against 2026-10-16's own committed trend, with only position 9 (67%) new and confirmed directly against today's own cover badge. Finance's trend does NOT chain-match cleanly: positions 0-6 match, but positions 7-8 (labelled 'Thu 15 Oct' and 'Fri 16 Oct' on THIS report's own chart) print 88% here, conflicting with the 100% already recorded for those same two dates in the already-built 2026-10-15 (committed) and 2026-10-16 (scratch, not yet committed) files — both of which were built directly from each of those dates' own cover badges. This is recorded verbatim as printed on this report's own chart and NOT reconciled against the earlier-committed figures, consistent with project policy; it looks like the same kind of trailing-history chart revision seen elsewhere in this same report (see call-logs.json's own wait-time trend notes for a parallel case on the same date). PST/Finance day-counters both reset to 0 given today is the first non-100% day for each.",
+  "_note": "FLAG FOR USER REVIEW: same gap as every date since 2026-10-02 — eleven consecutive dates now without the Crace/Denman/Lyneham on-halt day-counters visible in either source PDF's rendered page. The three values above (1/109/0) are carried forward unchanged, pending a visual check of the source PDF's cover graphic.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}

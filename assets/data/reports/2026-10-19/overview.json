@@ -1,0 +1,63 @@
+{
+  "_source": "Daily Operations Report - 20th October 2026.pdf (full + short versions), read directly from the user-uploaded PDFs. Report's cover is misdated — true date is 2026-10-19 (Monday); the user independently confirmed this correction mid-session. See tasks.json/call-logs.json/cloop.json/leave.json's own notes for full provenance.",
+  "report": {
+    "number": 336,
+    "date": "2026-10-19",
+    "weekday": "Monday",
+    "title": "Daily Operations Report - 20th October 2026 (cover misdated; corrected to 2026-10-19 Monday — see _source)"
+  },
+  "_dateCorrectionNote": "FLAG FOR USER REVIEW (resolved): both PDFs' cover pages print 'Report #336' / '20th October 2026, Monday', but 20 Oct 2026 is actually a Tuesday. Every internal signal in the report agrees the true date is Monday 2026-10-19 — the trend charts' own trailing labels end 'Mon, 19-Oct', the Cloop Real-Time snapshot is explicitly stamped 'extracted... Tuesday, 20th October 2026' (the normal next-business-morning pattern after a Monday report), the Staff & Doctors on Leave page header reads 'This week, 19th October 2026 until 23rd October 2026', and Report #336 follows directly from Report #335 (2026-10-16, Friday) with no other business day in between. The user confirmed this correction directly. Filed under 2026-10-19 throughout; the date on the PDF's own cover/title is the source's error, not introduced by this extraction.",
+  "criticalTasks": {
+    "streaks": [
+      {"name": "Crace", "days": 1, "onHalt": true},
+      {"name": "Denman", "days": 109, "onHalt": true, "longest": true},
+      {"name": "Lyneham", "days": 0, "onHalt": true},
+      {"name": "PST", "days": 0, "onHalt": false},
+      {"name": "Finance", "days": 0, "onHalt": false}
+    ],
+    "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+    "checklists": [
+      {"name": "PST", "completionPct": 67},
+      {"name": "Finance", "completionPct": 88, "incompleteCount": 1, "incompleteExample": "Best Practice Online Medicare Claim"}
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 357,
+    "accepted": 294,
+    "acceptedPct": 82,
+    "missed": 63,
+    "missedPct": 18,
+    "totalOutbound": 106,
+    "topInboundAgent": {"name": "David Antioch", "calls": 71},
+    "queueBreakdown": [
+      {"queue": "Appointments", "accepted": 186, "missed": 25},
+      {"queue": "General Enquiries", "accepted": 105, "missed": 38},
+      {"queue": "Canberra Vasectomy", "accepted": 1, "missed": 0}
+    ]
+  },
+  "_topInboundAgentNote": "David Antioch tops the inboundByStaff table this date (71 calls), same as 2026-10-16. All 10 names and their call counts/durations match both the full and short PDF versions' printed Inbound Calls - All Staff table exactly.",
+  "cloop": {
+    "inQueue": 64,
+    "oldestDays": 12.78,
+    "contactsQueuedYesterday": 81,
+    "emailsHandledYesterday": 104,
+    "totalOverallCases": 10210,
+    "totalInProgress": 134,
+    "totalOpenCases": 56
+  },
+  "_cloopNote": "Real-Time queue total (64) is the highest recorded since tracking began, driven mainly by Requests (31 in queue, oldest 4.85 days) and a persistent 12-item Failed Communication backlog; the single oldest item in the whole snapshot is a Nursing ticket now at 12.78 days. See cloop.json's own _totalCasesToDateNote for a deliberate, explained deviation from the usual trend-relabelling convention this date.",
+  "_outboundTrendNote": "FLAG FOR USER REVIEW (fifth consecutive date): call-logs.json's own outboundTenDayTrend continues to diverge from the PDF-printed 'Outbound 10 Day Trend Reporting' chart's trailing ~3 days, a pattern first flagged on 2026-10-13 and still present today. Doesn't affect summary.totalOutbound (106), which matches the PDF's own staff table and header exactly — see call-logs.json's own _outboundTenDayTrendNote for detail.",
+  "_broadcastTrendRevisionNote": "FLAG FOR USER REVIEW (new this date): several of this report's own 10-day trend charts print noticeably different values for older trailing days than what was already recorded for those same dates via the chain from earlier committed reports — the call-logs 'Overall/Appointments/General Enquiries/Canberra Vasectomy Average Wait Time' charts all revise their Tue 06-Oct point downward, and the Finance checklist trend chart shows 88% for Thu 15-Oct and Fri 16-Oct where 100% was already recorded for those dates. Every instance is recorded verbatim in its own file with a note; none have been reconciled against the earlier figures. This looks like one systemic phenomenon (the source system appears to have revised some historical statistics), not isolated parsing errors — see tasks.json's and call-logs.json's own notes for the full detail on each.",
+  "leave": {
+    "weekLabel": "19 October – 23 October 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Lucinda Gonzalez", "Sudina Rijal", "Apurva Pathak", "Holly Archer", "Atif Wan"],
+    "longTerm": [
+      {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+      {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+    ]
+  },
+  "_leaveNote": "Entirely different roster from the prior few weeks: only one doctor line (Dr Somya Jhorar, Denman) is out this week, versus the 2-doctor Crace roster seen 2026-10-09 through 2026-10-16. All 5 staff listed have at least one leave day this week (1-3 days each); none are out the full week or fully available. See leave.json's own _note for the full per-person breakdown."
+}

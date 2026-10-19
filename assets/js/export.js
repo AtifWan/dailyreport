@@ -20,10 +20,7 @@ const FOOTER_H = 9; // body end to page bottom
 const BODY_Y = MARGIN + HEADER_H;
 const BODY_H = PAGE_H - MARGIN - FOOTER_H - BODY_Y;
 
-// TODO: replace with the dashboard's real, stable production URL once one exists —
-// the only candidates in the repo today are a per-branch Vercel preview and a prod
-// Vercel project that's currently erroring, neither fit to print into every PDF.
-const DASHBOARD_URL = 'https://dashboard.example/';
+const DASHBOARD_URL = 'https://dailyreport-x15l.vercel.app/';
 
 let libsPromise = null;
 function loadScript(src) {
