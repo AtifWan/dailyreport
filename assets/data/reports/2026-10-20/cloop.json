@@ -1,0 +1,59 @@
+{
+  "_source": "Daily Operations Report - 20th October 2026.pdf, pages covering the Cloop Report, read directly from the user-uploaded PDF's rendered page images.",
+  "reportTitle": "Daily Operations Report - 20th October 2026",
+  "extractedAt": "2026-10-21T08:45:00+11:00",
+  "extractedAtLabel": "8:45 AM, Wednesday 21 October 2026",
+  "_extractedAtNote": "The report's own Real-Time snapshot is taken the next business morning (Wednesday 21 October), per the established convention, filed here under this report's own date (2026-10-20, a Tuesday).",
+  "realTimeQueues": [
+    {"queue": "Requests", "inQueue": 34, "oldestDays": 5.76},
+    {"queue": "Unassigned", "inQueue": 9, "oldestDays": 0.79},
+    {"queue": "File Transfer", "inQueue": 4, "oldestDays": 0.73},
+    {"queue": "Practice Finance", "inQueue": 3, "oldestDays": 0.67},
+    {"queue": "Finance", "inQueue": 2, "oldestDays": 0.39},
+    {"queue": "Documents", "inQueue": 1, "oldestDays": 0.64},
+    {"queue": "Nursing", "inQueue": 1, "oldestDays": 13.81}
+  ],
+  "realTimeSummary": {"inQueue": 54, "oldestDays": 13.81},
+  "_realTimeQueuesNote": "The 7 listed queues sum cleanly to the printed Summary row (34+9+4+3+2+1+1=54), no PDF-internal gap this date. 'Failed Communication' is absent from this Real-Time snapshot again (cleared, after reappearing on 2026-10-19 with 12 items) — a recurring appear/clear pattern on this specific queue. The single Nursing item continues aging (13.81 days, up from 12.78 on 2026-10-19), consistent with the same unresolved ticket persisting.",
+  "contactsQueuedYesterday": [
+    {"queue": "Unassigned", "count": 31},
+    {"queue": "Documents", "count": 25},
+    {"queue": "Failed Communication", "count": 16},
+    {"queue": "Requests", "count": 10},
+    {"queue": "Finance", "count": 7},
+    {"queue": "Medico-legal", "count": 5},
+    {"queue": "Practice Finance", "count": 2}
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": ["Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct", "Tue 20 Oct"],
+    "totals": [112, 65, 93, 80, 636, 112, 98, 35, 81, 96]
+  },
+  "_note": "contactsQueuedYesterday sums to 96 exactly, matching this report's own contactsQueuedTenDayTrend chart's trailing value (position 9, labelled 'Tue, 20-Oct' — directly the report's own date, no relabelling needed) and chain-matching 2026-10-19's own committed trend exactly at positions 0-8. emailsHandledYesterday: only 5 of 7 agents' incoming+outbound splits reconcile exactly to their own printed totals this date — see _emailsHandledNote for the two exceptions.",
+  "emailsHandledYesterday": [
+    {"agent": "Chloey Leow", "incoming": 53, "outbound": 15, "total": 69},
+    {"agent": "Jasmina Sodolovic", "incoming": 16, "outbound": 3, "total": 22},
+    {"agent": "Atif Wan", "incoming": 15, "outbound": 0, "total": 15},
+    {"agent": "Holly Archer", "incoming": 5, "outbound": 3, "total": 8},
+    {"agent": "Leh Peng Goh", "incoming": 7, "outbound": 0, "total": 7},
+    {"agent": "Ambrosie Brassil", "incoming": 0, "outbound": 1, "total": 1},
+    {"agent": "Jasmine Deery", "incoming": 0, "outbound": 1, "total": 1}
+  ],
+  "_emailsHandledNote": "FLAG FOR USER REVIEW: two of this date's 7 rows don't reconcile their own printed incoming+outbound split to their own printed total — Chloey Leow (53+15=68, but total printed as 69, 1 short) and Jasmina Sodolovic (16+3=19, but total printed as 22, 3 short). The other 5 rows (Atif Wan, Holly Archer, Leh Peng Goh, Ambrosie Brassil, Jasmine Deery) reconcile exactly. Recorded verbatim as printed, not corrected — a larger and more frequent version of the same kind of single-row PDF-internal gap seen on prior dates.",
+  "totalCasesToDate": {
+    "date": "2026-10-20",
+    "totalOverallCases": 10306,
+    "totalInProgress": 144,
+    "totalOpenCases": 53
+  },
+  "inProgressTenDayTrend": {
+    "labels": ["Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct", "Tue 20 Oct", "Wed 21 Oct"],
+    "totals": [112, 107, 101, 107, 105, 115, 117, 142, 134, 144]
+  },
+  "openCasesTenDayTrend": {
+    "labels": ["Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct", "Tue 20 Oct", "Wed 21 Oct"],
+    "totals": [33, 34, 60, 47, 37, 31, 40, 35, 56, 53]
+  },
+  "_totalCasesToDateNote": "Positions 0-8 of both trend arrays chain-match 2026-10-19's own committed trend EXACTLY, including its own deliberately-unrelabelled position 9 (labelled 'Mon 19-Oct', 142 in progress/35 open) and position 8 (labelled 'Tue 20-Oct', 134 in progress/56 open) — this independently confirms that 2026-10-19's unusual decision to keep the PDF's own literal labels (rather than relabel the final point to the report's own date) was correct: this report's own chart reprints those exact same two historical points with the exact same labels and values. SAME DELIBERATE DEVIATION CONTINUES HERE: this report's own chart ends with position 9 labelled 'Wed 21-Oct' (144/53, the next-business-morning snapshot stamped '21/10/2026' in the table above) sitting right after position 8's already-distinct 'Tue 20-Oct' (134/56). Relabelling position 9 down to 'Tue 20-Oct' would collide with that already-correct, already-committed value, so both labels are kept exactly as printed. totalCasesToDate.date is set to this report's own date (2026-10-20) per the usual filing convention, with its value (10306/144/53) taken from the position-9 snapshot as normal. totalOverallCases (10306) is a +96 increase over 2026-10-19's committed 10210.",
+  "_historicalDate": "2026-10-20",
+  "_unmatchedAgentNames": []
+}
