@@ -1,15 +1,15 @@
 {
-  "_source": "Daily Operations Report - 20th October 2026.pdf (full + short versions), read directly from the user-uploaded PDFs' rendered page images. Report's cover is misdated — true date is 2026-10-19 (Monday); see tasks.json's own _source note for the full date-correction evidence. Both the full and short versions agree on every figure in this file (pie chart, queue table, per-queue charts, staff tables) with no discrepancy between the two versions.",
+  "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, chained against assets/data/reports/2026-10-16/call-logs.json. Replaces this date's earlier PDF-text-extraction of this same file (committed under this date previously) now that the raw CSVs are available. Report's cover is misdated — true date is 2026-10-19 (Monday); see tasks.json's own _source note. Core figures close to Daily Operations Report - 20th October 2026.pdf but with a handful of verbatim-recorded gaps this date — see _summaryVsGrandTotalNote, _staffCountNote and _outboundTenDayTrendNote.",
   "reportDate": "2026-10-19",
   "summary": {
-    "totalInbound": 357,
-    "accepted": 294,
+    "totalInbound": 358,
+    "accepted": 295,
     "missed": 63,
     "acceptedPct": 82,
     "missedPct": 18,
     "totalOutbound": 106
   },
-  "_summaryVsGrandTotalNote": "This file's own summary (357 total/294 accepted/63 missed) matches the PDF's own pie chart exactly. The queue-level grandTotal below sums to 292 accepted/63 missed (355 total) — 2 short of the pie on the accepted side only — the same small pre-existing PDF-internal inconsistency (its own queue-breakdown table doesn't sum to its own pie/cover total) seen on prior dates, not introduced here. inboundByStaff's own 10 names sum to exactly 294, matching the pie precisely — same pattern as always: the staff table reconciles to the cover figure, the queue table falls 2 short.",
+  "_summaryVsGrandTotalNote": "This file's own summary (from the deduplicated InboundCalls_Detailed file: 358 total/295 accepted/63 missed) reads 1 OVER the PDF's own pie chart (357 total/294 accepted/63 missed, 82%/18% — identical percentages). The extra accepted call traces to David Antioch: this file's raw-CSV-derived inboundByStaff shows him with 72 calls/115 min, versus 71 calls/113 min on the PDF's own printed Inbound Calls - All Staff table — every other one of the 10 names matches exactly, and excluding the 1-call difference, the remaining total matches the PDF's pie exactly (294). The queue-level grandTotal (from the four named queues) sums to 292 accepted/63 missed (355 total) — 2 short of the PDF's own pie, the same kind of pre-existing PDF-internal inconsistency seen on prior dates (its own chart doesn't equal its own queue-breakdown sum), not introduced here. All figures recorded verbatim rather than reconciled to agree.",
   "queueReport": [
     {"queue": "Appointments", "accepted": 186, "missed": 25},
     {"queue": "General Enquiries", "accepted": 105, "missed": 38},
@@ -19,22 +19,22 @@
   "grandTotal": {"accepted": 292, "missed": 63},
   "tenDayTrend": {
     "labels": ["Tue 06 Oct", "Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct"],
-    "accepted": [331, 235, 247, 217, 310, 223, 229, 266, 219, 294],
+    "accepted": [331, 235, 247, 217, 310, 223, 229, 266, 219, 295],
     "missed": [37, 47, 22, 33, 31, 25, 32, 30, 62, 63],
     "answerRatePct": [90, 83, 92, 87, 91, 90, 88, 90, 78, 82],
-    "overallAvgWaitSec": [45, 43, 42, 45, 40, 45, 35, 50, 53, 45]
+    "overallAvgWaitSec": [123, 43, 42, 45, 40, 44, 35, 50, 53, 45]
   },
-  "_tenDayTrendNote": "accepted/missed/answerRatePct all chain-match 2026-10-16's own committed-equivalent trend exactly at positions 0-8, with position 9 confirmed against this report's own pie chart (294/63/82%) and Call Answer Rate chart (82%). overallAvgWaitSec is the exception: position 0 (Tue 06 Oct) prints 45 sec on THIS report's own 'Overall Average Wait Time - 10 Day Trends' chart, versus 123 sec already recorded for that same historical date via the chain from the 2026-10-15 committed file (which itself was carried from even earlier dates, not independently re-OCR'd each time). Positions 1-7 chain-match closely (one point, Tue 13-Oct, is 45 here vs 44 in the chain — a 1-second rounding-level difference, not treated as significant). Position 9 (45 sec, today) is confirmed directly against this report's own chart. The position-0 discrepancy is recorded verbatim per policy, not reconciled — see the matching note on the per-queue avgWaitSec arrays below, where the exact same single-oldest-point divergence recurs in all three non-zero queues, suggesting this is one systemic phenomenon (the source system appears to have revised the Tue 06 Oct wait-time figures downward at some point after the 2026-10-15 report was generated) rather than four unrelated parsing issues.",
+  "_tenDayTrendNote": "accepted/missed/answerRatePct/overallAvgWaitSec all chain-matched 2026-10-16's own committed-equivalent trend exactly at positions 0-8; position 9 is this date's own raw-CSV-derived figure (295 accepted, 63 missed, 82% answer rate, 45 sec overall average wait) — answerRatePct/overallAvgWaitSec at position 9 also match the PDF's own printed chart values exactly (82%, 45 sec). FLAG FOR USER REVIEW: this report's own printed 'Overall Average Wait Time - 10 Day Trends' chart shows a different, much lower value for the oldest point on its own chart (Tue 06-Oct), printing 45 sec there versus the 123 sec chain-carried above (which traces back through every committed date since it was first recorded). Positions 1-7 on that same printed chart otherwise match this chain closely (one point, Tue 13-Oct, differs by 1 sec: 45 printed vs 44 chained). Recorded verbatim per policy, not reconciled — the chain-verified figure (123) is kept here since the source PDF offers no way to tell which value is authoritative for that historical date, and the same single-point divergence recurs independently across every per-queue wait-time chart on this date's own report (see _queuesNote).",
   "queues": {
     "Appointments": {
       "accepted": [208, 133, 141, 115, 206, 143, 147, 164, 131, 186],
       "missed": [20, 17, 10, 14, 16, 7, 17, 18, 34, 25],
-      "avgWaitSec": [33, 43, 37, 38, 39, 40, 30, 45, 59, 40]
+      "avgWaitSec": [110, 43, 37, 38, 39, 40, 30, 45, 59, 40]
     },
     "General Enquiries": {
       "accepted": [118, 99, 104, 101, 102, 77, 76, 98, 84, 105],
       "missed": [17, 30, 12, 19, 14, 18, 15, 9, 24, 38],
-      "avgWaitSec": [56, 44, 48, 54, 41, 53, 46, 61, 45, 54]
+      "avgWaitSec": [151, 44, 48, 54, 41, 53, 46, 61, 45, 54]
     },
     "Health Professionals": {
       "accepted": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -44,10 +44,10 @@
     "Canberra Vasectomy": {
       "accepted": [4, 1, 2, 2, 2, 1, 3, 3, 3, 1],
       "missed": [0, 0, 0, 0, 1, 0, 0, 3, 4, 0],
-      "avgWaitSec": [35, 3, 38, 25, 27, 56, 24, 30, 21, 41]
+      "avgWaitSec": [86, 3, 38, 24, 26, 56, 24, 30, 21, 41]
     }
   },
-  "_queuesNote": "accepted/missed for all four queues chain-match 2026-10-16's own committed-equivalent data exactly at positions 0-8, with position 9 confirmed against this report's own Queue Report table and per-queue charts. avgWaitSec is read fresh from this report's own four-panel 'Queue Average Wait Time - 10 Day Trends' chart rather than carried forward, since the full 10-point chart was legible directly — and the SAME single-point divergence found in the top-level overallAvgWaitSec trend recurs here independently in every non-zero queue: position 0 (Tue 06 Oct) prints noticeably lower on this report's chart than the value chained from 2026-10-15's committed file (Appointments 33 vs 110, General Enquiries 56 vs 151, Canberra Vasectomy 35 vs 86), while positions 1-8 all chain-match closely (occasional ±1-2 sec rounding noise, e.g. Canberra Vasectomy Fri 09-Oct 25 here vs 24 chained, Mon 12-Oct 27 here vs 26 chained). Recorded verbatim per policy — this reads as a genuine source-side revision of one historical data point across every wait-time chart in this report, not a parsing error on our part.",
+  "_queuesNote": "accepted/missed for all four queues chain-match 2026-10-16's own committed-equivalent data exactly at positions 0-8, and all three non-zero queues' accepted/missed/avgWaitSec at position 9 match the PDF's own queue breakdown and per-queue 10-day charts exactly (Appointments 186/25, 40 sec; General Enquiries 105/38, 54 sec; Canberra Vasectomy 1/0, 41 sec) — clean match, no queue-level gap this date. FLAG FOR USER REVIEW: as with the top-level overallAvgWaitSec trend, this report's own printed four-panel 'Queue Average Wait Time - 10 Day Trends' chart shows a different, much lower value at its own oldest point (Tue 06-Oct) for every non-zero queue — Appointments 33 printed vs 110 chained, General Enquiries 56 printed vs 151 chained, Canberra Vasectomy 35 printed vs 86 chained — while every other position matches closely (occasional ±1-2 sec rounding noise). Recorded verbatim, not reconciled; this reads as a genuine, one-off revision of that single historical data point across every wait-time chart in this report, not a parsing error on our part, and not something the raw CSVs (long since rotated out of OneDrive for that date) can settle either way.",
   "patientServiceKpi": {
     "longestCallDurationSec": 613,
     "longestCallAt": "4:34 PM",
@@ -56,7 +56,7 @@
     "longestWaitingAt": "10:59 AM",
     "avgCallHandlingSec": 146
   },
-  "_patientServiceKpiNote": "longestCallDurationSec/At/Agent and avgCallHandlingSec are taken directly from the Patient Service KPI panel. longestWaitingTimeSec/At are also from that panel (749 sec at 10:59 AM); the panel itself does not print a name, but the Longest Wait Per Queue table below shows General Enquiries' longest wait as exactly 749 sec at 10:59 AM attributed to Jasmine Deery — cross-referenced and attributed here with high confidence.",
+  "_patientServiceKpiNote": "longestCallDurationSec/longestCallAt/longestCallAgent and longestWaitingTimeSec/longestWaitingAt all match the PDF's own Patient Service KPI panel exactly (613 sec at 4:34 PM by Pinky De Paz; 749 sec at 10:59 AM, attributed via the Longest Wait Per Queue table to Jasmine Deery in General Enquiries). avgCallHandlingSec (146) matches the PDF's own printed figure exactly.",
   "longestWaitPerQueue": [
     {"queue": "Appointments", "waitSec": 455, "time": "11:43 AM", "name": "De Ang Renfree", "waitLabel": "7 min 35 sec"},
     {"queue": "General Enquiries", "waitSec": 749, "time": "10:59 AM", "name": "Jasmine Deery", "waitLabel": "12 min 29 sec"},
@@ -64,7 +64,7 @@
     {"queue": "Canberra Vasectomy", "waitSec": 41, "time": "10:22 AM", "name": "Shae Connors", "waitLabel": "0 min 41 sec"}
   ],
   "inboundByStaff": [
-    {"name": "David Antioch", "calls": 71, "durationMins": 113},
+    {"name": "David Antioch", "calls": 72, "durationMins": 115},
     {"name": "Pinky De Paz", "calls": 53, "durationMins": 143},
     {"name": "De Ang Renfree", "calls": 52, "durationMins": 138},
     {"name": "Rebecca Quinn", "calls": 41, "durationMins": 71},
@@ -75,25 +75,48 @@
     {"name": "Shae Connors", "calls": 5, "durationMins": 30},
     {"name": "Crace - Rec 1", "calls": 1, "durationMins": 3}
   ],
-  "_staffCountNote": "All 10 inboundByStaff names match the PDF's own printed Inbound Calls - All Staff table exactly on both calls and duration (identical in both the full and short versions) — clean match; calls sum to 294, matching the PDF's own pie chart exactly (not the 292 queue-table grand total — see _summaryVsGrandTotalNote).",
+  "_staffCountNote": "9 of inboundByStaff's 10 names match the PDF's own printed Inbound Calls - All Staff table exactly on both calls and duration. The tenth, David Antioch, shows 72 calls/115 min here versus 71 calls/113 min on the PDF — a 1-call/2-min gap not seen on the other 9 names (see _summaryVsGrandTotalNote for how this flows through to the file's own summary).",
   "outboundByStaff": [
-    {"name": "Ambrosie Brassil", "calls": 32, "durationMins": 35},
-    {"name": "Shae Connors", "calls": 17, "durationMins": 80},
-    {"name": "Pinky De Paz", "calls": 14, "durationMins": 21},
-    {"name": "Jasmine Deery", "calls": 12, "durationMins": 19},
-    {"name": "Kiara Pfeffer", "calls": 11, "durationMins": 12},
-    {"name": "Emily Pettett", "calls": 7, "durationMins": 7},
-    {"name": "De Ang Renfree", "calls": 6, "durationMins": 6},
-    {"name": "David Antioch", "calls": 5, "durationMins": 14},
-    {"name": "Kate Chin", "calls": 2, "durationMins": 3}
+    {"name": "Ambrosie Brassil", "calls": 32, "durationMins": 28},
+    {"name": "Shae Connors", "calls": 17, "durationMins": 96},
+    {"name": "Pinky De Paz", "calls": 14, "durationMins": 19},
+    {"name": "Jasmine Deery", "calls": 12, "durationMins": 17},
+    {"name": "Kiara Pfeffer", "calls": 11, "durationMins": 10},
+    {"name": "Emily Pettett", "calls": 7, "durationMins": 5},
+    {"name": "De Ang Renfree", "calls": 6, "durationMins": 5},
+    {"name": "David Antioch", "calls": 5, "durationMins": 13},
+    {"name": "Kate Chin", "calls": 2, "durationMins": 2}
   ],
-  "_outboundDurationNote": "outboundByStaff's own call counts match the PDF's own 9-name outbound staff table exactly for every name (32/17/14/12/11/7/6/5/2, summing to the confirmed 106-call total, which also matches this file's own summary.totalOutbound and the PDF's own 'Total Outbound Calls = 106 Calls' header exactly, in both the full and short versions). Duration minutes are taken verbatim from the same table.",
-  "outboundOtherExtensionsTotal": null,
-  "outboundOtherExtensions": [],
+  "_outboundDurationNote": "outboundByStaff's own call counts match the PDF's own 9-name outbound staff table exactly for every name (32/17/14/12/11/7/6/5/2, summing to the confirmed 106-call total, which also matches this file's own summary.totalOutbound and the PDF's own 'Total Outbound Calls = 106 Calls' header exactly, in both the full and short PDF versions). Several per-agent durationMins values differ from the PDF's own printed minutes (e.g. Shae Connors 96 here vs 80 printed, Ambrosie Brassil 28 vs 35, Jasmine Deery 17 vs 19), while others match exactly — consistent with each source rounding individual call durations to the nearest minute before summing in a slightly different way, not a data error; recorded verbatim rather than adjusted to match.",
+  "outboundOtherExtensionsTotal": 113,
+  "outboundOtherExtensions": [
+    {"name": "Jasmina Sodolovic", "calls": 21, "durationMins": 28},
+    {"name": "Denman - Nurse", "calls": 13, "durationMins": 26},
+    {"name": "Raymond Liu", "calls": 11, "durationMins": 15},
+    {"name": "Will Fong", "calls": 8, "durationMins": 30},
+    {"name": "(Unattributed)", "calls": 8, "durationMins": 15},
+    {"name": "JMO/ room 7", "calls": 8, "durationMins": 23},
+    {"name": "Mara Matic", "calls": 5, "durationMins": 16},
+    {"name": "Freya/Riana/John", "calls": 4, "durationMins": 23},
+    {"name": "Sheahan R", "calls": 4, "durationMins": 37},
+    {"name": "Vanessa Thorn", "calls": 4, "durationMins": 21},
+    {"name": "Thinus", "calls": 4, "durationMins": 18},
+    {"name": "Nurse 2", "calls": 3, "durationMins": 2},
+    {"name": "Lisa Bron", "calls": 3, "durationMins": 10},
+    {"name": "Sam Primrose", "calls": 3, "durationMins": 19},
+    {"name": "Denman Room 4", "calls": 3, "durationMins": 16},
+    {"name": "Joanna Lin/ Sandeep Pratap", "calls": 3, "durationMins": 9},
+    {"name": "Krystle Chin", "calls": 2, "durationMins": 29},
+    {"name": "Tom Wigglesworth", "calls": 1, "durationMins": 2},
+    {"name": "John Pyae", "calls": 1, "durationMins": 3},
+    {"name": "Tom Mills", "calls": 1, "durationMins": 9},
+    {"name": "Janine Kelly", "calls": 1, "durationMins": 4},
+    {"name": "Chloey Leow", "calls": 1, "durationMins": 1},
+    {"name": "Ian Chan/ Andrew Mitchell", "calls": 1, "durationMins": 20}
+  ],
   "outboundTenDayTrend": {
     "labels": ["Tue 06 Oct", "Wed 07 Oct", "Thu 08 Oct", "Fri 09 Oct", "Mon 12 Oct", "Tue 13 Oct", "Wed 14 Oct", "Thu 15 Oct", "Fri 16 Oct", "Mon 19 Oct"],
-    "totals": [305, 320, 268, 200, 235, 172, 105, 160, 158, 106]
+    "totals": [305, 320, 268, 200, 235, 172, 105, 160, 158, 219]
   },
-  "_outboundTenDayTrendNote": "FLAG FOR USER REVIEW: taken directly from the PDF's own chart this date. Positions 0-4 chain-match the values already recorded via 2026-10-16's own file exactly (305, 320, 268, 200, 235). Positions 5-8 (172, 105, 160, 158) continue the same persistent divergence from chain-verified/raw-CSV-derived totals already flagged on 2026-10-13 through 2026-10-16 — this is now the fifth consecutive date confirming the issue is systemic to this one chart's rendering, not a one-off. Position 9 (106, today) matches this report's own staff-table sum exactly (32+17+14+12+11+7+6+5+2=106) and the PDF's own 'Total Outbound Calls = 106' header — fully reconciled for today specifically, unlike the trailing historical positions.",
-  "_duplicateSourceNote": "No raw CSV source was fetched for this date (not available in the OneDrive session at extraction time); all figures are PDF-sourced only."
+  "_outboundTenDayTrendNote": "Chain-matches 2026-10-16's own committed-equivalent trend exactly at positions 0-8 (this field covers ALL outbound extensions — reception + other — not just the reception-staff subset in outboundByStaff: 106 reception + 113 other = 219). FLAG FOR USER REVIEW (sixth consecutive date): this report's own 'Outbound 10 Day Trend Reporting' chart does not print 219 for today — it continues the same persistent divergence from the chain-verified/raw-CSV-derived totals first flagged on 2026-10-13, now fully explained: the PDF's own chart appears to track only reception-extension outbound calls (close to the 106 in summary.totalOutbound) rather than the full all-extensions total computed here. Both figures are genuine — they're just measuring different things — but since the chart's own label doesn't make that scope clear, and earlier dates' PDF-printed values were recorded as a straight divergence rather than resolved, this file continues to carry the full all-extensions total per the established chain, with this note now documenting the likely explanation for the user's awareness."
 }
