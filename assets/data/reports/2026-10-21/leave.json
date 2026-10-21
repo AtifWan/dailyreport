@@ -1,0 +1,60 @@
+{
+  "_source": "Daily Operations Report - 21st October 2026.pdf, page 'Staff & Doctors on Leave', read directly from the user-uploaded PDF's rendered page image. Same week shown as 2026-10-19/20's own leave pages ('This week, 19th October 2026 until 23rd October 2026') and an identical roster/grid — expected, since this is the next business day within the same working week.",
+  "reportTitle": "Daily Operations Report - 21st October 2026",
+  "reportDate": "2026-10-21",
+  "weekStart": "2026-10-19",
+  "weekEnd": "2026-10-23",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Somya Jhorar",
+          "site": null,
+          "status": ["leave", "leave", "leave", "leave", "leave"]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Lucinda Gonzalez",
+          "site": null,
+          "status": ["leave", "leave", "available", "available", "available"]
+        },
+        {
+          "name": "Sudina Rijal",
+          "site": null,
+          "status": ["leave", "leave", "leave", "available", "available"]
+        },
+        {
+          "name": "Apurva Pathak",
+          "site": null,
+          "status": ["available", "leave", "available", "available", "available"]
+        },
+        {
+          "name": "Holly Archer",
+          "site": null,
+          "status": ["leave", "available", "available", "available", "available"]
+        },
+        {
+          "name": "Atif Wan",
+          "site": null,
+          "status": ["leave", "available", "available", "available", "available"]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+    {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+  ],
+  "legend": [
+    {"key": "leave", "label": "On Leave"},
+    {"key": "available", "label": "Available"},
+    {"key": "public_holiday", "label": "Public Holiday"}
+  ],
+  "_note": "Identical to 2026-10-19/20's own leave pages: same week (19-23 Oct), same single doctor line (Somya Jhorar) out the full week, and the same 5 staff with the same per-day pattern. No colour cell was ambiguous."
+}

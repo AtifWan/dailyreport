@@ -1,0 +1,61 @@
+{
+  "_source": "Daily Operations Report - 21st October 2026.pdf, read directly from the user-uploaded PDF. Cover date is internally consistent (21 Oct 2026 is indeed a Wednesday) — no correction needed. See tasks.json/call-logs.json/cloop.json/leave.json's own notes for full provenance.",
+  "report": {
+    "number": 338,
+    "date": "2026-10-21",
+    "weekday": "Wednesday",
+    "title": "Daily Operations Report - 21st October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {"name": "Crace", "days": 1, "onHalt": true},
+      {"name": "Denman", "days": 109, "onHalt": true, "longest": true},
+      {"name": "Lyneham", "days": 0, "onHalt": true},
+      {"name": "PST", "days": 2, "onHalt": false},
+      {"name": "Finance", "days": 0, "onHalt": false}
+    ],
+    "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+    "checklists": [
+      {"name": "PST", "completionPct": 100},
+      {"name": "Finance", "completionPct": 88, "incompleteCount": 1, "incompleteExample": "Best Practice Online Medicare Claim"}
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 270,
+    "accepted": 227,
+    "acceptedPct": 84,
+    "missed": 43,
+    "missedPct": 16,
+    "totalOutbound": 141,
+    "topInboundAgent": {"name": "Rebecca Quinn", "calls": 81},
+    "queueBreakdown": [
+      {"queue": "Appointments", "accepted": 140, "missed": 23},
+      {"queue": "General Enquiries", "accepted": 79, "missed": 20},
+      {"queue": "Canberra Vasectomy", "accepted": 8, "missed": 0}
+    ]
+  },
+  "_topInboundAgentNote": "Rebecca Quinn tops the inboundByStaff table again this date (81 calls, up from 69 on 2026-10-20). All 11 names and their call counts/durations match the PDF's own printed Inbound Calls - All Staff table exactly, no gap this date.",
+  "cloop": {
+    "inQueue": 41,
+    "oldestDays": 6.72,
+    "contactsQueuedYesterday": 62,
+    "emailsHandledYesterday": 89,
+    "totalOverallCases": 10346,
+    "totalInProgress": 136,
+    "totalOpenCases": 46
+  },
+  "_cloopNote": "PST holds at 100% for a second day; Finance holds at 88% for a fifth consecutive trend position. Cloop's Real-Time queue total (41) continues down from 2026-10-20's 54. See cloop.json's own notes for the continuing deliberate deviation from the usual trend-relabelling convention and a flagged reconciliation gap on 1 of 6 emailsHandledYesterday rows.",
+  "_outboundTrendNote": "FLAG FOR USER REVIEW (ninth consecutive date): call-logs.json's own outboundTenDayTrend continues to diverge from the PDF-printed 'Outbound 10 Day Trend Reporting' chart, which again re-prints 2026-10-19/20's own chain-verified values lower (136, 116) than committed (219, 241). Doesn't affect summary.totalOutbound (141), which matches the PDF's own staff table and header exactly — see call-logs.json's own _outboundTenDayTrendNote for detail.",
+  "leave": {
+    "weekLabel": "19 October – 23 October 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": ["Lucinda Gonzalez", "Sudina Rijal", "Apurva Pathak", "Holly Archer", "Atif Wan"],
+    "longTerm": [
+      {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+      {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+    ]
+  },
+  "_leaveNote": "Identical roster and week to 2026-10-19/20's own leave pages, as expected for the next business day in the same working week — see leave.json's own _note."
+}
