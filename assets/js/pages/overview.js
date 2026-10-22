@@ -23,8 +23,7 @@ export async function renderOverview(container, date, manifest) {
   }).join('');
 
   container.innerHTML = `
-    ${datePickerHtml(date, manifest)}
-    <p class="result-meta">Report #${d.report.number} · ${esc(d.report.weekday)} ${formatDate(d.report.date)}</p>
+    ${datePickerHtml(date, manifest, `Report #${d.report.number}`)}
 
     <div class="kpis">
       ${pstChecklist ? `
