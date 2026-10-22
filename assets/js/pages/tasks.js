@@ -36,7 +36,6 @@ function checklistPanel(cl, dates) {
         <span class="k-v num" style="font-size:22px;color:${cl.completionPct === 100 ? 'var(--live-ink)' : cl.completionPct < 50 ? 'var(--danger-ink)' : 'var(--ink)'}">${cl.completionPct}%</span>
       </div>
       ${cl.trend ? `
-      <p class="q">10-day performance checklist</p>
       <div class="dr-chart-wrap">${lineChart({ dates, series: [{ data: cl.trend, color: cl.completionPct === 100 ? 'var(--live)' : 'var(--accent)', label: '% complete' }], height: 150, unit: '%' })}</div>
       ` : `<p class="foot-note">No 10-day trend chart was published for this checklist on this date.</p>`}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
@@ -77,7 +76,6 @@ export async function renderTasks(container, date, manifest) {
 
     <div class="panel">
       <h3>Streak history</h3>
-      <p class="q">Consecutive days each site/department hit 100% on its critical checklist.</p>
       ${d.streaks.map((s) => {
         const label = sinceLabel(since[s.name]);
         return `
@@ -102,7 +100,6 @@ export async function renderTasks(container, date, manifest) {
     ${d.sitePlaceholderNote ? `
     <div class="panel dr-section-gap">
       <h3>Crace, Denman &amp; Lyneham</h3>
-      <p class="q">Site-level checklists</p>
       <div class="dr-placeholder">${esc(d.sitePlaceholderNote)}</div>
     </div>
     ` : ''}

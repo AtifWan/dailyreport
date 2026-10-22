@@ -24,6 +24,20 @@
 .dr-page { display: none; }
 .dr-page.on { display: block; }
 
+/* Dashy Daily: the topbar used to carry a page title/subtitle (design-system's
+   .tb-titles) that index.html no longer renders — the sidebar nav already says
+   which page you're on. Without that two-line block the bar only needs to fit
+   a row of icon buttons, so its padding (set for the taller title+subtitle
+   version in design-system/css/styles.css) is tightened here instead of
+   touching that shared file. .content's top padding is trimmed to match —
+   there's no title above it to breathe room for anymore. */
+.topbar { padding-top: 9px; padding-bottom: 9px; }
+.content { padding-top: 16px; }
+@media (max-width: 880px) {
+  .topbar { padding-top: 7px; padding-bottom: 7px; }
+  .content { padding-top: 12px; }
+}
+
 .dr-section-gap { margin-top: 16px; }
 
 .dr-leave-table td, .dr-leave-table th { text-align: center; }

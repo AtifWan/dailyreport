@@ -60,7 +60,6 @@ export async function renderOverview(container, date, manifest) {
     <div class="grid2">
       <div class="panel">
         <h3>Critical daily tasks — streak</h3>
-        <p class="q">Consecutive days at 100% checklist completion.</p>
         ${streakRows}
         ${(() => {
           const longest = t.streaks.find((s) => s.longest);
@@ -72,7 +71,6 @@ export async function renderOverview(container, date, manifest) {
       </div>
       <div class="panel">
         <h3>Call queue snapshot</h3>
-        <p class="q">Accepted calls by queue, today.</p>
         ${queueRows}
         <div class="take"><b>Reads as:</b> Appointments takes just over half of all inbound traffic; ${esc(c.topInboundAgent.name)} answered the most calls today (${c.topInboundAgent.calls}).</div>
         ${viewLink('call-logs', date, 'View full call logs')}
@@ -107,14 +105,13 @@ export async function renderOverview(container, date, manifest) {
     <div class="grid2">
       <div class="panel">
         <h3>Cloop, at a glance</h3>
-        <p class="q">Case queue activity as of the report snapshot.</p>
         ${cl ? `
         ${cl.contactsQueuedYesterday != null ? `
         <div class="splitbar">
-          <div class="seg dr-splitbar-static" style="width:100%;background:var(--accent)">${cl.contactsQueuedYesterday} contacts queued yesterday</div>
+          <div class="seg dr-splitbar-static" style="width:100%;background:var(--accent)">${cl.contactsQueuedYesterday} emails queued yesterday</div>
         </div>
-        ` : `<p class="dr-placeholder">Contacts-queued-yesterday total not published this date.</p>`}
-        <div class="take"><b>Reads as:</b> ${cl.emailsHandledYesterday} contacts were handled yesterday across the team, out of ${cl.totalOverallCases.toLocaleString()} total cases logged to date (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).</div>
+        ` : `<p class="dr-placeholder">Emails-queued-yesterday total not published this date.</p>`}
+        <div class="take"><b>Reads as:</b> ${cl.emailsHandledYesterday} emails were handled yesterday across the team, out of ${cl.totalOverallCases.toLocaleString()} total cases logged to date (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).</div>
         ${viewLink('cloop', date, 'View full Cloop report')}
         ` : `<p class="dr-placeholder">No Cloop report was published for this date.</p>`}
       </div>

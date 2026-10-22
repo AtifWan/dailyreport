@@ -54,7 +54,7 @@ function mountStaffActivityTable(container, staff, date) {
             <span><b style="color:var(--ink)">Inbound:</b> ${r.inboundCalls} calls · ${r.inboundMins}m total</span>
             <span><b style="color:var(--ink)">Outbound:</b> ${r.outboundCalls} calls · ${r.outboundMins}m total</span>
             ${r.emailTotal > 0
-              ? `<span><b style="color:var(--ink)">Cloop, yesterday:</b> ${r.emailTotal} contacts handled (${r.emailIncoming} in / ${r.emailOutbound} out) — <a href="#/cloop/${esc(date)}" style="color:var(--accent)">view in Cloop &rarr;</a></span>`
+              ? `<span><b style="color:var(--ink)">Cloop, yesterday:</b> ${r.emailTotal} emails handled (${r.emailIncoming} in / ${r.emailOutbound} out) — <a href="#/cloop/${esc(date)}" style="color:var(--accent)">view in Cloop &rarr;</a></span>`
               : `<span class="foot-note" style="margin:0">No Cloop email activity logged for this agent yesterday.</span>`}
           </div>
         </td>
@@ -109,14 +109,12 @@ export async function renderCallLogs(container, date, manifest) {
   const queueTrendPanels = d.queues ? Object.entries(d.queues).map(([name, q]) => `
     <div class="panel" data-queue-panel="${esc(name)}">
       <h3 style="color:${QUEUE_COLORS[name]}">${esc(name)}</h3>
-      <p class="q">Accepted vs missed, 10-day trend</p>
       <div class="dr-chart-wrap">${stackedBarChart({ dates: t.labels, seriesA: q.accepted, seriesB: q.missed, height: 190 })}</div>
     </div>`).join('') : '';
 
   const waitTrendPanels = d.queues ? Object.entries(d.queues).map(([name, q]) => `
     <div class="panel" data-queue-panel="${esc(name)}">
       <h3 style="color:${QUEUE_COLORS[name]}">${esc(name)}</h3>
-      <p class="q">Average wait time (seconds), 10-day trend</p>
       <div class="dr-chart-wrap">${lineChart({ dates: t.labels, series: [{ data: q.avgWaitSec, color: QUEUE_COLORS[name], label: 'Avg wait (sec)' }], height: 170, unit: 's' })}</div>
     </div>`).join('') : '';
 
@@ -149,7 +147,6 @@ export async function renderCallLogs(container, date, manifest) {
 
     <div class="panel">
       <h3>Queue report</h3>
-      <p class="q">Accepted vs missed calls, by queue — ${d.summary.totalInbound} calls today.</p>
       ${queueBars}
       <div class="dr-legend"><span><i style="background:var(--live)"></i>Accepted</span><span><i style="background:var(--danger)"></i>Missed</span></div>
       <div class="take"><b>Reads as:</b> Appointments and General Enquiries carry almost all traffic; Canberra Vasectomy and Health Professionals are low-volume queues today.</div>
@@ -167,7 +164,6 @@ export async function renderCallLogs(container, date, manifest) {
       ${t.accepted ? `
       <div class="panel">
         <h3>Call volume — 10-day trend</h3>
-        <p class="q">Accepted vs missed, all queues</p>
         <div class="dr-chart-wrap">${stackedBarChart({ dates: t.labels, seriesA: t.accepted, seriesB: t.missed, height: 220 })}</div>
       </div>
       ` : ''}
@@ -207,7 +203,6 @@ export async function renderCallLogs(container, date, manifest) {
     ${d.longestWaitPerQueue ? `
     <div class="panel dr-section-gap">
       <h3>Longest wait per queue</h3>
-      <p class="q">Click a column to sort.</p>
       <div class="rtable-wrap dr-longest-wait">
         <table class="rtable">
           <thead><tr>
@@ -242,7 +237,7 @@ export async function renderCallLogs(container, date, manifest) {
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <div>
           <h3>Staff activity</h3>
-          <p class="q">Inbound + outbound calls, cross-referenced with yesterday's Cloop email handling. Click a row for detail, click a column to sort.</p>
+          <p class="q">Inbound + outbound calls, cross-referenced with yesterday's Cloop email handling.</p>
         </div>
         <input class="sinput dr-staff-search" type="text" placeholder="Search staff">
       </div>
@@ -267,7 +262,6 @@ export async function renderCallLogs(container, date, manifest) {
       </div>
       <div class="panel">
         <h3>Today's inbound pattern by hour</h3>
-        <p class="q">Accepted vs missed, hour by hour</p>
         ${hourly ? `<div class="dr-chart-wrap">${stackedBarChart({ dates: hourly.hours, seriesA: hourly.accepted, seriesB: hourly.missed, height: 200 })}</div>` : `<p class="dr-placeholder">Not published this date.</p>`}
       </div>
     </div>

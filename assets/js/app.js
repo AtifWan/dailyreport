@@ -8,20 +8,21 @@ import { renderLeave } from './pages/leave.js';
 import { renderChecklist } from './pages/checklist.js';
 import { exportReport, showToast } from './export.js';
 
-// Each route: key -> { title, subtitle, navId, render(container, date, manifest) }
+// Each route: key -> { title, navId, render(container, date, manifest) }
+// `title` only feeds the browser tab (document.title) and the sidebar's active-item
+// styling now — the visible in-page title/subtitle header was removed (the sidebar
+// nav already says which page you're on), so there's no on-page subtitle to carry.
 const ROUTES = {
-  overview: { title: 'Overview', subtitle: 'At-a-glance summary of the daily operations report.', navId: 'nav-overview', render: renderOverview },
-  'critical-tasks': { title: 'Critical daily tasks', subtitle: 'Streaks and checklist completion for each site and department.', navId: 'nav-tasks', render: renderTasks },
-  'call-logs': { title: 'Call logs', subtitle: 'Call volume, answer rate and per-queue performance.', navId: 'nav-calls', render: renderCallLogs },
-  cloop: { title: 'Cloop', subtitle: 'Case queue volumes, handling and week-over-week movement.', navId: 'nav-cloop', render: renderCloop },
-  leave: { title: "Staff & doctors' leave", subtitle: 'Week at a glance for clinical and admin staff.', navId: 'nav-leave', render: renderLeave },
-  'report-checklist': { title: 'Report checklist', subtitle: 'Status of this report’s required inputs — editors only.', navId: 'nav-checklist', render: (container) => renderChecklist(container) },
+  overview: { title: 'Overview', navId: 'nav-overview', render: renderOverview },
+  'critical-tasks': { title: 'Critical daily tasks', navId: 'nav-tasks', render: renderTasks },
+  'call-logs': { title: 'Call logs', navId: 'nav-calls', render: renderCallLogs },
+  cloop: { title: 'Cloop', navId: 'nav-cloop', render: renderCloop },
+  leave: { title: "Staff & doctors' leave", navId: 'nav-leave', render: renderLeave },
+  'report-checklist': { title: 'Report checklist', navId: 'nav-checklist', render: (container) => renderChecklist(container) },
 };
 const DEFAULT_ROUTE = 'overview';
 
 const contentEl = document.getElementById('page-content');
-const titleEl = document.querySelector('.tt');
-const subtitleEl = document.querySelector('.ts');
 
 // The selected report date lives in the URL (#/<route>/<date>), not inside any one
 // page — that's what makes it survive navigating between pages (item 11). This is
@@ -63,9 +64,7 @@ async function navigate() {
 
   const route = ROUTES[routeKey];
   document.querySelectorAll('.nav-item').forEach((el) => el.classList.toggle('on', el.id === route.navId));
-  titleEl.textContent = route.title;
-  subtitleEl.textContent = route.subtitle;
-  document.title = `${route.title} · Daily Operations Report · YourGP`;
+  document.title = `${route.title} · Dashy Daily · YourGP`;
 
   contentEl.innerHTML = '<p class="result-meta">Loading…</p>';
   try {
