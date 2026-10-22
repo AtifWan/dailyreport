@@ -1,5 +1,4 @@
 import { fetchJSON, formatDate, todayISOInCanberra } from './util.js';
-import { startOfWorkingStreak } from './workdays.js';
 
 // Builds the downloadable report as a native, vector-drawn PDF — every word of text,
 // every table cell and every chart line is drawn straight into the PDF with jsPDF,
@@ -456,13 +455,6 @@ async function loadReportData(date) {
   return { overview, tasks, callLogs, cloop, leave };
 }
 
-function sinceLabel(streak, reportDate, longestStreak) {
-  if (streak.longest) return `since ${formatDate(longestStreak.startDate, { day: 'numeric', month: 'short', year: 'numeric' })}`;
-  if (streak.onHalt) return null;
-  const startDate = startOfWorkingStreak(reportDate, streak.days);
-  return startDate ? `est. since ${formatDate(startDate, { day: 'numeric', month: 'short', year: 'numeric' })}` : null;
-}
-
 function buildStaffActivity(callLogs) {
   const byName = new Map();
   const ensure = (name) => {
@@ -590,23 +582,6 @@ function buildOverviewPage(doc, kit, pal, flow, { overview }) {
 function buildTasksPage(doc, kit, pal, flow, { tasks }) {
   if (!tasks) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No critical-tasks report was published for this date.'); return; }
   const w = CONTENT_W;
-  const maxStreak = Math.max(...tasks.streaks.map((s) => s.days), 1);
-
-  let y = flow.ensure(20);
-  y = kit.kpiRow(MARGIN, y, w, 20, tasks.streaks.map((s) => ({
-    label: s.name, value: s.days, sub: `day${s.days === 1 ? '' : 's'} streak${s.onHalt ? ' · on halt' : ''}${s.longest ? ' · longest' : ''}`, tone: s.onHalt ? 'crit' : 'good',
-  })));
-  flow.y = y + 5;
-
-  const streakRowH = 5.6;
-  const streakH = kit.panelHeaderH('') + tasks.streaks.length * streakRowH + 2;
-  const sy0 = flow.ensure(streakH);
-  const streakTop = kit.panelFrame(MARGIN, sy0, w, streakH, 'Streak history', '');
-  kit.hBarRows(MARGIN + 4, streakTop, w - 8, streakRowH, tasks.streaks.map((s) => {
-    const label = sinceLabel(s, tasks.reportDate, tasks.longestStreak);
-    return { label: s.name, frac: s.days / maxStreak, valueLabel: `${s.days}d`, subLabel: label, color: s.longest ? pal.live : s.onHalt ? pal.danger : pal.accent };
-  }), { labelW: 30, valueW: 22 });
-  flow.y = sy0 + streakH + 4;
 
   const colW = (w - 6) / 2;
   const panelH = Math.max(70, Math.min(100, flow.remaining));
@@ -644,7 +619,15 @@ function buildTasksPage(doc, kit, pal, flow, { tasks }) {
     kit.text(pal.dangerInk); doc.setFont('helvetica', 'normal');
     (cl.incomplete.length ? cl.incomplete : ['None — fully complete.']).slice(0, visible).forEach((task) => { doc.text(task, px + 8 + listColW, ly2, { maxWidth: listColW - 2 }); ly2 += rowH; });
   });
-  flow.y = py0 + panelH;
+  flow.y = py0 + panelH + 4;
+
+  // Side Quests: a new section Kenny asked for, fed by Tasky later — left blank
+  // rather than guessed at, same as the live dashboard's own placeholder.
+  const sqH = kit.panelHeaderH('') + 14;
+  const sqy0 = flow.ensure(sqH);
+  const sqContentY = kit.panelFrame(MARGIN, sqy0, w, sqH, 'Side Quests', '');
+  kit.placeholder(MARGIN + 4, sqContentY, w - 8, sqy0 + sqH - sqContentY - 2, 'Not tracked yet — data will come from Tasky.');
+  flow.y = sqy0 + sqH;
 }
 
 /** The three patient-facing call KPIs (longest call, longest wait, avg handling) —
