@@ -515,16 +515,11 @@ function buildCoverPage(doc, kit, pal, { date, overview, sectionsMeta }) {
   // overview.json, so the cover page is a summary in its own right rather than
   // just a title screen someone has to flip past.
   const stripY = 75;
-  const t = overview?.criticalTasks, c = overview?.callLogs, cl = overview?.cloop, lv = overview?.leave;
+  const c = overview?.callLogs, cl = overview?.cloop, lv = overview?.leave;
   const tiles = [];
   if (c) tiles.push({ label: 'Calls accepted', value: `${c.acceptedPct}%`, sub: `${c.accepted} of ${c.totalInbound}`, tone: c.acceptedPct >= 85 ? 'good' : 'crit' });
   if (c) tiles.push({ label: 'Calls missed', value: `${c.missedPct}%`, sub: `${c.missed} of ${c.totalInbound}`, tone: c.missedPct > 15 ? 'crit' : 'neutral' });
   if (cl) tiles.push({ label: 'Cloop in queue', value: cl.inQueue, sub: `oldest ${cl.oldestDays} days` });
-  if (t) {
-    const longest = t.streaks.find((s) => s.longest);
-    if (longest) tiles.push({ label: 'Longest streak', value: `${longest.days}d`, sub: longest.name });
-  }
-  if (t) tiles.push({ label: 'Sites on halt', value: t.streaks.filter((s) => s.onHalt).length, sub: `of ${t.streaks.length} tracked`, tone: 'crit' });
   if (lv) tiles.push({ label: 'On leave, doctors', value: lv.doctorLinesOnLeave, sub: lv.weekLabel });
   if (tiles.length) kit.kpiRow(MARGIN + 8, stripY, CONTENT_W - 16, 24, tiles.slice(0, 6));
   else kit.placeholder(MARGIN + 8, stripY, CONTENT_W - 16, 24, 'No overview data published for this date.');
@@ -559,13 +554,13 @@ function buildCoverPage(doc, kit, pal, { date, overview, sectionsMeta }) {
 function buildOverviewPage(doc, kit, pal, flow, { overview }) {
   if (!overview) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No overview report was published for this date.'); return; }
   const c = overview.callLogs, cl = overview.cloop, lv = overview.leave;
-  const w = CONTENT_W, colW = (w - 6) / 2;
+  const w = CONTENT_W;
 
-  // The checklist/streak KPIs and the "Critical daily tasks — streak" + "Call
-  // queue snapshot" panels that used to open this page are left out of the PDF
-  // on purpose — they're already front and centre on the live dashboard's own
-  // Overview tab, and in the full report the very next page (Critical daily
-  // tasks) covers the same streaks in more detail anyway.
+  // The checklist/streak KPIs and the "Side Quest Score" + "Call queue snapshot"
+  // panels that open the live dashboard's Overview tab are left out of the PDF
+  // on purpose — they're already front and centre there, and in the full report
+  // the very next page (Critical daily tasks) covers the same streaks in more
+  // detail anyway.
   let y = flow.ensure(20);
   y = kit.kpiRow(MARGIN, y, w, 20, [
     { label: 'Total inbound calls', value: c.totalInbound, sub: `${c.totalOutbound} outbound made` },
@@ -575,27 +570,19 @@ function buildOverviewPage(doc, kit, pal, flow, { overview }) {
   ]);
   flow.y = y + 5;
 
+  // "Cloop, at a glance" was dropped from this page — the "Cloop cases in queue"
+  // KPI tile above is enough, and the full Cloop page covers the detail.
   const panel2H = Math.max(46, Math.min(60, flow.remaining));
   const rowTop2 = flow.ensure(panel2H);
-  let cloopY = kit.panelFrame(MARGIN, rowTop2, colW, panel2H, 'Cloop, at a glance', '');
-  if (cl) {
-    kit.fill(pal.accent); doc.roundedRect(MARGIN + 4, cloopY, colW - 8, 6, 1, 1, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); doc.setTextColor(255, 255, 255);
-    doc.text(`${cl.contactsQueuedYesterday ?? '—'} emails queued yesterday`, MARGIN + 7, cloopY + 4);
-    kit.takeaway(MARGIN + 4, cloopY + 9, colW - 8, `${cl.emailsHandledYesterday} emails handled yesterday, out of ${cl.totalOverallCases.toLocaleString()} total cases logged (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).`);
-  } else {
-    kit.placeholder(MARGIN + 4, cloopY, colW - 8, 20, 'No Cloop report was published for this date.');
-  }
-
-  let leaveY = kit.panelFrame(MARGIN + colW + 6, rowTop2, colW, panel2H, "Staff & doctors' leave — this week", lv.weekLabel);
-  leaveY = kit.hBarRows(MARGIN + colW + 10, leaveY, colW - 8, 6, [
+  let leaveY = kit.panelFrame(MARGIN, rowTop2, w, panel2H, "Staff & doctors' leave — this week", lv.weekLabel);
+  leaveY = kit.hBarRows(MARGIN + 4, leaveY, w - 8, 6, [
     { label: 'Doctor lines on leave', frac: lv.doctorLinesOnLeave / 4, valueLabel: String(lv.doctorLinesOnLeave), color: pal.dangerInk },
     { label: 'Staff fully on leave', frac: lv.staffFullyOnLeave / 5, valueLabel: String(lv.staffFullyOnLeave), color: pal.dangerInk },
     { label: 'Staff partially on leave', frac: lv.staffPartialLeave / 5, valueLabel: String(lv.staffPartialLeave), color: pal.infer },
   ]);
   if (lv.longTerm?.[0]) {
     doc.setFont('helvetica', 'italic'); doc.setFontSize(6.8); kit.text(pal.inkFaint);
-    doc.text(`${lv.longTerm[0].name} remains on ${lv.longTerm[0].note.toLowerCase()}.`, MARGIN + colW + 10, leaveY + 3.5, { maxWidth: colW - 16 });
+    doc.text(`${lv.longTerm[0].name} remains on ${lv.longTerm[0].note.toLowerCase()}.`, MARGIN + 4, leaveY + 3.5, { maxWidth: w - 16 });
   }
   flow.y = rowTop2 + panel2H;
 }
