@@ -1,0 +1,113 @@
+{
+  "_source": "No source PDF for this date — per explicit user instruction, this is a literal carry-forward of 2026-10-21's own tasks.json (streaks, checklists, trend charts all unchanged, only reportTitle/reportDate updated below). Original provenance for the carried-forward content: Daily Operations Report - 21st October 2026.pdf, page 1 (Critical Daily Tasks), read directly from the user-uploaded PDF's rendered page images. Cover date is internally consistent (21 Oct 2026 is indeed a Wednesday, following directly from Report #337/2026-10-20) — no correction needed.",
+  "reportTitle": "Daily Operations Report - 22nd October 2026",
+  "reportDate": "2026-10-22",
+  "streaks": [
+    {
+      "name": "Crace",
+      "days": 1,
+      "onHalt": true,
+      "_carriedForward": true
+    },
+    {
+      "name": "Denman",
+      "days": 109,
+      "onHalt": true,
+      "longest": true,
+      "_carriedForward": true
+    },
+    {
+      "name": "Lyneham",
+      "days": 0,
+      "onHalt": true,
+      "_carriedForward": true
+    },
+    {
+      "name": "PST",
+      "days": 2,
+      "onHalt": false
+    },
+    {
+      "name": "Finance",
+      "days": 0,
+      "onHalt": false
+    }
+  ],
+  "longestStreak": {
+    "name": "Denman",
+    "days": 109,
+    "startDate": "2026-01-13"
+  },
+  "trendDates": [
+    "Thu 08 Oct",
+    "Fri 09 Oct",
+    "Mon 12 Oct",
+    "Tue 13 Oct",
+    "Wed 14 Oct",
+    "Thu 15 Oct",
+    "Fri 16 Oct",
+    "Mon 19 Oct",
+    "Tue 20 Oct",
+    "Wed 21 Oct"
+  ],
+  "checklists": [
+    {
+      "name": "PST",
+      "completionPct": 100,
+      "trend": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        67,
+        100,
+        100
+      ],
+      "complete": [
+        "E-Referrals",
+        "Action Failed Communications On Cloop",
+        "Send Claim For Automed Payments",
+        "Clinical Reminders",
+        "Caregp Ai Tool",
+        "Allocate - Healthlink Unallocated"
+      ],
+      "incomplete": []
+    },
+    {
+      "name": "Finance",
+      "completionPct": 88,
+      "trend": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        88,
+        88,
+        88,
+        88,
+        88
+      ],
+      "complete": [
+        "Xero accounts reconciled",
+        "Tyro Health receipts captured",
+        "Finance queue in Cloop has zero emails",
+        "All Remittances from 3rd Party & Insurer (From Cloop) Allocated",
+        "Unidentified payments resolved",
+        "Reconcile All GPs' and Practices' Xero accounts",
+        "90/60-day debt list actioned"
+      ],
+      "incomplete": [
+        "Best Practice Online Medicare Claim"
+      ],
+      "incompleteCount": 1,
+      "incompleteExample": "Best Practice Online Medicare Claim"
+    }
+  ],
+  "_trendNote": "PST holds at 100% for a second consecutive day (streak now 2 days). Finance holds at 88% for a fifth consecutive trend position (still missing Best Practice Online Medicare Claim). Both trends chain-match 2026-10-20's own committed trend exactly at positions 0-8, confirmed by position 9 against this report's own cover badges (Report #338, cleanly incremented from #337).",
+  "_note": "FLAG FOR USER REVIEW: same gap as every date since 2026-10-02 — thirteen consecutive dates now without the Crace/Denman/Lyneham on-halt day-counters visible in either source PDF's rendered page. The three values above (1/109/0) are carried forward unchanged, pending a visual check of the source PDF's cover graphic.",
+  "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF — only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
+}
