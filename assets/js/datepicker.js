@@ -54,7 +54,7 @@ export function datePickerHtml(currentDate, manifest, metaLine) {
           <div class="dr-pick-grid"></div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:4px;align-self:center">
+      <div style="display:flex;flex-direction:column;gap:4px;align-self:flex-end">
         <p class="foot-note" style="margin:0">
           ${manifest.dates.length} report${manifest.dates.length === 1 ? '' : 's'} available (${rangeLabel})
         </p>
