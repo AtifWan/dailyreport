@@ -1,0 +1,218 @@
+{
+  "_source": "Deterministic parse of raw Cloop CSV exports (Real Time Metrics Report, two Historical Metrics Reports — queue-level and agent-level) via scripts/parse_cloop.py, chained against assets/data/reports/2026-10-21/cloop.json. The Real-Time snapshot was manually provided (not fetched from SharePoint), so its own extraction time isn't in the file content or metadata — see _extractedAtNote. totalCasesToDate/inProgressTenDayTrend/openCasesTenDayTrend are NOT derivable from these CSVs at all (no raw source for them exists); the user supplied them directly by hand (10427 / 132 / 54) rather than from a source PDF — see _totalCasesToDateNote.",
+  "reportTitle": "Daily Operations Report - 22nd October 2026",
+  "extractedAt": "2026-10-23T05:45:00+11:00",
+  "extractedAtLabel": "5:45 AM, Friday 23 October 2026",
+  "_extractedAtNote": "No exact extraction time was available — the Real-Time CSV carries no timestamp of its own, and this file wasn't fetched via SharePoint (no lastModifiedDateTime to read). Time is inferred from the two Historical CSVs' own embedded generation timestamps (05:45:25 and 05:44:26 on 2026-10-23), on the assumption all three files were pulled in the same batch, same as every other date's real-time snapshot being taken the next business morning after the date it reports on.",
+  "realTimeQueues": [
+    {
+      "queue": "Medico-legal",
+      "inQueue": 2,
+      "oldestDays": 1.69
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 12,
+      "oldestDays": 2.6
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 10,
+      "oldestDays": 0.71
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 3,
+      "oldestDays": 1.97
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 3,
+      "oldestDays": 2.64
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 1,
+      "oldestDays": 0.63
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 10,
+      "oldestDays": 0.69
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 41,
+    "oldestDays": 2.64
+  },
+  "_realTimeQueuesNote": "Real-time snapshot as of the extraction above (2026-10-23 morning) — 7 queues, Summary row 41 in queue / oldest 63:20:10 (2.64 days).",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 23
+    },
+    {
+      "queue": "Requests",
+      "count": 18
+    },
+    {
+      "queue": "Documents",
+      "count": 17
+    },
+    {
+      "queue": "Finance",
+      "count": 11
+    },
+    {
+      "queue": "File Transfer",
+      "count": 2
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 2
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Fri 09 Oct",
+      "Mon 12 Oct",
+      "Tue 13 Oct",
+      "Wed 14 Oct",
+      "Thu 15 Oct",
+      "Fri 16 Oct",
+      "Mon 19 Oct",
+      "Tue 20 Oct",
+      "Wed 21 Oct",
+      "Thu 22 Oct"
+    ],
+    "totals": [
+      93,
+      80,
+      636,
+      112,
+      98,
+      35,
+      81,
+      96,
+      62,
+      74
+    ]
+  },
+  "_note": "contactsQueuedYesterday sums to 74 exactly, matching this file's own contactsQueuedTenDayTrend position 9 (labelled 'Thu 22-Oct', the historical date these two Historical CSVs cover) and chain-matching 2026-10-21's own committed trend exactly at positions 0-8.",
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 43,
+      "outbound": 17,
+      "total": 60
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 18,
+      "outbound": 9,
+      "total": 27
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 11,
+      "outbound": 1,
+      "total": 12
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 1,
+      "outbound": 1,
+      "total": 2
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 1,
+      "outbound": 0,
+      "total": 1
+    },
+    {
+      "agent": "Frances Doble",
+      "incoming": 0,
+      "outbound": 0,
+      "total": 0
+    },
+    {
+      "agent": "Holly Archer",
+      "incoming": 0,
+      "outbound": 0,
+      "total": 0
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 0,
+      "outbound": 0,
+      "total": 0
+    }
+  ],
+  "_emailsHandledNote": "8 agents, summing to 102 total (60 incoming-heavy via Chloey Leow, the rest low-volume). No reconciliation issues found against any other figure in this file (there is no separate printed total to check against, unlike a PDF-sourced date).",
+  "totalCasesToDate": {
+    "date": "2026-10-22",
+    "totalOverallCases": 10427,
+    "totalInProgress": 132,
+    "totalOpenCases": 54
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Mon 12 Oct",
+      "Tue 13 Oct",
+      "Wed 14 Oct",
+      "Thu 15 Oct",
+      "Fri 16 Oct",
+      "Mon 19 Oct",
+      "Tue 20 Oct",
+      "Wed 21 Oct",
+      "Thu 22 Oct",
+      "Fri 23 Oct"
+    ],
+    "totals": [
+      101,
+      107,
+      105,
+      115,
+      117,
+      142,
+      134,
+      144,
+      136,
+      132
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Mon 12 Oct",
+      "Tue 13 Oct",
+      "Wed 14 Oct",
+      "Thu 15 Oct",
+      "Fri 16 Oct",
+      "Mon 19 Oct",
+      "Tue 20 Oct",
+      "Wed 21 Oct",
+      "Thu 22 Oct",
+      "Fri 23 Oct"
+    ],
+    "totals": [
+      60,
+      47,
+      37,
+      31,
+      40,
+      35,
+      56,
+      53,
+      46,
+      54
+    ]
+  },
+  "_totalCasesToDateNote": "Not derived from any CSV or PDF this run — the user supplied these three numbers directly (10427 / 132 / 54), stated as current as of today. Filed under this report's own date (2026-10-22) per the usual convention, as position 9 of a trend whose label ('Fri 23-Oct') reflects the next-business-morning snapshot timing every prior date has also used for this same chart. Positions 0-8 chain-match 2026-10-21's own committed trend exactly for both trends. totalOverallCases (10427) is a +81 increase over 2026-10-21's committed 10346.",
+  "_historicalDate": "2026-10-22",
+  "_unmatchedAgentNames": []
+}
