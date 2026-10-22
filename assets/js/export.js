@@ -1,5 +1,4 @@
 import { fetchJSON, formatDate, todayISOInCanberra } from './util.js';
-import { startOfWorkingStreak } from './workdays.js';
 
 // Builds the downloadable report as a native, vector-drawn PDF — every word of text,
 // every table cell and every chart line is drawn straight into the PDF with jsPDF,
@@ -456,13 +455,6 @@ async function loadReportData(date) {
   return { overview, tasks, callLogs, cloop, leave };
 }
 
-function sinceLabel(streak, reportDate, longestStreak) {
-  if (streak.longest) return `since ${formatDate(longestStreak.startDate, { day: 'numeric', month: 'short', year: 'numeric' })}`;
-  if (streak.onHalt) return null;
-  const startDate = startOfWorkingStreak(reportDate, streak.days);
-  return startDate ? `est. since ${formatDate(startDate, { day: 'numeric', month: 'short', year: 'numeric' })}` : null;
-}
-
 function buildStaffActivity(callLogs) {
   const byName = new Map();
   const ensure = (name) => {
@@ -503,7 +495,7 @@ function buildCoverPage(doc, kit, pal, { date, overview, sectionsMeta }) {
   doc.text('Y', centerX, 32.3, { align: 'center' });
 
   doc.setFont('helvetica', 'normal'); doc.setFontSize(21); kit.text(pal.ink);
-  doc.text('Daily Operations Report', centerX, 50, { align: 'center' });
+  doc.text('Dashy Daily', centerX, 50, { align: 'center' });
   doc.setFontSize(11.5); kit.text(pal.inkMuted);
   doc.text(`${weekday}, ${formatDate(date)}`, centerX, 58, { align: 'center' });
   if (overview?.report?.number) {
@@ -515,16 +507,11 @@ function buildCoverPage(doc, kit, pal, { date, overview, sectionsMeta }) {
   // overview.json, so the cover page is a summary in its own right rather than
   // just a title screen someone has to flip past.
   const stripY = 75;
-  const t = overview?.criticalTasks, c = overview?.callLogs, cl = overview?.cloop, lv = overview?.leave;
+  const c = overview?.callLogs, cl = overview?.cloop, lv = overview?.leave;
   const tiles = [];
   if (c) tiles.push({ label: 'Calls accepted', value: `${c.acceptedPct}%`, sub: `${c.accepted} of ${c.totalInbound}`, tone: c.acceptedPct >= 85 ? 'good' : 'crit' });
   if (c) tiles.push({ label: 'Calls missed', value: `${c.missedPct}%`, sub: `${c.missed} of ${c.totalInbound}`, tone: c.missedPct > 15 ? 'crit' : 'neutral' });
   if (cl) tiles.push({ label: 'Cloop in queue', value: cl.inQueue, sub: `oldest ${cl.oldestDays} days` });
-  if (t) {
-    const longest = t.streaks.find((s) => s.longest);
-    if (longest) tiles.push({ label: 'Longest streak', value: `${longest.days}d`, sub: longest.name });
-  }
-  if (t) tiles.push({ label: 'Sites on halt', value: t.streaks.filter((s) => s.onHalt).length, sub: `of ${t.streaks.length} tracked`, tone: 'crit' });
   if (lv) tiles.push({ label: 'On leave, doctors', value: lv.doctorLinesOnLeave, sub: lv.weekLabel });
   if (tiles.length) kit.kpiRow(MARGIN + 8, stripY, CONTENT_W - 16, 24, tiles.slice(0, 6));
   else kit.placeholder(MARGIN + 8, stripY, CONTENT_W - 16, 24, 'No overview data published for this date.');
@@ -559,13 +546,13 @@ function buildCoverPage(doc, kit, pal, { date, overview, sectionsMeta }) {
 function buildOverviewPage(doc, kit, pal, flow, { overview }) {
   if (!overview) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No overview report was published for this date.'); return; }
   const c = overview.callLogs, cl = overview.cloop, lv = overview.leave;
-  const w = CONTENT_W, colW = (w - 6) / 2;
+  const w = CONTENT_W;
 
-  // The checklist/streak KPIs and the "Critical daily tasks — streak" + "Call
-  // queue snapshot" panels that used to open this page are left out of the PDF
-  // on purpose — they're already front and centre on the live dashboard's own
-  // Overview tab, and in the full report the very next page (Critical daily
-  // tasks) covers the same streaks in more detail anyway.
+  // The checklist/streak KPIs and the "Side Quest Score" + "Call queue snapshot"
+  // panels that open the live dashboard's Overview tab are left out of the PDF
+  // on purpose — they're already front and centre there, and in the full report
+  // the very next page (Critical daily tasks) covers the same streaks in more
+  // detail anyway.
   let y = flow.ensure(20);
   y = kit.kpiRow(MARGIN, y, w, 20, [
     { label: 'Total inbound calls', value: c.totalInbound, sub: `${c.totalOutbound} outbound made` },
@@ -575,27 +562,19 @@ function buildOverviewPage(doc, kit, pal, flow, { overview }) {
   ]);
   flow.y = y + 5;
 
+  // "Cloop, at a glance" was dropped from this page — the "Cloop cases in queue"
+  // KPI tile above is enough, and the full Cloop page covers the detail.
   const panel2H = Math.max(46, Math.min(60, flow.remaining));
   const rowTop2 = flow.ensure(panel2H);
-  let cloopY = kit.panelFrame(MARGIN, rowTop2, colW, panel2H, 'Cloop, at a glance', 'Case queue activity as of the report snapshot.');
-  if (cl) {
-    kit.fill(pal.accent); doc.roundedRect(MARGIN + 4, cloopY, colW - 8, 6, 1, 1, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7); doc.setTextColor(255, 255, 255);
-    doc.text(`${cl.contactsQueuedYesterday ?? '—'} contacts queued yesterday`, MARGIN + 7, cloopY + 4);
-    kit.takeaway(MARGIN + 4, cloopY + 9, colW - 8, `${cl.emailsHandledYesterday} contacts handled yesterday, out of ${cl.totalOverallCases.toLocaleString()} total cases logged (${cl.totalInProgress} in progress, ${cl.totalOpenCases} open).`);
-  } else {
-    kit.placeholder(MARGIN + 4, cloopY, colW - 8, 20, 'No Cloop report was published for this date.');
-  }
-
-  let leaveY = kit.panelFrame(MARGIN + colW + 6, rowTop2, colW, panel2H, "Staff & doctors' leave — this week", lv.weekLabel);
-  leaveY = kit.hBarRows(MARGIN + colW + 10, leaveY, colW - 8, 6, [
+  let leaveY = kit.panelFrame(MARGIN, rowTop2, w, panel2H, "Staff & doctors' leave — this week", lv.weekLabel);
+  leaveY = kit.hBarRows(MARGIN + 4, leaveY, w - 8, 6, [
     { label: 'Doctor lines on leave', frac: lv.doctorLinesOnLeave / 4, valueLabel: String(lv.doctorLinesOnLeave), color: pal.dangerInk },
     { label: 'Staff fully on leave', frac: lv.staffFullyOnLeave / 5, valueLabel: String(lv.staffFullyOnLeave), color: pal.dangerInk },
     { label: 'Staff partially on leave', frac: lv.staffPartialLeave / 5, valueLabel: String(lv.staffPartialLeave), color: pal.infer },
   ]);
   if (lv.longTerm?.[0]) {
     doc.setFont('helvetica', 'italic'); doc.setFontSize(6.8); kit.text(pal.inkFaint);
-    doc.text(`${lv.longTerm[0].name} remains on ${lv.longTerm[0].note.toLowerCase()}.`, MARGIN + colW + 10, leaveY + 3.5, { maxWidth: colW - 16 });
+    doc.text(`${lv.longTerm[0].name} remains on ${lv.longTerm[0].note.toLowerCase()}.`, MARGIN + 4, leaveY + 3.5, { maxWidth: w - 16 });
   }
   flow.y = rowTop2 + panel2H;
 }
@@ -603,23 +582,6 @@ function buildOverviewPage(doc, kit, pal, flow, { overview }) {
 function buildTasksPage(doc, kit, pal, flow, { tasks }) {
   if (!tasks) { kit.placeholder(MARGIN, flow.ensure(30), CONTENT_W, 30, 'No critical-tasks report was published for this date.'); return; }
   const w = CONTENT_W;
-  const maxStreak = Math.max(...tasks.streaks.map((s) => s.days), 1);
-
-  let y = flow.ensure(20);
-  y = kit.kpiRow(MARGIN, y, w, 20, tasks.streaks.map((s) => ({
-    label: s.name, value: s.days, sub: `day${s.days === 1 ? '' : 's'} streak${s.onHalt ? ' · on halt' : ''}${s.longest ? ' · longest' : ''}`, tone: s.onHalt ? 'crit' : 'good',
-  })));
-  flow.y = y + 5;
-
-  const streakRowH = 5.6;
-  const streakH = kit.panelHeaderH('x') + tasks.streaks.length * streakRowH + 2;
-  const sy0 = flow.ensure(streakH);
-  const streakTop = kit.panelFrame(MARGIN, sy0, w, streakH, 'Streak history', 'Consecutive days each site/department hit 100% on its critical checklist.');
-  kit.hBarRows(MARGIN + 4, streakTop, w - 8, streakRowH, tasks.streaks.map((s) => {
-    const label = sinceLabel(s, tasks.reportDate, tasks.longestStreak);
-    return { label: s.name, frac: s.days / maxStreak, valueLabel: `${s.days}d`, subLabel: label, color: s.longest ? pal.live : s.onHalt ? pal.danger : pal.accent };
-  }), { labelW: 30, valueW: 22 });
-  flow.y = sy0 + streakH + 4;
 
   const colW = (w - 6) / 2;
   const panelH = Math.max(70, Math.min(100, flow.remaining));
@@ -657,7 +619,15 @@ function buildTasksPage(doc, kit, pal, flow, { tasks }) {
     kit.text(pal.dangerInk); doc.setFont('helvetica', 'normal');
     (cl.incomplete.length ? cl.incomplete : ['None — fully complete.']).slice(0, visible).forEach((task) => { doc.text(task, px + 8 + listColW, ly2, { maxWidth: listColW - 2 }); ly2 += rowH; });
   });
-  flow.y = py0 + panelH;
+  flow.y = py0 + panelH + 4;
+
+  // Side Quests: a new section Kenny asked for, fed by Tasky later — left blank
+  // rather than guessed at, same as the live dashboard's own placeholder.
+  const sqH = kit.panelHeaderH('') + 14;
+  const sqy0 = flow.ensure(sqH);
+  const sqContentY = kit.panelFrame(MARGIN, sqy0, w, sqH, 'Side Quests', '');
+  kit.placeholder(MARGIN + 4, sqContentY, w - 8, sqy0 + sqH - sqContentY - 2, 'Not tracked yet — data will come from Tasky.');
+  flow.y = sqy0 + sqH;
 }
 
 /** The three patient-facing call KPIs (longest call, longest wait, avg handling) —
@@ -691,9 +661,9 @@ function buildCallLogsPage(doc, kit, pal, flow, { callLogs }) {
   flow.y = y + 5;
 
   const qRowH = 9;
-  const qH = kit.panelHeaderH('x') + d.queueReport.length * qRowH;
+  const qH = kit.panelHeaderH('') + d.queueReport.length * qRowH;
   const qy0 = flow.ensure(qH);
-  const queueTop = kit.panelFrame(MARGIN, qy0, w, qH, 'Queue report', `Accepted vs missed calls, by queue — ${d.summary.totalInbound} calls today.`);
+  const queueTop = kit.panelFrame(MARGIN, qy0, w, qH, 'Queue report', '');
   kit.hBarGroupDual(MARGIN + 4, queueTop, w - 8, qRowH, d.queueReport.map((q) => ({ label: q.queue, values: [{ value: q.accepted, color: pal.live }, { value: q.missed, color: pal.danger }] })));
   let lx = MARGIN + w - 70;
   lx = kit.legendChip(lx, qy0 + 6, pal.live, 'Accepted');
@@ -704,7 +674,7 @@ function buildCallLogsPage(doc, kit, pal, flow, { callLogs }) {
   const cy0 = flow.ensure(chartH);
   if (t.answerRatePct) kit.lineChart(MARGIN + 4, kit.panelFrame(MARGIN, cy0, colW, chartH, 'Call answer rate — 10-day trend', `Target: ${t.answerRateTargetPct}%`), colW - 8, chartH - kit.panelHeaderH('x') - 2, { labels: t.labels, data: t.answerRatePct, color: pal.accent, unit: '%', target: t.answerRateTargetPct, targetLabel: `${t.answerRateTargetPct}% target` });
   else kit.placeholder(MARGIN, cy0, colW, chartH, 'Not published this date.');
-  if (t.accepted) kit.stackedBarChart(MARGIN + colW + 10, kit.panelFrame(MARGIN + colW + 6, cy0, colW, chartH, 'Call volume — 10-day trend', 'Accepted vs missed, all queues'), colW - 8, chartH - kit.panelHeaderH('x') - 2, { labels: t.labels, seriesA: t.accepted, seriesB: t.missed, colorA: pal.live, colorB: pal.danger, labelA: 'Accepted', labelB: 'Missed' });
+  if (t.accepted) kit.stackedBarChart(MARGIN + colW + 10, kit.panelFrame(MARGIN + colW + 6, cy0, colW, chartH, 'Call volume — 10-day trend', ''), colW - 8, chartH - kit.panelHeaderH('') - 2, { labels: t.labels, seriesA: t.accepted, seriesB: t.missed, colorA: pal.live, colorB: pal.danger, labelA: 'Accepted', labelB: 'Missed' });
   else kit.placeholder(MARGIN + colW + 6, cy0, colW, chartH, 'Not published this date.');
   flow.y = cy0 + chartH + 4;
 
@@ -742,7 +712,7 @@ function buildCloopPage(doc, kit, pal, flow, { cloop, callLogs }) {
   y = kit.kpiRow(MARGIN, y, w, 20, [
     { label: 'In queue right now', value: d.realTimeSummary.inQueue, sub: `across ${d.realTimeQueues.length} queues` },
     { label: 'Oldest case in queue', value: `${d.realTimeSummary.oldestDays}d`, sub: `extracted ${d.extractedAtLabel}`, tone: 'crit' },
-    { label: 'Contacts queued, yesterday', value: yesterdayTotal ?? '—', sub: wowQueued || 'Not published this date' },
+    { label: 'Emails queued, yesterday', value: yesterdayTotal ?? '—', sub: wowQueued || 'Not published this date' },
     { label: 'Total overall cases', value: d.totalCasesToDate.totalOverallCases.toLocaleString(), sub: `to date, as of ${d.totalCasesToDate.date}` },
   ]);
   flow.y = y + 5;
@@ -750,18 +720,18 @@ function buildCloopPage(doc, kit, pal, flow, { cloop, callLogs }) {
   const rtRowH = 4.6, rtHeaderH = 5.4, rtMaxRows = 5;
   const rtShown = Math.min(d.realTimeQueues.length, rtMaxRows);
   const rtHasMore = d.realTimeQueues.length > rtMaxRows;
-  const rtH = kit.panelHeaderH('x') + rtHeaderH + rtShown * rtRowH + (rtHasMore ? 4.6 : 0) + 2;
+  const rtH = kit.panelHeaderH('') + rtHeaderH + rtShown * rtRowH + (rtHasMore ? 4.6 : 0) + 2;
   const cqRows = Math.min(d.contactsQueuedYesterday?.length || 0, 5);
   const cqH = kit.panelHeaderH(d.contactsQueuedYesterday ? 'x' : '') + cqRows * 4.4 + 2;
   const row1H = Math.max(rtH, cqH, 30);
   const row1y = flow.ensure(row1H);
-  let rty = kit.panelFrame(MARGIN, row1y, colW, row1H, 'Real-time metrics, by queue', 'In queue now, and the age of the oldest case (days).');
+  let rty = kit.panelFrame(MARGIN, row1y, colW, row1H, 'Real-time metrics, by queue', '');
   kit.table(MARGIN + 4, rty, colW - 8, {
     columns: [{ label: 'Queue', key: 'queue', flex: 2 }, { label: 'In queue', key: 'inQueue', flex: 1, align: 'right' }, { label: 'Oldest (d)', key: 'oldestDays', flex: 1, align: 'right' }],
     rows: d.realTimeQueues, rowH: rtRowH, headerH: rtHeaderH, maxRows: rtMaxRows,
   });
 
-  let cqy = kit.panelFrame(MARGIN + colW + 6, row1y, colW, row1H, 'Contacts queued yesterday, by queue', d.contactsQueuedYesterday ? `${yesterdayTotal} contacts queued in total.` : '');
+  let cqy = kit.panelFrame(MARGIN + colW + 6, row1y, colW, row1H, 'Emails queued yesterday, by queue', d.contactsQueuedYesterday ? `${yesterdayTotal} emails queued in total.` : '');
   if (d.contactsQueuedYesterday) {
     const maxQ = Math.max(...d.contactsQueuedYesterday.map((q) => q.count), 1);
     kit.hBarRows(MARGIN + colW + 10, cqy, colW - 8, 4.4, d.contactsQueuedYesterday.slice(0, cqRows).map((q) => ({ label: q.queue, frac: q.count / maxQ, valueLabel: String(q.count), color: pal.accent })), { labelW: 32, valueW: 16 });
@@ -771,16 +741,16 @@ function buildCloopPage(doc, kit, pal, flow, { cloop, callLogs }) {
   if (d.contactsQueuedTenDayTrend) {
     const trendH = 32;
     const ty0 = flow.ensure(trendH);
-    const ty = kit.panelFrame(MARGIN, ty0, w, trendH, 'Total contacts queued — 10-day trend', '');
+    const ty = kit.panelFrame(MARGIN, ty0, w, trendH, 'Total emails queued — 10-day trend', '');
     kit.lineChart(MARGIN + 4, ty, w - 8, trendH - kit.panelHeaderH('') - 2, { labels: d.contactsQueuedTenDayTrend.labels, data: d.contactsQueuedTenDayTrend.totals, color: pal.accent });
     flow.y = ty0 + trendH + 4;
   }
 
   const emailRows = d.emailsHandledYesterday.slice().sort((a, b) => b.total - a.total);
   const emRowH = 4.4, emHeaderH = 5.4, emMaxRows = Math.min(emailRows.length, 6);
-  const emH = kit.panelHeaderH('x') + emHeaderH + emMaxRows * emRowH + (emailRows.length > emMaxRows ? 4.6 : 0) + 2;
+  const emH = kit.panelHeaderH('') + emHeaderH + emMaxRows * emRowH + (emailRows.length > emMaxRows ? 4.6 : 0) + 2;
   const ey0 = flow.ensure(emH);
-  const ety = kit.panelFrame(MARGIN, ey0, w, emH, 'Emails handled yesterday, by agent', 'Incoming vs outbound contacts handled.');
+  const ety = kit.panelFrame(MARGIN, ey0, w, emH, 'Emails handled yesterday, by agent', '');
   kit.table(MARGIN + 4, ety, w - 8, {
     columns: [{ label: 'Agent', key: 'agent', flex: 2 }, { label: 'Incoming', key: 'incoming', flex: 1, align: 'right' }, { label: 'Outbound', key: 'outbound', flex: 1, align: 'right' }, { label: 'Total handled', key: 'total', flex: 1, align: 'right' }],
     rows: emailRows, rowH: emRowH, headerH: emHeaderH, maxRows: emMaxRows,
@@ -923,9 +893,9 @@ function buildShortDetailPage(doc, kit, pal, flow, { cloop, leave }) {
 
   if (cloop) {
     const rowH = 4.8, headerH = 5.6, maxRows = Math.min(cloop.realTimeQueues.length, 10);
-    const tableH = kit.panelHeaderH('x') + headerH + maxRows * rowH + (cloop.realTimeQueues.length > maxRows ? 4.6 : 0) + 2;
+    const tableH = kit.panelHeaderH('') + headerH + maxRows * rowH + (cloop.realTimeQueues.length > maxRows ? 4.6 : 0) + 2;
     const ty0 = flow.ensure(tableH);
-    const tableTop = kit.panelFrame(MARGIN, ty0, w, tableH, 'Cloop — real-time metrics, by queue', 'In queue now, and the age of the oldest case (days).');
+    const tableTop = kit.panelFrame(MARGIN, ty0, w, tableH, 'Cloop — real-time metrics, by queue', '');
     kit.table(MARGIN + 4, tableTop, w - 8, {
       columns: [{ label: 'Queue', key: 'queue', flex: 2 }, { label: 'In queue', key: 'inQueue', flex: 1, align: 'right' }, { label: 'Oldest (d)', key: 'oldestDays', flex: 1, align: 'right' }],
       rows: cloop.realTimeQueues, rowH, headerH, maxRows,
@@ -985,9 +955,9 @@ function buildShortDetailPage(doc, kit, pal, flow, { cloop, leave }) {
 function buildLinkPage(doc, pal, dateLabel) {
   const centerX = PAGE_W / 2, centerY = PAGE_H / 2;
   doc.setFont('helvetica', 'normal'); doc.setFontSize(13); doc.setTextColor(...pal.ink);
-  doc.textWithLink('For more information, visit the Daily Operations Dashboard', centerX, centerY, { align: 'center', url: DASHBOARD_URL });
+  doc.textWithLink('For more information, visit Dashy Daily', centerX, centerY, { align: 'center', url: DASHBOARD_URL });
   doc.setDrawColor(...pal.accent); doc.setLineWidth(0.3);
-  const linkW = doc.getTextWidth('For more information, visit the Daily Operations Dashboard');
+  const linkW = doc.getTextWidth('For more information, visit Dashy Daily');
   doc.line(centerX - linkW / 2, centerY + 1.4, centerX + linkW / 2, centerY + 1.4);
 }
 
@@ -1014,7 +984,7 @@ function drawChrome(doc, pal, meta, pageNum, totalPages) {
   doc.setDrawColor(...pal.hairline); doc.setLineWidth(0.2);
   doc.line(MARGIN, PAGE_H - MARGIN - 6, PAGE_W - MARGIN, PAGE_H - MARGIN - 6);
   doc.setFont('helvetica', 'normal'); doc.setFontSize(7); doc.setTextColor(...pal.inkFaint);
-  doc.text('YourGP · Daily Operations Report', MARGIN, PAGE_H - MARGIN - 1.8);
+  doc.text('YourGP · Dashy Daily', MARGIN, PAGE_H - MARGIN - 1.8);
   doc.text(meta.dateLabel, PAGE_W / 2, PAGE_H - MARGIN - 1.8, { align: 'center' });
   doc.text(`Page ${pageNum} of ${totalPages}`, PAGE_W - MARGIN, PAGE_H - MARGIN - 1.8, { align: 'right' });
 }
@@ -1060,7 +1030,7 @@ function buildShortReportDoc(doc, kit, pal, data, dateLabel, onProgress) {
   // Unlike the full report, page 1 here is real content, not a cover reserved for
   // later — jsPDF already starts the document on it, so no addPage() for this one.
   onProgress?.('Building at-a-glance page…');
-  const meta1 = { title: 'Daily Operations Report', color: pal.accentStrong, dateLabel };
+  const meta1 = { title: 'Dashy Daily', color: pal.accentStrong, dateLabel };
   const pageMeta = [{ isCover: false, ...meta1 }];
   const flow1 = makeFlow(doc, pageMeta, meta1);
   buildOverviewPage(doc, kit, pal, flow1, { overview: data.overview });
@@ -1076,11 +1046,11 @@ function buildShortReportDoc(doc, kit, pal, data, dateLabel, onProgress) {
   const trendH = Math.max(34, flow1.remaining);
   const ty0 = flow1.ensure(trendH);
   const t = data.callLogs?.tenDayTrend;
-  const chartTop = kit.panelFrame(MARGIN, ty0, CONTENT_W, trendH, 'Call volume — 10-day trend', 'Accepted vs missed, all queues');
+  const chartTop = kit.panelFrame(MARGIN, ty0, CONTENT_W, trendH, 'Call volume — 10-day trend', '');
   if (t?.accepted) {
-    kit.stackedBarChart(MARGIN + 4, chartTop, CONTENT_W - 8, trendH - kit.panelHeaderH('x') - 2, { labels: t.labels, seriesA: t.accepted, seriesB: t.missed, colorA: pal.live, colorB: pal.danger, labelA: 'Accepted', labelB: 'Missed' });
+    kit.stackedBarChart(MARGIN + 4, chartTop, CONTENT_W - 8, trendH - kit.panelHeaderH('') - 2, { labels: t.labels, seriesA: t.accepted, seriesB: t.missed, colorA: pal.live, colorB: pal.danger, labelA: 'Accepted', labelB: 'Missed' });
   } else {
-    kit.placeholder(MARGIN + 4, chartTop, CONTENT_W - 8, trendH - kit.panelHeaderH('x') - 4, 'Not published this date.');
+    kit.placeholder(MARGIN + 4, chartTop, CONTENT_W - 8, trendH - kit.panelHeaderH('') - 4, 'Not published this date.');
   }
   flow1.y = ty0 + trendH;
 

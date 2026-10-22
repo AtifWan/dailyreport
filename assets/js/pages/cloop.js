@@ -88,7 +88,7 @@ export async function renderCloop(container, date, manifest) {
         <div class="k-n">extracted ${esc(d.extractedAtLabel)}</div>
       </div>
       <div class="kpi">
-        <div class="k-l">Contacts queued, yesterday</div>
+        <div class="k-l">Emails queued, yesterday</div>
         <div class="k-v num">${yesterdayTotal != null ? yesterdayTotal : '—'}</div>
         <div class="k-n">${wowQueued ? `vs 1 week ago ${deltaChip(wowQueued.delta, wowQueued.pct)}` : 'Not published this date'}</div>
       </div>
@@ -102,7 +102,6 @@ export async function renderCloop(container, date, manifest) {
     <div class="grid2">
       <div class="panel">
         <h3>Real-time metrics, by queue</h3>
-        <p class="q">In queue now, and the age of the oldest case (days). Click a column to sort.</p>
         <div class="rtable-wrap dr-realtime-table" style="max-height:none">
           <table class="rtable">
             <thead><tr>
@@ -116,9 +115,9 @@ export async function renderCloop(container, date, manifest) {
         </div>
       </div>
       <div class="panel">
-        <h3>Contacts queued yesterday, by queue</h3>
+        <h3>Emails queued yesterday, by queue</h3>
         ${d.contactsQueuedYesterday ? `
-        <p class="q">${yesterdayTotal} contacts queued in total.</p>
+        <p class="q">${yesterdayTotal} emails queued in total.</p>
         ${hBarGroup({ items: d.contactsQueuedYesterday.map((q) => ({ label: q.queue, values: [{ value: q.count, color: 'var(--accent)' }] })) })}
         ` : `<p class="dr-placeholder">Not published this date.</p>`}
       </div>
@@ -126,15 +125,13 @@ export async function renderCloop(container, date, manifest) {
 
     ${d.contactsQueuedTenDayTrend ? `
     <div class="panel dr-section-gap">
-      <h3>Total contacts queued — 10-day trend</h3>
-      <p class="q">All queues combined</p>
-      <div class="dr-chart-wrap">${lineChart({ dates: d.contactsQueuedTenDayTrend.labels, series: [{ data: d.contactsQueuedTenDayTrend.totals, color: 'var(--accent)', label: 'Contacts queued' }], height: 210 })}</div>
+      <h3>Total emails queued — 10-day trend</h3>
+      <div class="dr-chart-wrap">${lineChart({ dates: d.contactsQueuedTenDayTrend.labels, series: [{ data: d.contactsQueuedTenDayTrend.totals, color: 'var(--accent)', label: 'Emails queued' }], height: 210 })}</div>
     </div>
     ` : ''}
 
     <div class="panel dr-section-gap">
       <h3>Emails handled yesterday, by agent</h3>
-      <p class="q">Incoming vs outbound contacts handled — the cross-category matrix from the source report. Click a column to sort.</p>
       <div class="rtable-wrap dr-emails-table" style="max-height:none">
         <table class="rtable">
           <thead><tr>

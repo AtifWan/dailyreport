@@ -97,7 +97,7 @@ export async function renderLeave(container, date, manifest) {
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <div>
           <h3>Week at a glance</h3>
-          <p class="q">Fully-out people first, then partial. Filter by day, or search a name.</p>
+          <p class="q">Fully-out people first, then partial.</p>
         </div>
         <input class="sinput dr-leave-search" type="text" placeholder="Search name">
       </div>
@@ -122,7 +122,6 @@ export async function renderLeave(container, date, manifest) {
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
         <div>
           <h3>Public holiday calendar</h3>
-          <p class="q">Real 2026 ACT (Canberra) public holidays — browse ahead to see what's coming up.</p>
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <button class="locbtn dr-cal-prev" aria-label="Previous month">&larr;</button>
