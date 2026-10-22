@@ -24,8 +24,11 @@ function monthIndex(year, month) { return year * 12 + month; }
  *
  * @param {string} currentDate
  * @param {{dates:string[], latest:string}} manifest
+ * @param {string} [metaLine] Optional extra line shown under the "N reports
+ *   available" text (e.g. the Overview page's "Report #338") — kept out of
+ *   this shared component's own markup since only one page needs it.
  */
-export function datePickerHtml(currentDate, manifest) {
+export function datePickerHtml(currentDate, manifest, metaLine) {
   const min = manifest.dates[0];
   const max = manifest.latest;
   const rangeLabel = min === max
@@ -51,9 +54,12 @@ export function datePickerHtml(currentDate, manifest) {
           <div class="dr-pick-grid"></div>
         </div>
       </div>
-      <p class="foot-note" style="margin:0;align-self:center">
-        ${manifest.dates.length} report${manifest.dates.length === 1 ? '' : 's'} available (${rangeLabel})
-      </p>
+      <div style="display:flex;flex-direction:column;gap:4px;align-self:center">
+        <p class="foot-note" style="margin:0">
+          ${manifest.dates.length} report${manifest.dates.length === 1 ? '' : 's'} available (${rangeLabel})
+        </p>
+        ${metaLine ? `<p class="foot-note" style="margin:0">${metaLine}</p>` : ''}
+      </div>
     </div>`;
 }
 
