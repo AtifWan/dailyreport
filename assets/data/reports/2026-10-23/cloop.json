@@ -1,9 +1,9 @@
 {
   "_source": "Deterministic parse of raw Cloop CSV exports (Real Time Metrics Report, two Historical Metrics Reports \u2014 queue-level and agent-level) via scripts/parse_cloop.py, chained against assets/data/reports/2026-10-22/cloop.json. The Real-Time snapshot was manually provided (not fetched from SharePoint), so its own extraction time isn't in the file content or metadata \u2014 see _extractedAtNote. totalCasesToDate/inProgressTenDayTrend/openCasesTenDayTrend are NOT derivable from these CSVs at all (no raw source for them exists); the user supplied them directly by hand (10505 / 135 / 59) rather than from a source PDF \u2014 see _totalCasesToDateNote.",
   "reportTitle": "Daily Operations Report - 23rd October 2026",
-  "extractedAt": "2026-10-26T06:46:00+11:00",
-  "extractedAtLabel": "6:46 AM, Monday 26 October 2026",
-  "_extractedAtNote": "No exact extraction time was available \u2014 the Real-Time CSV carries no timestamp of its own, and this file wasn't fetched via SharePoint (no lastModifiedDateTime to read). Time is inferred from the two Historical CSVs' own embedded generation timestamps (06:46:46 and 06:46:13 on 2026-10-26), on the assumption all three files were pulled in the same batch, same as every other date's real-time snapshot being taken the next business morning after the date it reports on (here, the Monday after Friday 23 October).",
+  "extractedAt": "2026-10-26T09:46:00+11:00",
+  "extractedAtLabel": "9:46 AM, Monday 26 October 2026",
+  "_extractedAtNote": "No exact extraction time was available \u2014 the Real-Time CSV carries no timestamp of its own, and this file wasn't fetched via SharePoint (no lastModifiedDateTime to read). Time is inferred from the two Historical CSVs' own embedded generation timestamps (09:46:46 Canberra time and 09:46:13 Canberra time on 2026-10-26), on the assumption all three files were pulled in the same batch, same as every other date's real-time snapshot being taken the next business morning after the date it reports on (here, the Monday after Friday 23 October). CORRECTED: the embedded CSV filename timestamps are in the uploader's own local time (Malaysia, UTC+8), not Canberra's \u2014 confirmed directly by the user. Converted by +3 hours for the AEDT (UTC+11) offset in effect on this date.",
   "realTimeQueues": [
     {
       "queue": "Requests",

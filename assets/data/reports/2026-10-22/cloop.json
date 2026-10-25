@@ -1,9 +1,9 @@
 {
-  "_source": "Deterministic parse of raw Cloop CSV exports (Real Time Metrics Report, two Historical Metrics Reports — queue-level and agent-level) via scripts/parse_cloop.py, chained against assets/data/reports/2026-10-21/cloop.json. The Real-Time snapshot was manually provided (not fetched from SharePoint), so its own extraction time isn't in the file content or metadata — see _extractedAtNote. totalCasesToDate/inProgressTenDayTrend/openCasesTenDayTrend are NOT derivable from these CSVs at all (no raw source for them exists); the user supplied them directly by hand (10427 / 132 / 54) rather than from a source PDF — see _totalCasesToDateNote.",
+  "_source": "Deterministic parse of raw Cloop CSV exports (Real Time Metrics Report, two Historical Metrics Reports \u2014 queue-level and agent-level) via scripts/parse_cloop.py, chained against assets/data/reports/2026-10-21/cloop.json. The Real-Time snapshot was manually provided (not fetched from SharePoint), so its own extraction time isn't in the file content or metadata \u2014 see _extractedAtNote. totalCasesToDate/inProgressTenDayTrend/openCasesTenDayTrend are NOT derivable from these CSVs at all (no raw source for them exists); the user supplied them directly by hand (10427 / 132 / 54) rather than from a source PDF \u2014 see _totalCasesToDateNote.",
   "reportTitle": "Daily Operations Report - 22nd October 2026",
-  "extractedAt": "2026-10-23T05:45:00+11:00",
-  "extractedAtLabel": "5:45 AM, Friday 23 October 2026",
-  "_extractedAtNote": "No exact extraction time was available — the Real-Time CSV carries no timestamp of its own, and this file wasn't fetched via SharePoint (no lastModifiedDateTime to read). Time is inferred from the two Historical CSVs' own embedded generation timestamps (05:45:25 and 05:44:26 on 2026-10-23), on the assumption all three files were pulled in the same batch, same as every other date's real-time snapshot being taken the next business morning after the date it reports on.",
+  "extractedAt": "2026-10-23T08:45:00+11:00",
+  "extractedAtLabel": "8:45 AM, Friday 23 October 2026",
+  "_extractedAtNote": "No exact extraction time was available \u2014 the Real-Time CSV carries no timestamp of its own, and this file wasn't fetched via SharePoint (no lastModifiedDateTime to read). Time is inferred from the two Historical CSVs' own embedded generation timestamps (08:45:25 Canberra time and 08:44:26 Canberra time on 2026-10-23), on the assumption all three files were pulled in the same batch, same as every other date's real-time snapshot being taken the next business morning after the date it reports on. CORRECTED: the embedded CSV filename timestamps are in the uploader's own local time (Malaysia, UTC+8), not Canberra's \u2014 confirmed directly by the user. Converted by +3 hours for the AEDT (UTC+11) offset in effect on this date.",
   "realTimeQueues": [
     {
       "queue": "Medico-legal",
@@ -45,7 +45,7 @@
     "inQueue": 41,
     "oldestDays": 2.64
   },
-  "_realTimeQueuesNote": "Real-time snapshot as of the extraction above (2026-10-23 morning) — 7 queues, Summary row 41 in queue / oldest 63:20:10 (2.64 days).",
+  "_realTimeQueuesNote": "Real-time snapshot as of the extraction above (2026-10-23 morning) \u2014 7 queues, Summary row 41 in queue / oldest 63:20:10 (2.64 days).",
   "contactsQueuedYesterday": [
     {
       "queue": "Unassigned",
@@ -212,7 +212,7 @@
       54
     ]
   },
-  "_totalCasesToDateNote": "Not derived from any CSV or PDF this run — the user supplied these three numbers directly (10427 / 132 / 54), stated as current as of today. Filed under this report's own date (2026-10-22) per the usual convention, as position 9 of a trend whose label ('Fri 23-Oct') reflects the next-business-morning snapshot timing every prior date has also used for this same chart. Positions 0-8 chain-match 2026-10-21's own committed trend exactly for both trends. totalOverallCases (10427) is a +81 increase over 2026-10-21's committed 10346.",
+  "_totalCasesToDateNote": "Not derived from any CSV or PDF this run \u2014 the user supplied these three numbers directly (10427 / 132 / 54), stated as current as of today. Filed under this report's own date (2026-10-22) per the usual convention, as position 9 of a trend whose label ('Fri 23-Oct') reflects the next-business-morning snapshot timing every prior date has also used for this same chart. Positions 0-8 chain-match 2026-10-21's own committed trend exactly for both trends. totalOverallCases (10427) is a +81 increase over 2026-10-21's committed 10346.",
   "_historicalDate": "2026-10-22",
   "_unmatchedAgentNames": []
 }
