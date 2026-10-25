@@ -126,7 +126,7 @@ export async function renderCallLogs(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Total inbound calls</div>
         <div class="k-v num">${d.summary.totalInbound}</div>
-        <div class="k-n">across all queues today</div>
+        <div class="k-n">across all queues on this date</div>
       </div>
       <div class="kpi good">
         <div class="k-l">Calls accepted</div>
@@ -141,7 +141,7 @@ export async function renderCallLogs(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Total outbound calls</div>
         <div class="k-v num">${d.summary.totalOutbound}</div>
-        <div class="k-n">made by staff today</div>
+        <div class="k-n">made by staff on this date</div>
       </div>
     </div>
 
@@ -149,7 +149,6 @@ export async function renderCallLogs(container, date, manifest) {
       <h3>Queue report</h3>
       ${queueBars}
       <div class="dr-legend"><span><i style="background:var(--live)"></i>Accepted</span><span><i style="background:var(--danger)"></i>Missed</span></div>
-      <div class="take"><b>Reads as:</b> Appointments and General Enquiries carry almost all traffic; Canberra Vasectomy and Health Professionals are low-volume queues today.</div>
     </div>
 
     ${(t.answerRatePct || t.accepted) ? `
@@ -195,7 +194,7 @@ export async function renderCallLogs(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Avg call handling</div>
         <div class="k-v num">${fmtSec(d.patientServiceKpi.avgCallHandlingSec)}</div>
-        <div class="k-n">per accepted call, today</div>
+        <div class="k-n">per accepted call, on this date</div>
       </div>
     </div>
     ` : `<p class="dr-placeholder dr-section-gap">Patient service KPIs were not published for this date.</p>`}
