@@ -1,0 +1,127 @@
+{
+  "_source": "No source PDF for this date \u2014 assembled from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance: call-logs/cloop are raw-CSV parses, tasks/leave are a literal carry-forward of 2026-10-22's own data per explicit user instruction).",
+  "report": {
+    "number": 340,
+    "date": "2026-10-23",
+    "weekday": "Friday",
+    "title": "Daily Operations Report - 23rd October 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "PST",
+        "days": 2,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 0,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 88,
+        "incompleteCount": 1,
+        "incompleteExample": "Best Practice Online Medicare Claim"
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 227,
+    "accepted": 193,
+    "acceptedPct": 85,
+    "missed": 34,
+    "missedPct": 15,
+    "totalOutbound": 139,
+    "topInboundAgent": {
+      "name": "Lucinda Gonzalez",
+      "calls": 46
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 107,
+        "missed": 16
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 83,
+        "missed": 18
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 1,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "Lucinda Gonzalez tops the inboundByStaff table this date (46 calls). No PDF exists for this date to cross-check against.",
+  "cloop": {
+    "inQueue": 50,
+    "oldestDays": 5.68,
+    "contactsQueuedYesterday": 78,
+    "emailsHandledYesterday": 98,
+    "totalOverallCases": 10505,
+    "totalInProgress": 135,
+    "totalOpenCases": 59
+  },
+  "_cloopNote": "Cloop's Real-Time queue total (50) is up from 2026-10-22's committed 41. totalOverallCases/InProgress/OpenCases (10505/135/59) were given by hand, not read from a PDF \u2014 see cloop.json's own _totalCasesToDateNote.",
+  "leave": {
+    "weekLabel": "19 October \u2013 23 October 2026",
+    "doctorLinesOnLeave": 1,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 5,
+    "staffPartialLeaveNames": [
+      "Lucinda Gonzalez",
+      "Sudina Rijal",
+      "Apurva Pathak",
+      "Holly Archer",
+      "Atif Wan"
+    ],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "Identical to 2026-10-22's own leave section \u2014 this overview's leave summary is a week-level aggregate (same week, 19-23 October), and leave.json itself is a literal carry-forward per explicit user instruction, so nothing here changes day to day within the week."
+}
