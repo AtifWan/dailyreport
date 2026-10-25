@@ -195,7 +195,7 @@ export async function renderCallLogs(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Avg call handling</div>
         <div class="k-v num">${fmtSec(d.patientServiceKpi.avgCallHandlingSec)}</div>
-        <div class="k-n">per accepted call, today</div>
+        <div class="k-n">per accepted call</div>
       </div>
     </div>
     ` : `<p class="dr-placeholder dr-section-gap">Patient service KPIs were not published for this date.</p>`}

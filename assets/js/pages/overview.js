@@ -53,7 +53,6 @@ export async function renderOverview(container, date, manifest) {
       <div class="panel">
         <h3>Call queue snapshot</h3>
         ${queueRows}
-        <div class="take"><b>Reads as:</b> Appointments takes just over half of all inbound traffic; ${esc(c.topInboundAgent.name)} answered the most calls today (${c.topInboundAgent.calls}).</div>
         ${viewLink('call-logs', date, 'View full call logs')}
       </div>
     </div>
