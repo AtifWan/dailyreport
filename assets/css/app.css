@@ -191,3 +191,15 @@
 .dr-queue-row { display: flex; align-items: center; gap: 8px; }
 .dr-queue-row [data-queue-name] { flex: 1 1 180px; min-width: 0; }
 .dr-queue-row [data-queue-file] { flex: 1 1 220px; min-width: 0; }
+
+/* Overview KPI tile vs-previous-report badge — pinned to its own row (margin-top,
+   not inline after the number) so a long "(was X on 20 Oct)" string on one tile
+   never pushes that tile's own k-n text down relative to its neighbours in the
+   same .kpis row. "good"/"bad" are which way the CHANGE reads for that specific
+   metric, not which way the number moved, e.g. Calls Missed falling still gets
+   "good" (green) even though the digit itself went down. */
+.dr-compare-row { display: flex; }
+.dr-compare-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; margin-top: 8px; white-space: nowrap; }
+.dr-compare-badge--good { background: var(--live-soft); color: var(--live-ink); }
+.dr-compare-badge--bad { background: var(--danger-soft); color: var(--danger-ink); }
+.dr-compare-badge--neutral, .dr-compare-badge--flat { background: var(--surface-sunk); color: var(--ink-muted); }
