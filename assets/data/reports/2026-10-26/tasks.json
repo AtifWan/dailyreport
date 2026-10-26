@@ -39,16 +39,16 @@
     "startDate": "2026-01-13"
   },
   "trendDates": [
-    "Thu 08 Oct",
-    "Fri 09 Oct",
-    "Mon 12 Oct",
     "Tue 13 Oct",
     "Wed 14 Oct",
     "Thu 15 Oct",
     "Fri 16 Oct",
     "Mon 19 Oct",
     "Tue 20 Oct",
-    "Wed 21 Oct"
+    "Wed 21 Oct",
+    "Thu 22 Oct",
+    "Fri 23 Oct",
+    "Mon 26 Oct"
   ],
   "checklists": [
     {
@@ -59,10 +59,10 @@
         100,
         100,
         100,
-        100,
-        100,
-        100,
         67,
+        100,
+        100,
+        100,
         100,
         100
       ],
@@ -82,9 +82,9 @@
       "trend": [
         100,
         100,
-        100,
-        100,
-        100,
+        88,
+        88,
+        88,
         88,
         88,
         88,
@@ -107,7 +107,7 @@
       "incompleteExample": "Best Practice Online Medicare Claim"
     }
   ],
-  "_trendNote": "PST holds at 100% for a second consecutive day (streak now 2 days). Finance holds at 88% for a fifth consecutive trend position (still missing Best Practice Online Medicare Claim). Both trends chain-match 2026-10-20's own committed trend exactly at positions 0-8, confirmed by position 9 against this report's own cover badges (Report #338, cleanly incremented from #337).",
+  "_trendNote": "PST and Finance completionPct/complete/incomplete are unchanged from 2026-10-21 (per explicit user carry-forward instruction), but the 10-day trend window itself correctly slides forward to end on this report's own date ('Mon 26 Oct'), dropping the oldest point and repeating the current (unchanged) percentage as the new point \u2014 same sliding-window convention used by Call Logs/Cloop's own trend charts. Trend values: PST holds at 100% except the one historical dip on Mon 19 Oct (67%); Finance holds at 88% since Thu 15 Oct.",
   "_note": "FLAG FOR USER REVIEW: same gap as every date since 2026-10-02 \u2014 thirteen consecutive dates now without the Crace/Denman/Lyneham on-halt day-counters visible in either source PDF's rendered page. The three values above (1/109/0) are carried forward unchanged, pending a visual check of the source PDF's cover graphic.",
   "sitePlaceholderNote": "Crace, Denman and Lyneham each track a daily 100% streak counter in this report (left), but their itemised task checklists were not included in either source PDF \u2014 only PST and Finance publish task-level detail. Showing streak status only for the three clinics until Phase 2 wiring can expose their per-task checklists too."
 }
