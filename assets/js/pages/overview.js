@@ -5,12 +5,38 @@ function viewLink(route, date, label) {
   return `<a href="#/${route}/${date}" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none">${label} <span aria-hidden="true">&rarr;</span></a>`;
 }
 
+// Which way a RISE in the number reads for that metric — 'up' (higher is good,
+// e.g. Calls Accepted), 'down' (higher is bad, e.g. Calls Missed), or 'neutral'
+// (no inherent good/bad, e.g. a plain volume count) — not which way the digit
+// itself moved. Compares against the previous REPORT (manifest-adjacent date),
+// not the previous calendar day, since reports skip weekends.
+function compareBadge(curr, prev, { percent = false, goodWhen = 'neutral', prevDateLabel } = {}) {
+  if (curr == null || prev == null || prevDateLabel == null) return '';
+  const unit = percent ? '%' : '';
+  const prevText = `${prev}${unit} on ${esc(prevDateLabel)}`;
+  const delta = curr - prev;
+  if (delta === 0) {
+    return `<div class="dr-compare-row"><span class="dr-compare-badge dr-compare-badge--flat">No change (${prevText})</span></div>`;
+  }
+  const kind = goodWhen === 'neutral' ? 'neutral' : (delta > 0) === (goodWhen === 'up') ? 'good' : 'bad';
+  const arrow = delta > 0 ? '&#9650;' : '&#9660;';
+  return `<div class="dr-compare-row"><span class="dr-compare-badge dr-compare-badge--${kind}">${arrow} ${Math.abs(delta)}${unit} (was ${prevText})</span></div>`;
+}
+
 export async function renderOverview(container, date, manifest) {
-  const d = await fetchJSON(`assets/data/reports/${date}/overview.json`);
+  const prevDate = manifest.dates[manifest.dates.indexOf(date) - 1] ?? null;
+  const [d, prevD] = await Promise.all([
+    fetchJSON(`assets/data/reports/${date}/overview.json`),
+    prevDate ? fetchJSON(`assets/data/reports/${prevDate}/overview.json`).catch(() => null) : Promise.resolve(null),
+  ]);
   const t = d.criticalTasks, c = d.callLogs, cl = d.cloop, lv = d.leave;
+  const pt = prevD?.criticalTasks, pc = prevD?.callLogs, pcl = prevD?.cloop;
+  const prevDateLabel = prevD ? formatDate(prevDate, { day: 'numeric', month: 'short' }) : null;
 
   const pstChecklist = t.checklists.find((x) => x.name === 'PST');
   const financeChecklist = t.checklists.find((x) => x.name === 'Finance');
+  const prevPst = pt?.checklists.find((x) => x.name === 'PST');
+  const prevFinance = pt?.checklists.find((x) => x.name === 'Finance');
   const queueRows = c.queueBreakdown.map((q) => {
     const total = q.accepted + q.missed;
     const acceptedPct = total > 0 ? Math.round((q.accepted / total) * 100) : null;
@@ -30,12 +56,14 @@ export async function renderOverview(container, date, manifest) {
       <div class="kpi ${pstChecklist.completionPct === 100 ? 'good' : ''}">
         <div class="k-l">PST checklist</div>
         <div class="k-v num">${pstChecklist.completionPct}%</div>
+        ${compareBadge(pstChecklist.completionPct, prevPst?.completionPct, { percent: true, goodWhen: 'up', prevDateLabel })}
       </div>
       ` : ''}
       ${financeChecklist ? `
       <div class="kpi ${financeChecklist.completionPct < 100 ? 'crit' : 'good'}">
         <div class="k-l">Finance checklist</div>
         <div class="k-v num">${financeChecklist.completionPct}%</div>
+        ${compareBadge(financeChecklist.completionPct, prevFinance?.completionPct, { percent: true, goodWhen: 'up', prevDateLabel })}
         <div class="k-n">${financeChecklist.incompleteCount != null ? `${financeChecklist.incompleteCount} task outstanding: ${esc(financeChecklist.incompleteExample)}` : (financeChecklist.completionPct === 100 ? 'Fully complete' : '')}</div>
       </div>
       ` : ''}
@@ -61,22 +89,26 @@ export async function renderOverview(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Total inbound calls</div>
         <div class="k-v num">${c.totalInbound}</div>
+        ${compareBadge(c.totalInbound, pc?.totalInbound, { goodWhen: 'neutral', prevDateLabel })}
         <div class="k-n">${c.totalOutbound} outbound calls made</div>
       </div>
       <div class="kpi good">
         <div class="k-l">Calls accepted</div>
         <div class="k-v num">${c.acceptedPct}%</div>
+        ${compareBadge(c.acceptedPct, pc?.acceptedPct, { percent: true, goodWhen: 'up', prevDateLabel })}
         <div class="k-n">${c.accepted} of ${c.totalInbound} calls</div>
       </div>
       <div class="kpi crit">
         <div class="k-l">Calls missed</div>
         <div class="k-v num">${c.missedPct}%</div>
+        ${compareBadge(c.missedPct, pc?.missedPct, { percent: true, goodWhen: 'down', prevDateLabel })}
         <div class="k-n">${c.missed} of ${c.totalInbound} calls</div>
       </div>
       <div class="kpi">
         <div class="k-l">Cloop cases in queue</div>
         ${cl ? `
         <div class="k-v num">${cl.inQueue}</div>
+        ${compareBadge(cl.inQueue, pcl?.inQueue, { goodWhen: 'down', prevDateLabel })}
         <div class="k-n">oldest case ${cl.oldestDays} days</div>
         ` : `<div class="k-n">No Cloop report this date</div>`}
       </div>
