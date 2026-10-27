@@ -1,14 +1,16 @@
-import { esc, fetchJSON } from '../util.js';
+import { esc, fetchJSON, formatDate } from '../util.js';
 import { lineChart } from '../charts.js';
 import { datePickerHtml, wireDatePicker } from '../datepicker.js';
+import { compareBadge, getPreviousDate } from '../compare.js';
 
-function checklistPanel(cl, dates) {
+function checklistPanel(cl, dates, prevCl, prevDateLabel) {
   return `
     <div class="panel">
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px">
         <h3>${esc(cl.name)}</h3>
         <span class="k-v num" style="font-size:22px;color:${cl.completionPct === 100 ? 'var(--live-ink)' : cl.completionPct < 50 ? 'var(--danger-ink)' : 'var(--ink)'}">${cl.completionPct}%</span>
       </div>
+      ${compareBadge(cl.completionPct, prevCl?.completionPct, { percent: true, goodWhen: 'up', prevDateLabel })}
       ${cl.trend ? `
       <div class="dr-chart-wrap">${lineChart({ dates, series: [{ data: cl.trend, color: cl.completionPct === 100 ? 'var(--live)' : 'var(--accent)', label: '% complete' }], height: 150, unit: '%' })}</div>
       ` : `<p class="foot-note">No 10-day trend chart was published for this checklist on this date.</p>`}
@@ -30,13 +32,18 @@ function checklistPanel(cl, dates) {
 }
 
 export async function renderTasks(container, date, manifest) {
-  const d = await fetchJSON(`assets/data/reports/${date}/tasks.json`);
+  const prevDate = getPreviousDate(manifest, date);
+  const [d, prevD] = await Promise.all([
+    fetchJSON(`assets/data/reports/${date}/tasks.json`),
+    prevDate ? fetchJSON(`assets/data/reports/${prevDate}/tasks.json`).catch(() => null) : Promise.resolve(null),
+  ]);
+  const prevDateLabel = prevD ? formatDate(prevDate, { day: 'numeric', month: 'short' }) : null;
 
   container.innerHTML = `
     ${datePickerHtml(date, manifest)}
 
     <div class="grid2">
-      ${d.checklists.map((cl) => checklistPanel(cl, d.trendDates)).join('')}
+      ${d.checklists.map((cl) => checklistPanel(cl, d.trendDates, prevD?.checklists.find((x) => x.name === cl.name), prevDateLabel)).join('')}
     </div>
 
     <div class="panel dr-section-gap">

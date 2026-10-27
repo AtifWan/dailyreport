@@ -1,6 +1,7 @@
-import { esc, fetchJSON, mountInteractiveTable } from '../util.js';
+import { esc, fetchJSON, formatDate, mountInteractiveTable } from '../util.js';
 import { barChart, stackedBarChart, lineChart, hBarGroup } from '../charts.js';
 import { datePickerHtml, wireDatePicker } from '../datepicker.js';
+import { compareBadge, getPreviousDate } from '../compare.js';
 
 const QUEUE_COLORS = { Appointments: 'var(--age1)', 'General Enquiries': 'var(--age2)', 'Health Professionals': 'var(--age3)', 'Canberra Vasectomy': 'var(--age4)' };
 const QUEUES = Object.keys(QUEUE_COLORS);
@@ -93,12 +94,15 @@ function wireQueueFilter(container) {
 }
 
 export async function renderCallLogs(container, date, manifest) {
-  const [d, cloop] = await Promise.all([
+  const prevDate = getPreviousDate(manifest, date);
+  const [d, cloop, prevD] = await Promise.all([
     fetchJSON(`assets/data/reports/${date}/call-logs.json`),
     fetchJSON(`assets/data/reports/${date}/cloop.json`).catch(() => null),
+    prevDate ? fetchJSON(`assets/data/reports/${prevDate}/call-logs.json`).catch(() => null) : Promise.resolve(null),
   ]);
   const t = d.tenDayTrend || {};
   const staff = buildStaffActivity(d, cloop);
+  const prevDateLabel = prevD ? formatDate(prevDate, { day: 'numeric', month: 'short' }) : null;
 
   const queueBars = hBarGroup({
     items: d.queueReport.map((q) => ({ label: q.queue, values: [{ value: q.accepted, color: 'var(--live)' }, { value: q.missed, color: 'var(--danger)' }] })),
@@ -126,21 +130,25 @@ export async function renderCallLogs(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Total inbound calls</div>
         <div class="k-v num">${d.summary.totalInbound}</div>
+        ${compareBadge(d.summary.totalInbound, prevD?.summary?.totalInbound, { goodWhen: 'neutral', prevDateLabel })}
         <div class="k-n">across all queues on this date</div>
       </div>
       <div class="kpi good">
         <div class="k-l">Calls accepted</div>
         <div class="k-v num">${d.summary.acceptedPct}%</div>
+        ${compareBadge(d.summary.acceptedPct, prevD?.summary?.acceptedPct, { percent: true, goodWhen: 'up', prevDateLabel })}
         <div class="k-n">${d.summary.accepted} of ${d.summary.totalInbound} calls</div>
       </div>
       <div class="kpi crit">
         <div class="k-l">Calls missed</div>
         <div class="k-v num">${d.summary.missedPct}%</div>
+        ${compareBadge(d.summary.missedPct, prevD?.summary?.missedPct, { percent: true, goodWhen: 'down', prevDateLabel })}
         <div class="k-n">${d.summary.missed} of ${d.summary.totalInbound} calls</div>
       </div>
       <div class="kpi">
         <div class="k-l">Total outbound calls</div>
         <div class="k-v num">${d.summary.totalOutbound}</div>
+        ${compareBadge(d.summary.totalOutbound, prevD?.summary?.totalOutbound, { goodWhen: 'neutral', prevDateLabel })}
         <div class="k-n">made by staff on this date</div>
       </div>
     </div>
@@ -184,16 +192,19 @@ export async function renderCallLogs(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Longest call duration</div>
         <div class="k-v num">${fmtSec(d.patientServiceKpi.longestCallDurationSec)}</div>
+        ${compareBadge(d.patientServiceKpi.longestCallDurationSec, prevD?.patientServiceKpi?.longestCallDurationSec, { goodWhen: 'neutral', prevDateLabel, format: fmtSec })}
         <div class="k-n">${d.patientServiceKpi.longestCallAt} · ${esc(d.patientServiceKpi.longestCallAgent)}</div>
       </div>
       <div class="kpi crit">
         <div class="k-l">Longest waiting time</div>
         <div class="k-v num">${fmtSec(d.patientServiceKpi.longestWaitingTimeSec)}</div>
+        ${compareBadge(d.patientServiceKpi.longestWaitingTimeSec, prevD?.patientServiceKpi?.longestWaitingTimeSec, { goodWhen: 'down', prevDateLabel, format: fmtSec })}
         <div class="k-n">${d.patientServiceKpi.longestWaitingAt}</div>
       </div>
       <div class="kpi">
         <div class="k-l">Avg call handling</div>
         <div class="k-v num">${fmtSec(d.patientServiceKpi.avgCallHandlingSec)}</div>
+        ${compareBadge(d.patientServiceKpi.avgCallHandlingSec, prevD?.patientServiceKpi?.avgCallHandlingSec, { goodWhen: 'neutral', prevDateLabel, format: fmtSec })}
         <div class="k-n">per accepted call, on this date</div>
       </div>
     </div>
