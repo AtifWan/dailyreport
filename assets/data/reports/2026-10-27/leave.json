@@ -1,0 +1,143 @@
+{
+  "_source": "No PDF exists for this date. Per explicit user instruction ('use the Leaves I screenshot for you yesterday'), this is a literal carry-forward of 2026-10-26's own leave.json — same working week (26-30 Oct), same roster, only reportTitle/reportDate updated below. Staff annual-leave entries (Georgina Bick, Jasmina Sodolovic, Nicole Regaspi x3 single-day entries, Kiara Pfeffer, Andrew Davies) are read directly from a detailed annual-leave list the user screenshotted (exact date ranges and hours stated). Doctor leave (Somya Jhorar, Tom Wigglesworth, Dr Julie Beuth) is read from a separate GP Calendar screenshot the user also sent, whose day-by-day bars were obscured by redaction marks — the exact per-day breakdown for all three was confirmed verbally by the user afterward: Somya Jhorar and Tom Wigglesworth out the full week (Mon-Fri), Dr Julie Beuth out Tuesday through Friday (not Monday).",
+  "reportTitle": "Daily Operations Report - 27th October 2026",
+  "reportDate": "2026-10-27",
+  "weekStart": "2026-10-26",
+  "weekEnd": "2026-10-30",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Somya Jhorar",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Tom Wigglesworth",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Dr Julie Beuth",
+          "site": null,
+          "status": [
+            "available",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Georgina Bick",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "available"
+          ]
+        },
+        {
+          "name": "Jasmina Sodolovic",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Nicole Regaspi",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Kiara Pfeffer",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Andrew Davies",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "Same working week (26-30 Oct) as 2026-10-26's report — identical roster, carried forward unchanged per explicit user instruction. Georgina Bick's leave (Thu 22 Oct - Thu 29 Oct, 30.0 hrs) started the prior week and runs into this one; only the Mon-Thu portion falls inside this week's grid (she's shown available Friday, since her leave ends Thu 29 Oct). Nicole Regaspi's three separate single-day entries (Mon/Tue/Wed) combine into one consecutive Mon-Wed leave block below."
+}
