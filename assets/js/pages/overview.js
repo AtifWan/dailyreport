@@ -1,30 +1,13 @@
 import { esc, fetchJSON, formatDate } from '../util.js';
 import { datePickerHtml, wireDatePicker } from '../datepicker.js';
+import { compareBadge, getPreviousDate } from '../compare.js';
 
 function viewLink(route, date, label) {
   return `<a href="#/${route}/${date}" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none">${label} <span aria-hidden="true">&rarr;</span></a>`;
 }
 
-// Which way a RISE in the number reads for that metric — 'up' (higher is good,
-// e.g. Calls Accepted), 'down' (higher is bad, e.g. Calls Missed), or 'neutral'
-// (no inherent good/bad, e.g. a plain volume count) — not which way the digit
-// itself moved. Compares against the previous REPORT (manifest-adjacent date),
-// not the previous calendar day, since reports skip weekends.
-function compareBadge(curr, prev, { percent = false, goodWhen = 'neutral', prevDateLabel } = {}) {
-  if (curr == null || prev == null || prevDateLabel == null) return '';
-  const unit = percent ? '%' : '';
-  const prevText = `${prev}${unit} on ${esc(prevDateLabel)}`;
-  const delta = curr - prev;
-  if (delta === 0) {
-    return `<div class="dr-compare-row"><span class="dr-compare-badge dr-compare-badge--flat">No change (${prevText})</span></div>`;
-  }
-  const kind = goodWhen === 'neutral' ? 'neutral' : (delta > 0) === (goodWhen === 'up') ? 'good' : 'bad';
-  const arrow = delta > 0 ? '&#9650;' : '&#9660;';
-  return `<div class="dr-compare-row"><span class="dr-compare-badge dr-compare-badge--${kind}">${arrow} ${Math.abs(delta)}${unit} (was ${prevText})</span></div>`;
-}
-
 export async function renderOverview(container, date, manifest) {
-  const prevDate = manifest.dates[manifest.dates.indexOf(date) - 1] ?? null;
+  const prevDate = getPreviousDate(manifest, date);
   const [d, prevD] = await Promise.all([
     fetchJSON(`assets/data/reports/${date}/overview.json`),
     prevDate ? fetchJSON(`assets/data/reports/${prevDate}/overview.json`).catch(() => null) : Promise.resolve(null),

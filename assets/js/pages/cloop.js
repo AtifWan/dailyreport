@@ -1,6 +1,7 @@
-import { esc, fetchJSON, mountInteractiveTable } from '../util.js';
+import { esc, fetchJSON, formatDate, mountInteractiveTable } from '../util.js';
 import { lineChart, hBarGroup } from '../charts.js';
 import { datePickerHtml, wireDatePicker } from '../datepicker.js';
+import { compareBadge, getPreviousDate } from '../compare.js';
 
 function weekOverWeek(totals) {
   const latest = totals[totals.length - 1];
@@ -44,10 +45,14 @@ function mountEmailsTable(container, rows, totals) {
 }
 
 export async function renderCloop(container, date, manifest) {
-  const [d, callLogs] = await Promise.all([
+  const prevDate = getPreviousDate(manifest, date);
+  const [d, callLogs, prevD] = await Promise.all([
     fetchJSON(`assets/data/reports/${date}/cloop.json`).catch(() => null),
     fetchJSON(`assets/data/reports/${date}/call-logs.json`).catch(() => null),
+    prevDate ? fetchJSON(`assets/data/reports/${prevDate}/cloop.json`).catch(() => null) : Promise.resolve(null),
   ]);
+  const prevDateLabel = prevD ? formatDate(prevDate, { day: 'numeric', month: 'short' }) : null;
+  const prevYesterdayTotal = prevD?.contactsQueuedYesterday ? prevD.contactsQueuedYesterday.reduce((s, q) => s + q.count, 0) : null;
 
   // A handful of the oldest reports in this project's backlog (see PHASE-2.md's
   // Pattern B note) have no Cloop section published at all — not a thinner one,
@@ -80,21 +85,25 @@ export async function renderCloop(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">In queue right now</div>
         <div class="k-v num">${d.realTimeSummary.inQueue}</div>
+        ${compareBadge(d.realTimeSummary.inQueue, prevD?.realTimeSummary?.inQueue, { goodWhen: 'down', prevDateLabel })}
         <div class="k-n">across ${d.realTimeQueues.length} queues</div>
       </div>
       <div class="kpi crit">
         <div class="k-l">Oldest case in queue</div>
         <div class="k-v num">${d.realTimeSummary.oldestDays}<small style="font-size:14px;font-weight:600"> days</small></div>
+        ${compareBadge(d.realTimeSummary.oldestDays, prevD?.realTimeSummary?.oldestDays, { goodWhen: 'down', prevDateLabel, format: (v) => `${Math.round(v * 100) / 100}d` })}
         <div class="k-n">extracted ${esc(d.extractedAtLabel)}</div>
       </div>
       <div class="kpi">
         <div class="k-l">Emails queued, yesterday</div>
         <div class="k-v num">${yesterdayTotal != null ? yesterdayTotal : '—'}</div>
+        ${compareBadge(yesterdayTotal, prevYesterdayTotal, { goodWhen: 'neutral', prevDateLabel })}
         <div class="k-n">${wowQueued ? `vs 1 week ago ${deltaChip(wowQueued.delta, wowQueued.pct)}` : 'Not published this date'}</div>
       </div>
       <div class="kpi">
         <div class="k-l">Total overall cases</div>
         <div class="k-v num">${d.totalCasesToDate.totalOverallCases.toLocaleString()}</div>
+        ${compareBadge(d.totalCasesToDate.totalOverallCases, prevD?.totalCasesToDate?.totalOverallCases, { goodWhen: 'neutral', prevDateLabel, format: (v) => v.toLocaleString() })}
         <div class="k-n">to date, as of ${d.totalCasesToDate.date}</div>
       </div>
     </div>
@@ -151,11 +160,13 @@ export async function renderCloop(container, date, manifest) {
       <div class="kpi">
         <div class="k-l">Total in progress</div>
         <div class="k-v num">${d.totalCasesToDate.totalInProgress}</div>
+        ${compareBadge(d.totalCasesToDate.totalInProgress, prevD?.totalCasesToDate?.totalInProgress, { goodWhen: 'down', prevDateLabel })}
         <div class="k-n">${wowProgress ? `vs 1 week ago ${deltaChip(wowProgress.delta, wowProgress.pct)}` : 'Not published this date'}</div>
       </div>
       <div class="kpi">
         <div class="k-l">Total open cases</div>
         <div class="k-v num">${d.totalCasesToDate.totalOpenCases}</div>
+        ${compareBadge(d.totalCasesToDate.totalOpenCases, prevD?.totalCasesToDate?.totalOpenCases, { goodWhen: 'down', prevDateLabel })}
         <div class="k-n">${wowOpen ? `vs 1 week ago ${deltaChip(wowOpen.delta, wowOpen.pct)}` : 'Not published this date'}</div>
       </div>
     </div>
