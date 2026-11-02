@@ -125,5 +125,5 @@
       }
     ]
   },
-  "_leaveNote": "New working week (2-6 Nov), fully different roster from the prior week's leave page — expected, since leave schedules rotate week to week. doctorLinesOnLeave (5) counts every Doctor-group person with at least one leave day this week (Somya Jhorar out all week, Tom Wigglesworth Mon only, Dr Julie Beuth Mon-Wed, Dr Elliott Missen Tue-Fri, Dr Lisa Bron Fri only) — more overlapping doctor leave than most prior weeks. The 'of 4 rostered lines' denominator used in the Overview panel is carried forward unchanged from prior weeks, not independently re-verified for this one. See leave.json for the full day-by-day grid."
+  "_leaveNote": "New working week (2-6 Nov), fully different roster from the prior week's leave page — expected, since leave schedules rotate week to week. doctorLinesOnLeave (5) counts every Doctor-group person with at least one leave day this week (Dr Somya Jhorar out all week, Dr Tom Wigglesworth Mon only, Dr Julie Beuth Mon-Wed, Dr Elliott Missen Tue-Fri, Dr Lisa Bron Fri only) — more overlapping doctor leave than most prior weeks. The 'of 4 rostered lines' denominator used in the Overview panel is carried forward unchanged from prior weeks, not independently re-verified for this one. See leave.json for the full day-by-day grid."
 }

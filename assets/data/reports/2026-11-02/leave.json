@@ -1,5 +1,5 @@
 {
-  "_source": "No PDF exists for this date. Staff leave entries (Sudina Rijal, Ambrosie Brassil, Abbey Freestone, Bethany Tran, Anita Tammaro, Andrew Davies) are read directly from a detailed leave list the user screenshotted (exact date ranges and hours stated). Doctor leave (Somya Jhorar, Tom Wigglesworth, Dr Julie Beuth, Dr Elliott Missen, Dr Lisa Bron) is read from a separate GP Calendar screenshot the user also sent, whose day-by-day bars were obscured by a redaction mark — the exact per-day breakdown for all five was confirmed verbally by the user afterward: Somya Jhorar out the full week (Mon-Fri), Tom Wigglesworth out Monday only, Dr Julie Beuth out Monday through Wednesday, Dr Elliott Missen out Tuesday through Friday, Dr Lisa Bron out Friday only.",
+  "_source": "No PDF exists for this date. Staff leave entries (Sudina Rijal, Ambrosie Brassil, Abbey Freestone, Bethany Tran, Anita Tammaro, Andrew Davies) are read directly from a detailed leave list the user screenshotted (exact date ranges and hours stated). Doctor leave (Dr Somya Jhorar, Dr Tom Wigglesworth, Dr Julie Beuth, Dr Elliott Missen, Dr Lisa Bron) is read from a separate GP Calendar screenshot the user also sent, whose day-by-day bars were obscured by a redaction mark — the exact per-day breakdown for all five was confirmed verbally by the user afterward: Dr Somya Jhorar out the full week (Mon-Fri), Dr Tom Wigglesworth out Monday only, Dr Julie Beuth out Monday through Wednesday, Dr Elliott Missen out Tuesday through Friday, Dr Lisa Bron out Friday only.",
   "reportTitle": "Daily Operations Report - 2nd November 2026",
   "reportDate": "2026-11-02",
   "weekStart": "2026-11-02",
@@ -16,7 +16,7 @@
       "group": "Doctor",
       "people": [
         {
-          "name": "Somya Jhorar",
+          "name": "Dr Somya Jhorar",
           "site": null,
           "status": [
             "leave",
@@ -27,7 +27,7 @@
           ]
         },
         {
-          "name": "Tom Wigglesworth",
+          "name": "Dr Tom Wigglesworth",
           "site": null,
           "status": [
             "leave",
