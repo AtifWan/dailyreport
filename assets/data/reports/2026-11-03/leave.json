@@ -1,0 +1,176 @@
+{
+  "_source": "No PDF exists for this date. Per explicit user instruction ('Please use the same for Leaves and Task'), this is a literal carry-forward of 2026-11-02's own leave.json \u2014 same working week (2-6 Nov), same roster, only reportTitle/reportDate updated below. Staff leave entries (Sudina Rijal, Ambrosie Brassil, Abbey Freestone, Bethany Tran, Anita Tammaro, Andrew Davies) are read directly from a detailed leave list the user screenshotted (exact date ranges and hours stated). Doctor leave (Dr Somya Jhorar, Dr Tom Wigglesworth, Dr Julie Beuth, Dr Elliott Missen, Dr Lisa Bron) is read from a separate GP Calendar screenshot the user also sent, whose day-by-day bars were obscured by a redaction mark \u2014 the exact per-day breakdown for all five was confirmed verbally by the user afterward: Dr Somya Jhorar out the full week (Mon-Fri), Dr Tom Wigglesworth out Monday only, Dr Julie Beuth out Monday through Wednesday, Dr Elliott Missen out Tuesday through Friday, Dr Lisa Bron out Friday only.",
+  "reportTitle": "Daily Operations Report - 3rd November 2026",
+  "reportDate": "2026-11-03",
+  "weekStart": "2026-11-02",
+  "weekEnd": "2026-11-06",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Somya Jhorar",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Dr Tom Wigglesworth",
+          "site": null,
+          "status": [
+            "leave",
+            "available",
+            "available",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Dr Julie Beuth",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Dr Elliott Missen",
+          "site": null,
+          "status": [
+            "available",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Dr Lisa Bron",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "available",
+            "available",
+            "leave"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Sudina Rijal",
+          "site": null,
+          "status": [
+            "leave",
+            "available",
+            "available",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Ambrosie Brassil",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "available"
+          ]
+        },
+        {
+          "name": "Abbey Freestone",
+          "site": null,
+          "status": [
+            "leave",
+            "available",
+            "available",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Bethany Tran",
+          "site": null,
+          "status": [
+            "leave",
+            "available",
+            "available",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Anita Tammaro",
+          "site": null,
+          "status": [
+            "leave",
+            "available",
+            "available",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Andrew Davies",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ],
+  "_note": "Same working week (2-6 Nov) as 2026-11-02's report \u2014 identical roster, carried forward unchanged per explicit user instruction ('Please use the same for Leaves and Task'). Five doctors are on leave at some point this week (more overlap than most prior weeks), confirmed day-by-day verbally after the GP Calendar screenshot's bars came through redacted. Ambrosie Brassil's 30.0-hr block (Mon-Thu) and Andrew Davies's 25.5-hr block (Wed-Fri) are each straightforward multi-day annual-leave spans; the other four staff entries are each a single day of Personal/Carer's Leave (Mon 2 Nov only, so all four read 'available' from Tuesday onward)."
+}
