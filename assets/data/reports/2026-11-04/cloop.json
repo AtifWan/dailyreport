@@ -1,0 +1,205 @@
+{
+  "_source": "Deterministic parse of raw Cloop CSV exports (Real Time Metrics Report, two Historical Metrics Reports \u2014 queue-level and agent-level) via scripts/parse_cloop.py, chained against assets/data/reports/2026-11-03/cloop.json. The historical files cover 2026-11-04 (the simple 'yesterday' case \u2014 Wednesday, no weekend rollback needed). totalCasesToDate/inProgressTenDayTrend/openCasesTenDayTrend are NOT derivable from these CSVs at all (no raw source for them exists); the user supplied them directly by hand (11104 / 159 / 56) rather than from a source PDF \u2014 see _totalCasesToDateNote.",
+  "reportTitle": "Daily Operations Report - 4th November 2026",
+  "extractedAt": "2026-11-05T09:25:00+11:00",
+  "extractedAtLabel": "9:25 AM, Thursday 5 November 2026",
+  "_extractedAtNote": "No exact extraction time was available \u2014 the Real-Time CSV carries no timestamp of its own, and this file wasn't fetched via SharePoint (no lastModifiedDateTime to read). Time is inferred from the two Historical CSVs' own embedded generation timestamps (06:25:27.565 queue-level and 06:25:04.300 agent-level, Malaysia local time on 2026-11-05, converted +3 hours for the AEDT offset in effect \u2014 09:25:27.565 and 09:25:04.300 Canberra time, rounded down to the minute using the queue-level file as the primary driver), on the assumption all three files were pulled in the same batch, same as every other date's real-time snapshot being taken the next business morning after the date it reports on.",
+  "realTimeQueues": [
+    {
+      "queue": "Practice Finance",
+      "inQueue": 1,
+      "oldestDays": 0.93
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 29,
+      "oldestDays": 7.78
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 6,
+      "oldestDays": 0.67
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 2,
+      "oldestDays": 0.69
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 2,
+      "oldestDays": 1.07
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 7,
+      "oldestDays": 0.68
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 1.99
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 2,
+      "oldestDays": 0.95
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 50,
+    "oldestDays": 7.78
+  },
+  "_realTimeQueuesNote": "Real-time snapshot as of the extraction above (2026-11-05 morning) \u2014 8 queues, Summary row 50 in queue / oldest 186:43:06 (7.78 days).",
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 32
+    },
+    {
+      "queue": "Documents",
+      "count": 17
+    },
+    {
+      "queue": "Requests",
+      "count": 10
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 8
+    },
+    {
+      "queue": "Finance",
+      "count": 4
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 3
+    },
+    {
+      "queue": "File Transfer",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "labels": [
+      "Thu 22 Oct",
+      "Fri 23 Oct",
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov"
+    ],
+    "totals": [
+      74,
+      78,
+      73,
+      60,
+      89,
+      45,
+      107,
+      84,
+      81,
+      75
+    ]
+  },
+  "_note": "contactsQueuedYesterday sums to 75 exactly, matching this file's own contactsQueuedTenDayTrend position 9 (labelled 'Wed 4 Nov', the historical date these two Historical CSVs cover) and chain-matching 2026-11-03's own committed trend exactly at positions 0-8.",
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 50,
+      "outbound": 15,
+      "total": 65
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 16,
+      "outbound": 3,
+      "total": 22
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 4,
+      "outbound": 0,
+      "total": 5
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 4,
+      "outbound": 1,
+      "total": 5
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 1,
+      "outbound": 0,
+      "total": 1
+    }
+  ],
+  "_emailsHandledNote": "5 agents. Two of them show a raw-CSV discrepancy between their own incoming+outbound columns and the CSV's separate 'Contacts handled' (total) column, taken verbatim rather than reconciled, per the standing never-silently-reconcile rule: Jasmina Sodolovic reads 16 incoming + 3 outbound = 19, but the CSV's own total column says 22 (+3); Leh Peng Goh reads 4 incoming + 0 outbound = 4, but the CSV's own total column says 5 (+1). Chloey Leow, Lucinda Gonzalez and Atif Wan all have components summing exactly to their printed total. Summing the five printed totals gives 98. No PDF exists for this date to cross-check against.",
+  "totalCasesToDate": {
+    "date": "2026-11-04",
+    "totalOverallCases": 11104,
+    "totalInProgress": 159,
+    "totalOpenCases": 56
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Fri 23 Oct",
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov"
+    ],
+    "totals": [
+      132,
+      135,
+      146,
+      139,
+      146,
+      158,
+      146,
+      150,
+      153,
+      159
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Fri 23 Oct",
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov"
+    ],
+    "totals": [
+      54,
+      59,
+      54,
+      49,
+      49,
+      58,
+      55,
+      54,
+      58,
+      56
+    ]
+  },
+  "_totalCasesToDateNote": "Not derived from any CSV or PDF this run \u2014 the user supplied these three numbers directly (11104 / 159 / 56), stated as current as of today. Filed under this report's own date (2026-11-04) per the usual convention, as position 9 of a trend whose label ('Thu 5 Nov') reflects the next-business-morning snapshot timing every prior date has also used for this same chart. Positions 0-8 chain-match 2026-11-03's own committed trend exactly for both trends. totalOverallCases (11104) is a +77 increase over 2026-11-03's committed 11027.",
+  "_historicalDate": "2026-11-04",
+  "_unmatchedAgentNames": []
+}
