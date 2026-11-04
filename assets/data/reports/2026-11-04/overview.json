@@ -1,0 +1,129 @@
+{
+  "_source": "No source PDF for this date \u2014 assembled from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance: call-logs/cloop are raw-CSV parses, tasks.json is a literal carry-forward of 2026-11-03's own data per explicit user instruction, leave.json is a literal carry-forward of 2026-11-02's own weekly grid, same week, per the same instruction).",
+  "report": {
+    "number": 348,
+    "date": "2026-11-04",
+    "weekday": "Thursday",
+    "title": "Daily Operations Report - 4th November 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "PST",
+        "days": 2,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 0,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 88,
+        "incompleteCount": 1,
+        "incompleteExample": "Best Practice Online Medicare Claim"
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 293,
+    "accepted": 252,
+    "acceptedPct": 86,
+    "missed": 41,
+    "missedPct": 14,
+    "totalOutbound": 140,
+    "topInboundAgent": {
+      "name": "Lucinda Gonzalez",
+      "calls": 52
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 139,
+        "missed": 15
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 108,
+        "missed": 25
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 4,
+        "missed": 1
+      }
+    ]
+  },
+  "_topInboundAgentNote": "Lucinda Gonzalez tops the inboundByStaff table this date (52 calls). No PDF exists for this date to cross-check against.",
+  "_callLogsNote": "summary vs grandTotal carries a gap of 1 this date (see call-logs.json's own _summaryVsGrandTotalNote) \u2014 one familiar direct-line 'Denman - Rec 1' call, the only cause. No new anomaly this date: neither the recurring unaccounted-'YourGP' pattern nor the reverse-direction wrinkle seen on 2026-11-03 recurred.",
+  "cloop": {
+    "inQueue": 50,
+    "oldestDays": 7.78,
+    "contactsQueuedYesterday": 75,
+    "emailsHandledYesterday": 98,
+    "totalOverallCases": 11104,
+    "totalInProgress": 159,
+    "totalOpenCases": 56
+  },
+  "_cloopNote": "Cloop's Real-Time queue total (50) is roughly in line with 2026-11-03's committed 47. totalOverallCases/InProgress/OpenCases (11104/159/56) were given by hand, not read from a PDF \u2014 see cloop.json's own _totalCasesToDateNote. emailsHandledYesterday's 98 total includes a small raw-CSV quirk flagged in cloop.json's own _emailsHandledNote (two agents' printed totals exceed their incoming+outbound components).",
+  "leave": {
+    "weekLabel": "2 November \u2013 6 November 2026",
+    "doctorLinesOnLeave": 5,
+    "staffFullyOnLeave": 0,
+    "staffPartialLeave": 6,
+    "staffPartialLeaveNames": [
+      "Sudina Rijal",
+      "Ambrosie Brassil",
+      "Abbey Freestone",
+      "Bethany Tran",
+      "Anita Tammaro",
+      "Andrew Davies"
+    ],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "Same working week (2-6 Nov) as 2026-11-02/03 \u2014 roster carried forward unchanged per explicit user instruction. doctorLinesOnLeave (5) counts every Doctor-group person with at least one leave day this week. As of today (Thursday), Dr Somya Jhorar and Dr Elliott Missen are on leave; on the staff side, Ambrosie Brassil (Mon-Thu block, her last day) and Andrew Davies (Wed-Fri block) are on leave, the other four staff entries having only been out Monday. The 'of 4 rostered lines' denominator used in the Overview panel is carried forward unchanged from prior weeks, not independently re-verified for this one. See leave.json for the full day-by-day grid."
+}
