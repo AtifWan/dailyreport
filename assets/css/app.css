@@ -226,6 +226,26 @@
 .dr-panel-header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .dr-panel-header-row h3 { margin: 0; }
 
+/* "Generate today's report" pop-up: a native <dialog> so the backdrop, centering
+   and Escape-to-close all come for free, styled to match .panel. One instance is
+   created per Report Checklist page load (see checklist.js) and reused across its
+   loading/done/error states by swapping its inner HTML, rather than opening a new
+   dialog each time. */
+.dr-generate-dialog { width: min(480px, 92vw); padding: 0; border: 1px solid var(--hairline); border-radius: var(--radius); box-shadow: var(--shadow); background: var(--surface); color: var(--ink); }
+.dr-generate-dialog::backdrop { background: oklch(20% 0 0 / .45); }
+.dr-dialog-body { padding: 24px; text-align: center; }
+.dr-dialog-body h3 { margin: 14px 0 4px; font-size: 16px; }
+.dr-dialog-body ul, .dr-dialog-body p { text-align: left; }
+.dr-dialog-body .btn { margin-top: 4px; }
+.dr-dialog-icon { width: 40px; height: 40px; margin: 0 auto; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; }
+.dr-dialog-icon--ok { background: var(--success-soft); color: var(--success-ink); }
+.dr-dialog-icon--err { background: var(--danger-soft); color: var(--danger-ink); }
+.dr-spinner { width: 32px; height: 32px; margin: 0 auto; border: 3px solid var(--hairline-strong); border-top-color: var(--accent); border-radius: 50%; animation: dr-spin .8s linear infinite; }
+@keyframes dr-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .dr-spinner { animation-duration: 2.4s; }
+}
+
 /* Overview KPI tile vs-previous-report badge — pinned to its own row (margin-top,
    not inline after the number) so a long "(was X on 20 Oct)" string on one tile
    never pushes that tile's own k-n text down relative to its neighbours in the

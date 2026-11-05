@@ -766,15 +766,30 @@ function leaveDone() {
   return todaysEntries.length > 0 || (answer === 'no' && !!mostRecent);
 }
 
-function generateSuccessHtml(result, date) {
+// The pop-up shown while Generate runs and once it finishes — one native
+// <dialog> per page load (created in renderChecklist, reused here by id),
+// its content swapped between loading/done/error states rather than a new
+// dialog opened each time. Native <dialog> gives the backdrop, centering and
+// Escape-to-close for free.
+function renderDialogLoading(dialog, date) {
+  dialog.innerHTML = `
+    <div class="dr-dialog-body">
+      <div class="dr-spinner" aria-hidden="true"></div>
+      <h3>Generating ${esc(date)}'s report…</h3>
+      <p class="q">Parsing today's files and writing the report — this takes a few seconds.</p>
+    </div>`;
+}
+
+function renderDialogDone(dialog, result, date) {
   const lines = Object.entries(result.written || {}).map(([, path]) => `<li><code>${esc(path)}</code></li>`);
   const stillNeeded = (result.stillNeeded || []).map((s) => `<li>${esc(s)}</li>`);
   const unmatched = (result.unmatchedAgentNames || []).length
     ? `<p class="q">Cloop agent email(s) not matched to a known name (saved as a best-effort guess): ${esc(result.unmatchedAgentNames.join(', '))}.</p>`
     : '';
-  return `
-    <div class="callout">
-      <div class="ch">Generated ${esc(date)}</div>
+  dialog.innerHTML = `
+    <div class="dr-dialog-body">
+      <div class="dr-dialog-icon dr-dialog-icon--ok" aria-hidden="true">✓</div>
+      <h3>Done — ${esc(date)}'s report is generated</h3>
       <p style="margin:4px 0">Wrote:</p>
       <ul style="margin:0 0 8px;padding-left:20px">${lines.join('')}</ul>
       ${unmatched}
@@ -786,8 +801,21 @@ function generateSuccessHtml(result, date) {
         <li><a href="#/leave/${esc(date)}">Staff &amp; doctors' leave — #/leave/${esc(date)}</a></li>
       </ul>
       <p class="q" style="margin:0 0 4px">The Overview page won't show ${esc(date)} yet — still needed:</p>
-      <ul class="q" style="margin:0;padding-left:20px">${stillNeeded.join('')}</ul>
+      <ul class="q" style="margin:0 0 14px;padding-left:20px">${stillNeeded.join('')}</ul>
+      <button type="button" class="btn btn-primary" data-dialog-close>Close</button>
     </div>`;
+  dialog.querySelector('[data-dialog-close]').addEventListener('click', () => dialog.close());
+}
+
+function renderDialogError(dialog, message) {
+  dialog.innerHTML = `
+    <div class="dr-dialog-body">
+      <div class="dr-dialog-icon dr-dialog-icon--err" aria-hidden="true">✕</div>
+      <h3>Couldn't generate the report</h3>
+      <p class="q">${esc(message)}</p>
+      <button type="button" class="btn" data-dialog-close>Close</button>
+    </div>`;
+  dialog.querySelector('[data-dialog-close]').addEventListener('click', () => dialog.close());
 }
 
 function renderGenerateSection(container) {
@@ -805,19 +833,16 @@ function renderGenerateSection(container) {
       <p class="q">Builds call-logs.json, cloop.json, tasks.json and leave.json from everything above, in the dashboard's existing format, and saves them straight into this repo. Previous dates are never touched.</p>
       <button type="button" class="btn btn-primary" id="generateBtn" ${allDone ? '' : 'disabled'}>Generate today's report</button>
       ${!allDone ? `<p class="q" style="margin-top:8px">Still need: ${esc(missing.join(', '))}.</p>` : ''}
-      <div id="generateResult" class="dr-section-gap"></div>
     </div>`;
 
   const btn = container.querySelector('#generateBtn');
-  const resultEl = container.querySelector('#generateResult');
   if (!allDone) return;
 
   btn.addEventListener('click', async () => {
-    btn.disabled = true;
-    const idleLabel = btn.textContent;
-    btn.textContent = 'Generating…';
-    resultEl.innerHTML = '';
+    const dialog = document.getElementById('generateDialog');
     const today = todayISOInCanberra();
+    renderDialogLoading(dialog, today);
+    dialog.showModal();
     const payload = {
       date: today,
       callLogsFiles: loadEntries('call-logs', today).map((e) => ({ subtypeKey: e.subtypeKey, savedAs: e.savedAs })),
@@ -833,21 +858,28 @@ function renderGenerateSection(container) {
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok || !body.ok) throw new Error(body.error || `request failed (${res.status})`);
-      resultEl.innerHTML = generateSuccessHtml(body, today);
+      renderDialogDone(dialog, body, today);
     } catch (err) {
       const networkError = err instanceof TypeError;
       const message = networkError
         ? "couldn't reach the local upload server — is `python3 scripts/upload_server.py` running?"
         : (err.message || String(err));
-      resultEl.innerHTML = `<div class="callout"><div class="ch">Couldn't generate the report</div><p style="margin:0">${esc(message)}</p></div>`;
-    } finally {
-      btn.disabled = false;
-      btn.textContent = idleLabel;
+      renderDialogError(dialog, message);
     }
   });
 }
 
 export async function renderChecklist(container) {
+  // One dialog per visit to this page — document.body, not this container,
+  // since app.js's router only ever replaces #page-content's own innerHTML
+  // (navigating away and back would otherwise leave a stale dialog behind
+  // alongside the new one).
+  document.getElementById('generateDialog')?.remove();
+  const dialog = document.createElement('dialog');
+  dialog.id = 'generateDialog';
+  dialog.className = 'dr-generate-dialog';
+  document.body.appendChild(dialog);
+
   container.innerHTML = `
     <div id="uploadSection"></div>
     <div id="generateSection" class="dr-section-gap"></div>`;
