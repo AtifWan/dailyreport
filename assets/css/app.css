@@ -178,7 +178,6 @@
    capability) — a status row per required input, same dot+pill idiom as the
    leave-grid's status rail, plus a plain form for the one manually-entered
    field (Total Cases to Date) that has no automated source yet. */
-.dr-check-list { display: flex; flex-direction: column; gap: 10px; }
 .dr-check-row { display: flex; align-items: center; gap: 12px; padding: 10px 2px; border-bottom: 1px solid var(--hairline); }
 .dr-check-row:last-child { border-bottom: none; }
 .dr-check-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; background: var(--hairline-strong); }
