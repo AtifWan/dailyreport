@@ -1,2 +1,10 @@
 node_modules/
 .vercel/
+
+# Local-only intake folders for the Report Checklist tab's upload section
+# (scripts/upload_server.py). Raw Call Logs/Cloop CSVs and Staff/Drs leave
+# screenshots are saved here on the user's own machine and must never reach
+# GitHub — see CLAUDE.md / the checklist upload feature's ground rules.
+/Call Logs/
+/Cloop/
+/Staff and Drs Leaves/
