@@ -1,5 +1,5 @@
 {
-  "_comment": "The one manifest for historical reports. Add a folder + one entry here each time another day's PDF is processed \u2014 nothing else in the app changes.",
+  "_comment": "The one manifest for historical reports. Add a folder + one entry here each time another day's PDF is processed — nothing else in the app changes.",
   "dates": [
     "2026-06-22",
     "2026-06-23",
@@ -92,7 +92,8 @@
     "2026-10-30",
     "2026-11-02",
     "2026-11-03",
-    "2026-11-04"
+    "2026-11-04",
+    "2026-11-05"
   ],
-  "latest": "2026-11-04"
+  "latest": "2026-11-05"
 }

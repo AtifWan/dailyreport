@@ -1,0 +1,210 @@
+{
+  "reportDate": "2026-11-06",
+  "realTimeQueues": [
+    {
+      "queue": "Requests",
+      "inQueue": 17,
+      "oldestDays": 1.96
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 8,
+      "oldestDays": 0.7
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 4,
+      "oldestDays": 0.89
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 1,
+      "oldestDays": 1.97
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 13,
+      "oldestDays": 0.77
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 3.03
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 4,
+      "oldestDays": 0.75
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 48,
+    "oldestDays": 3.03
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 29
+    },
+    {
+      "queue": "Documents",
+      "count": 23
+    },
+    {
+      "queue": "Requests",
+      "count": 21
+    },
+    {
+      "queue": "Finance",
+      "count": 9
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 5
+    },
+    {
+      "queue": "File Transfer",
+      "count": 3
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 2
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "totals": [
+      78,
+      73,
+      60,
+      89,
+      45,
+      107,
+      84,
+      81,
+      75,
+      92
+    ],
+    "labels": [
+      "Fri 23 Oct",
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov"
+    ]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 56,
+      "outbound": 15,
+      "total": 71
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 20,
+      "outbound": 13,
+      "total": 33
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 9,
+      "outbound": 0,
+      "total": 9
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 4,
+      "outbound": 0,
+      "total": 4
+    },
+    {
+      "agent": "Pinky De Paz",
+      "incoming": 1,
+      "outbound": 2,
+      "total": 4
+    },
+    {
+      "agent": "Emily Pettett",
+      "incoming": 2,
+      "outbound": 0,
+      "total": 2
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 0,
+      "outbound": 0,
+      "total": 0
+    }
+  ],
+  "_historicalDate": "2026-11-05",
+  "_unmatchedAgentNames": [],
+  "totalCasesToDate": {
+    "date": "2026-11-05",
+    "totalOverallCases": 11202,
+    "totalInProgress": 159,
+    "totalOpenCases": 56
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov"
+    ],
+    "totals": [
+      135,
+      146,
+      139,
+      146,
+      158,
+      146,
+      150,
+      153,
+      159,
+      159
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov"
+    ],
+    "totals": [
+      59,
+      54,
+      49,
+      49,
+      58,
+      55,
+      54,
+      58,
+      56,
+      56
+    ]
+  },
+  "reportTitle": "Daily Operations Report - 5th November 2026",
+  "extractedAt": "2026-11-06T10:28:00+11:00",
+  "extractedAtLabel": "10:28 AM, Friday 6 November 2026",
+  "_extractedAtNote": "No exact extraction time was available — the Real-Time CSV carries no timestamp of its own, and these files were supplied directly by the user in chat rather than fetched via SharePoint (no lastModifiedDateTime to read). Time is inferred from the two Historical CSVs' own embedded generation timestamps (07:28:59.212 queue-level and 07:32:17.299 agent-level, Malaysia local time on 2026-11-06, converted +3 hours for the AEDT offset in effect — 10:28:59.212 and 10:32:17.299 Canberra time, rounded down to the minute using the queue-level file as the primary driver), on the assumption all three files were pulled in the same batch, same as every other date's real-time snapshot being taken the next business morning after the date it reports on.",
+  "_source": "Real-Time + two Historical Metrics Reports from Cloop's own raw CSV exports, supplied directly by the user in chat (the OneDrive Cloop_Automation folder's own feed has stalled since 2026-10-07), via scripts/parse_cloop.py, chained against assets/data/reports/2026-11-04/cloop.json. Total Cases to Date has no raw export and was supplied directly by the user.",
+  "_emailsHandledNote": "Pinky De Paz's printed total (4) is 1 OVER her own incoming+outbound components (1+2=3) in the raw Historical Metrics Report (agent) export — recorded verbatim, not reconciled, same quirk type noted on 2026-11-04 (there affecting two different agents)."
+}
