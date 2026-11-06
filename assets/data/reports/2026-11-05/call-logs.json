@@ -1,0 +1,576 @@
+{
+  "reportDate": "2026-11-05",
+  "summary": {
+    "totalInbound": 270,
+    "accepted": 249,
+    "missed": 21,
+    "acceptedPct": 92,
+    "missedPct": 8,
+    "totalOutbound": 142
+  },
+  "queueReport": [
+    {
+      "queue": "Appointments",
+      "accepted": 142,
+      "missed": 8
+    },
+    {
+      "queue": "General Enquiries",
+      "accepted": 102,
+      "missed": 13
+    },
+    {
+      "queue": "Health Professionals",
+      "accepted": 0,
+      "missed": 0
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "accepted": 3,
+      "missed": 0
+    }
+  ],
+  "grandTotal": {
+    "accepted": 247,
+    "missed": 21
+  },
+  "tenDayTrend": {
+    "accepted": [
+      193,
+      269,
+      239,
+      206,
+      247,
+      197,
+      283,
+      265,
+      252,
+      249
+    ],
+    "missed": [
+      34,
+      41,
+      29,
+      39,
+      16,
+      48,
+      54,
+      26,
+      41,
+      21
+    ],
+    "answerRatePct": [
+      85,
+      87,
+      89,
+      84,
+      94,
+      80,
+      84,
+      91,
+      86,
+      92
+    ],
+    "overallAvgWaitSec": [
+      62,
+      41,
+      43,
+      48,
+      45,
+      49,
+      46,
+      41,
+      39,
+      38
+    ],
+    "labels": [
+      "Fri 23 Oct",
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov"
+    ]
+  },
+  "queues": {
+    "Appointments": {
+      "accepted": [
+        107,
+        171,
+        129,
+        116,
+        157,
+        109,
+        188,
+        143,
+        139,
+        142
+      ],
+      "missed": [
+        16,
+        14,
+        8,
+        15,
+        6,
+        16,
+        26,
+        7,
+        15,
+        8
+      ],
+      "avgWaitSec": [
+        53,
+        39,
+        35,
+        48,
+        45,
+        46,
+        45,
+        43,
+        34,
+        37
+      ]
+    },
+    "General Enquiries": {
+      "accepted": [
+        83,
+        94,
+        107,
+        85,
+        89,
+        84,
+        87,
+        114,
+        108,
+        102
+      ],
+      "missed": [
+        18,
+        27,
+        20,
+        24,
+        10,
+        32,
+        28,
+        19,
+        25,
+        13
+      ],
+      "avgWaitSec": [
+        73,
+        46,
+        52,
+        49,
+        45,
+        53,
+        50,
+        39,
+        47,
+        40
+      ]
+    },
+    "Health Professionals": {
+      "accepted": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "missed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "avgWaitSec": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "Canberra Vasectomy": {
+      "accepted": [
+        1,
+        3,
+        1,
+        3,
+        0,
+        2,
+        2,
+        6,
+        4,
+        3
+      ],
+      "missed": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "avgWaitSec": [
+        26,
+        36,
+        53,
+        22,
+        0,
+        62,
+        46,
+        40,
+        28,
+        24
+      ]
+    }
+  },
+  "patientServiceKpi": {
+    "longestCallDurationSec": 647,
+    "longestCallAt": "8:32 AM",
+    "longestCallAgent": "Hannah Searle",
+    "longestWaitingTimeSec": 499,
+    "longestWaitingAt": "3:47 PM",
+    "avgCallHandlingSec": 137
+  },
+  "longestWaitPerQueue": [
+    {
+      "queue": "Appointments",
+      "waitSec": 499,
+      "time": "3:47 PM",
+      "name": "De Ang Renfree",
+      "waitLabel": "8 min 19 sec"
+    },
+    {
+      "queue": "General Enquiries",
+      "waitSec": 234,
+      "time": "4:33 PM",
+      "name": "Emily Pettett",
+      "waitLabel": "3 min 54 sec"
+    },
+    {
+      "queue": "Health Professionals",
+      "waitSec": 0,
+      "time": null,
+      "name": null,
+      "waitLabel": "0 min 0 sec"
+    },
+    {
+      "queue": "Canberra Vasectomy",
+      "waitSec": 34,
+      "time": "3:03 PM",
+      "name": "Shae Connors",
+      "waitLabel": "0 min 34 sec"
+    }
+  ],
+  "inboundByStaff": [
+    {
+      "name": "Rebecca Quinn",
+      "calls": 68,
+      "durationMins": 127
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 47,
+      "durationMins": 131
+    },
+    {
+      "name": "David Antioch",
+      "calls": 42,
+      "durationMins": 76
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 30,
+      "durationMins": 63
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 25,
+      "durationMins": 49
+    },
+    {
+      "name": "Hannah Searle",
+      "calls": 7,
+      "durationMins": 32
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 7,
+      "durationMins": 22
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 6,
+      "durationMins": 26
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 6,
+      "durationMins": 18
+    },
+    {
+      "name": "Isaac Davis",
+      "calls": 6,
+      "durationMins": 14
+    },
+    {
+      "name": "Apurva Pathak",
+      "calls": 4,
+      "durationMins": 10
+    },
+    {
+      "name": "Crace - Rec 1",
+      "calls": 1,
+      "durationMins": 1
+    }
+  ],
+  "outboundByStaff": [
+    {
+      "name": "Rebecca Quinn",
+      "calls": 24,
+      "durationMins": 46
+    },
+    {
+      "name": "De Ang Renfree",
+      "calls": 24,
+      "durationMins": 23
+    },
+    {
+      "name": "Isaac Davis",
+      "calls": 23,
+      "durationMins": 42
+    },
+    {
+      "name": "Samantha Cooper",
+      "calls": 14,
+      "durationMins": 42
+    },
+    {
+      "name": "Apurva Pathak",
+      "calls": 12,
+      "durationMins": 16
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 10,
+      "durationMins": 10
+    },
+    {
+      "name": "Lucinda Gonzalez",
+      "calls": 9,
+      "durationMins": 20
+    },
+    {
+      "name": "Hannah Searle",
+      "calls": 9,
+      "durationMins": 11
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 8,
+      "durationMins": 8
+    },
+    {
+      "name": "Shae Connors",
+      "calls": 5,
+      "durationMins": 4
+    },
+    {
+      "name": "David Antioch",
+      "calls": 3,
+      "durationMins": 2
+    },
+    {
+      "name": "Pinky De Paz",
+      "calls": 1,
+      "durationMins": 0
+    }
+  ],
+  "outboundOtherExtensionsTotal": 138,
+  "outboundOtherExtensions": [
+    {
+      "name": "Denman Room 4",
+      "calls": 16,
+      "durationMins": 93
+    },
+    {
+      "name": "Sam Primrose",
+      "calls": 13,
+      "durationMins": 67
+    },
+    {
+      "name": "Fred/Mano",
+      "calls": 13,
+      "durationMins": 29
+    },
+    {
+      "name": "Joanna Lin/ Sandeep Pratap",
+      "calls": 10,
+      "durationMins": 72
+    },
+    {
+      "name": "(Unattributed)",
+      "calls": 10,
+      "durationMins": 10
+    },
+    {
+      "name": "Denman - Nurse",
+      "calls": 9,
+      "durationMins": 13
+    },
+    {
+      "name": "Will Fong",
+      "calls": 7,
+      "durationMins": 30
+    },
+    {
+      "name": "Nurse Consult",
+      "calls": 6,
+      "durationMins": 21
+    },
+    {
+      "name": "Tom Wigglesworth",
+      "calls": 5,
+      "durationMins": 22
+    },
+    {
+      "name": "Sheahan R",
+      "calls": 4,
+      "durationMins": 33
+    },
+    {
+      "name": "Raymond Liu",
+      "calls": 4,
+      "durationMins": 45
+    },
+    {
+      "name": "RM9 Dr Elliott Missen",
+      "calls": 4,
+      "durationMins": 46
+    },
+    {
+      "name": "Janine Kelly",
+      "calls": 4,
+      "durationMins": 50
+    },
+    {
+      "name": "Freya/Riana/John",
+      "calls": 4,
+      "durationMins": 10
+    },
+    {
+      "name": "Thinus",
+      "calls": 4,
+      "durationMins": 31
+    },
+    {
+      "name": "Kristy Muir/ John Deery",
+      "calls": 4,
+      "durationMins": 25
+    },
+    {
+      "name": "Penny Gosling",
+      "calls": 3,
+      "durationMins": 5
+    },
+    {
+      "name": "Mara Matic",
+      "calls": 3,
+      "durationMins": 3
+    },
+    {
+      "name": "Nurse 3 (TR2)",
+      "calls": 3,
+      "durationMins": 15
+    },
+    {
+      "name": "John Pyae",
+      "calls": 3,
+      "durationMins": 15
+    },
+    {
+      "name": "RM7 Dr Kathleen O'Brien",
+      "calls": 2,
+      "durationMins": 30
+    },
+    {
+      "name": "Krystle Chin",
+      "calls": 2,
+      "durationMins": 52
+    },
+    {
+      "name": "Nurse 2",
+      "calls": 2,
+      "durationMins": 7
+    },
+    {
+      "name": "PM Alex Cownie",
+      "calls": 1,
+      "durationMins": 8
+    },
+    {
+      "name": "Lyneham  - Nurse",
+      "calls": 1,
+      "durationMins": 0
+    },
+    {
+      "name": "Julie Beuth",
+      "calls": 1,
+      "durationMins": 8
+    }
+  ],
+  "outboundTenDayTrend": {
+    "totals": [
+      268,
+      261,
+      251,
+      207,
+      258,
+      213,
+      276,
+      295,
+      257,
+      280
+    ],
+    "labels": [
+      "Fri 23 Oct",
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov"
+    ]
+  },
+  "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, chained against assets/data/reports/2026-11-04/call-logs.json. Raw files supplied directly by the user in chat (the OneDrive Call_Logs_Automation folder's own feed has stalled since 2026-10-21).",
+  "_summaryVsGrandTotalNote": "summary (from the deduplicated InboundCalls_Detailed file: 270 total/249 accepted/21 missed) reads 2 OVER the queue-level grandTotal (247 accepted/21 missed), from two separate causes: one familiar direct-line-extension call ('Crace - Rec 1', CallGUID a3f6d557… at 7:26:16 AM — not one of the four named call queues, so it never appears in any CallQueue_Detailed file, same pattern as 2026-11-04's 'Denman - Rec 1' call), and one recurrence of the unaccounted-'YourGP' pattern seen on earlier dates (CallGUID 66b4e070… at 3:19:30 PM, answered by De Ang Renfree, targeting 0261090000/CallAlertName 'YourGP' — a real answered call that simply never appears in any queue file, cause not independently diagnosed). Both are known quirk types, not a new anomaly."
+}
