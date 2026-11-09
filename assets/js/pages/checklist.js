@@ -1,4 +1,4 @@
-import { esc, todayISOInCanberra, formatDate } from '../util.js';
+import { esc, todayISOInCanberra, formatDate, fetchJSON } from '../util.js';
 import { isWorkingDay } from '../workdays.js';
 
 // The local upload server (scripts/upload_server.py) is the only backend this
@@ -166,19 +166,6 @@ async function validateCloopFile(file) {
     return { ok: false, error: `looks like ${subtype.fullLabel}, but is missing expected column(s): ${missing.join(', ')}` };
   }
   return { ok: true, subtypeKey, subtypeFullLabel: subtype.fullLabel };
-}
-
-// --- Staff and Drs Leaves validation ----------------------------------------
-// Screenshots, not CSVs — there's no column structure to check, just that it
-// actually looks like an image.
-const LEAVE_IMAGE_EXT_RE = /\.(png|jpe?g|gif|webp|bmp|heic|heif)$/i;
-
-async function validateLeaveFile(file) {
-  const looksLikeImage = (file.type && file.type.startsWith('image/')) || LEAVE_IMAGE_EXT_RE.test(file.name);
-  if (!looksLikeImage) {
-    return { ok: false, error: `only image files are accepted here (got "${file.name}")` };
-  }
-  return { ok: true };
 }
 
 // --- Per-day readiness state (browser-local only; see localStorage note) --
@@ -469,9 +456,8 @@ const UPLOAD_CATEGORIES = [
     },
   },
   {
-    key: 'leave', title: 'Staff and Drs Leaves', folder: 'Staff and Drs Leaves', accept: 'image/*',
-    hint: 'Screenshots of the staff leave list and/or the GP calendar — drag them in or click to browse. Updating these is a weekly job, not a daily one, so most days you’ll just confirm the existing ones are still current rather than uploading anything.',
-    dropzone: true, validate: validateLeaveFile,
+    key: 'leave', title: 'Staff and Drs Leaves', folder: 'Staff and Drs Leaves',
+    hint: 'A simple weekly grid — who’s available, on leave, or on a public holiday, Monday to Friday. Updating this is a weekly job, not a daily one, so most days you’ll just confirm the existing week is still current rather than editing anything.',
   },
 ];
 
@@ -514,32 +500,225 @@ function shortSydneyDate(dateIso) {
   return formatDate(dateIso, { weekday: 'short', day: 'numeric', month: 'short' });
 }
 
-async function handleLeaveFiles(el, cat, state, files) {
-  state.busy = true;
-  renderLeaveBlock(el, cat, state);
-  for (const file of files) {
-    const validation = await cat.validate(file);
-    if (!validation.ok) {
-      state.log.unshift({ ok: false, filename: file.name, error: validation.error });
-      renderLeaveBlock(el, cat, state);
-      continue;
+// --- Staff and Drs Leaves: typed weekly grid, not screenshots -------------
+// A GP Calendar screenshot and a staff leave-list screenshot are hard to
+// read reliably (wrong-week screenshots, ambiguous multi-day bars) — this
+// form lets whoever's updating leave type the same weekly grid the dashboard
+// already shows, directly, with no image interpretation needed at all.
+const LEAVE_STATUS_CYCLE = ['available', 'leave', 'public_holiday'];
+const LEAVE_STATUS_META = {
+  available: { label: 'Available', bg: 'var(--live-soft)', ink: 'var(--live-ink)' },
+  leave: { label: 'Leave', bg: 'var(--danger-soft)', ink: 'var(--danger-ink)' },
+  public_holiday: { label: 'Public holiday', bg: 'var(--infer-soft)', ink: 'var(--infer-ink)' },
+};
+const LEAVE_DAY_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+
+function blankLeaveGrid() {
+  return { groups: [{ group: 'Doctor', people: [] }, { group: 'Staff', people: [] }], longTerm: [] };
+}
+
+// Pre-fills the form from the most recently committed leave.json — most
+// weeks only a handful of people's days actually change, so starting from
+// last week's grid means only touching what's different. Walks backwards
+// through the manifest since not every date necessarily has its own
+// leave.json (carried-forward dates reuse an earlier one).
+async function loadTemplateLeaveGrid() {
+  try {
+    const manifest = await fetchJSON('assets/data/reports/index.json');
+    const dates = [...(manifest.dates || [])].sort();
+    for (let i = dates.length - 1; i >= 0; i--) {
+      try {
+        const d = await fetchJSON(`assets/data/reports/${dates[i]}/leave.json`);
+        if (d && Array.isArray(d.groups)) {
+          return {
+            groups: d.groups.map((g) => ({
+              group: g.group,
+              people: g.people.map((p) => ({ name: p.name, status: Array.isArray(p.status) ? [...p.status] : LEAVE_DAY_SHORT.map(() => 'available') })),
+            })),
+            longTerm: (d.longTerm || []).map((x) => ({ ...x })),
+          };
+        }
+      } catch { /* this date has no leave.json — try an earlier one */ }
     }
+  } catch { /* no manifest reachable at all — fall through to blank */ }
+  return blankLeaveGrid();
+}
+
+function mondayOf(dateIso) {
+  const d = new Date(`${dateIso}T00:00:00Z`);
+  const dow = (d.getUTCDay() + 6) % 7; // Mon=0 ... Sun=6
+  d.setUTCDate(d.getUTCDate() - dow);
+  return d;
+}
+
+function leaveWeekLabel(dateIso) {
+  const start = mondayOf(dateIso);
+  const end = new Date(start);
+  end.setUTCDate(start.getUTCDate() + 4);
+  const fmt = (dt) => dt.toLocaleDateString('en-AU', { timeZone: 'UTC', day: 'numeric', month: 'short' });
+  return `${fmt(start)} – ${fmt(end)}`;
+}
+
+function leaveGridFormHtml(state) {
+  const grid = state.leaveGrid;
+  const today = todayISOInCanberra();
+
+  const groupsHtml = grid.groups.map((g) => `
+    <div class="dr-leave-grid-group">
+      <h5>${esc(g.group)}</h5>
+      <div class="dr-leave-grid-table-wrap">
+        <table class="dr-leave-grid-table">
+          <thead><tr><th>Name</th>${LEAVE_DAY_SHORT.map((d) => `<th>${d}</th>`).join('')}<th></th></tr></thead>
+          <tbody>
+            ${g.people.map((p, pi) => `
+              <tr>
+                <td><input type="text" class="dinput dr-leave-name-input" placeholder="Name" data-group="${esc(g.group)}" data-person="${pi}" value="${esc(p.name)}"></td>
+                ${p.status.map((s, di) => {
+                  const meta = LEAVE_STATUS_META[s] || LEAVE_STATUS_META.available;
+                  return `<td><button type="button" class="dr-leave-cell" data-group="${esc(g.group)}" data-person="${pi}" data-day="${di}" style="background:${meta.bg};color:${meta.ink}">${esc(meta.label)}</button></td>`;
+                }).join('')}
+                <td><button type="button" class="dr-leave-remove" data-group="${esc(g.group)}" data-person="${pi}" aria-label="Remove row" title="Remove">&times;</button></td>
+              </tr>`).join('')}
+            ${!g.people.length ? `<tr><td colspan="${LEAVE_DAY_SHORT.length + 2}" class="dr-leave-grid-empty">No one listed yet.</td></tr>` : ''}
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn dr-leave-add-person" data-group="${esc(g.group)}">+ Add ${esc(g.group.toLowerCase())}</button>
+    </div>`).join('');
+
+  const longTermHtml = `
+    <div class="dr-leave-grid-group">
+      <h5>Long-term leave</h5>
+      ${grid.longTerm.length ? `
+      <div class="dr-leave-grid-table-wrap">
+        <table class="dr-leave-grid-table dr-leave-grid-longterm">
+          <thead><tr><th>Name</th><th>Note</th><th>From</th><th>To</th><th></th></tr></thead>
+          <tbody>
+            ${grid.longTerm.map((lt, li) => `
+              <tr>
+                <td><input type="text" class="dinput" placeholder="Name" data-lt="${li}" data-field="name" value="${esc(lt.name || '')}"></td>
+                <td><input type="text" class="dinput" placeholder="e.g. Maternity Leave" data-lt="${li}" data-field="note" value="${esc(lt.note || '')}"></td>
+                <td><input type="date" class="dinput" data-lt="${li}" data-field="from" value="${esc(lt.from || '')}"></td>
+                <td><input type="date" class="dinput" data-lt="${li}" data-field="to" value="${esc(lt.to || '')}"></td>
+                <td><button type="button" class="dr-leave-remove" data-lt-remove="${li}" aria-label="Remove row" title="Remove">&times;</button></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>` : '<p class="q">None recorded.</p>'}
+      <button type="button" class="btn" data-lt-add>+ Add long-term leave</button>
+    </div>`;
+
+  return `
+    <div class="dr-leave-grid">
+      <p class="q"><b>Week of ${esc(leaveWeekLabel(today))}</b> — click a day to cycle Available → Leave → Public holiday.</p>
+      ${groupsHtml}
+      ${longTermHtml}
+      ${state.leaveGridError ? `<p class="q" style="color:var(--danger-ink)">${esc(state.leaveGridError)}</p>` : ''}
+      <div class="dr-leave-grid-actions">
+        <button type="button" class="btn" data-leave-grid-cancel ${state.leaveGridBusy ? 'disabled' : ''}>Cancel</button>
+        <button type="button" class="btn btn-primary" data-leave-grid-save ${state.leaveGridBusy ? 'disabled' : ''}>${state.leaveGridBusy ? 'Saving…' : "Save this week's leave"}</button>
+      </div>
+    </div>`;
+}
+
+function wireLeaveGridForm(el, cat, state) {
+  const groupByName = (name) => state.leaveGrid.groups.find((g) => g.group === name);
+
+  el.querySelectorAll('.dr-leave-cell').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const g = groupByName(btn.dataset.group);
+      const person = g.people[Number(btn.dataset.person)];
+      const day = Number(btn.dataset.day);
+      const next = (LEAVE_STATUS_CYCLE.indexOf(person.status[day]) + 1) % LEAVE_STATUS_CYCLE.length;
+      person.status[day] = LEAVE_STATUS_CYCLE[next];
+      renderLeaveBlock(el, cat, state);
+    });
+  });
+  el.querySelectorAll('.dr-leave-name-input').forEach((inp) => {
+    inp.addEventListener('input', () => {
+      const g = groupByName(inp.dataset.group);
+      g.people[Number(inp.dataset.person)].name = inp.value;
+    });
+  });
+  el.querySelectorAll('.dr-leave-remove[data-group]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const g = groupByName(btn.dataset.group);
+      g.people.splice(Number(btn.dataset.person), 1);
+      renderLeaveBlock(el, cat, state);
+    });
+  });
+  el.querySelectorAll('.dr-leave-add-person').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const g = groupByName(btn.dataset.group);
+      g.people.push({ name: '', status: LEAVE_DAY_SHORT.map(() => 'available') });
+      renderLeaveBlock(el, cat, state);
+    });
+  });
+  el.querySelectorAll('[data-lt]').forEach((inp) => {
+    inp.addEventListener('input', () => {
+      state.leaveGrid.longTerm[Number(inp.dataset.lt)][inp.dataset.field] = inp.value;
+    });
+  });
+  el.querySelectorAll('[data-lt-remove]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      state.leaveGrid.longTerm.splice(Number(btn.dataset.ltRemove), 1);
+      renderLeaveBlock(el, cat, state);
+    });
+  });
+  const addLt = el.querySelector('[data-lt-add]');
+  if (addLt) addLt.addEventListener('click', () => {
+    state.leaveGrid.longTerm.push({ name: '', note: '', from: '', to: '' });
+    renderLeaveBlock(el, cat, state);
+  });
+
+  const cancelBtn = el.querySelector('[data-leave-grid-cancel]');
+  if (cancelBtn) cancelBtn.addEventListener('click', () => {
+    state.forceOpen = false;
+    state.leaveGridError = null;
+    renderLeaveBlock(el, cat, state);
+  });
+
+  const saveBtn = el.querySelector('[data-leave-grid-save]');
+  if (saveBtn) saveBtn.addEventListener('click', async () => {
+    const today = todayISOInCanberra();
+    const groups = state.leaveGrid.groups.map((g) => ({ group: g.group, people: g.people.filter((p) => p.name.trim()).map((p) => ({ name: p.name.trim(), site: null, status: p.status })) }));
+    const longTerm = state.leaveGrid.longTerm.filter((lt) => lt.name.trim() && lt.from && lt.to);
+    state.leaveGridBusy = true;
+    state.leaveGridError = null;
+    renderLeaveBlock(el, cat, state);
     try {
-      const result = await uploadOneFile(cat.key, file);
-      state.log.unshift({ ok: true, savedAs: result.savedAs, folder: result.folder });
-      appendAllEntry(cat.key, { originalName: file.name, savedAs: result.savedAs, at: new Date().toISOString(), dateIso: todayISOInCanberra() });
+      const res = await fetch(`${LOCAL_UPLOAD_BASE}/leave-grid`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ date: today, groups, longTerm }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok || !body.ok) throw new Error(body.error || `request failed (${res.status})`);
+      appendAllEntry(cat.key, { originalName: "typed leave grid", savedAs: body.relativePath, at: new Date().toISOString(), dateIso: today });
+      saveDailyAnswer(cat.key, today, 'yes');
+      state.forceOpen = false;
+      state.leaveGrid = null;
     } catch (err) {
       const networkError = err instanceof TypeError;
-      state.log.unshift({
-        ok: false,
-        filename: file.name,
-        error: networkError ? "couldn't reach the local upload server — is `python3 scripts/upload_server.py` running?" : (err.message || String(err)),
-      });
+      state.leaveGridError = networkError ? "couldn't reach the local upload server — is `python3 scripts/upload_server.py` running?" : (err.message || String(err));
     }
+    state.leaveGridBusy = false;
     renderLeaveBlock(el, cat, state);
-  }
-  state.busy = false;
-  renderLeaveBlock(el, cat, state);
+  });
+}
+
+// Fires the (async) template load the first time the form needs to be shown,
+// however it got triggered (the Yes/No question, the "Edit" button, or
+// straight away because there's no history yet) — idempotent, so calling it
+// on every render is harmless once the load is in flight or done.
+function ensureLeaveGridLoaded(el, cat, state) {
+  if (state.leaveGrid || state.leaveGridLoading) return;
+  state.leaveGridLoading = true;
+  loadTemplateLeaveGrid().then((grid) => {
+    state.leaveGrid = grid;
+    state.leaveGridLoading = false;
+    renderLeaveBlock(el, cat, state);
+  });
 }
 
 function renderLeaveBlock(el, cat, state) {
@@ -549,9 +728,15 @@ function renderLeaveBlock(el, cat, state) {
   const todaysEntries = allEntries.filter((e) => e.dateIso === today);
   const answer = loadDailyAnswer(cat.key, today);
 
-  const done = todaysEntries.length > 0 || (answer === 'no' && !!mostRecent);
   const showQuestion = !!mostRecent && todaysEntries.length === 0 && answer === null;
-  const showDropzone = state.forceOpen || !mostRecent || answer === 'yes' || todaysEntries.length > 0;
+  // Once today's entry exists (a save already went through), the form
+  // collapses back to the "Done" status row + "Edit this week's leave"
+  // button — unlike the old per-file dropzone, there's nothing left to add
+  // after one successful save, so `answer === 'yes'` only keeps reopening
+  // the form while that save hasn't happened yet (e.g. the page was
+  // reloaded mid-edit).
+  const showForm = state.forceOpen || !mostRecent || (answer === 'yes' && todaysEntries.length === 0);
+  if (showForm) ensureLeaveGridLoaded(el, cat, state);
 
   const mostRecentBatch = mostRecent ? allEntries.filter((e) => e.dateIso === mostRecent.dateIso) : [];
   const lastUpdatedLabel = mostRecent ? `${shortSydneyDate(mostRecent.dateIso)} (${mostRecentBatch.map((e) => e.originalName).join(', ')})` : null;
@@ -577,9 +762,8 @@ function renderLeaveBlock(el, cat, state) {
           <button type="button" class="btn btn-primary" data-leave-answer="yes">Yes — I have new ones</button>
         </div>
       </div>` : ''}
-    ${!showQuestion && !showDropzone ? '<button type="button" class="btn" data-leave-force-open>Upload different screenshots</button>' : ''}
-    ${showDropzone ? dropzoneHtml(cat, state.busy) : ''}
-    <div class="dr-upload-log">${state.log.map(uploadLogRowHtml).join('')}</div>`;
+    ${!showQuestion && !showForm ? '<button type="button" class="btn" data-leave-force-open>Edit this week\'s leave</button>' : ''}
+    ${showForm ? (state.leaveGridLoading || !state.leaveGrid ? '<p class="q">Loading last week\'s grid…</p>' : leaveGridFormHtml(state)) : ''}`;
 
   el.querySelectorAll('[data-leave-answer]').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -589,24 +773,12 @@ function renderLeaveBlock(el, cat, state) {
     });
   });
   const forceBtn = el.querySelector('[data-leave-force-open]');
-  if (forceBtn) forceBtn.addEventListener('click', () => { state.forceOpen = true; renderLeaveBlock(el, cat, state); });
+  if (forceBtn) forceBtn.addEventListener('click', () => {
+    state.forceOpen = true;
+    renderLeaveBlock(el, cat, state);
+  });
 
-  const input = el.querySelector('input[type="file"]');
-  if (input) {
-    input.addEventListener('change', (e) => {
-      const files = [...e.target.files];
-      if (files.length) handleLeaveFiles(el, cat, state, files);
-    });
-  }
-  const zone = el.querySelector('.dr-dropzone');
-  if (zone) {
-    ['dragenter', 'dragover'].forEach((evt) => zone.addEventListener(evt, (e) => { e.preventDefault(); zone.classList.add('drag'); }));
-    ['dragleave', 'drop'].forEach((evt) => zone.addEventListener(evt, (e) => { e.preventDefault(); zone.classList.remove('drag'); }));
-    zone.addEventListener('drop', (e) => {
-      const files = [...(e.dataTransfer?.files || [])];
-      if (files.length) handleLeaveFiles(el, cat, state, files);
-    });
-  }
+  if (showForm && state.leaveGrid && !state.leaveGridLoading) wireLeaveGridForm(el, cat, state, el);
 }
 
 async function handleFiles(el, cat, state, files, readinessEl) {
@@ -714,7 +886,7 @@ function renderUploadSection(container) {
   UPLOAD_CATEGORIES.forEach((cat) => {
     const blockEl = container.querySelector(`#upload-${cat.key}`);
     if (cat.key === 'leave') {
-      renderLeaveBlock(blockEl, cat, { busy: false, log: [], forceOpen: false });
+      renderLeaveBlock(blockEl, cat, { forceOpen: false, leaveGrid: null, leaveGridLoading: false, leaveGridBusy: false, leaveGridError: null });
       return;
     }
     let readinessEl = null;

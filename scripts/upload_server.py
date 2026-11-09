@@ -37,7 +37,7 @@ import json
 import re
 import sys
 import traceback
-from datetime import datetime
+from datetime import date as date_cls, datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -121,6 +121,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._handle_upload()
         if self.path == "/generate":
             return self._handle_generate()
+        if self.path == "/leave-grid":
+            return self._handle_leave_grid()
         return self._json(404, {"ok": False, "error": "not_found"})
 
     def _handle_upload(self):
@@ -182,6 +184,63 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e:  # noqa: BLE001 - never crash the server on a bad report day
             traceback.print_exc()
             return self._json(500, {"ok": False, "error": f"unexpected_error: {e}"})
+
+    def _handle_leave_grid(self):
+        """Writes leave.json straight from the Report Checklist page's typed
+        weekly grid — no screenshot, no PDF, nothing for a human to read and
+        transcribe. See checklist.js's own leaveGridFormHtml/wireLeaveGridForm."""
+        length = int(self.headers.get("Content-Length", 0))
+        try:
+            payload = json.loads(self.rfile.read(length).decode("utf-8"))
+            date = payload["date"]
+            groups = payload["groups"]
+            long_term = payload.get("longTerm", [])
+        except Exception as e:  # noqa: BLE001
+            return self._json(400, {"ok": False, "error": f"bad_request: {e}"})
+
+        try:
+            d = date_cls.fromisoformat(date)
+        except Exception as e:  # noqa: BLE001
+            return self._json(400, {"ok": False, "error": f"bad_date: {e}"})
+
+        allowed_status = {"leave", "available", "public_holiday"}
+        for g in groups:
+            for p in g.get("people", []):
+                status = p.get("status")
+                if not isinstance(status, list) or len(status) != 5 or any(s not in allowed_status for s in status):
+                    return self._json(400, {"ok": False, "error": f"bad_status_for: {p.get('name')!r}"})
+
+        week_start = d - timedelta(days=d.weekday())  # Monday
+        week_end = week_start + timedelta(days=4)  # Friday
+
+        result = {
+            "_source": "Entered directly through the Report Checklist page's Staff & Drs Leave weekly grid — no screenshot or PDF for this date.",
+            "reportTitle": generate_report.ordinal_date_title(date),
+            "reportDate": date,
+            "weekStart": week_start.isoformat(),
+            "weekEnd": week_end.isoformat(),
+            "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "groups": groups,
+            "longTerm": long_term,
+            "legend": [
+                {"key": "leave", "label": "On Leave"},
+                {"key": "available", "label": "Available"},
+                {"key": "public_holiday", "label": "Public Holiday"},
+            ],
+        }
+
+        out_dir = generate_report.REPORTS_DIR / date
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / "leave.json"
+        out_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+        print(f"[upload-server] wrote {out_path.relative_to(REPO_ROOT)} ({week_start.isoformat()}–{week_end.isoformat()})")
+        return self._json(200, {
+            "ok": True,
+            "relativePath": str(out_path.relative_to(REPO_ROOT)),
+            "weekStart": result["weekStart"],
+            "weekEnd": result["weekEnd"],
+        })
 
 
 def main():
