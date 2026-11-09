@@ -1,5 +1,6 @@
 node_modules/
 .vercel/
+__pycache__/
 
 # Local-only intake folders for the Report Checklist tab's upload section
 # (scripts/upload_server.py). Raw Call Logs/Cloop CSVs and Staff/Drs leave

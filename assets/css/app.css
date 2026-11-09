@@ -222,6 +222,23 @@
 .dr-leave-question { margin: 4px 0 12px; }
 .dr-leave-question-btns { display: flex; gap: 8px; flex-wrap: wrap; }
 
+/* Typed weekly leave grid — replaces screenshot upload for Staff & Drs Leaves. */
+.dr-leave-grid { margin-top: 4px; }
+.dr-leave-grid-group { margin: 18px 0; }
+.dr-leave-grid-group h5 { margin: 0 0 8px; font-size: 14.5px; color: var(--ink); }
+.dr-leave-grid-table-wrap { overflow-x: auto; }
+.dr-leave-grid-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.dr-leave-grid-table th { text-align: left; font-weight: 600; color: var(--ink-faint); font-size: 12px; padding: 4px 6px; }
+.dr-leave-grid-table td { padding: 4px 6px; vertical-align: middle; }
+.dr-leave-grid-empty { color: var(--ink-faint); font-style: italic; padding: 10px 6px; }
+.dr-leave-name-input { width: 190px; }
+.dr-leave-cell { width: 100%; min-width: 92px; border: none; border-radius: var(--radius-sm); padding: 6px 4px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.dr-leave-cell:hover { filter: brightness(0.96); }
+.dr-leave-remove { border: none; background: transparent; color: var(--ink-faint); font-size: 18px; line-height: 1; cursor: pointer; padding: 4px 8px; }
+.dr-leave-remove:hover { color: var(--danger-ink); }
+.dr-leave-grid-longterm input[type="date"] { width: 130px; }
+.dr-leave-grid-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+
 /* "Upload today's files" panel header, with the "Start a new day" reset. */
 .dr-panel-header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .dr-panel-header-row h3 { margin: 0; }
