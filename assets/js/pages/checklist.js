@@ -729,7 +729,13 @@ function renderLeaveBlock(el, cat, state) {
   const answer = loadDailyAnswer(cat.key, today);
 
   const showQuestion = !!mostRecent && todaysEntries.length === 0 && answer === null;
-  const showForm = state.forceOpen || !mostRecent || answer === 'yes' || todaysEntries.length > 0;
+  // Once today's entry exists (a save already went through), the form
+  // collapses back to the "Done" status row + "Edit this week's leave"
+  // button — unlike the old per-file dropzone, there's nothing left to add
+  // after one successful save, so `answer === 'yes'` only keeps reopening
+  // the form while that save hasn't happened yet (e.g. the page was
+  // reloaded mid-edit).
+  const showForm = state.forceOpen || !mostRecent || (answer === 'yes' && todaysEntries.length === 0);
   if (showForm) ensureLeaveGridLoaded(el, cat, state);
 
   const mostRecentBatch = mostRecent ? allEntries.filter((e) => e.dateIso === mostRecent.dateIso) : [];
