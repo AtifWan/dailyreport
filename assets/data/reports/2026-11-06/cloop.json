@@ -1,0 +1,211 @@
+{
+  "reportDate": "2026-11-09",
+  "realTimeQueues": [
+    {
+      "queue": "Medico-legal",
+      "inQueue": 1,
+      "oldestDays": 3.02
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 25,
+      "oldestDays": 4.39
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 4,
+      "oldestDays": 2.12
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 1,
+      "oldestDays": 4.41
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 10,
+      "oldestDays": 2.1
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 4,
+      "oldestDays": 2.18
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 5.47
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 46,
+    "oldestDays": 5.47
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Documents",
+      "count": 19
+    },
+    {
+      "queue": "Unassigned",
+      "count": 19
+    },
+    {
+      "queue": "Finance",
+      "count": 5
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 5
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 4
+    },
+    {
+      "queue": "Requests",
+      "count": 2
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "totals": [
+      73,
+      60,
+      89,
+      45,
+      107,
+      84,
+      81,
+      75,
+      92,
+      54
+    ],
+    "labels": [
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov"
+    ]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 43,
+      "outbound": 7,
+      "total": 50
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 5,
+      "outbound": 0,
+      "total": 5
+    },
+    {
+      "agent": "Pinky De Paz",
+      "incoming": 0,
+      "outbound": 5,
+      "total": 5
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 4,
+      "outbound": 0,
+      "total": 4
+    },
+    {
+      "agent": "Apurva Pathak",
+      "incoming": 1,
+      "outbound": 2,
+      "total": 3
+    },
+    {
+      "agent": "Jasmine Deery",
+      "incoming": 1,
+      "outbound": 0,
+      "total": 1
+    },
+    {
+      "agent": "Emily Pettett",
+      "incoming": 0,
+      "outbound": 0,
+      "total": 0
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 0,
+      "outbound": 0,
+      "total": 0
+    }
+  ],
+  "_historicalDate": "2026-11-06",
+  "_unmatchedAgentNames": [],
+  "totalCasesToDate": {
+    "date": "2026-11-06",
+    "totalOverallCases": 11261,
+    "totalInProgress": 163,
+    "totalOpenCases": 63
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov"
+    ],
+    "totals": [
+      146,
+      139,
+      146,
+      158,
+      146,
+      150,
+      153,
+      159,
+      159,
+      163
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov"
+    ],
+    "totals": [
+      54,
+      49,
+      49,
+      58,
+      55,
+      54,
+      58,
+      56,
+      56,
+      63
+    ]
+  },
+  "reportTitle": "Daily Operations Report - 6th November 2026",
+  "extractedAt": "2026-11-09T10:30:00+11:00",
+  "extractedAtLabel": "10:30 AM, Monday 9 November 2026",
+  "_extractedAtNote": "No exact extraction time was available — unlike some earlier dates, none of the three raw CSVs supplied directly by the user in chat carries an embedded generation timestamp, and there is no lastModifiedDateTime (not fetched via SharePoint). Time is a round estimate following the standing convention that the Real-Time snapshot is pulled the next business morning after the date it reports on (Friday 6 Nov -> Monday 9 Nov, the weekend in between), not derived from any value in the files themselves.",
+  "_source": "Real-Time + two Historical Metrics Reports from Cloop's own raw CSV exports, supplied directly by the user in chat (the OneDrive Cloop_Automation folder's own feed has stalled since 2026-10-07), via scripts/parse_cloop.py, chained against assets/data/reports/2026-11-05/cloop.json. Total Cases to Date has no raw export and was supplied directly by the user."
+}
