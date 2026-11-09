@@ -82,6 +82,18 @@
       39,
       38,
       49
+    ],
+    "labels": [
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov"
     ]
   },
   "queues": {
@@ -510,6 +522,18 @@
       257,
       280,
       181
+    ],
+    "labels": [
+      "Mon 26 Oct",
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov"
     ]
   },
   "_source": "Deterministic parse of raw Telair PBX CSV exports (ExportCallRecords, InboundCalls_Detailed, CallQueue_Detailed per queue) via scripts/parse_call_logs.py, chained against assets/data/reports/2026-11-05/call-logs.json. Raw files supplied directly by the user in chat (the OneDrive Call_Logs_Automation folder's own feed has stalled since 2026-10-21).",
