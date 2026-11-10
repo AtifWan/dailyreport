@@ -1,0 +1,120 @@
+{
+  "_source": "Entered directly through the Report Checklist page's Staff & Drs Leave weekly grid, saved straight from the website — no screenshot or PDF for this date.",
+  "reportTitle": "Daily Operations Report - 11th November 2026",
+  "reportDate": "2026-11-11",
+  "weekStart": "2026-11-09",
+  "weekEnd": "2026-11-13",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Dr Somyata Jhorar",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "available",
+            "available"
+          ]
+        },
+        {
+          "name": "Dr Lisa Bron",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Shae Connors",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Ambrosie Brassil",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "available"
+          ]
+        },
+        {
+          "name": "Andrew Davies",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Nita Sigdel",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "leave",
+            "leave",
+            "available"
+          ]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ]
+}
