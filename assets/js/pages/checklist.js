@@ -687,20 +687,26 @@ function wireLeaveGridForm(el, cat, state) {
     state.leaveGridError = null;
     renderLeaveBlock(el, cat, state);
     try {
-      const res = await fetch(`${LOCAL_UPLOAD_BASE}/leave-grid`, {
+      // Unlike Call Logs/Cloop, this doesn't need a CSV parser running
+      // anywhere — it's typed data, so it goes straight to this page's own
+      // Vercel API (api/generate/leave-grid.py), which commits leave.json to
+      // GitHub itself. No local upload server involved for Leave at all.
+      const res = await fetch('/api/generate/leave-grid', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ date: today, groups, longTerm }),
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok || !body.ok) throw new Error(body.error || `request failed (${res.status})`);
+      if (body.mainBranchError) {
+        throw new Error(`saved, but the live site may not show it yet (${body.mainBranchError})`);
+      }
       appendAllEntry(cat.key, { originalName: "typed leave grid", savedAs: body.relativePath, at: new Date().toISOString(), dateIso: today });
       saveDailyAnswer(cat.key, today, 'yes');
       state.forceOpen = false;
       state.leaveGrid = null;
     } catch (err) {
-      const networkError = err instanceof TypeError;
-      state.leaveGridError = networkError ? "couldn't reach the local upload server — is `python3 scripts/upload_server.py` running?" : (err.message || String(err));
+      state.leaveGridError = err.message || String(err);
     }
     state.leaveGridBusy = false;
     renderLeaveBlock(el, cat, state);
@@ -875,7 +881,7 @@ function renderUploadSection(container) {
         <h3>Upload today's files</h3>
         <button type="button" class="btn" id="startNewDayBtn">Start a new day</button>
       </div>
-      <p class="q">Saved straight to folders in this repo on your own machine — nothing here is sent to GitHub, Vercel, or anywhere else. Requires the local upload server running (<code>python3 scripts/upload_server.py</code>).</p>
+      <p class="q">Call Logs and Cloop are saved straight to folders in this repo on your own machine — nothing there is sent to GitHub, Vercel, or anywhere else — and need the local upload server running (<code>python3 scripts/upload_server.py</code>). Staff and Drs Leave is different: it saves straight from this website, no local server needed.</p>
       <div class="dr-upload-grid">
         <div class="dr-upload-block" id="upload-call-logs"></div>
         <div class="dr-upload-block" id="upload-cloop"></div>
