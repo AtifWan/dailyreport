@@ -1,0 +1,192 @@
+{
+  "reportDate": "2026-11-10",
+  "realTimeQueues": [
+    {
+      "queue": "Requests",
+      "inQueue": 27,
+      "oldestDays": 5.92
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 11,
+      "oldestDays": 0.79
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 1,
+      "oldestDays": 5.94
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 1,
+      "oldestDays": 0.69
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 14,
+      "oldestDays": 0.8
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 7,
+      "oldestDays": 0.77
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 6.99
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 62,
+    "oldestDays": 6.99
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Documents",
+      "count": 27
+    },
+    {
+      "queue": "Unassigned",
+      "count": 26
+    },
+    {
+      "queue": "Requests",
+      "count": 9
+    },
+    {
+      "queue": "Finance",
+      "count": 8
+    },
+    {
+      "queue": "File Transfer",
+      "count": 3
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 1
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "totals": [
+      60,
+      89,
+      45,
+      107,
+      84,
+      81,
+      75,
+      92,
+      54,
+      75
+    ],
+    "labels": [
+      "Tue 27 Oct",
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov"
+    ]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 48,
+      "outbound": 13,
+      "total": 61
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 19,
+      "outbound": 4,
+      "total": 26
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 8,
+      "outbound": 0,
+      "total": 8
+    },
+    {
+      "agent": "Jasmine Deery",
+      "incoming": 0,
+      "outbound": 2,
+      "total": 2
+    }
+  ],
+  "_historicalDate": "2026-11-09",
+  "_unmatchedAgentNames": [],
+  "totalCasesToDate": {
+    "date": "2026-11-09",
+    "totalOverallCases": 11347,
+    "totalInProgress": 164,
+    "totalOpenCases": 67
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov"
+    ],
+    "totals": [
+      139,
+      146,
+      158,
+      146,
+      150,
+      153,
+      159,
+      159,
+      163,
+      164
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Wed 28 Oct",
+      "Thu 29 Oct",
+      "Fri 30 Oct",
+      "Mon 2 Nov",
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov"
+    ],
+    "totals": [
+      49,
+      49,
+      58,
+      55,
+      54,
+      58,
+      56,
+      56,
+      63,
+      67
+    ]
+  },
+  "reportTitle": "Daily Operations Report - 9th November 2026",
+  "extractedAt": "2026-11-10T10:30:00+11:00",
+  "extractedAtLabel": "10:30 AM, Tuesday 10 November 2026",
+  "_extractedAtNote": "No exact extraction time was available — none of the three raw CSVs supplied directly by the user in chat carries an embedded generation timestamp, and there is no lastModifiedDateTime (not fetched via SharePoint). Time is a round estimate following the standing convention that the Real-Time snapshot is pulled the next business morning after the date it reports on (Monday 9 Nov -> Tuesday 10 Nov), not derived from any value in the files themselves.",
+  "_source": "Real-Time + two Historical Metrics Reports from Cloop's own raw CSV exports, supplied directly by the user in chat (the OneDrive Cloop_Automation folder's own feed has stalled since 2026-10-07), via scripts/parse_cloop.py, chained against assets/data/reports/2026-11-06/cloop.json. Total Cases to Date has no raw export and was supplied directly by the user.",
+  "_emailsHandledNote": "Jasmina Sodolovic's printed total (26) is 3 OVER her own incoming+outbound components (19+4=23) in the raw Historical Metrics Report (agent) export — recorded verbatim, not reconciled, same quirk type noted on earlier dates (there affecting different agents by smaller margins)."
+}

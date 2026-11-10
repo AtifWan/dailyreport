@@ -1,0 +1,37 @@
+{
+  "_source": "No PDF exists for this date. Entered directly by the user through the new Report Checklist 'Staff & Drs Leave' typed grid (screenshots of the filled-in form sent in chat), not read from a screenshot of an external calendar/leave-list this time.",
+  "reportTitle": "Daily Operations Report - 9th November 2026",
+  "reportDate": "2026-11-09",
+  "weekStart": "2026-11-09",
+  "weekEnd": "2026-11-13",
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {"name": "Dr Michelle De Jesus", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"]},
+        {"name": "Dr Somyata Jhorar", "site": null, "status": ["leave", "leave", "leave", "available", "available"]},
+        {"name": "Dr Lisa Bron", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"]}
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {"name": "Shae Connors", "site": null, "status": ["leave", "leave", "leave", "leave", "leave"]},
+        {"name": "Ambrosie Brassil", "site": null, "status": ["leave", "leave", "leave", "leave", "available"]},
+        {"name": "Andrew Davies", "site": null, "status": ["available", "available", "leave", "leave", "leave"]},
+        {"name": "Nita Sigdel", "site": null, "status": ["available", "available", "leave", "leave", "available"]}
+      ]
+    }
+  ],
+  "longTerm": [
+    {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+    {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+  ],
+  "legend": [
+    {"key": "leave", "label": "On Leave"},
+    {"key": "available", "label": "Available"},
+    {"key": "public_holiday", "label": "Public Holiday"}
+  ],
+  "_note": "Two things worth a second look, not corrected here since I wasn't told to: (1) 'Dr Somyata Jhorar' is spelled differently from every earlier report's 'Dr Somya Jhorar' — recorded exactly as typed, may just be a typo. (2) Only people with at least one leave day this week were added to the grid; earlier weeks' fully-available entries (Dr Tom Wigglesworth, Dr Julie Beuth, Dr Elliott Missen, Holly Archer) aren't listed here at all, so the roster this week is shorter than prior weeks' — this may be intentional (only exceptions get entered) rather than those people having left the roster. Dr Michelle De Jesus appears both in the weekly grid (Leave all week) and in longTerm (her ongoing Maternity Leave) — consistent, not a conflict."
+}
