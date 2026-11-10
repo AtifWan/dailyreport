@@ -1,0 +1,62 @@
+{
+  "_source": "No source PDF for this date — assembled from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance: call-logs/cloop are raw-CSV parses from files the user supplied directly in chat, tasks.json is a literal carry-forward of 2026-11-06's own data, and leave.json was entered directly by the user through the new typed weekly-grid tool for the new working week 9-13 Nov).",
+  "report": {
+    "number": 351,
+    "date": "2026-11-09",
+    "weekday": "Monday",
+    "title": "Daily Operations Report - 9th November 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {"name": "Crace", "days": 1, "onHalt": true, "_carriedForward": true},
+      {"name": "Denman", "days": 109, "onHalt": true, "longest": true, "_carriedForward": true},
+      {"name": "Lyneham", "days": 0, "onHalt": true, "_carriedForward": true},
+      {"name": "PST", "days": 2, "onHalt": false},
+      {"name": "Finance", "days": 0, "onHalt": false}
+    ],
+    "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+    "checklists": [
+      {"name": "PST", "completionPct": 100},
+      {"name": "Finance", "completionPct": 88, "incompleteCount": 1, "incompleteExample": "Best Practice Online Medicare Claim"}
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 248,
+    "accepted": 213,
+    "acceptedPct": 86,
+    "missed": 35,
+    "missedPct": 14,
+    "totalOutbound": 59,
+    "topInboundAgent": {"name": "Rebecca Quinn", "calls": 71},
+    "queueBreakdown": [
+      {"queue": "Appointments", "accepted": 136, "missed": 18},
+      {"queue": "General Enquiries", "accepted": 72, "missed": 17},
+      {"queue": "Health Professionals", "accepted": 0, "missed": 0},
+      {"queue": "Canberra Vasectomy", "accepted": 4, "missed": 0}
+    ]
+  },
+  "_topInboundAgentNote": "Rebecca Quinn tops the inboundByStaff table this date (71 calls). No PDF exists for this date to cross-check against.",
+  "_callLogsNote": "summary vs grandTotal carries a gap of 1 this date (see call-logs.json's own _summaryVsGrandTotalNote) — one recurrence of the unaccounted-'YourGP' pattern seen on earlier dates. Same quirk type, not a new anomaly.",
+  "cloop": {
+    "inQueue": 62,
+    "oldestDays": 6.99,
+    "contactsQueuedYesterday": 75,
+    "emailsHandledYesterday": 97,
+    "totalOverallCases": 11347,
+    "totalInProgress": 164,
+    "totalOpenCases": 67
+  },
+  "_cloopNote": "Cloop's Real-Time queue total (62) is up from 2026-11-06's committed 46. totalOverallCases/InProgress/OpenCases (11347/164/67) were given by hand, not read from a PDF — see cloop.json's own _source. emailsHandledYesterday's 97 total includes a raw-CSV quirk flagged in cloop.json's own _emailsHandledNote (Jasmina Sodolovic's printed total exceeds her incoming+outbound components by 3).",
+  "leave": {
+    "weekLabel": "9 November – 13 November 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Ambrosie Brassil", "Andrew Davies", "Nita Sigdel"],
+    "longTerm": [
+      {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+      {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+    ]
+  },
+  "_leaveNote": "New working week (9-13 Nov), entered directly by the user through the new typed weekly-grid tool rather than read from screenshots. doctorLinesOnLeave (3) counts every Doctor-group person listed this week with at least one leave day — all 3 listed doctors (Dr Michelle De Jesus, Dr Somyata Jhorar, Dr Lisa Bron) have leave this week, each one's full week or part. As of today (Monday), all 3 doctors and 2 staff (Shae Connors, Ambrosie Brassil) are on leave; Andrew Davies and Nita Sigdel are available today. See leave.json's own _note: this week's grid only lists people with at least one leave day, so doctorLinesOnLeave/staffPartialLeave here aren't directly comparable to earlier weeks' totals (which counted the full roster, available people included)."
+}
