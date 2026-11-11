@@ -9,6 +9,19 @@ site shows it immediately) — mirroring scripts/generate_report.py, but
 sourcing files from the request body instead of local disk, and committing
 via the GitHub API instead of writing to a folder.
 
+The report's date is NEVER taken from "today" (the day someone clicks
+Generate) or from a guessed/defaulted business day — it's read straight out
+of the Call Logs' own InboundCalls_Detailed CSV (its CallDateTime column),
+the one genuinely trustworthy source. Call Logs are typically uploaded a day
+(or, after a weekend, several days) after the date they actually cover, so
+"today" is routinely wrong; this showed up as a real bug (reports always
+landing a day behind, or on the prior Friday after a weekend) before this
+fix. Only Cloop's Real-Time snapshot date and Total Cases to Date's "today"
+label are genuinely about today, so those are computed here from the
+server's own clock, not trusted from the client either — the Historical
+reports are overridden to the same date as Call Logs, since both describe
+the same completed business day.
+
 Still deliberately does NOT build overview.json or bump index.json's
 "latest" — see generate_report.py's own docstring for why (needs a human
 judgement call this button can't safely invent). It does add the date to
@@ -17,7 +30,6 @@ the new files are immediately reachable via the dashboard's own navigation.
 
 POST body (JSON):
   {
-    "date": "2026-11-11",
     "callLogs": {
       "inbound": "<InboundCalls_Detailed.csv text>",
       "outbound": "<ExportCallRecords.csv text>",
@@ -27,7 +39,6 @@ POST body (JSON):
       "realtime": "<Real-Time Metrics Report.csv text>",
       "queueHistorical": "<Historical Metrics Report (queue).csv text>",
       "agentHistorical": "<Historical Metrics Report (agent).csv text>",
-      "realtimeDate": "2026-11-11", "historicalDate": "2026-11-10",
       "totalCasesToDate": {"totalOverallCases": 123, "totalInProgress": 45, "totalOpenCases": 6}
     }
   }
@@ -95,6 +106,24 @@ def write_temp(name, content):
     p = Path(d) / name
     p.write_text(content, encoding="utf-8")
     return str(p)
+
+
+def extract_call_logs_date(inbound_text):
+    """The one trustworthy date for this whole report: InboundCalls_Detailed's
+    own CallDateTime column, e.g. "10/11/2026 7:00:41 AM" (day/month/year,
+    matching every other date field this project's raw PBX exports use — see
+    scripts/parse_call_logs.py's own format_time). Deliberately NOT "today" —
+    Call Logs are routinely uploaded a day, or after a weekend several days,
+    after the date they actually cover."""
+    rows = list(csv.DictReader(io.StringIO(inbound_text)))
+    if not rows or not rows[0].get("CallDateTime"):
+        raise GenerateError("Call Logs: couldn't read a date — the Inbound file has no CallDateTime column or no data rows.")
+    date_part = rows[0]["CallDateTime"].split(" ", 1)[0]
+    try:
+        day, month, year = (int(x) for x in date_part.split("/"))
+        return date_cls(year, month, day).isoformat()
+    except Exception as e:  # noqa: BLE001
+        raise GenerateError(f"Call Logs: couldn't read a date from the Inbound file's own CallDateTime column ({date_part!r}).") from e
 
 
 def json_at(repo_root, token, branch, path):
@@ -285,12 +314,24 @@ def add_date_to_manifest(date, token):
 
 
 def run(payload):
-    date = payload["date"]
     github_token = os.environ["GITHUB_TOKEN"]
+    call_logs_payload = payload.get("callLogs") or {}
+    if not call_logs_payload.get("inbound"):
+        raise GenerateError("Call Logs: missing Inbound file(s) — needed to read this report's date, not just to build call-logs.json.")
+    date = extract_call_logs_date(call_logs_payload["inbound"])
+
+    # Cloop's Historical reports describe the same completed business day as
+    # Call Logs — always this date, never a client-supplied or guessed one.
+    # Its Real-Time snapshot and Total Cases to Date genuinely are "today",
+    # read from this server's own clock rather than trusting the browser's.
+    cloop_payload = dict(payload.get("cloop") or {})
+    cloop_payload["historicalDate"] = date
+    cloop_payload["realtimeDate"] = datetime.now(SYDNEY).strftime("%Y-%m-%d")
+
     manifest = lib.get_manifest(REPO_ROOT, OWNER, REPO, DAILY_BRANCH, github_token)
 
-    call_logs_json = build_call_logs_json(date, payload.get("callLogs") or {}, github_token, DAILY_BRANCH, manifest)
-    cloop_json, unmatched_agents = build_cloop_json(date, payload.get("cloop") or {}, github_token, DAILY_BRANCH, manifest)
+    call_logs_json = build_call_logs_json(date, call_logs_payload, github_token, DAILY_BRANCH, manifest)
+    cloop_json, unmatched_agents = build_cloop_json(date, cloop_payload, github_token, DAILY_BRANCH, manifest)
     tasks_json = build_tasks_json(date, github_token, DAILY_BRANCH, manifest)
     leave_json, leave_mode = build_leave_json(date, github_token, DAILY_BRANCH, manifest)
 

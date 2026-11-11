@@ -1,5 +1,4 @@
 import { esc, todayISOInCanberra, formatDate, fetchJSON } from '../util.js';
-import { isWorkingDay } from '../workdays.js';
 
 function statusRow(label, done, subtitle) {
   // Grey = not started, green = done — a deliberate, page-specific exception
@@ -210,44 +209,6 @@ function saveStatusValue(category, dateIso, value) {
   }
 }
 
-// Cloop's two report dates: the day the Real-Time snapshot was taken (always
-// today, by construction — it's a live view) and the day the two Historical
-// reports cover (the most recently completed BUSINESS day — see
-// scripts/parse_cloop.py's own docstring on why that's deliberately not
-// auto-guessed as "yesterday": a weekend or public holiday breaks that simple
-// rule). Defaulted here using the same isWorkingDay() the rest of this
-// project already uses for exactly that reason, but left fully editable,
-// stored per-day like the rest of this page's local-only state.
-function cloopDatesStorageKey(dateIso) {
-  return `dr-checklist-cloop-dates-${dateIso}`;
-}
-
-function defaultCloopDates(dateIso) {
-  let d = new Date(`${dateIso}T00:00:00Z`);
-  do {
-    d = new Date(d.getTime() - 86400000);
-  } while (!isWorkingDay(d.toISOString().slice(0, 10)));
-  return { realtimeDate: dateIso, historicalDate: d.toISOString().slice(0, 10) };
-}
-
-function loadCloopDatesValue(dateIso) {
-  try {
-    const saved = JSON.parse(localStorage.getItem(cloopDatesStorageKey(dateIso)));
-    if (saved && saved.realtimeDate && saved.historicalDate) return saved;
-  } catch {
-    // fall through to the computed default
-  }
-  return defaultCloopDates(dateIso);
-}
-
-function saveCloopDatesValue(dateIso, value) {
-  try {
-    localStorage.setItem(cloopDatesStorageKey(dateIso), JSON.stringify(value));
-  } catch {
-    // see saveEntry's own note — not fatal, just means it won't persist.
-  }
-}
-
 function formatSydneyTime(isoTimestamp) {
   // Matches this project's established "7:49 AM" style (uppercase AM/PM,
   // baked into every committed JSON file's own time strings) rather than
@@ -380,31 +341,6 @@ function renderStatusField(el, cat, readinessEl) {
     saveStatusValue(cat.key, today, value);
     renderStatusField(el, cat, readinessEl);
     if (readinessEl) renderReadinessForCategory(readinessEl, cat);
-  });
-}
-
-// Cloop-only: the two dates the Generate step needs to tell the Real-Time
-// snapshot apart from the Historical reports' own coverage date (see
-// cloopDatesStorageKey's own note on why these can't just be "today" and
-// "yesterday"). Not part of the Done/Pending readiness tick above — the
-// files and Total Cases to Date already decide that — just metadata Generate
-// reads later.
-function renderCloopDates(el) {
-  const today = todayISOInCanberra();
-  const current = loadCloopDatesValue(today);
-  el.innerHTML = `
-    <h5>Cloop report dates</h5>
-    <p class="q">Defaults to today (Real-Time) and the most recent business day (Historical) — change these if that's wrong.</p>
-    <form class="dr-cases-form">
-      <label>Real-Time snapshot date<input class="dinput" type="date" name="realtimeDate" value="${esc(current.realtimeDate)}" required></label>
-      <label>Historical reports cover date<input class="dinput" type="date" name="historicalDate" value="${esc(current.historicalDate)}" required></label>
-      <button class="btn btn-primary" type="submit">Save</button>
-    </form>`;
-  el.querySelector('form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const fd = new FormData(e.target);
-    saveCloopDatesValue(today, { realtimeDate: fd.get('realtimeDate'), historicalDate: fd.get('historicalDate') });
-    renderCloopDates(el);
   });
 }
 
@@ -862,13 +798,6 @@ function renderUploadSection(container) {
     }
     renderUploadBlock(blockEl, cat, { busy: false, log: [] }, readinessEl);
     let afterEl = blockEl;
-    if (cat.key === 'cloop') {
-      const datesEl = document.createElement('div');
-      datesEl.className = 'dr-section-gap';
-      afterEl.after(datesEl);
-      renderCloopDates(datesEl);
-      afterEl = datesEl;
-    }
     if (cat.readiness && cat.readiness.statusRequired) {
       const statusEl = document.createElement('div');
       statusEl.className = 'dr-section-gap';
@@ -907,12 +836,12 @@ function leaveDone() {
 // its content swapped between loading/done/error states rather than a new
 // dialog opened each time. Native <dialog> gives the backdrop, centering and
 // Escape-to-close for free.
-function renderDialogLoading(dialog, date) {
+function renderDialogLoading(dialog) {
   dialog.innerHTML = `
     <div class="dr-dialog-body">
       <div class="dr-spinner" aria-hidden="true"></div>
-      <h3>Generating ${esc(date)}'s report…</h3>
-      <p class="q">Parsing today's files and writing the report — this takes a few seconds.</p>
+      <h3>Generating the report…</h3>
+      <p class="q">Parsing the uploaded files and writing the report — this takes a few seconds. The date is read straight from the Call Logs files, not today's date.</p>
     </div>`;
 }
 
@@ -981,15 +910,19 @@ function renderGenerateSection(container) {
   btn.addEventListener('click', async () => {
     const dialog = document.getElementById('generateDialog');
     const today = todayISOInCanberra();
-    renderDialogLoading(dialog, today);
+    renderDialogLoading(dialog);
     dialog.showModal();
 
     const clEntries = loadEntries('call-logs', today);
     const cloopEntries = loadEntries('cloop', today);
     const findContent = (entries, key) => entries.find((e) => e.subtypeKey === key)?.content;
 
+    // No date is sent here at all — the server reads it straight out of the
+    // Call Logs' own CallDateTime column (see api/generate/report.py), never
+    // from "today" or a guessed/defaulted business day. That's the one
+    // reliable source: Call Logs are usually uploaded a day (or, after a
+    // weekend, several days) after the date they actually cover.
     const payload = {
-      date: today,
       callLogs: {
         inbound: findContent(clEntries, 'inbound'),
         outbound: findContent(clEntries, 'outbound'),
@@ -999,7 +932,6 @@ function renderGenerateSection(container) {
         realtime: findContent(cloopEntries, 'realtime'),
         queueHistorical: findContent(cloopEntries, 'queueHistorical'),
         agentHistorical: findContent(cloopEntries, 'agentHistorical'),
-        ...loadCloopDatesValue(today),
         totalCasesToDate: loadStatusValue('cloop', today),
       },
     };
@@ -1011,7 +943,7 @@ function renderGenerateSection(container) {
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok || !body.ok) throw new Error(body.error || `request failed (${res.status})`);
-      renderDialogDone(dialog, body, today);
+      renderDialogDone(dialog, body, body.date);
     } catch (err) {
       renderDialogError(dialog, err.message || String(err));
     }
