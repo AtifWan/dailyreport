@@ -1,0 +1,131 @@
+{
+  "_source": "No source PDF for this date — assembled from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance: call-logs/cloop are raw-CSV parses from files the user supplied directly in chat, tasks.json is a literal carry-forward of 2026-11-09's own data per explicit user instruction 'Task is on hold', and leave.json a literal carry-forward of 2026-11-09's own weekly grid per explicit user instruction 'Leave is the same as the one I've updated').",
+  "report": {
+    "number": 352,
+    "date": "2026-11-10",
+    "weekday": "Tuesday",
+    "title": "Daily Operations Report - 10th November 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "PST",
+        "days": 2,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 0,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 88,
+        "incompleteCount": 1,
+        "incompleteExample": "Best Practice Online Medicare Claim"
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 199,
+    "accepted": 173,
+    "acceptedPct": 87,
+    "missed": 26,
+    "missedPct": 13,
+    "totalOutbound": 53,
+    "topInboundAgent": {
+      "name": "Rebecca Quinn",
+      "calls": 60
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 81,
+        "missed": 11
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 90,
+        "missed": 15
+      },
+      {
+        "queue": "Health Professionals",
+        "accepted": 0,
+        "missed": 0
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 1,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "Rebecca Quinn tops the inboundByStaff table this date (60 calls). No PDF exists for this date to cross-check against.",
+  "_callLogsNote": "summary vs grandTotal carries a gap of 1 this date (see call-logs.json's own _summaryVsGrandTotalNote) — one direct-line 'Crace - Rec 1' call, not one of the four named call queues. Same quirk type documented on earlier dates, not a new anomaly.",
+  "cloop": {
+    "inQueue": 36,
+    "oldestDays": 7.99,
+    "contactsQueuedYesterday": 103,
+    "emailsHandledYesterday": 130,
+    "totalOverallCases": 11422,
+    "totalInProgress": 168,
+    "totalOpenCases": 45
+  },
+  "_cloopNote": "Cloop's Real-Time queue total (36) is down from 2026-11-09's committed 62. totalOverallCases/InProgress/OpenCases (11422/168/45) were given by hand, not read from a PDF — see cloop.json's own _source. emailsHandledYesterday's 130 total includes a raw-CSV quirk flagged in cloop.json's own _emailsHandledNote (Jasmina Sodolovic's printed total exceeds her incoming+outbound components by 5, same agent/quirk type as 2026-11-09 with a different-sized gap).",
+  "leave": {
+    "weekLabel": "9 November – 13 November 2026",
+    "doctorLinesOnLeave": 2,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": [
+      "Ambrosie Brassil",
+      "Andrew Davies",
+      "Nita Sigdel"
+    ],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "Same working week (9-13 Nov) as 2026-11-09 — roster saved directly through the website's typed leave grid (not a carry-forward this time: the user re-entered/edited this date's grid themselves, dropping Dr Michelle De Jesus from the weekly grid — she remains in longTerm). doctorLinesOnLeave (2) counts every Doctor-group person listed this week with at least one leave day — both listed doctors (Dr Somyata Jhorar, Dr Lisa Bron) have leave this week. As of today (Tuesday), both doctors and 2 staff (Shae Connors, Ambrosie Brassil) are on leave; Andrew Davies and Nita Sigdel are available today. See leave.json's own _source: this week's grid only lists people with at least one leave day, so these totals aren't directly comparable to earlier weeks' (which counted the full roster)."
+}
