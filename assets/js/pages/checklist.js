@@ -1,15 +1,6 @@
 import { esc, todayISOInCanberra, formatDate, fetchJSON } from '../util.js';
 import { isWorkingDay } from '../workdays.js';
 
-// The local upload server (scripts/upload_server.py) is the only backend this
-// page talks to now — always http://127.0.0.1:<port>, regardless of whether
-// this page itself is being viewed from the Vercel deployment or from inside
-// the Artifact, because "local" here means the viewer's own machine, not this
-// page's own origin. Raw files (including leave screenshots) go ONLY to this
-// address — never to Vercel, GitHub, or anywhere else — so they never leave
-// the machine the browser is running on.
-const LOCAL_UPLOAD_BASE = 'http://127.0.0.1:8787';
-
 function statusRow(label, done, subtitle) {
   // Grey = not started, green = done — a deliberate, page-specific exception
   // to the vendored design system's own blue "good" colour (see app.css's
@@ -34,23 +25,12 @@ function readFileText(file) {
   });
 }
 
-function readFileBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    // readAsDataURL gives "data:<mime>;base64,<the actual base64>" — strip
-    // everything up to and including the first comma.
-    reader.onload = () => resolve(String(reader.result).split(',', 2)[1] || '');
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
-  });
-}
-
 // One block per upload category: a file input (multiple files allowed, since
 // a single day's Call Logs or Cloop upload is several CSVs at once) plus a
-// running log of per-file save confirmations/errors. Every selected file is
-// POSTed to the local upload server individually and immediately, so a
-// failure partway through (e.g. the server isn't running) still leaves
-// whichever files got through saved, with the log showing exactly which.
+// running log of per-file read confirmations/errors. Validated files are
+// read and kept in this browser's localStorage only, until "Generate
+// today's report" sends everything to the website's own Generate endpoint
+// (api/generate/report.py) in one go — no local server involved.
 
 function parseCsvHeaderColumns(text) {
   const firstLine = text.replace(/^﻿/, '').split(/\r\n|\r|\n/, 1)[0] || '';
@@ -104,7 +84,7 @@ async function validateCallLogsFile(file) {
   if (missing.length) {
     return { ok: false, error: `looks like ${subtype.fullLabel}, but is missing expected column(s): ${missing.join(', ')}` };
   }
-  return { ok: true, subtypeKey, subtypeFullLabel: subtype.fullLabel };
+  return { ok: true, subtypeKey, subtypeFullLabel: subtype.fullLabel, text };
 }
 
 // --- Cloop validation -------------------------------------------------------
@@ -152,7 +132,7 @@ async function validateCloopFile(file) {
     if (!matches) {
       return { ok: false, error: "looks like a Real-Time Metrics Report, but its column layout on row 3 doesn't match what's expected — it may be from a different export or a changed format" };
     }
-    return { ok: true, subtypeKey: 'realtime', subtypeFullLabel: CLOOP_SUBTYPES.realtime.fullLabel };
+    return { ok: true, subtypeKey: 'realtime', subtypeFullLabel: CLOOP_SUBTYPES.realtime.fullLabel, text };
   }
 
   const columns = new Set(parseCsvHeaderColumns(text));
@@ -165,7 +145,7 @@ async function validateCloopFile(file) {
   if (missing.length) {
     return { ok: false, error: `looks like ${subtype.fullLabel}, but is missing expected column(s): ${missing.join(', ')}` };
   }
-  return { ok: true, subtypeKey, subtypeFullLabel: subtype.fullLabel };
+  return { ok: true, subtypeKey, subtypeFullLabel: subtype.fullLabel, text };
 }
 
 // --- Per-day readiness state (browser-local only; see localStorage note) --
@@ -463,23 +443,11 @@ const UPLOAD_CATEGORIES = [
 
 function uploadLogRowHtml(entry) {
   const icon = entry.ok ? '✓' : '✕';
-  const label = entry.ok ? `Saved <b>${esc(entry.savedAs)}</b> to <b>${esc(entry.folder)}/</b>${entry.subtypeFullLabel ? ` — ${esc(entry.subtypeFullLabel)}` : ''}` : `${esc(entry.filename)} — ${esc(entry.error)}`;
+  const label = entry.ok ? `Read <b>${esc(entry.filename)}</b>${entry.subtypeFullLabel ? ` — ${esc(entry.subtypeFullLabel)}` : ''} — ready to generate` : `${esc(entry.filename)} — ${esc(entry.error)}`;
   return `<div class="dr-upload-log-row${entry.ok ? '' : ' err'}">
     <span class="dr-upload-log-icon">${icon}</span>
     <span>${label}</span>
   </div>`;
-}
-
-async function uploadOneFile(category, file) {
-  const contentBase64 = await readFileBase64(file);
-  const res = await fetch(`${LOCAL_UPLOAD_BASE}/upload`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ category, filename: file.name, contentBase64 }),
-  });
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok || !body.ok) throw new Error(body.error || `request failed (${res.status})`);
-  return body;
 }
 
 function dropzoneHtml(cat, busy) {
@@ -787,6 +755,9 @@ function renderLeaveBlock(el, cat, state) {
   if (showForm && state.leaveGrid && !state.leaveGridLoading) wireLeaveGridForm(el, cat, state, el);
 }
 
+// Reads and validates each file entirely in the browser, then stashes its
+// text content straight into localStorage — nothing is sent anywhere until
+// "Generate today's report" is clicked. No local server involved at all.
 async function handleFiles(el, cat, state, files, readinessEl) {
   state.busy = true;
   renderUploadBlock(el, cat, state, readinessEl);
@@ -796,30 +767,17 @@ async function handleFiles(el, cat, state, files, readinessEl) {
     if (!validation.ok) {
       state.log.unshift({ ok: false, filename: file.name, error: validation.error });
       renderUploadBlock(el, cat, state, readinessEl);
-      continue; // invalid files are never sent to the upload server at all
+      continue;
     }
-    try {
-      const result = await uploadOneFile(cat.key, file);
-      state.log.unshift({ ok: true, savedAs: result.savedAs, folder: result.folder, subtypeFullLabel: validation.subtypeFullLabel });
-      if (readinessEl && validation.subtypeKey) {
-        const subtypeConfig = cat.readiness.subtypes.find((s) => s.key === validation.subtypeKey);
-        saveEntry(
-          cat.key, todayISOInCanberra(),
-          { subtypeKey: validation.subtypeKey, originalName: file.name, savedAs: result.savedAs, at: new Date().toISOString() },
-          subtypeConfig && subtypeConfig.multiple,
-        );
-        renderReadinessForCategory(readinessEl, cat);
-      }
-    } catch (err) {
-      // fetch() itself throws a TypeError for a network-level failure (e.g.
-      // nothing listening on LOCAL_UPLOAD_BASE) — anything else is a real
-      // error response from the server, so show its own message instead.
-      const networkError = err instanceof TypeError;
-      state.log.unshift({
-        ok: false,
-        filename: file.name,
-        error: networkError ? "couldn't reach the local upload server — is `python3 scripts/upload_server.py` running?" : (err.message || String(err)),
-      });
+    state.log.unshift({ ok: true, filename: file.name, subtypeFullLabel: validation.subtypeFullLabel });
+    if (readinessEl && validation.subtypeKey) {
+      const subtypeConfig = cat.readiness.subtypes.find((s) => s.key === validation.subtypeKey);
+      saveEntry(
+        cat.key, todayISOInCanberra(),
+        { subtypeKey: validation.subtypeKey, originalName: file.name, content: validation.text, at: new Date().toISOString() },
+        subtypeConfig && subtypeConfig.multiple,
+      );
+      renderReadinessForCategory(readinessEl, cat);
     }
     renderUploadBlock(el, cat, state, readinessEl);
   }
@@ -858,9 +816,9 @@ function renderUploadBlock(el, cat, state, readinessEl) {
 function startNewDay(container) {
   const today = todayISOInCanberra();
   const ok = confirm(
-    "Start a new day?\n\nThis clears today's Call Logs and Cloop progress and today's leave "
-    + "answer, on this browser only. It does NOT delete any saved files, and your leave "
-    + 'screenshot history is kept.',
+    "Start a new day?\n\nThis clears today's Call Logs and Cloop files and today's leave "
+    + "answer, on this browser only. Nothing has been committed anywhere for these files yet, "
+    + 'so this is safe — and your leave history is kept either way.',
   );
   if (!ok) return;
   try {
@@ -881,7 +839,7 @@ function renderUploadSection(container) {
         <h3>Upload today's files</h3>
         <button type="button" class="btn" id="startNewDayBtn">Start a new day</button>
       </div>
-      <p class="q">Call Logs and Cloop are saved straight to folders in this repo on your own machine — nothing there is sent to GitHub, Vercel, or anywhere else — and need the local upload server running (<code>python3 scripts/upload_server.py</code>). Staff and Drs Leave is different: it saves straight from this website, no local server needed.</p>
+      <p class="q">Drop today's files in below. Nothing is sent anywhere until you click "Generate today's report" — then this page parses them and commits the result straight to GitHub. No local server needed for anything on this page.</p>
       <div class="dr-upload-grid">
         <div class="dr-upload-block" id="upload-call-logs"></div>
         <div class="dr-upload-block" id="upload-cloop"></div>
@@ -964,6 +922,9 @@ function renderDialogDone(dialog, result, date) {
   const unmatched = (result.unmatchedAgentNames || []).length
     ? `<p class="q">Cloop agent email(s) not matched to a known name (saved as a best-effort guess): ${esc(result.unmatchedAgentNames.join(', '))}.</p>`
     : '';
+  const mainErrors = (result.mainBranchErrors || []).length
+    ? `<p class="q" style="color:var(--danger-ink)">Saved to the pipeline branch, but the live site may not show it yet: ${esc(result.mainBranchErrors.join('; '))}</p>`
+    : '';
   dialog.innerHTML = `
     <div class="dr-dialog-body">
       <div class="dr-dialog-icon dr-dialog-icon--ok" aria-hidden="true">✓</div>
@@ -971,6 +932,7 @@ function renderDialogDone(dialog, result, date) {
       <p style="margin:4px 0">Wrote:</p>
       <ul style="margin:0 0 8px;padding-left:20px">${lines.join('')}</ul>
       ${unmatched}
+      ${mainErrors}
       <p style="margin:8px 0 4px"><b>Preview it:</b> use the date picker on any page below to switch to ${esc(date)}, or jump straight there:</p>
       <ul style="margin:0 0 8px;padding-left:20px">
         <li><a href="#/call-logs/${esc(date)}">Call logs — #/call-logs/${esc(date)}</a></li>
@@ -1008,7 +970,7 @@ function renderGenerateSection(container) {
   container.innerHTML = `
     <div class="panel">
       <h3>Generate today's report</h3>
-      <p class="q">Builds call-logs.json, cloop.json, tasks.json and leave.json from everything above, in the dashboard's existing format, and saves them straight into this repo. Previous dates are never touched.</p>
+      <p class="q">Builds call-logs.json, cloop.json, tasks.json and leave.json from everything above and commits them straight to GitHub — no local server involved. Previous dates are never touched.</p>
       <button type="button" class="btn btn-primary" id="generateBtn" ${allDone ? '' : 'disabled'}>Generate today's report</button>
       ${!allDone ? `<p class="q" style="margin-top:8px">Still need: ${esc(missing.join(', '))}.</p>` : ''}
     </div>`;
@@ -1021,15 +983,28 @@ function renderGenerateSection(container) {
     const today = todayISOInCanberra();
     renderDialogLoading(dialog, today);
     dialog.showModal();
+
+    const clEntries = loadEntries('call-logs', today);
+    const cloopEntries = loadEntries('cloop', today);
+    const findContent = (entries, key) => entries.find((e) => e.subtypeKey === key)?.content;
+
     const payload = {
       date: today,
-      callLogsFiles: loadEntries('call-logs', today).map((e) => ({ subtypeKey: e.subtypeKey, savedAs: e.savedAs })),
-      cloopFiles: loadEntries('cloop', today).map((e) => ({ subtypeKey: e.subtypeKey, savedAs: e.savedAs })),
-      cloopDates: loadCloopDatesValue(today),
-      totalCasesToDate: loadStatusValue('cloop', today),
+      callLogs: {
+        inbound: findContent(clEntries, 'inbound'),
+        outbound: findContent(clEntries, 'outbound'),
+        queues: clEntries.filter((e) => e.subtypeKey === 'queue').map((e) => e.content),
+      },
+      cloop: {
+        realtime: findContent(cloopEntries, 'realtime'),
+        queueHistorical: findContent(cloopEntries, 'queueHistorical'),
+        agentHistorical: findContent(cloopEntries, 'agentHistorical'),
+        ...loadCloopDatesValue(today),
+        totalCasesToDate: loadStatusValue('cloop', today),
+      },
     };
     try {
-      const res = await fetch(`${LOCAL_UPLOAD_BASE}/generate`, {
+      const res = await fetch('/api/generate/report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -1038,11 +1013,7 @@ function renderGenerateSection(container) {
       if (!res.ok || !body.ok) throw new Error(body.error || `request failed (${res.status})`);
       renderDialogDone(dialog, body, today);
     } catch (err) {
-      const networkError = err instanceof TypeError;
-      const message = networkError
-        ? "couldn't reach the local upload server — is `python3 scripts/upload_server.py` running?"
-        : (err.message || String(err));
-      renderDialogError(dialog, message);
+      renderDialogError(dialog, err.message || String(err));
     }
   });
 }
