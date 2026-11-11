@@ -16,6 +16,17 @@
       "group": "Doctor",
       "people": [
         {
+          "name": "Dr Michelle De Jesus",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
           "name": "Dr Somyata Jhorar",
           "site": null,
           "status": [
