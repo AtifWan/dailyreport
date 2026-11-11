@@ -212,7 +212,7 @@
   },
   "_source": "Real-Time + two Historical Metrics Reports from Cloop's own raw CSV exports, uploaded directly through the dashboard's Report Checklist page, via scripts/parse_cloop.py. Total Cases to Date has no raw export and was typed in directly on the checklist page.",
   "reportTitle": "Daily Operations Report - 11th November 2026",
-  "extractedAt": "2026-11-12T10:06:10.957148+11:00",
-  "extractedAtLabel": "10:06 AM, Thursday 12 November 2026",
+  "extractedAt": "2026-11-12T10:07:48.926578+11:00",
+  "extractedAtLabel": "10:07 AM, Thursday 12 November 2026",
   "_extractedAtNote": "No raw Cloop export carries its own exact extraction timestamp, and this file wasn't fetched via SharePoint. This is simply when the Report Checklist's Generate button was run, which may be later than when the files were actually exported from Cloop."
 }
