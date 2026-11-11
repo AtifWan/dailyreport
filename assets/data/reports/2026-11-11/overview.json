@@ -1,0 +1,62 @@
+{
+  "_source": "No source PDF for this date — assembled from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance: call-logs/cloop generated via the website's Report Checklist Generate button from raw CSVs, tasks.json carried forward by that same button, leave.json already existed from the typed weekly grid, same working week as 2026-11-09/10).",
+  "report": {
+    "number": 353,
+    "date": "2026-11-11",
+    "weekday": "Wednesday",
+    "title": "Daily Operations Report - 11th November 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {"name": "Crace", "days": 1, "onHalt": true, "_carriedForward": true},
+      {"name": "Denman", "days": 109, "onHalt": true, "longest": true, "_carriedForward": true},
+      {"name": "Lyneham", "days": 0, "onHalt": true, "_carriedForward": true},
+      {"name": "PST", "days": 2, "onHalt": false},
+      {"name": "Finance", "days": 0, "onHalt": false}
+    ],
+    "longestStreak": {"name": "Denman", "days": 109, "startDate": "2026-01-13"},
+    "checklists": [
+      {"name": "PST", "completionPct": 100},
+      {"name": "Finance", "completionPct": 88, "incompleteCount": 1, "incompleteExample": "Best Practice Online Medicare Claim"}
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 241,
+    "accepted": 186,
+    "acceptedPct": 77,
+    "missed": 55,
+    "missedPct": 23,
+    "totalOutbound": 110,
+    "topInboundAgent": {"name": "Apurva Pathak", "calls": 44},
+    "queueBreakdown": [
+      {"queue": "Appointments", "accepted": 103, "missed": 27},
+      {"queue": "General Enquiries", "accepted": 82, "missed": 28},
+      {"queue": "Health Professionals", "accepted": 0, "missed": 0},
+      {"queue": "Canberra Vasectomy", "accepted": 1, "missed": 0}
+    ]
+  },
+  "_topInboundAgentNote": "Apurva Pathak tops the inboundByStaff table this date (44 calls). No PDF exists for this date to cross-check against.",
+  "_callLogsNote": "summary and grandTotal agree exactly this date (186 accepted/55 missed both ways) — no direct-line or unaccounted-call quirk this time.",
+  "cloop": {
+    "inQueue": 62,
+    "oldestDays": 8.99,
+    "contactsQueuedYesterday": 88,
+    "emailsHandledYesterday": 106,
+    "totalOverallCases": 11512,
+    "totalInProgress": 165,
+    "totalOpenCases": 63
+  },
+  "_cloopNote": "Cloop's Real-Time queue total (62) is up from 2026-11-10's committed 36. totalOverallCases/InProgress/OpenCases (11512/165/63) were typed in through the website's Total Cases to Date form, not read from a PDF — see cloop.json's own _source. emailsHandledYesterday's 106 total includes a raw-CSV quirk flagged in cloop.json's own _emailsHandledNote (Jasmina Sodolovic's printed total exceeds her incoming+outbound components by 4, same recurring agent/quirk type as 2026-11-09/10 with a different-sized gap each time).",
+  "leave": {
+    "weekLabel": "9 November – 13 November 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": ["Ambrosie Brassil", "Andrew Davies", "Nita Sigdel"],
+    "longTerm": [
+      {"name": "Anna Lewis", "note": "Maternity Leave", "from": "2026-01-19", "to": "2027-03-14"},
+      {"name": "Dr Michelle De Jesus", "note": "Maternity Leave", "from": "2026-09-21", "to": "2027-07-02"}
+    ]
+  },
+  "_leaveNote": "Same working week (9-13 Nov) as 2026-11-09/10 — leave.json already existed for this date (entered through the typed weekly-grid tool) and was left untouched by Generate. doctorLinesOnLeave (3) counts every Doctor-group person listed this week with at least one leave day — all 3 listed doctors have leave this week. As of today (Wednesday), every person currently listed on the roster is on leave: all 3 doctors (Dr Michelle De Jesus, Dr Somyata Jhorar, Dr Lisa Bron) and all 4 staff (Shae Connors, Ambrosie Brassil, Andrew Davies, Nita Sigdel). See leave.json's own _note from 2026-11-09: this week's grid only lists people with at least one leave day, so these totals aren't directly comparable to earlier weeks' (which counted the full roster, available people included)."
+}
