@@ -1,0 +1,131 @@
+{
+  "_source": "No source PDF for this date — assembled automatically by the website's Generate button from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance). Built by deterministic rules in api/generate/report.py's build_overview_json, not a manual judgement pass; the cross-checks it runs (call-logs summary vs grandTotal, cloop emailsHandledYesterday per-agent totals) are documented in that function's own docstring.",
+  "report": {
+    "number": 354,
+    "date": "2026-11-12",
+    "weekday": "Thursday",
+    "title": "Daily Operations Report - 12th November 2026"
+  },
+  "criticalTasks": {
+    "streaks": [
+      {
+        "name": "Crace",
+        "days": 1,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Denman",
+        "days": 109,
+        "onHalt": true,
+        "longest": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "Lyneham",
+        "days": 0,
+        "onHalt": true,
+        "_carriedForward": true
+      },
+      {
+        "name": "PST",
+        "days": 2,
+        "onHalt": false
+      },
+      {
+        "name": "Finance",
+        "days": 0,
+        "onHalt": false
+      }
+    ],
+    "longestStreak": {
+      "name": "Denman",
+      "days": 109,
+      "startDate": "2026-01-13"
+    },
+    "checklists": [
+      {
+        "name": "PST",
+        "completionPct": 100
+      },
+      {
+        "name": "Finance",
+        "completionPct": 88,
+        "incompleteCount": 1,
+        "incompleteExample": "Best Practice Online Medicare Claim"
+      }
+    ]
+  },
+  "callLogs": {
+    "totalInbound": 277,
+    "accepted": 249,
+    "acceptedPct": 90,
+    "missed": 28,
+    "missedPct": 10,
+    "totalOutbound": 166,
+    "topInboundAgent": {
+      "name": "Rebecca Quinn",
+      "calls": 82
+    },
+    "queueBreakdown": [
+      {
+        "queue": "Appointments",
+        "accepted": 152,
+        "missed": 19
+      },
+      {
+        "queue": "General Enquiries",
+        "accepted": 93,
+        "missed": 9
+      },
+      {
+        "queue": "Health Professionals",
+        "accepted": 0,
+        "missed": 0
+      },
+      {
+        "queue": "Canberra Vasectomy",
+        "accepted": 2,
+        "missed": 0
+      }
+    ]
+  },
+  "_topInboundAgentNote": "Rebecca Quinn tops the inboundByStaff table this date (82 calls). No PDF exists for this date to cross-check against.",
+  "_callLogsNote": "summary vs grandTotal carries a gap of 2 this date (summary: 249 accepted/28 missed, grandTotal: 247 accepted/28 missed) — likely one or more direct-line/individual-extension calls outside the four named queues, same quirk type documented on earlier dates, not a new anomaly.",
+  "cloop": {
+    "inQueue": 58,
+    "oldestDays": 9.99,
+    "contactsQueuedYesterday": 82,
+    "emailsHandledYesterday": 91,
+    "totalOverallCases": 11589,
+    "totalInProgress": 180,
+    "totalOpenCases": 57
+  },
+  "_cloopNote": "Cloop's Real-Time queue total (58) is down from the previous committed date's 62. totalOverallCases/InProgress/OpenCases (11589/180/57) were typed in through the website's Total Cases to Date form, not read from a PDF. emailsHandledYesterday's totals include a known recurring quirk — printed total vs incoming+outbound components doesn't quite add up for: Chloey Leow (off by 1) (same quirk type seen on earlier dates, not a new anomaly).",
+  "leave": {
+    "weekLabel": "9 November – 13 November 2026",
+    "doctorLinesOnLeave": 3,
+    "staffFullyOnLeave": 1,
+    "staffPartialLeave": 3,
+    "staffPartialLeaveNames": [
+      "Ambrosie Brassil",
+      "Andrew Davies",
+      "Nita Sigdel"
+    ],
+    "longTerm": [
+      {
+        "name": "Anna Lewis",
+        "note": "Maternity Leave",
+        "from": "2026-01-19",
+        "to": "2027-03-14"
+      },
+      {
+        "name": "Dr Michelle De Jesus",
+        "note": "Maternity Leave",
+        "from": "2026-09-21",
+        "to": "2027-07-02"
+      }
+    ]
+  },
+  "_leaveNote": "As of today (Thursday), 2 doctors (Dr Michelle De Jesus and Dr Lisa Bron) and 4 staff (Shae Connors, Ambrosie Brassil, Andrew Davies and Nita Sigdel) are on leave; Dr Somyata Jhorar is available today. doctorLinesOnLeave (3) counts every Doctor-group person listed this week with at least one leave day. This week's leave grid only lists people with at least one leave day, so these totals aren't directly comparable to a week where the full roster was listed."
+}
