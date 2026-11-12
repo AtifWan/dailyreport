@@ -1,22 +1,22 @@
 {
   "reportDate": "2026-11-11",
   "summary": {
-    "totalInbound": 241,
-    "accepted": 186,
-    "missed": 55,
-    "acceptedPct": 77,
-    "missedPct": 23,
-    "totalOutbound": 110
+    "totalInbound": 319,
+    "accepted": 262,
+    "missed": 57,
+    "acceptedPct": 82,
+    "missedPct": 18,
+    "totalOutbound": 136
   },
   "queueReport": [
     {
       "queue": "Appointments",
-      "accepted": 103,
-      "missed": 27
+      "accepted": 151,
+      "missed": 29
     },
     {
       "queue": "General Enquiries",
-      "accepted": 82,
+      "accepted": 110,
       "missed": 28
     },
     {
@@ -31,8 +31,8 @@
     }
   ],
   "grandTotal": {
-    "accepted": 186,
-    "missed": 55
+    "accepted": 262,
+    "missed": 57
   },
   "tenDayTrend": {
     "accepted": [
@@ -45,7 +45,7 @@
       172,
       213,
       173,
-      186
+      262
     ],
     "missed": [
       16,
@@ -57,7 +57,7 @@
       23,
       35,
       26,
-      55
+      57
     ],
     "answerRatePct": [
       94,
@@ -69,7 +69,7 @@
       88,
       86,
       87,
-      77
+      82
     ],
     "overallAvgWaitSec": [
       45,
@@ -81,7 +81,7 @@
       49,
       37,
       46,
-      48
+      44
     ],
     "labels": [
       "Thu 29 Oct",
@@ -108,7 +108,7 @@
         92,
         136,
         81,
-        103
+        151
       ],
       "missed": [
         6,
@@ -120,7 +120,7 @@
         12,
         18,
         11,
-        27
+        29
       ],
       "avgWaitSec": [
         45,
@@ -146,7 +146,7 @@
         75,
         72,
         90,
-        82
+        110
       ],
       "missed": [
         10,
@@ -170,7 +170,7 @@
         53,
         32,
         56,
-        60
+        52
       ]
     },
     "Health Professionals": {
@@ -252,24 +252,24 @@
   },
   "patientServiceKpi": {
     "longestCallDurationSec": 662,
-    "longestCallAt": "8:30 AM",
+    "longestCallAt": "11:30 AM",
     "longestCallAgent": "Lucinda Gonzalez",
     "longestWaitingTimeSec": 899,
-    "longestWaitingAt": "1:51 PM",
-    "avgCallHandlingSec": 149
+    "longestWaitingAt": "4:51 PM",
+    "avgCallHandlingSec": 144
   },
   "longestWaitPerQueue": [
     {
       "queue": "Appointments",
       "waitSec": 251,
-      "time": "8:56 AM",
+      "time": "11:56 AM",
       "name": "Rebecca Quinn",
       "waitLabel": "4 min 11 sec"
     },
     {
       "queue": "General Enquiries",
       "waitSec": 899,
-      "time": "1:51 PM",
+      "time": "4:51 PM",
       "name": "Apurva Pathak",
       "waitLabel": "14 min 59 sec"
     },
@@ -283,31 +283,46 @@
     {
       "queue": "Canberra Vasectomy",
       "waitSec": 177,
-      "time": "9:38 AM",
+      "time": "12:38 PM",
       "name": "Apurva Pathak",
       "waitLabel": "2 min 57 sec"
     }
   ],
   "inboundByStaff": [
     {
-      "name": "Apurva Pathak",
-      "calls": 44,
-      "durationMins": 139
+      "name": "Rebecca Quinn",
+      "calls": 62,
+      "durationMins": 134
     },
     {
-      "name": "Rebecca Quinn",
-      "calls": 38,
-      "durationMins": 83
+      "name": "Apurva Pathak",
+      "calls": 50,
+      "durationMins": 148
     },
     {
       "name": "De Ang Renfree",
-      "calls": 27,
-      "durationMins": 66
+      "calls": 39,
+      "durationMins": 93
     },
     {
       "name": "Samantha Cooper",
-      "calls": 25,
-      "durationMins": 44
+      "calls": 30,
+      "durationMins": 56
+    },
+    {
+      "name": "David Antioch",
+      "calls": 19,
+      "durationMins": 36
+    },
+    {
+      "name": "Kiara Pfeffer",
+      "calls": 18,
+      "durationMins": 46
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 13,
+      "durationMins": 28
     },
     {
       "name": "Lucinda Gonzalez",
@@ -315,19 +330,9 @@
       "durationMins": 37
     },
     {
-      "name": "Emily Pettett",
-      "calls": 10,
-      "durationMins": 22
-    },
-    {
       "name": "Hannah Searle",
       "calls": 10,
       "durationMins": 20
-    },
-    {
-      "name": "Kiara Pfeffer",
-      "calls": 8,
-      "durationMins": 21
     },
     {
       "name": "Pinky De Paz",
@@ -335,21 +340,21 @@
       "durationMins": 12
     },
     {
-      "name": "David Antioch",
-      "calls": 4,
-      "durationMins": 8
-    },
-    {
       "name": "Isaac Davis",
-      "calls": 4,
-      "durationMins": 11
+      "calls": 5,
+      "durationMins": 19
     }
   ],
   "outboundByStaff": [
     {
       "name": "Samantha Cooper",
-      "calls": 28,
-      "durationMins": 45
+      "calls": 32,
+      "durationMins": 50
+    },
+    {
+      "name": "Isaac Davis",
+      "calls": 27,
+      "durationMins": 26
     },
     {
       "name": "Apurva Pathak",
@@ -357,24 +362,24 @@
       "durationMins": 28
     },
     {
-      "name": "Isaac Davis",
-      "calls": 22,
-      "durationMins": 21
-    },
-    {
       "name": "Kiara Pfeffer",
-      "calls": 16,
-      "durationMins": 29
+      "calls": 18,
+      "durationMins": 30
     },
     {
       "name": "De Ang Renfree",
-      "calls": 12,
+      "calls": 13,
       "durationMins": 11
     },
     {
       "name": "Rebecca Quinn",
-      "calls": 3,
-      "durationMins": 3
+      "calls": 10,
+      "durationMins": 7
+    },
+    {
+      "name": "Emily Pettett",
+      "calls": 7,
+      "durationMins": 4
     },
     {
       "name": "Hannah Searle",
@@ -387,6 +392,11 @@
       "durationMins": 11
     },
     {
+      "name": "Denman - Rec 1",
+      "calls": 1,
+      "durationMins": 0
+    },
+    {
       "name": "David Antioch",
       "calls": 1,
       "durationMins": 1
@@ -395,19 +405,19 @@
       "name": "Lucinda Gonzalez",
       "calls": 1,
       "durationMins": 0
-    },
-    {
-      "name": "Emily Pettett",
-      "calls": 1,
-      "durationMins": 0
     }
   ],
-  "outboundOtherExtensionsTotal": 104,
+  "outboundOtherExtensionsTotal": 131,
   "outboundOtherExtensions": [
     {
       "name": "(Unattributed)",
-      "calls": 15,
-      "durationMins": 15
+      "calls": 16,
+      "durationMins": 16
+    },
+    {
+      "name": "Jasmina Sodolovic",
+      "calls": 16,
+      "durationMins": 10
     },
     {
       "name": "Thinus",
@@ -415,24 +425,19 @@
       "durationMins": 17
     },
     {
-      "name": "Jasmina Sodolovic",
-      "calls": 8,
-      "durationMins": 5
+      "name": "Will Fong",
+      "calls": 10,
+      "durationMins": 34
     },
     {
       "name": "Denman - Nurse",
-      "calls": 7,
-      "durationMins": 25
+      "calls": 8,
+      "durationMins": 38
     },
     {
       "name": "Sheahan R",
       "calls": 7,
       "durationMins": 40
-    },
-    {
-      "name": "Will Fong",
-      "calls": 7,
-      "durationMins": 30
     },
     {
       "name": "Denman Room 4",
@@ -445,14 +450,24 @@
       "durationMins": 39
     },
     {
+      "name": "Kristy Muir/ John Deery",
+      "calls": 6,
+      "durationMins": 21
+    },
+    {
+      "name": "Belinda",
+      "calls": 5,
+      "durationMins": 15
+    },
+    {
       "name": "Lyneham  - Nurse",
       "calls": 5,
       "durationMins": 9
     },
     {
-      "name": "Kristy Muir/ John Deery",
-      "calls": 5,
-      "durationMins": 19
+      "name": "Penny Gosling",
+      "calls": 4,
+      "durationMins": 13
     },
     {
       "name": "Janine Kelly",
@@ -470,9 +485,14 @@
       "durationMins": 11
     },
     {
-      "name": "Belinda",
+      "name": "Ian Chan/ Andrew Mitchell",
       "calls": 2,
-      "durationMins": 14
+      "durationMins": 4
+    },
+    {
+      "name": "Raymond Liu",
+      "calls": 2,
+      "durationMins": 5
     },
     {
       "name": "RM2 Dr Tracy Fox / Dr Michelle De Jesus",
@@ -490,14 +510,29 @@
       "durationMins": 10
     },
     {
-      "name": "Tom Wigglesworth",
+      "name": "Nurse 2",
       "calls": 1,
       "durationMins": 2
     },
     {
-      "name": "Penny Gosling",
+      "name": "Nurse 3 (TR2)",
       "calls": 1,
-      "durationMins": 5
+      "durationMins": 1
+    },
+    {
+      "name": "JMO/ room 7",
+      "calls": 1,
+      "durationMins": 1
+    },
+    {
+      "name": "Mara Matic",
+      "calls": 1,
+      "durationMins": 6
+    },
+    {
+      "name": "Tom Wigglesworth",
+      "calls": 1,
+      "durationMins": 2
     },
     {
       "name": "Nurse 1",
@@ -513,11 +548,6 @@
       "name": "Vanessa Thorn",
       "calls": 1,
       "durationMins": 3
-    },
-    {
-      "name": "Raymond Liu",
-      "calls": 1,
-      "durationMins": 1
     },
     {
       "name": "Krystle Chin",
@@ -536,7 +566,7 @@
       181,
       194,
       167,
-      214
+      267
     ],
     "labels": [
       "Thu 29 Oct",
@@ -551,5 +581,5 @@
       "Wed 11 Nov"
     ]
   },
-  "_source": "Deterministic parse of raw Telair PBX CSV exports, uploaded directly through the dashboard's Report Checklist page and run via scripts/parse_call_logs.py, chained against assets/data/reports/2026-11-10/call-logs.json."
+  "_source": "Deterministic parse of raw Telair PBX CSV exports, uploaded directly in chat and run via scripts/parse_call_logs.py, chained against assets/data/reports/2026-11-10/call-logs.json. This REPLACES an earlier commit for the same date — the user confirmed this upload is the correct full-day export (241 inbound/186 accepted in the earlier commit vs 319 inbound/262 accepted here, a ~32% increase). The Inbound file's own CallDateTime column used a different format this time (24-hour, no seconds, no AM/PM, e.g. \"11/11/2026 7:15\") instead of the usual 12-hour+seconds+AM/PM format — handled correctly for this parse but flagged here in case the source export settings changed."
 }

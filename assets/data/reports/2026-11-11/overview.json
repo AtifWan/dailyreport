@@ -1,5 +1,5 @@
 {
-  "_source": "No source PDF for this date — assembled from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance: call-logs/cloop generated via the website's Report Checklist Generate button from raw CSVs, tasks.json carried forward by that same button, leave.json already existed from the typed weekly grid, same working week as 2026-11-09/10).",
+  "_source": "No source PDF for this date — assembled from this date's own call-logs.json, cloop.json, tasks.json and leave.json (see each file's own _source for provenance: call-logs/cloop generated via the website's Report Checklist Generate button from raw CSVs, tasks.json carried forward by that same button, leave.json already existed from the typed weekly grid, same working week as 2026-11-09/10). UPDATED 2026-11-12: call-logs.json was replaced with a corrected full-day export (user-confirmed in chat) and this file's callLogs section/notes were updated to match — see call-logs.json's own _source and this file's own _callLogsNote for details. cloop/tasks/leave sections are unaffected.",
   "report": {
     "number": 353,
     "date": "2026-11-11",
@@ -21,22 +21,22 @@
     ]
   },
   "callLogs": {
-    "totalInbound": 241,
-    "accepted": 186,
-    "acceptedPct": 77,
-    "missed": 55,
-    "missedPct": 23,
-    "totalOutbound": 110,
-    "topInboundAgent": {"name": "Apurva Pathak", "calls": 44},
+    "totalInbound": 319,
+    "accepted": 262,
+    "acceptedPct": 82,
+    "missed": 57,
+    "missedPct": 18,
+    "totalOutbound": 136,
+    "topInboundAgent": {"name": "Rebecca Quinn", "calls": 62},
     "queueBreakdown": [
-      {"queue": "Appointments", "accepted": 103, "missed": 27},
-      {"queue": "General Enquiries", "accepted": 82, "missed": 28},
+      {"queue": "Appointments", "accepted": 151, "missed": 29},
+      {"queue": "General Enquiries", "accepted": 110, "missed": 28},
       {"queue": "Health Professionals", "accepted": 0, "missed": 0},
       {"queue": "Canberra Vasectomy", "accepted": 1, "missed": 0}
     ]
   },
-  "_topInboundAgentNote": "Apurva Pathak tops the inboundByStaff table this date (44 calls). No PDF exists for this date to cross-check against.",
-  "_callLogsNote": "summary and grandTotal agree exactly this date (186 accepted/55 missed both ways) — no direct-line or unaccounted-call quirk this time.",
+  "_topInboundAgentNote": "Rebecca Quinn tops the inboundByStaff table this date (62 calls). No PDF exists for this date to cross-check against.",
+  "_callLogsNote": "summary and grandTotal agree exactly this date (262 accepted/57 missed both ways) — no direct-line or unaccounted-call quirk. UPDATED 2026-11-12: this date's call-logs.json was replaced with a corrected full-day export (previous commit covered only 241 inbound/186 accepted — see call-logs.json's own _source) — totalInbound/accepted/missed/topInboundAgent/queueBreakdown above reflect the corrected data, not the original report run.",
   "cloop": {
     "inQueue": 62,
     "oldestDays": 8.99,
