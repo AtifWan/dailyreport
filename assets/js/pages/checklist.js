@@ -869,8 +869,10 @@ function renderDialogDone(dialog, result, date) {
         <li><a href="#/critical-tasks/${esc(date)}">Critical daily tasks — #/critical-tasks/${esc(date)}</a></li>
         <li><a href="#/leave/${esc(date)}">Staff &amp; doctors' leave — #/leave/${esc(date)}</a></li>
       </ul>
-      <p class="q" style="margin:0 0 4px">The Overview page won't show ${esc(date)} yet — still needed:</p>
-      <ul class="q" style="margin:0 0 14px;padding-left:20px">${stillNeeded.join('')}</ul>
+      ${stillNeeded.length
+        ? `<p class="q" style="margin:0 0 4px">The Overview page won't show ${esc(date)} yet — still needed:</p>
+      <ul class="q" style="margin:0 0 14px;padding-left:20px">${stillNeeded.join('')}</ul>`
+        : `<p class="q" style="margin:0 0 14px">The Overview page is ready too — ${esc(date)} is now the dashboard's latest date.</p>`}
       <button type="button" class="btn btn-primary" data-dialog-close>Close</button>
     </div>`;
   dialog.querySelector('[data-dialog-close]').addEventListener('click', () => dialog.close());
@@ -899,7 +901,7 @@ function renderGenerateSection(container) {
   container.innerHTML = `
     <div class="panel">
       <h3>Generate today's report</h3>
-      <p class="q">Builds call-logs.json, cloop.json, tasks.json and leave.json from everything above and commits them straight to GitHub — no local server involved. Previous dates are never touched.</p>
+      <p class="q">Builds call-logs.json, cloop.json, tasks.json and leave.json from everything above and commits them straight to GitHub — no local server involved. Previous dates are never touched. Usually also finishes overview.json and sets this as the dashboard's latest date right away; only holds that last step back if something needs a second look (see the "still needed" note after generating).</p>
       <button type="button" class="btn btn-primary" id="generateBtn" ${allDone ? '' : 'disabled'}>Generate today's report</button>
       ${!allDone ? `<p class="q" style="margin-top:8px">Still need: ${esc(missing.join(', '))}.</p>` : ''}
     </div>`;

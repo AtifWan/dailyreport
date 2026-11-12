@@ -22,11 +22,22 @@ server's own clock, not trusted from the client either — the Historical
 reports are overridden to the same date as Call Logs, since both describe
 the same completed business day.
 
-Still deliberately does NOT build overview.json or bump index.json's
-"latest" — see generate_report.py's own docstring for why (needs a human
-judgement call this button can't safely invent). It does add the date to
-index.json's "dates" array on both branches, same as the local version, so
-the new files are immediately reachable via the dashboard's own navigation.
+Also builds overview.json and bumps index.json's "latest" itself, straight
+away — no more waiting for a human/Claude judgement pass. This used to be
+deliberately left out (see generate_report.py's own docstring for the
+original reasoning), but the judgement calls it actually took were narrow
+and mechanical enough to encode as rules: copy the already-computed summary
+numbers across, generate the weekday/leave narrative from leave.json's own
+grid, and run two specific cross-checks (call-logs summary vs grandTotal,
+cloop emailsHandledYesterday's per-agent total vs incoming+outbound) against
+fixed tolerance thresholds built up from the quirks already seen on past
+dates. If either cross-check comes back outside that tolerance, or there
+are unmatched agent names from the Cloop parse, or the immediately
+preceding date doesn't have its own overview.json yet (reports are numbered
+in strict calendar order), this step stops short: call-logs/cloop/tasks/
+leave are still written and "dates" still gets this date, but overview.json
+and "latest" are left for a manual judgement pass instead of guessing — see
+build_overview_json's own docstring for exactly what trips that.
 
 POST body (JSON):
   {
@@ -72,6 +83,14 @@ _WEEKDAY_ABBR = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 _MONTH_ABBR = [None, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 _WEEKDAY_FULL = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 _MONTH_FULL = [None, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+# How big a gap is still a "known quirk" rather than something new to flag.
+# The biggest ones actually seen so far are a 1-call call-logs gap (a direct
+# line outside the four named queues) and a 5-unit emailsHandledYesterday
+# gap (one agent's printed total running ahead of their own incoming+
+# outbound rows) — both well under these thresholds.
+CALL_LOGS_GRAND_TOTAL_GAP_THRESHOLD = 10
+EMAIL_HANDLED_AGENT_GAP_THRESHOLD = 10
 
 
 class GenerateError(Exception):
@@ -284,6 +303,268 @@ def build_leave_json(date, token, branch, manifest):
     )
 
 
+def format_names(names):
+    names = list(names)
+    if not names:
+        return ""
+    if len(names) == 1:
+        return names[0]
+    return ", ".join(names[:-1]) + f" and {names[-1]}"
+
+
+def week_label(week_start, week_end):
+    d1, d2 = date_cls.fromisoformat(week_start), date_cls.fromisoformat(week_end)
+    return f"{d1.day} {_MONTH_FULL[d1.month]} – {d2.day} {_MONTH_FULL[d2.month]} {d2.year}"
+
+
+def immediate_prev_date(manifest, date):
+    earlier = [d for d in manifest.get("dates", []) if d < date]
+    return max(earlier) if earlier else None
+
+
+def build_critical_tasks(tasks_json):
+    streaks = [
+        {k: v for k, v in s.items() if k in ("name", "days", "onHalt", "longest", "_carriedForward")}
+        for s in tasks_json.get("streaks", [])
+    ]
+    checklists = []
+    for c in tasks_json.get("checklists", []):
+        entry = {"name": c["name"], "completionPct": c["completionPct"]}
+        incomplete = c.get("incomplete") or []
+        if incomplete:
+            entry["incompleteCount"] = len(incomplete)
+            entry["incompleteExample"] = incomplete[0]
+        checklists.append(entry)
+    return {
+        "streaks": streaks,
+        "longestStreak": tasks_json.get("longestStreak"),
+        "checklists": checklists,
+    }
+
+
+def build_call_logs_overview(call_logs_json):
+    """Returns (section, note, stop_reason). stop_reason is set only when the
+    summary-vs-grandTotal gap is bigger than CALL_LOGS_GRAND_TOTAL_GAP_THRESHOLD
+    — a gap that size has never actually shown up, so it's treated as new-data
+    risk rather than the familiar "a direct line outside the four named
+    queues" quirk."""
+    summary = call_logs_json["summary"]
+    grand_total = call_logs_json["grandTotal"]
+    top = max(call_logs_json.get("inboundByStaff", []), key=lambda a: a["calls"], default=None)
+    section = {
+        "totalInbound": summary["totalInbound"],
+        "accepted": summary["accepted"],
+        "acceptedPct": summary["acceptedPct"],
+        "missed": summary["missed"],
+        "missedPct": summary["missedPct"],
+        "totalOutbound": summary["totalOutbound"],
+        "topInboundAgent": {"name": top["name"], "calls": top["calls"]} if top else None,
+        "queueBreakdown": call_logs_json.get("queueReport", []),
+    }
+    gap = abs(summary["accepted"] - grand_total["accepted"]) + abs(summary["missed"] - grand_total["missed"])
+    if gap == 0:
+        call_logs_note = (
+            f"summary and grandTotal agree exactly this date "
+            f"({summary['accepted']} accepted/{summary['missed']} missed both ways) — no discrepancy."
+        )
+    elif gap <= CALL_LOGS_GRAND_TOTAL_GAP_THRESHOLD:
+        call_logs_note = (
+            f"summary vs grandTotal carries a gap of {gap} this date (summary: "
+            f"{summary['accepted']} accepted/{summary['missed']} missed, grandTotal: "
+            f"{grand_total['accepted']} accepted/{grand_total['missed']} missed) — likely one or "
+            "more direct-line/individual-extension calls outside the four named queues, same "
+            "quirk type documented on earlier dates, not a new anomaly."
+        )
+    else:
+        return section, None, f"call-logs summary vs grandTotal gap of {gap} is bigger than any seen before (threshold {CALL_LOGS_GRAND_TOTAL_GAP_THRESHOLD})"
+    top_note = (
+        f"{top['name']} tops the inboundByStaff table this date ({top['calls']} calls). "
+        "No PDF exists for this date to cross-check against." if top else "No inboundByStaff data this date."
+    )
+    return section, {"_topInboundAgentNote": top_note, "_callLogsNote": call_logs_note}, None
+
+
+def build_cloop_overview(cloop_json, prev_cloop):
+    """Returns (section, notes, stop_reason). stop_reason is set only when
+    some agent's emailsHandledYesterday total vs incoming+outbound gap is
+    bigger than EMAIL_HANDLED_AGENT_GAP_THRESHOLD — bigger than the 4-5 unit
+    gaps actually seen (a recurring Jasmina Sodolovic quirk)."""
+    rt = cloop_json["realTimeSummary"]
+    emails = cloop_json.get("emailsHandledYesterday", [])
+    section = {
+        "inQueue": rt["inQueue"],
+        "oldestDays": rt["oldestDays"],
+        "contactsQueuedYesterday": cloop_json["contactsQueuedTenDayTrend"]["totals"][-1],
+        "emailsHandledYesterday": sum(a["total"] for a in emails),
+        "totalOverallCases": cloop_json["totalCasesToDate"]["totalOverallCases"],
+        "totalInProgress": cloop_json["totalCasesToDate"]["totalInProgress"],
+        "totalOpenCases": cloop_json["totalCasesToDate"]["totalOpenCases"],
+    }
+    prev_in_queue = (prev_cloop or {}).get("realTimeSummary", {}).get("inQueue")
+    if prev_in_queue is not None:
+        direction = "up from" if rt["inQueue"] > prev_in_queue else ("down from" if rt["inQueue"] < prev_in_queue else "unchanged from")
+        trend_bit = f"Cloop's Real-Time queue total ({rt['inQueue']}) is {direction} the previous committed date's {prev_in_queue}."
+    else:
+        trend_bit = f"Cloop's Real-Time queue total is {rt['inQueue']} this date (no earlier committed date to compare against)."
+
+    mismatches = []
+    for a in emails:
+        gap = a["total"] - (a["incoming"] + a["outbound"])
+        if gap != 0:
+            mismatches.append((a["agent"], gap))
+    worst = max((abs(g) for _, g in mismatches), default=0)
+    if worst > EMAIL_HANDLED_AGENT_GAP_THRESHOLD:
+        return section, None, f"emailsHandledYesterday per-agent gap of {worst} is bigger than any seen before (threshold {EMAIL_HANDLED_AGENT_GAP_THRESHOLD})"
+    if mismatches:
+        mismatch_bit = (
+            " emailsHandledYesterday's totals include a known recurring quirk — printed total vs "
+            "incoming+outbound components doesn't quite add up for: "
+            + "; ".join(f"{name} (off by {gap})" for name, gap in mismatches)
+            + " (same quirk type seen on earlier dates, not a new anomaly)."
+        )
+    else:
+        mismatch_bit = " emailsHandledYesterday's totals match incoming+outbound exactly this date — no quirk."
+
+    cloop_note = (
+        f"{trend_bit} totalOverallCases/InProgress/OpenCases ("
+        f"{section['totalOverallCases']}/{section['totalInProgress']}/{section['totalOpenCases']}) were "
+        "typed in through the website's Total Cases to Date form, not read from a PDF."
+        + mismatch_bit
+    )
+    return section, {"_cloopNote": cloop_note}, None
+
+
+def build_leave_overview(leave_json, weekday_name):
+    """Returns (section, note, stop_reason). stop_reason only fires if the
+    report's own weekday isn't one of leave.json's own "days" (shouldn't
+    happen for an ordinary business-day report)."""
+    if weekday_name not in leave_json.get("days", []):
+        return None, None, f"report's weekday ({weekday_name}) isn't one of this week's leave.json days {leave_json.get('days')}"
+    idx = leave_json["days"].index(weekday_name)
+    groups = {g["group"]: g["people"] for g in leave_json.get("groups", [])}
+    doctors = groups.get("Doctor", [])
+    staff = groups.get("Staff", [])
+
+    def away(status_list):
+        return any(s in ("leave", "public_holiday") for s in status_list)
+
+    def fully_away(status_list):
+        return all(s in ("leave", "public_holiday") for s in status_list)
+
+    doctor_lines_on_leave = sum(1 for p in doctors if away(p["status"]))
+    staff_fully = [p["name"] for p in staff if fully_away(p["status"])]
+    staff_partial = [p["name"] for p in staff if away(p["status"]) and not fully_away(p["status"])]
+
+    section = {
+        "weekLabel": week_label(leave_json["weekStart"], leave_json["weekEnd"]),
+        "doctorLinesOnLeave": doctor_lines_on_leave,
+        "staffFullyOnLeave": len(staff_fully),
+        "staffPartialLeave": len(staff_partial),
+        "staffPartialLeaveNames": staff_partial,
+        "longTerm": leave_json.get("longTerm", []),
+    }
+
+    doctors_on_leave_today = [p["name"] for p in doctors if p["status"][idx] in ("leave", "public_holiday")]
+    doctors_available_today = [p["name"] for p in doctors if p["status"][idx] not in ("leave", "public_holiday")]
+    staff_on_leave_today = [p["name"] for p in staff if p["status"][idx] in ("leave", "public_holiday")]
+    staff_available_today = [p["name"] for p in staff if p["status"][idx] not in ("leave", "public_holiday")]
+
+    if (doctors or staff) and not doctors_available_today and not staff_available_today:
+        today_bit = (
+            f"As of today ({weekday_name}), every person currently listed on the roster is on "
+            f"leave: all {len(doctors)} doctor{'s' if len(doctors) != 1 else ''} "
+            f"({format_names(doctors_on_leave_today)}) and all {len(staff)} staff "
+            f"({format_names(staff_on_leave_today)})."
+        )
+    elif not doctors_on_leave_today and not staff_on_leave_today:
+        today_bit = f"As of today ({weekday_name}), everyone currently listed on the roster is available — no leave today despite being on this week's grid."
+    else:
+        parts = []
+        if doctors_on_leave_today:
+            parts.append(f"{len(doctors_on_leave_today)} doctor{'s' if len(doctors_on_leave_today) != 1 else ''} ({format_names(doctors_on_leave_today)})")
+        if staff_on_leave_today:
+            parts.append(f"{len(staff_on_leave_today)} staff ({format_names(staff_on_leave_today)})")
+        available_names = doctors_available_today + staff_available_today
+        today_bit = (
+            f"As of today ({weekday_name}), {' and '.join(parts)} are on leave; "
+            f"{format_names(available_names)} {'is' if len(available_names) == 1 else 'are'} available today."
+        )
+
+    leave_note = (
+        f"{today_bit} doctorLinesOnLeave ({doctor_lines_on_leave}) counts every Doctor-group "
+        "person listed this week with at least one leave day. This week's leave grid only lists "
+        "people with at least one leave day, so these totals aren't directly comparable to a week "
+        "where the full roster was listed."
+    )
+    return section, {"_leaveNote": leave_note}, None
+
+
+def build_overview_json(date, call_logs_json, cloop_json, tasks_json, leave_json, unmatched_agents, token, branch, manifest):
+    """Builds overview.json by deterministic rule rather than a judgement
+    pass — see this module's own docstring for the reasoning. Returns
+    (overview_dict, None) on success, or (None, stop_reason) when something
+    needs an actual human/Claude look before this date can be finalized:
+    reports must be numbered in strict calendar order (so a still-pending
+    earlier date blocks this one), and the two cross-checks below
+    (call-logs summary vs grandTotal, cloop emailsHandledYesterday per-agent
+    totals) must stay within the tolerance built up from quirks already
+    seen on past dates — see CALL_LOGS_GRAND_TOTAL_GAP_THRESHOLD and
+    EMAIL_HANDLED_AGENT_GAP_THRESHOLD above. Unmatched Cloop agent names
+    also hold this date back, since a name that didn't match known staff
+    could just as easily be a typo as a genuinely new hire.
+    """
+    existing = json_at(REPO_ROOT, token, branch, f"assets/data/reports/{date}/overview.json")
+    if existing:
+        return existing, None
+
+    if unmatched_agents:
+        return None, f"Cloop parse has unmatched agent name(s) needing a look: {', '.join(unmatched_agents)}"
+
+    prev_date = immediate_prev_date(manifest, date)
+    if prev_date is None:
+        return None, "no earlier date exists to carry this report's sequence number from"
+    prev_overview = json_at(REPO_ROOT, token, branch, f"assets/data/reports/{prev_date}/overview.json")
+    if not prev_overview:
+        return None, f"waiting on {prev_date}'s own overview.json to be built first (reports are numbered in calendar order)"
+
+    weekday_name = _WEEKDAY_FULL[date_cls.fromisoformat(date).weekday()]
+    call_logs_section, call_logs_notes, stop = build_call_logs_overview(call_logs_json)
+    if stop:
+        return None, stop
+    prev_cloop = json_at(REPO_ROOT, token, branch, f"assets/data/reports/{prev_date}/cloop.json")
+    cloop_section, cloop_notes, stop = build_cloop_overview(cloop_json, prev_cloop)
+    if stop:
+        return None, stop
+    leave_section, leave_notes, stop = build_leave_overview(leave_json, weekday_name)
+    if stop:
+        return None, stop
+
+    overview = {
+        "_source": (
+            "No source PDF for this date — assembled automatically by the website's Generate "
+            "button from this date's own call-logs.json, cloop.json, tasks.json and leave.json "
+            "(see each file's own _source for provenance). Built by deterministic rules in "
+            "api/generate/report.py's build_overview_json, not a manual judgement pass; the "
+            "cross-checks it runs (call-logs summary vs grandTotal, cloop emailsHandledYesterday "
+            "per-agent totals) are documented in that function's own docstring."
+        ),
+        "report": {
+            "number": prev_overview["report"]["number"] + 1,
+            "date": date,
+            "weekday": weekday_name,
+            "title": ordinal_date_title(date),
+        },
+        "criticalTasks": build_critical_tasks(tasks_json),
+        "callLogs": call_logs_section,
+        **call_logs_notes,
+        "cloop": cloop_section,
+        **cloop_notes,
+        "leave": leave_section,
+        **leave_notes,
+    }
+    return overview, None
+
+
 def commit_to_both_branches(path, body, message, token):
     daily_commit = lib.github_commit_file(OWNER, REPO, DAILY_BRANCH, path, body, message, token)
     main_error = None
@@ -294,20 +575,29 @@ def commit_to_both_branches(path, body, message, token):
     return daily_commit, main_error
 
 
-def add_date_to_manifest(date, token):
+def add_date_to_manifest(date, token, set_latest=False):
     """Mirrors generate_report.py's own index.json behaviour: adds the date
-    to "dates" (sorted, no duplicate) on BOTH branches independently, never
-    touching "latest" — each branch's own current index.json is read fresh
-    rather than assuming the two are identical."""
+    to "dates" (sorted, no duplicate) on BOTH branches independently — each
+    branch's own current index.json is read fresh rather than assuming the
+    two are identical. With set_latest=True, also bumps "latest" to this
+    date (only call this once build_overview_json has actually succeeded —
+    it's the caller's job to know that's safe)."""
     main_errors = []
     for branch in (DAILY_BRANCH, MAIN_BRANCH):
         manifest = json_at(REPO_ROOT, token, branch, "assets/data/reports/index.json") or {"dates": [], "latest": None}
-        if date in manifest.get("dates", []):
+        changed = False
+        if date not in manifest.get("dates", []):
+            manifest["dates"] = sorted(set(manifest.get("dates", [])) | {date})
+            changed = True
+        if set_latest and manifest.get("latest") != date:
+            manifest["latest"] = date
+            changed = True
+        if not changed:
             continue
-        manifest["dates"] = sorted(set(manifest.get("dates", [])) | {date})
         body = json.dumps(manifest, ensure_ascii=False, indent=2) + "\n"
+        message = f"Set index.json's latest to {date} ({branch})" if set_latest else f"Add {date} to index.json's dates ({branch})"
         try:
-            lib.github_commit_file(OWNER, REPO, branch, "assets/data/reports/index.json", body, f"Add {date} to index.json's dates ({branch})", token)
+            lib.github_commit_file(OWNER, REPO, branch, "assets/data/reports/index.json", body, message, token)
         except Exception as e:  # noqa: BLE001
             main_errors.append(f"{branch}: {e}")
     return main_errors
@@ -351,11 +641,42 @@ def run(payload):
             main_errors.append(f"{name}: {main_error}")
         written[name] = path
 
-    manifest_errors = add_date_to_manifest(date, github_token)
-    if manifest_errors:
-        main_errors.extend(manifest_errors)
+    dates_errors = add_date_to_manifest(date, github_token)
+    if dates_errors:
+        main_errors.extend(dates_errors)
+
+    overview_json, overview_stop_reason = build_overview_json(
+        date, call_logs_json, cloop_json, tasks_json, leave_json, unmatched_agents, github_token, DAILY_BRANCH, manifest,
+    )
+    still_needed = []
+    latest_errors = []
+    if overview_json is not None:
+        overview_path = f"assets/data/reports/{date}/overview.json"
+        overview_body = json.dumps(overview_json, ensure_ascii=False, indent=2) + "\n"
+        _, overview_main_error = commit_to_both_branches(
+            overview_path, overview_body, f"Add overview.json for {date}, set as latest (auto-generated via website Generate)", github_token,
+        )
+        if overview_main_error:
+            main_errors.append(f"overview.json: {overview_main_error}")
+        written["overview.json"] = overview_path
+        latest_errors = add_date_to_manifest(date, github_token, set_latest=True)
+        if latest_errors:
+            main_errors.extend(latest_errors)
     else:
-        written["index.json"] = "assets/data/reports/index.json (added this date only — \"latest\" left unchanged)"
+        still_needed.append(
+            f"overview.json — not auto-built: {overview_stop_reason}. This date can't become \"latest\" until "
+            "it's added through the same manual judgement-based process used before this was automated."
+        )
+
+    if dates_errors:
+        written["index.json"] = f"assets/data/reports/index.json — FAILED to add {date} to \"dates\": {'; '.join(dates_errors)}"
+    elif overview_json is not None and not latest_errors:
+        written["index.json"] = f"assets/data/reports/index.json (added {date} to \"dates\" and set as \"latest\")"
+    elif overview_json is not None and latest_errors:
+        written["index.json"] = f"assets/data/reports/index.json (added {date} to \"dates\", but setting \"latest\" failed: {'; '.join(latest_errors)})"
+        still_needed.append(f"index.json's \"latest\" — overview.json was built, but bumping \"latest\" failed: {'; '.join(latest_errors)}")
+    else:
+        written["index.json"] = f"assets/data/reports/index.json (added {date} to \"dates\" only — \"latest\" left unchanged)"
 
     return {
         "ok": True,
@@ -369,10 +690,7 @@ def run(payload):
             "cloopRealTimeSummary": cloop_json["realTimeSummary"],
             "totalCasesToDate": cloop_json["totalCasesToDate"],
         },
-        "stillNeeded": [
-            "overview.json — needs a quick read-through with Claude (it draws on judgement, e.g. flagging anomalies, that this button can't safely invent). The Overview page for this date won't work until it's added.",
-            "Once overview.json is ready, this date can be set as assets/data/reports/index.json's \"latest\" (it's already in \"dates\" so other pages can be previewed now).",
-        ],
+        "stillNeeded": still_needed,
     }
 
 
