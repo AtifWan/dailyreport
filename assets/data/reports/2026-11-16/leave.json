@@ -16,7 +16,18 @@
       "group": "Doctor",
       "people": [
         {
-          "name": "Dr Lisa Bron",
+          "name": "Dr Michelle De Jesus",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Dr Somyata Jhorar",
           "site": null,
           "status": [
             "leave",
@@ -27,22 +38,11 @@
           ]
         },
         {
-          "name": "Roslyn Mackenzie",
+          "name": "Dr Lisa Bron",
           "site": null,
           "status": [
-            "available",
-            "available",
-            "available",
             "leave",
-            "leave"
-          ]
-        },
-        {
-          "name": "Kathleen O'Brien",
-          "site": null,
-          "status": [
-            "available",
-            "available",
+            "leave",
             "leave",
             "leave",
             "leave"
@@ -65,13 +65,13 @@
           ]
         },
         {
-          "name": "Rebecca Quinn",
+          "name": "Ambrosie Brassil",
           "site": null,
           "status": [
-            "available",
             "leave",
-            "available",
-            "available",
+            "leave",
+            "leave",
+            "leave",
             "available"
           ]
         },
@@ -87,25 +87,14 @@
           ]
         },
         {
-          "name": "Emily Pettett",
+          "name": "Nita Sigdel",
           "site": null,
           "status": [
-            "available",
             "available",
             "available",
             "leave",
+            "leave",
             "available"
-          ]
-        },
-        {
-          "name": "Apurva Pathak",
-          "site": null,
-          "status": [
-            "available",
-            "available",
-            "available",
-            "available",
-            "leave"
           ]
         }
       ]
