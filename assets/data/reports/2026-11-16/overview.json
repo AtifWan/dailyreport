@@ -106,11 +106,13 @@
     "weekLabel": "16 November – 20 November 2026",
     "doctorLinesOnLeave": 3,
     "staffFullyOnLeave": 1,
-    "staffPartialLeave": 3,
+    "staffPartialLeave": 5,
     "staffPartialLeaveNames": [
-      "Ambrosie Brassil",
+      "Rebecca Quinn",
       "Andrew Davies",
-      "Nita Sigdel"
+      "Emily Pettett",
+      "Apurva Pathak",
+      "Megan Moreno Pitcher"
     ],
     "longTerm": [
       {
@@ -127,5 +129,5 @@
       }
     ]
   },
-  "_leaveNote": "As of today (Monday), 3 doctors (Dr Michelle De Jesus, Dr Somyata Jhorar and Dr Lisa Bron) and 2 staff (Shae Connors and Ambrosie Brassil) are on leave; Andrew Davies and Nita Sigdel are available today. doctorLinesOnLeave (3) counts every Doctor-group person listed this week with at least one leave day. This week's leave grid only lists people with at least one leave day, so these totals aren't directly comparable to a week where the full roster was listed."
+  "_leaveNote": "As of today (Monday), 1 doctor (Dr Lisa Bron) and 2 staff (Shae Connors and Megan Moreno Pitcher) are on leave; Roslyn Mackenzie, Kathleen O'Brien, Rebecca Quinn, Andrew Davies, Emily Pettett and Apurva Pathak are available today. doctorLinesOnLeave (3) counts every Doctor-group person listed this week with at least one leave day. This week's leave grid only lists people with at least one leave day, so these totals aren't directly comparable to a week where the full roster was listed. UPDATED 2026-11-17: this date's leave.json was corrected to use the colleague's fuller same-week grid saved under 2026-11-17/leave.json (the doctor and staff roster changed significantly — see leave.json's own _source) — callLogs/cloop/tasks sections above are unaffected."
 }

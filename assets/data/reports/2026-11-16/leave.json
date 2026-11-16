@@ -1,5 +1,5 @@
 {
-  "_source": "Entered directly through the Report Checklist page's Staff & Drs Leave weekly grid, saved straight from the website — no screenshot or PDF for this date.",
+  "_source": "Entered directly through the Report Checklist page's Staff & Drs Leave weekly grid, saved straight from the website — no screenshot or PDF for this date. CORRECTED 2026-11-17: the colleague re-saved this same work week's grid a day later under 2026-11-17/leave.json with a fuller/updated roster; since both dates fall in the same work week (16-20 Nov), that newer grid was copied here so the published 2026-11-16 report reflects it. See assets/data/reports/2026-11-17/leave.json for the original save.",
   "reportTitle": "Daily Operations Report - 16th November 2026",
   "reportDate": "2026-11-16",
   "weekStart": "2026-11-16",
@@ -16,18 +16,7 @@
       "group": "Doctor",
       "people": [
         {
-          "name": "Dr Michelle De Jesus",
-          "site": null,
-          "status": [
-            "leave",
-            "leave",
-            "leave",
-            "leave",
-            "leave"
-          ]
-        },
-        {
-          "name": "Dr Somyata Jhorar",
+          "name": "Dr Lisa Bron",
           "site": null,
           "status": [
             "leave",
@@ -38,11 +27,22 @@
           ]
         },
         {
-          "name": "Dr Lisa Bron",
+          "name": "Roslyn Mackenzie",
           "site": null,
           "status": [
+            "available",
+            "available",
+            "available",
             "leave",
-            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Kathleen O'Brien",
+          "site": null,
+          "status": [
+            "available",
+            "available",
             "leave",
             "leave",
             "leave"
@@ -65,13 +65,13 @@
           ]
         },
         {
-          "name": "Ambrosie Brassil",
+          "name": "Rebecca Quinn",
           "site": null,
           "status": [
+            "available",
             "leave",
-            "leave",
-            "leave",
-            "leave",
+            "available",
+            "available",
             "available"
           ]
         },
@@ -87,13 +87,35 @@
           ]
         },
         {
-          "name": "Nita Sigdel",
+          "name": "Emily Pettett",
           "site": null,
           "status": [
             "available",
             "available",
+            "available",
+            "leave",
+            "available"
+          ]
+        },
+        {
+          "name": "Apurva Pathak",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "available",
+            "available",
+            "leave"
+          ]
+        },
+        {
+          "name": "Megan Moreno Pitcher",
+          "site": null,
+          "status": [
             "leave",
             "leave",
+            "available",
+            "available",
             "available"
           ]
         }
