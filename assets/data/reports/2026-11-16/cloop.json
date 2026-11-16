@@ -1,0 +1,202 @@
+{
+  "reportDate": "2026-11-17",
+  "realTimeQueues": [
+    {
+      "queue": "Medico-legal",
+      "inQueue": 3,
+      "oldestDays": 5.7
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 12,
+      "oldestDays": 0.66
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 33,
+      "oldestDays": 7.83
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 5,
+      "oldestDays": 0.67
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 2,
+      "oldestDays": 5.95
+    },
+    {
+      "queue": "GP Mail",
+      "inQueue": 1,
+      "oldestDays": 13.99
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 2,
+      "oldestDays": 5.74
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 3,
+      "oldestDays": 4.77
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 22,
+      "oldestDays": 0.48
+    },
+    {
+      "queue": "Nursing",
+      "inQueue": 2,
+      "oldestDays": 6.91
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 85,
+    "oldestDays": 13.99
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Documents",
+      "count": 37
+    },
+    {
+      "queue": "Unassigned",
+      "count": 31
+    },
+    {
+      "queue": "Finance",
+      "count": 13
+    },
+    {
+      "queue": "Requests",
+      "count": 6
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 2
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "totals": [
+      81,
+      75,
+      92,
+      54,
+      75,
+      103,
+      88,
+      82,
+      20,
+      90
+    ],
+    "labels": [
+      "Tue 3 Nov",
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov"
+    ]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 75,
+      "outbound": 17,
+      "total": 92
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 13,
+      "outbound": 0,
+      "total": 13
+    },
+    {
+      "agent": "Jasmine Deery",
+      "incoming": 2,
+      "outbound": 5,
+      "total": 8
+    },
+    {
+      "agent": "Holly Archer",
+      "incoming": 0,
+      "outbound": 2,
+      "total": 2
+    }
+  ],
+  "_historicalDate": "2026-11-16",
+  "_unmatchedAgentNames": [],
+  "totalCasesToDate": {
+    "date": "2026-11-16",
+    "totalOverallCases": 11761,
+    "totalInProgress": 171,
+    "totalOpenCases": 86
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov"
+    ],
+    "totals": [
+      153,
+      159,
+      159,
+      163,
+      164,
+      168,
+      165,
+      180,
+      175,
+      171
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov"
+    ],
+    "totals": [
+      58,
+      56,
+      56,
+      63,
+      67,
+      45,
+      63,
+      57,
+      100,
+      86
+    ]
+  },
+  "_source": "Real-Time + two Historical Metrics Reports from Cloop's own raw CSV exports, uploaded directly through the dashboard's Report Checklist page, via scripts/parse_cloop.py. Total Cases to Date has no raw export and was typed in directly on the checklist page.",
+  "reportTitle": "Daily Operations Report - 16th November 2026",
+  "extractedAt": "2026-11-17T09:45:16.523942+11:00",
+  "extractedAtLabel": "9:45 AM, Tuesday 17 November 2026",
+  "_extractedAtNote": "No raw Cloop export carries its own exact extraction timestamp, and this file wasn't fetched via SharePoint. This is simply when the Report Checklist's Generate button was run, which may be later than when the files were actually exported from Cloop."
+}
