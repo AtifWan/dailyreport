@@ -1,0 +1,211 @@
+{
+  "reportDate": "2026-11-18",
+  "realTimeQueues": [
+    {
+      "queue": "Medico-legal",
+      "inQueue": 3,
+      "oldestDays": 0.67
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 28,
+      "oldestDays": 7.87
+    },
+    {
+      "queue": "Documents",
+      "inQueue": 3,
+      "oldestDays": 0.64
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 2,
+      "oldestDays": 1.83
+    },
+    {
+      "queue": "Practice Finance",
+      "inQueue": 3,
+      "oldestDays": 5.76
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 11,
+      "oldestDays": 0.69
+    },
+    {
+      "queue": "Finance",
+      "inQueue": 1,
+      "oldestDays": 0.65
+    },
+    {
+      "queue": "Escalation",
+      "inQueue": 2,
+      "oldestDays": 6.93
+    },
+    {
+      "queue": "Nursing",
+      "inQueue": 2,
+      "oldestDays": 7.9
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 55,
+    "oldestDays": 7.9
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 29
+    },
+    {
+      "queue": "Finance",
+      "count": 24
+    },
+    {
+      "queue": "Documents",
+      "count": 18
+    },
+    {
+      "queue": "Requests",
+      "count": 14
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 10
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 3
+    },
+    {
+      "queue": "File Transfer",
+      "count": 1
+    },
+    {
+      "queue": "GP Mail",
+      "count": 1
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "totals": [
+      75,
+      92,
+      54,
+      75,
+      103,
+      88,
+      82,
+      20,
+      90,
+      100
+    ],
+    "labels": [
+      "Wed 4 Nov",
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov"
+    ]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 48,
+      "outbound": 11,
+      "total": 59
+    },
+    {
+      "agent": "Jasmina Sodolovic",
+      "incoming": 22,
+      "outbound": 8,
+      "total": 33
+    },
+    {
+      "agent": "Leh Peng Goh",
+      "incoming": 24,
+      "outbound": 0,
+      "total": 24
+    },
+    {
+      "agent": "Atif Wan",
+      "incoming": 5,
+      "outbound": 0,
+      "total": 5
+    },
+    {
+      "agent": "Jasmine Deery",
+      "incoming": 0,
+      "outbound": 3,
+      "total": 3
+    }
+  ],
+  "_historicalDate": "2026-11-17",
+  "_unmatchedAgentNames": [],
+  "totalCasesToDate": {
+    "date": "2026-11-17",
+    "totalOverallCases": 11824,
+    "totalInProgress": 173,
+    "totalOpenCases": 57
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov",
+      "Wed 18 Nov"
+    ],
+    "totals": [
+      159,
+      159,
+      163,
+      164,
+      168,
+      165,
+      180,
+      175,
+      171,
+      173
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Thu 5 Nov",
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov",
+      "Wed 18 Nov"
+    ],
+    "totals": [
+      56,
+      56,
+      63,
+      67,
+      45,
+      63,
+      57,
+      100,
+      86,
+      57
+    ]
+  },
+  "_source": "Real-Time + two Historical Metrics Reports from Cloop's own raw CSV exports, uploaded directly through the dashboard's Report Checklist page, via scripts/parse_cloop.py. Total Cases to Date has no raw export and was typed in directly on the checklist page.",
+  "reportTitle": "Daily Operations Report - 17th November 2026",
+  "extractedAt": "2026-11-18T09:21:06.808551+11:00",
+  "extractedAtLabel": "9:21 AM, Wednesday 18 November 2026",
+  "_extractedAtNote": "No raw Cloop export carries its own exact extraction timestamp, and this file wasn't fetched via SharePoint. This is simply when the Report Checklist's Generate button was run, which may be later than when the files were actually exported from Cloop."
+}
