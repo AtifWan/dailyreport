@@ -1,0 +1,172 @@
+{
+  "reportDate": "2026-11-20",
+  "realTimeQueues": [
+    {
+      "queue": "Practice Finance",
+      "inQueue": 1,
+      "oldestDays": 1.75
+    },
+    {
+      "queue": "Medico-legal",
+      "inQueue": 2,
+      "oldestDays": 0.89
+    },
+    {
+      "queue": "Requests",
+      "inQueue": 7,
+      "oldestDays": 4.08
+    },
+    {
+      "queue": "File Transfer",
+      "inQueue": 2,
+      "oldestDays": 3.84
+    },
+    {
+      "queue": "Unassigned",
+      "inQueue": 6,
+      "oldestDays": 0.55
+    },
+    {
+      "queue": "Nursing",
+      "inQueue": 2,
+      "oldestDays": 9.9
+    }
+  ],
+  "realTimeSummary": {
+    "inQueue": 20,
+    "oldestDays": 9.9
+  },
+  "contactsQueuedYesterday": [
+    {
+      "queue": "Unassigned",
+      "count": 31
+    },
+    {
+      "queue": "Documents",
+      "count": 26
+    },
+    {
+      "queue": "File Transfer",
+      "count": 4
+    },
+    {
+      "queue": "Medico-legal",
+      "count": 3
+    },
+    {
+      "queue": "Failed Communication",
+      "count": 2
+    }
+  ],
+  "contactsQueuedTenDayTrend": {
+    "totals": [
+      54,
+      75,
+      103,
+      88,
+      82,
+      20,
+      90,
+      100,
+      88,
+      66
+    ],
+    "labels": [
+      "Fri 6 Nov",
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov",
+      "Wed 18 Nov",
+      "Thu 19 Nov"
+    ]
+  },
+  "emailsHandledYesterday": [
+    {
+      "agent": "Chloey Leow",
+      "incoming": 66,
+      "outbound": 13,
+      "total": 79
+    },
+    {
+      "agent": "Jessica Hinchy",
+      "incoming": 0,
+      "outbound": 1,
+      "total": 1
+    },
+    {
+      "agent": "Lucinda Gonzalez",
+      "incoming": 0,
+      "outbound": 0,
+      "total": 0
+    }
+  ],
+  "_historicalDate": "2026-11-19",
+  "_unmatchedAgentNames": [],
+  "totalCasesToDate": {
+    "date": "2026-11-19",
+    "totalOverallCases": 11967,
+    "totalInProgress": 177,
+    "totalOpenCases": 40
+  },
+  "inProgressTenDayTrend": {
+    "labels": [
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov",
+      "Wed 18 Nov",
+      "Thu 19 Nov",
+      "Fri 20 Nov"
+    ],
+    "totals": [
+      163,
+      164,
+      168,
+      165,
+      180,
+      175,
+      171,
+      173,
+      173,
+      177
+    ]
+  },
+  "openCasesTenDayTrend": {
+    "labels": [
+      "Mon 9 Nov",
+      "Tue 10 Nov",
+      "Wed 11 Nov",
+      "Thu 12 Nov",
+      "Fri 13 Nov",
+      "Mon 16 Nov",
+      "Tue 17 Nov",
+      "Wed 18 Nov",
+      "Thu 19 Nov",
+      "Fri 20 Nov"
+    ],
+    "totals": [
+      63,
+      67,
+      45,
+      63,
+      57,
+      100,
+      86,
+      57,
+      50,
+      40
+    ]
+  },
+  "_source": "Real-Time + two Historical Metrics Reports from Cloop's own raw CSV exports, uploaded directly through the dashboard's Report Checklist page, via scripts/parse_cloop.py. Total Cases to Date has no raw export and was typed in directly on the checklist page.",
+  "reportTitle": "Daily Operations Report - 19th November 2026",
+  "extractedAt": "2026-11-20T09:25:36.954226+11:00",
+  "extractedAtLabel": "9:25 AM, Friday 20 November 2026",
+  "_extractedAtNote": "No raw Cloop export carries its own exact extraction timestamp, and this file wasn't fetched via SharePoint. This is simply when the Report Checklist's Generate button was run, which may be later than when the files were actually exported from Cloop."
+}
