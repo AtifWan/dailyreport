@@ -1,5 +1,5 @@
 {
-  "_source": "Entered directly through the Report Checklist page's Staff & Drs Leave weekly grid, saved straight from the website — no screenshot or PDF for this date.",
+  "_source": "Entered directly through the Report Checklist page's Staff & Drs Leave weekly grid, saved straight from the website — no screenshot or PDF for this date. Saved on Tuesday 24 Nov (the save always uses the browser's own \"today\", with no way to pick a different date), describing the work week that actually starts Monday 23 Nov — see assets/data/reports/2026-11-23/leave.json, backfilled with this same grid so Monday's own eventual report (Call Logs run a day behind, so it'll likely be generated before this date's own report is) finds its week's data directly.",
   "reportTitle": "Daily Operations Report - 24th November 2026",
   "reportDate": "2026-11-24",
   "weekStart": "2026-11-23",
