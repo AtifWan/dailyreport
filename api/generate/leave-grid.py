@@ -34,12 +34,36 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 import generate_lib as lib  # noqa: E402
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
 OWNER = os.environ.get("GITHUB_OWNER", "AtifWan")
 REPO = os.environ.get("GITHUB_REPO", "dailyreport")
 DAILY_BRANCH = os.environ.get("GITHUB_BRANCH", "claude/zip-component-analysis-0jm9or")
 MAIN_BRANCH = "main"
 
 ALLOWED_STATUS = {"leave", "available", "public_holiday"}
+
+
+def add_date_to_manifest(date, token):
+    """A Leave-only save has no overview.json/call-logs.json/etc. to anchor
+    it, so without this the date is committed but invisible: the dashboard's
+    own date picker only lists dates already in index.json's "dates" (see
+    assets/js/datepicker.js), so a brand-new week's leave grid saved before
+    any other data exists for it would otherwise have nowhere to be viewed
+    at all. Mirrors api/generate/report.py's own add_date_to_manifest, but
+    never touches "latest" — a Leave save alone never finishes a report."""
+    errors = []
+    for branch in (DAILY_BRANCH, MAIN_BRANCH):
+        text = lib.read_local_or_github(REPO_ROOT, OWNER, REPO, branch, token, "assets/data/reports/index.json")
+        manifest = json.loads(text) if text else {"dates": [], "latest": None}
+        if date in manifest.get("dates", []):
+            continue
+        manifest["dates"] = sorted(set(manifest.get("dates", [])) | {date})
+        body = json.dumps(manifest, ensure_ascii=False, indent=2)
+        try:
+            lib.github_commit_file(OWNER, REPO, branch, "assets/data/reports/index.json", body, f"Add {date} to index.json's dates ({branch})", token)
+        except Exception as e:  # noqa: BLE001
+            errors.append(f"{branch}: {e}")
+    return errors
 
 
 def ordinal_date_title(iso_date):
@@ -99,6 +123,8 @@ def run(payload):
     except Exception as e:  # noqa: BLE001 - the daily-branch commit above already succeeded; don't lose that
         main_error = str(e)
 
+    manifest_errors = add_date_to_manifest(date, github_token)
+
     return {
         "ok": True,
         "date": date,
@@ -108,6 +134,7 @@ def run(payload):
         "dailyBranchCommit": daily_commit,
         "mainBranchCommit": main_commit,
         "mainBranchError": main_error,
+        "manifestErrors": manifest_errors or None,
     }
 
 
