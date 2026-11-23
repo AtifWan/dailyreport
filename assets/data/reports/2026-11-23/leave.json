@@ -1,0 +1,98 @@
+{
+  "_source": "Entered directly through the Report Checklist page's Staff & Drs Leave weekly grid, saved straight from the website — no screenshot or PDF for this date. BACKFILLED 2026-11-24: the website always saves the leave grid under whichever date is \"today\" in the browser, with no way to pick a different date; this week's grid was actually saved on Tuesday 24 Nov (see assets/data/reports/2026-11-24/leave.json), but the work week itself starts Monday 23 Nov, and Call Logs always run a day behind — so the next report to be generated would be dated 2026-11-23 and would otherwise find no leave.json here at all (the one under 2026-11-24 isn't visible to carry-forward, since it isn't \"before\" this date). Copied here unchanged except reportDate/reportTitle so Monday's own report finds its week's data directly.",
+  "reportTitle": "Daily Operations Report - 23rd November 2026",
+  "reportDate": "2026-11-23",
+  "weekStart": "2026-11-23",
+  "weekEnd": "2026-11-27",
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "groups": [
+    {
+      "group": "Doctor",
+      "people": [
+        {
+          "name": "Roslyn Mackenzie",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Julie Beuth",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "available",
+            "leave",
+            "leave"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Staff",
+      "people": [
+        {
+          "name": "Apurva Pathak",
+          "site": null,
+          "status": [
+            "leave",
+            "leave",
+            "leave",
+            "leave",
+            "leave"
+          ]
+        },
+        {
+          "name": "Rebecca Quinn",
+          "site": null,
+          "status": [
+            "available",
+            "available",
+            "leave",
+            "available",
+            "available"
+          ]
+        }
+      ]
+    }
+  ],
+  "longTerm": [
+    {
+      "name": "Anna Lewis",
+      "note": "Maternity Leave",
+      "from": "2026-01-19",
+      "to": "2027-03-14"
+    },
+    {
+      "name": "Dr Michelle De Jesus",
+      "note": "Maternity Leave",
+      "from": "2026-09-21",
+      "to": "2027-07-02"
+    }
+  ],
+  "legend": [
+    {
+      "key": "leave",
+      "label": "On Leave"
+    },
+    {
+      "key": "available",
+      "label": "Available"
+    },
+    {
+      "key": "public_holiday",
+      "label": "Public Holiday"
+    }
+  ]
+}
