@@ -605,6 +605,9 @@ function wireLeaveGridForm(el, cat, state) {
       if (body.mainBranchError) {
         throw new Error(`saved, but the live site may not show it yet (${body.mainBranchError})`);
       }
+      if (body.manifestErrors) {
+        throw new Error(`saved, but this date may not show up in the date picker yet (${body.manifestErrors.join('; ')})`);
+      }
       appendAllEntry(cat.key, { originalName: "typed leave grid", savedAs: body.relativePath, at: new Date().toISOString(), dateIso: today });
       saveDailyAnswer(cat.key, today, 'yes');
       state.forceOpen = false;
